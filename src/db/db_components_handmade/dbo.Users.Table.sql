@@ -1,7 +1,7 @@
 USE SaymeDB 
 GO
-CREATE TABLE dbo.User
-   (id bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,  
+CREATE TABLE dbo.Users
+   (id bigint PRIMARY KEY NOT NULL IDENTITY(1, 1),  
     login nvarchar(16) NOT NULL,
     password nvarchar(16) NOT NULL,
     bio nvarchar(256) NOT NULL,
