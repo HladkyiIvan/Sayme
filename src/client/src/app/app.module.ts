@@ -5,6 +5,8 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationModule } from './modules/registration/registration.module';
+import { UserProfileModule } from './modules/user-profile/user-profile.module';
+import { AnyProfileModule } from './modules/any-profile/any-profile.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { RegistrationModule } from './modules/registration/registration.module';
     AppRoutingModule,
     FormsModule,
     RegistrationModule,
+    UserProfileModule,
+    AnyProfileModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

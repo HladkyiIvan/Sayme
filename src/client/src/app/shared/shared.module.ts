@@ -5,6 +5,8 @@ import { AboutUserBodyComponent } from './about-user-body/about-user-body.compon
 import { FooterComponent } from './footer/footer.component';
 import { InfoSidebarComponent } from './info-sidebar/info-sidebar.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { PostComponent } from './post/post.component';
+import { EmptyNavigationBarComponent } from './empty-navigation-bar/empty-navigation-bar.component';
 
 @NgModule({
   imports: [
@@ -16,12 +18,16 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
     FooterComponent,
     InfoSidebarComponent,
     NavigationBarComponent,
+    PostComponent,
+    EmptyNavigationBarComponent,
   ],
   exports: [
     AboutUserBodyComponent,
     FooterComponent,
     NavigationBarComponent,
     InfoSidebarComponent,
+    PostComponent,
+    EmptyNavigationBarComponent
   ]
 })
 export class SharedModule { }
