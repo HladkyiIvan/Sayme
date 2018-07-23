@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmptyNavigationBarComponent } from './empty-navigation-bar.component';
+import { AuthorisationBodyComponent } from './authorisation-body.component';
 
-describe('EmptyNavigationBarComponent', () => {
-  let component: EmptyNavigationBarComponent;
-  let fixture: ComponentFixture<EmptyNavigationBarComponent>;
+describe('AuthorisationBodyComponent', () => {
+  let component: AuthorisationBodyComponent;
+  let fixture: ComponentFixture<AuthorisationBodyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptyNavigationBarComponent ]
+      declarations: [ AuthorisationBodyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmptyNavigationBarComponent);
+    fixture = TestBed.createComponent(AuthorisationBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

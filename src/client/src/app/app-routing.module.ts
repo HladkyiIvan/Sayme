@@ -4,12 +4,9 @@ import { RegistrationComponent } from './modules/registration/registration.compo
 import { UserProfileComponent } from './modules/user-profile/user-profile.component';
 import { AppComponent } from './app.component';
 import { AnyProfileComponent } from './modules/any-profile/any-profile.component';
+import { AuthorisationComponent } from './modules/authorisation/authorisation.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AppComponent,
-  },
   {
     path: 'someone',
     component: AnyProfileComponent,
@@ -21,6 +18,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserProfileComponent,
+  },
+  {
+    path: '**',
+    component: AuthorisationComponent,
   }
 ];
 

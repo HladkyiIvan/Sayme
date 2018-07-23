@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { InfoSidebarComponent } from './info-sidebar/info-sidebar.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PostComponent } from './post/post.component';
-import { EmptyNavigationBarComponent } from './empty-navigation-bar/empty-navigation-bar.component';
+import { LoginRegistrationHeaderComponent } from './login-registration-header/login-registration-header.component';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { EmptyNavigationBarComponent } from './empty-navigation-bar/empty-naviga
     InfoSidebarComponent,
     NavigationBarComponent,
     PostComponent,
-    EmptyNavigationBarComponent,
+    LoginRegistrationHeaderComponent,
   ],
   exports: [
     AboutUserBodyComponent,
@@ -27,7 +27,7 @@ import { EmptyNavigationBarComponent } from './empty-navigation-bar/empty-naviga
     NavigationBarComponent,
     InfoSidebarComponent,
     PostComponent,
-    EmptyNavigationBarComponent
+    LoginRegistrationHeaderComponent
   ]
 })
 export class SharedModule { }
