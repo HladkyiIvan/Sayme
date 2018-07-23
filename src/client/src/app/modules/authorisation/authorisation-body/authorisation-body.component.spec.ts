@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavigationBarComponent } from './navigation-bar.component';
+import { AuthorisationBodyComponent } from './authorisation-body.component';
 
-describe('NavigationBarComponent', () => {
-  let component: NavigationBarComponent;
-  let fixture: ComponentFixture<NavigationBarComponent>;
+describe('AuthorisationBodyComponent', () => {
+  let component: AuthorisationBodyComponent;
+  let fixture: ComponentFixture<AuthorisationBodyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavigationBarComponent ]
+      declarations: [ AuthorisationBodyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavigationBarComponent);
+    fixture = TestBed.createComponent(AuthorisationBodyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
