@@ -21,7 +21,10 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
+<<<<<<< HEAD
     "primeicons": "^1.0.0-beta.10",
+=======
+>>>>>>> 81983eaf0e9edb64d65e22dc5e98f4087ceec9de
     "primeng": "^6.0.1",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
