@@ -1,0 +1,20 @@
+[
+    {
+        "username": "Andrey",
+        "usernick": "Andron",
+        "text": "This is my first message!",
+        "likes": 219
+    },
+    {
+        "username": "Margin",
+        "usernick": "Huston",
+        "text": "This is MY SECOND message!",
+        "likes": 21
+    },
+    {
+        "username": "Hileop",
+        "usernick": "Kraken",
+        "text": "What ta fun is that?",
+        "likes": 12
+    }
+]

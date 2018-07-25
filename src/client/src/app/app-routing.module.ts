@@ -1,32 +1,28 @@
 import { NgModule }  from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistrationComponent } from './modules/registration/registration.component';
-import { UserProfileComponent } from './modules/user-profile/user-profile.component';
-import { AppComponent } from './app.component';
-import { AnyProfileComponent } from './modules/any-profile/any-profile.component';
+import { InfoSidebarComponent } from './info-sidebar/info-sidebar.component';
+import { AboutUserBodyComponent } from './about-user-body/about-user-body.component';
+import { TestComponent } from './test/test.component';
+import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: AppComponent,
+    path: 'user',
+    component: AboutUserBodyComponent,
   },
   {
     path: 'someone',
-    component: AnyProfileComponent,
+    component: InfoSidebarComponent,
   },
   {
-    path: 'registration',
-    component: RegistrationComponent,
-  },
-  {
-    path: 'user',
-    component: UserProfileComponent,
+    path: 'post',
+    component: PostComponent,
   }
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ],
+  exports: [ RouterModule ]
 })
 
 export class AppRoutingModule {}

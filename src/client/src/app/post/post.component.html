@@ -1,0 +1,30 @@
+<div>
+   <div>
+      <form #postForm="ngForm">
+
+         <!-- {{ postForm.value | json}} <br> -->
+         <!-- <hr> -->
+         <!-- {{newpost | json}} -->
+
+         <label for="userName">Username</label><br>
+         <input [(ngModel)]="newpost.username" type="textbox" name="username" placeholder="username"><br>
+         <label for="text">Message</label><br>
+         <input [(ngModel)]="newpost.text" type="text" name="text">
+         <input type="submit" name="sayHello" value="Say" (click)="onSay()">
+      </form>
+      <ul>
+         <li *ngFor="let post of posts.reverse()">
+            <div>
+               <p>{{post.username}}</p>
+            </div>
+            <div>
+               <p>{{post.text}}</p>
+            </div>
+            <div>
+               <button (click)="LikeClick()">Like</button>
+               <p>{{post.likes}}</p>
+            </div>
+         </li>
+      </ul>
+   </div>
+</div>
