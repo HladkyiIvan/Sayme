@@ -19,6 +19,9 @@ import { FooterComponent } from './footer/footer.component';
 import { InfoSidebarComponent } from './info-sidebar/info-sidebar.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PostComponent } from './post/post.component';
+import { TestModule } from './test/test.module';
+import { HttpClientModule } from '../../node_modules/@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,7 @@ import { PostComponent } from './post/post.component';
     FooterComponent,
     InfoSidebarComponent,
     NavigationBarComponent,
-    PostComponent
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,20 @@ import { PostComponent } from './post/post.component';
     SharedModule,
     ButtonModule,
     AccordionModule,
-    SidebarModule
+    SidebarModule,
+    SharedModule, 
+    TestModule,
+    HttpClientModule,
+  ],
+  exports: [
+    LoginRegistrationHeaderComponent,
+    AboutUserBodyComponent,
+    FooterComponent,
+    InfoSidebarComponent,
+    NavigationBarComponent,
+    PostComponent,
+    SharedModule,
+    AccordionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
