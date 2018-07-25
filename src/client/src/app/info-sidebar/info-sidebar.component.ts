@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoSidebarComponent implements OnInit {
 
+   opened: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  open(){
+    this.opened = !this.opened;
+    return this.opened;
   }
 
 }
