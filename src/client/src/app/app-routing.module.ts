@@ -8,6 +8,11 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/menu',
+    pathMatch: 'full'
+  },
+  {
     path: 'menu',
     component: NavigationToolsComponent,
     children: [
