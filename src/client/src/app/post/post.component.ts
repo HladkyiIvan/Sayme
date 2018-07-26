@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataViewModule} from 'primeng/dataview';
+import { DataViewModule } from 'primeng/dataview';
 import { PostService } from '../post.service';
 import {Post} from '../post';
 

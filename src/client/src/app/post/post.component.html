@@ -1,30 +1,55 @@
-<div>
-   <div>
-      <form #postForm="ngForm">
+<div class="outer">
+    <div class="inner">
+        <div class="container">
+            <form #postForm="ngForm">
 
-         <!-- {{ postForm.value | json}} <br> -->
-         <!-- <hr> -->
-         <!-- {{newpost | json}} -->
+                <!-- {{ postForm.value | json}}
+                <br> -->
+                <!-- <hr> {{newpost | json}} -->
 
-         <label for="userName">Username</label><br>
-         <input [(ngModel)]="newpost.username" type="textbox" name="username" placeholder="username"><br>
-         <label for="text">Message</label><br>
-         <input [(ngModel)]="newpost.text" type="text" name="text">
-         <input type="submit" name="sayHello" value="Say" (click)="onSay()">
-      </form>
-      <ul>
-         <li *ngFor="let post of posts.reverse()">
-            <div>
-               <p>{{post.username}}</p>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input [(ngModel)]="newpost.username" name="username" value="username12345" type="text" pInputText placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">
+                                <i class="fa fa-poo"></i>
+                            </span>
+                            <input [(ngModel)]="newpost.text" value="sample text12345" name="text" type="text" pInputText placeholder="Say something...">
+                            <button  pButton type="button" icon="fa fa-comment-alt" (click)="onSay()"></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p-dataView [value]="posts.reverse()">
+        <ng-template let-post pTemplate="listItem">
+            <div class="ui-g" style="padding: 2em; border-bottom: 1px solid #d9d9d9">
+                <div class="ui-g-12 ui-md-8 post-container">
+                    <div class="ui-g">
+                        <div class="ui-g-2 ui-sm-6">User: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{post.username}}</b>
+                        </div>
+
+                        <div class="ui-g-2 ui-sm-6">Msg: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{post.text}}</b>
+                        </div>
+
+                        <div class="ui-g-2 ui-sm-6">Likes: </div>
+                        <div class="ui-g-10 ui-sm-6">
+                            <b>{{post.likes}}</b>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-               <p>{{post.text}}</p>
-            </div>
-            <div>
-               <button (click)="LikeClick()">Like</button>
-               <p>{{post.likes}}</p>
-            </div>
-         </li>
-      </ul>
-   </div>
-</div>
+        </ng-template>
+    </p-dataView>

@@ -8,20 +8,22 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
 
 const routes: Routes = [
   {
-    path: 'user',
-    component: AboutUserBodyComponent,
-  },
-  {
-    path: 'post',
-    component: PostComponent,
-  },
-  {
     path: 'menu',
     component: NavigationToolsComponent,
-  },
-  {
-    path: '**',
-    component: AboutUserBodyComponent,
+    children: [
+      {
+        path: 'post',
+        component: PostComponent,
+      },
+      {
+        path: 'interesting',
+        component: TestComponent,
+      },
+      {
+        path: '**',
+        component: AboutUserBodyComponent,
+      }
+    ]
   }
 ];
 

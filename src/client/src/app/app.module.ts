@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import {SidebarModule} from 'primeng/sidebar';
-import {MenuModule} from 'primeng/primeng';
-import {ButtonModule} from 'primeng/button';
-import {MenubarModule} from 'primeng/menubar';
-import {AccordionModule} from 'primeng/accordion';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/button';
+import { MenubarModule } from 'primeng/menubar';
+import { AccordionModule } from 'primeng/accordion';
+import { DataViewModule } from 'primeng/dataview';
 
 import { LoginRegistrationHeaderComponent } from './login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './about-user-body/about-user-body.component';
@@ -45,7 +46,8 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
     TestModule,
     HttpClientModule,
     MenubarModule,
-    MenuModule
+    MenuModule,
+    DataViewModule,
   ],
   exports: [
     LoginRegistrationHeaderComponent,
@@ -55,6 +57,7 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
     PostComponent,
     SharedModule,
     AccordionModule,
+    DataViewModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

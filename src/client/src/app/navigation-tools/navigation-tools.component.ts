@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+
+
 
 @Component({
   selector: 'app-navigation-tools',
@@ -11,7 +14,9 @@ export class NavigationToolsComponent implements OnInit {
   items: MenuItem[];
   opened: boolean = false;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.items = [
@@ -22,21 +27,21 @@ export class NavigationToolsComponent implements OnInit {
       },
       {
           label: 'News',
-          routerLink: "**"
+          routerLink: 'post'
       },
       {
           label: 'Interesting',
-          routerLink: "**"
+          routerLink: "interesting"
       },
       {
           label: 'Say',
           routerLink: "**"
-      }]
+      }
+    ]
   }
 
   open(){
     this.opened = !this.opened;
     return this.opened;
   }
-
 }
