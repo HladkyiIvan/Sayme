@@ -1,0 +1,20 @@
+<p-menubar [model]="items" styleClass = "menu">
+  <div>
+      <input type="text" pInputText placeholder="Search..." style="margin-right: 10px;">
+  </div>
+</p-menubar>
+
+<p-sidebar [(visible)]="opened" id ="sidebar" [baseZIndex]="10000" (onHide)="open()">
+  <h1>
+      <a routerLink =" ">Username</a>
+  </h1>
+  <h5>
+      <a routerLink =" ">followers: num</a>
+  </h5>
+  <h5>
+      <a routerLink =" ">following: num</a>
+  </h5>
+  <button pButton type="button"  label="Settings" class="ui-button-warning"></button>
+  <br>
+  <button pButton type="button"  label="Log out" class="ui-button-warning"></button>
+</p-sidebar>

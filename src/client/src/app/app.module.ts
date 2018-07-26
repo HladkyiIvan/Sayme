@@ -8,19 +8,18 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import {SidebarModule} from 'primeng/sidebar';
+import {MenuModule} from 'primeng/primeng';
 import {ButtonModule} from 'primeng/button';
-
+import {MenubarModule} from 'primeng/menubar';
 import {AccordionModule} from 'primeng/accordion';
-import {MenuItem} from 'primeng/api';
 
 import { LoginRegistrationHeaderComponent } from './login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './about-user-body/about-user-body.component';
 import { FooterComponent } from './footer/footer.component';
-import { InfoSidebarComponent } from './info-sidebar/info-sidebar.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { PostComponent } from './post/post.component';
 import { TestModule } from './test/test.module';
-import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { NavigationToolsComponent } from './navigation-tools/navigation-tools.component';
 
 
 @NgModule({
@@ -29,9 +28,8 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     LoginRegistrationHeaderComponent,
     AboutUserBodyComponent,
     FooterComponent,
-    InfoSidebarComponent,
-    NavigationBarComponent,
     PostComponent,
+    NavigationToolsComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,13 +44,14 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
     SharedModule, 
     TestModule,
     HttpClientModule,
+    MenubarModule,
+    MenuModule
   ],
   exports: [
     LoginRegistrationHeaderComponent,
     AboutUserBodyComponent,
     FooterComponent,
-    InfoSidebarComponent,
-    NavigationBarComponent,
+    NavigationToolsComponent,
     PostComponent,
     SharedModule,
     AccordionModule,
