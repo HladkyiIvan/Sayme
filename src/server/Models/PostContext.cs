@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace server.Models
 {
     public class PostContext : DbContext
     {
-        public PostContext(DbContextOptions<PostContext> options)
-            : base(options)
-        {
-        }
+        public DbSet<Post> Post { get; set; }
 
-        public DbSet<Post> Posts { get; set; }
+        public PostContext(DbContextOptions<PostContext> options)
+            :base(options)
+        { }
     }
 }
