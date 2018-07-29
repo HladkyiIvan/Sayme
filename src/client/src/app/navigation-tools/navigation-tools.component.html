@@ -4,7 +4,7 @@
   </div>
 </p-menubar>
 
-<p-sidebar [(visible)]="opened" id ="sidebar" [baseZIndex]="10000" (onHide)="open()">
+<p-sidebar [(visible)]="isOpened" id ="sidebar" [baseZIndex]="10000" (onHide)="openCloseSidebar()">
   <h1>
       <a routerLink =" ">Username</a>
   </h1>

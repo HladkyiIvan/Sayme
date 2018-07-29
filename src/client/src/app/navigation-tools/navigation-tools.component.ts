@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 export class NavigationToolsComponent implements OnInit {
 
   items: MenuItem[];
-  opened: boolean = false;
+  isOpened: boolean = false;
 
   constructor(
     private router: Router,
@@ -21,9 +21,8 @@ export class NavigationToolsComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-          label: ' ',
           icon: "fas fa-align-justify",
-          command: (onclick)=> {this.open();}
+          command: (onclick)=> {this.openCloseSidebar();}
       },
       {
           label: 'News',
@@ -40,8 +39,8 @@ export class NavigationToolsComponent implements OnInit {
     ]
   }
 
-  open(){
-    this.opened = !this.opened;
-    return this.opened;
+  openCloseSidebar(){
+    this.isOpened = !this.isOpened;
+    return this.isOpened;
   }
 }
