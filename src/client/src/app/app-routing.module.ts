@@ -5,12 +5,13 @@ import { AboutUserBodyComponent } from './about-user-body/about-user-body.compon
 import { TestComponent } from './test/test.component';
 import { PostComponent } from './post/post.component';
 import { NavigationToolsComponent } from './navigation-tools/navigation-tools.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/menu',
-    pathMatch: 'full'
+    redirectTo: 'menu',
+    pathMatch: 'full',
   },
   {
     path: 'menu',
@@ -26,9 +27,13 @@ const routes: Routes = [
       },
       {
         path: '**',
-        component: AboutUserBodyComponent,
-      }
+        component: PostComponent,
+      },
     ]
+  },
+  {
+    path: '**',
+    redirectTo: 'menu'
   }
 ];
 

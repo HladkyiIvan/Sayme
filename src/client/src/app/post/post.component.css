@@ -1,11 +1,14 @@
-/* .outer {
-    background-color: blue;
+input{
+    padding: 5px;
+    border-radius: 5px; 
+    border: powderblue solid 1px;
 }
 
-.container{
-    background-color: green;
+.post-text{
+    resize: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border: none;
+    outline: none;
 }
-
-.post-container{
-    text-decoration: blueviolet;
-} */
