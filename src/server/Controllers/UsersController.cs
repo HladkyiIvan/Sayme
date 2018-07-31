@@ -7,25 +7,25 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private readonly PostContext _context;
+        private readonly UsersContext _context;
 
-        public PostController(PostContext context)
+        public UsersController(UsersContext context)
         {
             _context = context;
         }  
         
         [HttpGet]
-        public IEnumerable<Post> Get()
+        public IEnumerable<Users> Get()
         {
-            return _context.Post.ToList();
+            return _context.Users.ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Post> Get(long id)
+        public ActionResult<Users> Get(long id)
         {
-            var item = _context.Post.Find(id);
+            var item = _context.Users.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -34,13 +34,13 @@ namespace server.Controllers
         } 
 
         [HttpPost]
-        public IActionResult Post([FromBody]Post post)
+        public IActionResult Users([FromBody]Users user)
         {
             if(ModelState.IsValid)
             {
-                _context.Post.Add(post);
+                _context.Users.Add(user);
                 _context.SaveChanges();
-                return Ok(post);
+                return Ok(user);
             }
             return BadRequest(ModelState);
         } 

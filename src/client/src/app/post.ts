@@ -1,8 +1,7 @@
 export class Post {
     constructor(
-    private username: string,
-    private usernick: string,
-    private text: string,
-    private likes: number,
+    public id?: number,
+    public message?: string,
+    public id_user?: number
     ){}
 }

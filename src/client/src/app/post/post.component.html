@@ -13,7 +13,7 @@
                             <span class="ui-inputgroup-addon">
                                 <i class="fa fa-user"></i>
                             </span>
-                            <input [(ngModel)]="newpost.username" name="username" value="username12345" type="text" pInputText placeholder="Username">
+                            <input [(ngModel)]="username" name="username" value="username12345" type="text" pInputText placeholder="Username">
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-4">
@@ -21,7 +21,7 @@
                             <span class="ui-inputgroup-addon">
                                 <i class="fa fa-poo"></i>
                             </span>
-                            <input [(ngModel)]="newpost.text" value="sample text12345" name="text" type="text" pInputText placeholder="Say something...">
+                            <input [(ngModel)]="newpost.message" value="sample message" name="text" type="text" pInputText placeholder="Say something...">
                             <button  pButton type="button" icon="fa fa-comment-alt" (click)="onSay()"></button>
                         </div>
                     </div>
@@ -36,17 +36,12 @@
                     <div class="ui-g">
                         <div class="ui-g-2 ui-sm-6">User: </div>
                         <div class="ui-g-10 ui-sm-6">
-                            <b>{{post.username}}</b>
+                            <b>{{username}}</b>
                         </div>
 
-                        <div class="ui-g-2 ui-sm-6">Msg: </div>
+                        <div class="ui-g-2 ui-sm-6">Message: </div>
                         <div class="ui-g-10 ui-sm-6">
-                            <b>{{post.text}}</b>
-                        </div>
-
-                        <div class="ui-g-2 ui-sm-6">Likes: </div>
-                        <div class="ui-g-10 ui-sm-6">
-                            <b>{{post.likes}}</b>
+                            <b>{{post.message}}</b>
                         </div>
                     </div>
                 </div>
