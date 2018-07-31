@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
-import { PostService } from '../post.service';
-import { UsersService } from '../users.service';
-import {Post} from '../post';
-import {Users} from '../users';
+import { UsersService } from '../services/users.service';
+import {Users} from '../Models/users';
+import { PostService } from '../services/post.service';
+import { Post } from '../Models/post';
 
 @Component({
   selector: 'app-post',
@@ -21,31 +21,37 @@ export class PostComponent implements OnInit{
 
   constructor(private _postService: PostService, private _usersService: UsersService){}
 
+  // При первом вызове компонента вызывается метод сервиса, который
+  // возвращает все посты, которые он нашел по АПИшке, и добавляет их
+  // в локальный массив, который в свою очередь общаеться с формой 
+  // хтмл файла.
   ngOnInit(){
     this.loadPosts();
   }
 
+  // добавляет новый пост в список постов
   onSay(){
-    this._usersService.getUsers()
-        .subscribe((data: Users[]) => this.usersToSearch = data);
+    // this._usersService.getUsers()
+    //     .subscribe((data: Users[]) => this.usersToSearch = data);
 
-    this.usersToSearch.forEach(element => {
-      if (element.login == this.username){
-        this.newpost.id_user = element.id;
-      }
-      else{
-        this.newuser.login = this.username;
-        this.newuser.mail = " ";
-        this.newuser.password = " ";
-        this.newuser.bio = " ";
-        this.newuser.active = true;
-        this._usersService.createUser(this.newuser)
-        .subscribe((data: Users) => this.usersToSearch.push(data));
+    // this.usersToSearch.forEach(element => {
+    //   if (element.login == this.username){
+    //     this.newpost.id_user = element.id;
+    //   }
+    //   else{
+    //     this.newuser.login = this.username;
+    //     this.newuser.mail = " ";
+    //     this.newuser.password = " ";
+    //     this.newuser.bio = " ";
+    //     this.newuser.active = true;
+    //     this._usersService.createUser(this.newuser)
+    //     .subscribe((data: Users) => this.usersToSearch.push(data));
 
-        this.newpost.id_user = this.usersToSearch.length + 1;
-      }
-    });
+    //     this.newpost.id_user = this.usersToSearch.length + 1;
+    //   }
+    // });
 
+    this.newpost.id_user = 1;
     this._postService.createPost(this.newpost)
     .subscribe((data: Post) => this.posts.push(data));
     this.newpost = new Post();

@@ -1,21 +1,45 @@
-<p-menubar [model]="items" styleClass = "menu">
-  <div>
-      <input type="text" pInputText placeholder="Search..." style="margin-right: 10px;">
-  </div>
+<div class="wrapper-body">
+<p-menubar [model]="items" styleClass="menu">
+    <div>
+        <input type="search" class="search-input" style="font-size: 15px;" pInputText placeholder="Search..." >
+        <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
+    </div>
 </p-menubar>
 
-<p-sidebar [(visible)]="isOpened" id ="sidebar" [baseZIndex]="10000" (onHide)="openCloseSidebar()">
-  <h1>
-      <a routerLink =" ">Username</a>
-  </h1>
-  <h5>
-      <a routerLink =" ">followers: num</a>
-  </h5>
-  <h5>
-      <a routerLink =" ">following: num</a>
-  </h5>
-  <button pButton type="button"  label="Settings" class="ui-button-warning"></button>
-  <br>
-  <button pButton type="button"  label="Log out" class="ui-button-warning"></button>
+<!-- Feedback modal form -->
+<p-dialog header="Feedback" [(visible)]="display1" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+    [maximizable]="true" [baseZIndex]="10000">
+    <p>Left your answer or comment here:</p>
+    <textarea [(ngModel)]="feedbackText" class="feedback-input" name="feedbackText"></textarea>
+    <div style="float: right;">
+        <button type="button" style="margin-right: 10px;" pButton (click)="onSendFeedback()" label="Send" class="ui-button-info"></button>
+        <button type="button" pButton (click)="onCancelFeedBack()" label="Cancel"></button>
+    </div>
+</p-dialog>
+
+<!-- Successfuly sent feedback modal form -->
+<p-dialog header="Success!" [(visible)]="display2" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+    [maximizable]="true" [baseZIndex]="10000">
+    <p>Report was successfuly sent!</p>
+    <div style="float: right;">
+        <button type="button" pButton (click)="display2=false" label="OK" class="ui-button-info"></button>
+    </div>
+</p-dialog>
+
+<!-- Left slide sidebar -->
+<p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open()" >
+    <h1>
+        <a style="text-decoration: none;" routerLink=" ">Username</a>
+    </h1>
+    <h5>
+        <a style="text-decoration: none;" routerLink=" ">followers: num</a>
+    </h5>
+    <h5>
+        <a style="text-decoration: none;" routerLink=" ">following: num</a>
+    </h5>
+    <button pButton type="button" label="Settings" class="ui-button-warning" style="width: 200px; margin: 10px 0px;"></button>
+    <br>
+    <button pButton type="button" label="Log out" class="ui-button-danger" style="width: 200px;"></button>
 </p-sidebar>
 <router-outlet></router-outlet>
+</div>

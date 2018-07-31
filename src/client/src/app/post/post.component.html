@@ -1,29 +1,17 @@
 <div class="outer">
     <div class="inner">
         <div class="container">
-            <form #postForm="ngForm">
+            <form #postForm="ngForm" (keydown.enter)="onSay()">
 
                 <!-- {{ postForm.value | json}}
                 <br> -->
                 <!-- <hr> {{newpost | json}} -->
-
-                <div class="ui-g ui-fluid">
-                    <div class="ui-g-12 ui-md-2">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon">
-                                <i class="fa fa-user"></i>
-                            </span>
-                            <input [(ngModel)]="username" name="username" value="username12345" type="text" pInputText placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="ui-g-12 ui-md-4">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon">
-                                <i class="fa fa-poo"></i>
-                            </span>
-                            <input [(ngModel)]="newpost.message" value="sample message" name="text" type="text" pInputText placeholder="Say something...">
-                            <button  pButton type="button" icon="fa fa-comment-alt" (click)="onSay()"></button>
-                        </div>
+                
+                <div class="ui-g ui-fluid" >
+                    <div style="padding: 10px;" class="ui-g-12">
+                        <input [(ngModel)]="username" style="outline: none; border-radius: 40px; margin: 0 20px; margin-left: -10px;" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                        <input [(ngModel)]="newpost.message" style="outline: none; border-radius: 40px; margin-right: 20px;" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off">
+                        <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
                     </div>
                 </div>
             </form>
@@ -31,18 +19,11 @@
     </div>
     <p-dataView [value]="posts.reverse()">
         <ng-template let-post pTemplate="listItem">
-            <div class="ui-g" style="padding: 2em; border-bottom: 1px solid #d9d9d9">
-                <div class="ui-g-12 ui-md-8 post-container">
-                    <div class="ui-g">
-                        <div class="ui-g-2 ui-sm-6">User: </div>
-                        <div class="ui-g-10 ui-sm-6">
-                            <b>{{username}}</b>
-                        </div>
-
-                        <div class="ui-g-2 ui-sm-6">Message: </div>
-                        <div class="ui-g-10 ui-sm-6">
-                            <b>{{post.message}}</b>
-                        </div>
+            <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9">
+                <div class="ui-g-12 ui-md-12 post-container">
+                    <div class="ui-g-12">
+                        <p><b>{{post.id}}</b>:</p> 
+                        <p><textarea class="post-text" readonly>{{post.message}}</textarea></p>
                     </div>
                 </div>
             </div>
