@@ -9,23 +9,45 @@ namespace server.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostContext _context;
+        private readonly PostContext _postcontext;
+        private readonly UsersContext _userscontext;
 
-        public PostController(PostContext context)
+        public PostController(PostContext context, UsersContext userscontext)
         {
-            _context = context;
+            _postcontext = context;
+            _userscontext = userscontext;
         }  
         
         [HttpGet]
-        public IEnumerable<Post> Get()
+        public IEnumerable<PostTransport> Get()
         {
-            return _context.Post.ToList();
+            var posts = _postcontext.Post.ToList();
+            var users = _userscontext.Users.ToList();
+            List<PostTransport> sendingPosts = new List<PostTransport>();
+
+            foreach (Post post in posts)
+            {
+                sendingPosts.Add(new PostTransport(post));
+            }
+
+            foreach(PostTransport post in sendingPosts)
+            {
+                foreach (Users user in users)
+                {
+                    if (post.id_user == user.id)
+                    {
+                        post.username = user.login;
+                    }
+                }
+            }
+
+            return sendingPosts;
         }
 
         [HttpGet("{id}")]
         public ActionResult<Post> Get(long id)
         {
-            var item = _context.Post.Find(id);
+            var item = _postcontext.Post.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -34,13 +56,15 @@ namespace server.Controllers
         } 
 
         [HttpPost]
-        public IActionResult Post([FromBody]Post post)
+        public IActionResult Post([FromBody]Post postTransport)
         {
+            // Post post = new Post(postTransport); 
+
             if(ModelState.IsValid)
             {
-                _context.Post.Add(post);
-                _context.SaveChanges();
-                return Ok(post);
+                _postcontext.Post.Add(postTransport);
+                _postcontext.SaveChanges();
+                return Ok(postTransport);
             }
             return BadRequest(ModelState);
         } 

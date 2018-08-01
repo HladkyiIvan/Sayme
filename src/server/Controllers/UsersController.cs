@@ -34,7 +34,7 @@ namespace server.Controllers
         } 
 
         [HttpPost]
-        public IActionResult Users([FromBody]Users user)
+        public IActionResult Post([FromBody]Users user)
         {
             if(ModelState.IsValid)
             {
