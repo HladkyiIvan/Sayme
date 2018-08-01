@@ -4,6 +4,8 @@ import { UsersService } from '../services/users.service';
 import {Users} from '../Models/users';
 import { PostService } from '../services/post.service';
 import { Post } from '../Models/post';
+import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
+
 
 @Component({
   selector: 'app-post',
@@ -18,6 +20,7 @@ export class PostComponent implements OnInit{
   newpost = new Post();
   newuser = new Users();
   username = "username";
+  timeit = timer(1, 10000);
 
   constructor(private _postService: PostService, private _usersService: UsersService){}
 
@@ -27,6 +30,7 @@ export class PostComponent implements OnInit{
   // хтмл файла.
   ngOnInit(){
     this.loadPosts();
+    this.timeit.subscribe(x => this.loadPosts());
   }
 
   // добавляет новый пост в список постов
@@ -53,7 +57,7 @@ export class PostComponent implements OnInit{
 
     this.newpost.id_user = 1;
     this._postService.createPost(this.newpost)
-    .subscribe((data: Post) => this.posts.push(data));
+        .subscribe((data: Post) => this.posts.push(data));
     this.newpost = new Post();
     this.newuser = new Users();
   }
@@ -62,5 +66,7 @@ export class PostComponent implements OnInit{
     this._postService.getPosts()
         .subscribe((data: Post[]) => this.posts = data);
   } 
+
+  
 }
 
