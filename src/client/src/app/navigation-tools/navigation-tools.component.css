@@ -1,5 +1,6 @@
-.wrapper{
-    text-decoration: brown;
+
+a{
+    text-decoration: none;
 }
 
 .search-input{
@@ -22,12 +23,23 @@
     max-width: 900px;
 }
 
-.feedback-input{
+.feedback-text{
+    font-size: 12px;
     width: 320px;
     height: 150px;
     resize: none; 
     border: rgb(201, 201, 38) solid 1px;
     border-radius: 10px;
     outline: none;
-    padding: 5px;
+    padding: 10px;
+}
+
+.feedback-email{
+    font-size: 12px;
+    margin-bottom: 15px;
+    border: rgb(201, 201, 38) solid 1px;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+    width: 320px;
 }

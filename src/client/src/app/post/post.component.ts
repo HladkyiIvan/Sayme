@@ -4,7 +4,8 @@ import { UsersService } from '../services/users.service';
 import { Users } from '../Models/users';
 import { PostService } from '../services/post.service';
 import { Post } from '../Models/post';
-import { Location } from '@angular/common';
+import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
+
 
 @Component({
   selector: 'app-post',
@@ -19,8 +20,9 @@ export class PostComponent implements OnInit{
   newpost = new Post();
   newuser = new Users();
   maxUserId = 0;
+  timeit = timer(1, 10000);
 
-  constructor(private _postService: PostService, private _usersService: UsersService, private location: Location){}
+  constructor(private _postService: PostService, private _usersService: UsersService){}
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -28,6 +30,7 @@ export class PostComponent implements OnInit{
   // хтмл файла.
   ngOnInit(){
     this.loadPosts();
+    this.timeit.subscribe(x => this.loadPosts());
   }
 
   // добавляет новый пост в список постов
@@ -75,5 +78,7 @@ export class PostComponent implements OnInit{
     this._usersService.getUsers()
         .subscribe((data: Users[]) => this.usersToSearch = data);
   } 
+
+  
 }
 

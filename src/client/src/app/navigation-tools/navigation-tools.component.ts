@@ -14,6 +14,7 @@ export class NavigationToolsComponent implements OnInit {
   display1: boolean = false;
   display2: boolean = false;
   feedbackText = '';
+  useremail = '';
 
   constructor(
     private router: Router,
@@ -28,7 +29,7 @@ export class NavigationToolsComponent implements OnInit {
       },
       {
         label: 'News',
-        routerLink: 'post'
+        routerLink: 'post',
       },
       {
         label: 'Interesting',
@@ -51,10 +52,11 @@ export class NavigationToolsComponent implements OnInit {
   }
 
   onSendFeedback() {
-    if (this.feedbackText.length > 10) {
+    if (this.feedbackText.length > 10 && this.useremail.length > 3 ) {
       this.display1 = false;
       this.display2 = true;
       this.feedbackText = '';
+      this.useremail = '';
     }
   }
 
