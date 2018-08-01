@@ -1,20 +1,21 @@
 <div class="wrapper-body">
 <p-menubar [model]="items" styleClass="menu">
-    <div>
-        <input type="search" class="search-input" style="font-size: 15px;" pInputText placeholder="Search..." >
-        <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
-    </div>
+    <input type="search" class="search-input" style="font-size: 15px;" pInputText placeholder="Search..." >
+    <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
 </p-menubar>
 
 <!-- Feedback modal form -->
 <p-dialog header="Feedback" [(visible)]="display1" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
     [maximizable]="true" [baseZIndex]="10000">
     <p>Left your answer or comment here:</p>
-    <textarea [(ngModel)]="feedbackText" class="feedback-input" name="feedbackText"></textarea>
-    <div style="float: right;">
-        <button type="button" style="margin-right: 10px;" pButton (click)="onSendFeedback()" label="Send" class="ui-button-info"></button>
-        <button type="button" pButton (click)="onCancelFeedBack()" label="Cancel"></button>
-    </div>
+    <form #postForm="ngForm" (keydown.enter)="onSay()">
+        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email">
+        <textarea required [(ngModel)]="feedbackText" class="feedback-text" name="feedbackText" placeholder="your comment"></textarea>
+        <div style="float: right; margin-top: 5px;">
+            <button type="button" style="margin-right: 10px;" pButton (click)="onSendFeedback()" label="Send" class="ui-button-info"></button>
+            <button type="button" pButton (click)="onCancelFeedBack()" label="Cancel"></button>
+        </div>
+    </form>
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
@@ -29,13 +30,13 @@
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open()" >
     <h1>
-        <a style="text-decoration: none;" routerLink=" ">Username</a>
+        <a routerLink=" ">Username</a>
     </h1>
     <h5>
-        <a style="text-decoration: none;" routerLink=" ">followers: num</a>
+        <a routerLink=" ">followers: num</a>
     </h5>
     <h5>
-        <a style="text-decoration: none;" routerLink=" ">following: num</a>
+        <a routerLink=" ">following: num</a>
     </h5>
     <button pButton type="button" label="Settings" class="ui-button-warning" style="width: 200px; margin: 10px 0px;"></button>
     <br>
