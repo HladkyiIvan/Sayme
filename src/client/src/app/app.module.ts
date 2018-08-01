@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { SidebarModule } from 'primeng/sidebar';
-import { MenuModule } from 'primeng/primeng';
+import { MenuModule, DialogModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { AccordionModule } from 'primeng/accordion';
@@ -48,6 +48,7 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
     MenubarModule,
     MenuModule,
     DataViewModule,
+    DialogModule,
   ],
   exports: [
     LoginRegistrationHeaderComponent,
