@@ -29,7 +29,6 @@ export class PostComponent implements OnInit{
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла.
   ngOnInit(){
-    this.loadPosts();
     this.timeit.subscribe(x => this.loadPosts());
   }
 
