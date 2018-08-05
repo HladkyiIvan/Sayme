@@ -11,8 +11,8 @@ export class NavigationToolsComponent implements OnInit {
 
   items: MenuItem[];
   opened: boolean = false;
-  display1: boolean = false;
-  display2: boolean = false;
+  isEnabledFeedbackForm: boolean = false;
+  isEnabledSuccessForm: boolean = false;
   feedbackText = '';
   useremail = '';
 
@@ -48,20 +48,20 @@ export class NavigationToolsComponent implements OnInit {
   }
 
   showDialog() {
-    this.display1 = true;
+    this.isEnabledFeedbackForm = true;
   }
 
   onSendFeedback() {
     if (this.feedbackText.length > 10 && this.useremail.length > 3 ) {
-      this.display1 = false;
-      this.display2 = true;
+      this.isEnabledFeedbackForm = false;
+      this.isEnabledSuccessForm = true;
       this.feedbackText = '';
       this.useremail = '';
     }
   }
 
   onCancelFeedBack() {
-    this.display1 = false;
+    this.isEnabledFeedbackForm = false;
   }
 
 }

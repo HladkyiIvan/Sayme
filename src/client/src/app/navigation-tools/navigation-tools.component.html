@@ -6,7 +6,7 @@
 </p-menubar>
 
 <!-- Feedback modal form -->
-<p-dialog header="Feedback" [(visible)]="display1" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+<p-dialog header="Feedback" [(visible)]="isEnabledFeedbackForm" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
     [maximizable]="true" [baseZIndex]="10000">
     <p>Left your answer or comment here:</p>
     <form #postForm="ngForm" (keydown.enter)="onSay()">
@@ -20,11 +20,11 @@
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
-<p-dialog header="Success!" [(visible)]="display2" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+<p-dialog header="Success!" [(visible)]="isEnabledSuccessForm" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
     [maximizable]="true" [baseZIndex]="10000">
     <p>Report was successfuly sent!</p>
     <div style="float: right;">
-        <button type="button" pButton (click)="display2=false" label="OK" class="ui-button-info"></button>
+        <button type="button" pButton (click)="isEnabledSuccessForm=false" label="OK" class="ui-button-info"></button>
     </div>
 </p-dialog>
 

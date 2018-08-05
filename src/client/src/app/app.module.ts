@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule, DialogModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +17,6 @@ import { LoginRegistrationHeaderComponent } from './login-registration-header/lo
 import { AboutUserBodyComponent } from './about-user-body/about-user-body.component';
 import { FooterComponent } from './footer/footer.component';
 import { PostComponent } from './post/post.component';
-import { TestModule } from './test/test.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationToolsComponent } from './navigation-tools/navigation-tools.component';
 
@@ -38,12 +36,9 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
     AppRoutingModule,
     FormsModule,
     RouterModule,
-    SharedModule,
     ButtonModule,
     AccordionModule,
     SidebarModule,
-    SharedModule, 
-    TestModule,
     HttpClientModule,
     MenubarModule,
     MenuModule,
@@ -56,7 +51,6 @@ import { NavigationToolsComponent } from './navigation-tools/navigation-tools.co
     FooterComponent,
     NavigationToolsComponent,
     PostComponent,
-    SharedModule,
     AccordionModule,
     DataViewModule,
   ],
