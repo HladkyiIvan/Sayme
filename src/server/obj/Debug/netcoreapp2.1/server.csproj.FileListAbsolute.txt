@@ -24,3 +24,17 @@ C:\Users\ZenBook\Desktop\projects\ISD\SayMe\src\server\obj\Debug\netcoreapp2.1\s
 C:\Users\ZenBook\Desktop\projects\ISD\SayMe\src\server\obj\Debug\netcoreapp2.1\server.RazorTargetAssemblyInfo.cache
 C:\Users\ZenBook\Desktop\projects\ISD\SayMe\src\server\obj\Debug\netcoreapp2.1\server.dll
 C:\Users\ZenBook\Desktop\projects\ISD\SayMe\src\server\obj\Debug\netcoreapp2.1\server.pdb
+C:\Users\User\Desktop\Sayme\Sayme\src\server\bin\Debug\netcoreapp2.1\server.deps.json
+C:\Users\User\Desktop\Sayme\Sayme\src\server\bin\Debug\netcoreapp2.1\server.runtimeconfig.json
+C:\Users\User\Desktop\Sayme\Sayme\src\server\bin\Debug\netcoreapp2.1\server.runtimeconfig.dev.json
+C:\Users\User\Desktop\Sayme\Sayme\src\server\bin\Debug\netcoreapp2.1\server.dll
+C:\Users\User\Desktop\Sayme\Sayme\src\server\bin\Debug\netcoreapp2.1\server.pdb
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.RazorAssemblyInfo.cache
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.RazorAssemblyInfo.cs
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.AssemblyInfo.cs
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.RazorTargetAssemblyInfo.cache
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.dll
+C:\Users\User\Desktop\Sayme\Sayme\src\server\obj\Debug\netcoreapp2.1\server.pdb
