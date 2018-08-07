@@ -55,8 +55,6 @@ export class PostComponent implements OnInit{
           }
         });
 
-        this.loadPosts();
-
         this.newpost.id_user = this.maxUserId + 1;
     }
     
@@ -67,15 +65,14 @@ export class PostComponent implements OnInit{
 
     this.newpost = new Post();
     this.newuser = new Users(); 
-
-    this.loadPosts();
   }
 
   loadPosts() {
-    this._postService.getPosts()
-        .subscribe((data: Post[]) => this.posts = data);
     this._usersService.getUsers()
         .subscribe((data: Users[]) => this.usersToSearch = data);
+    this._postService.getPosts()
+        .subscribe((data: Post[]) => this.posts = data);
+    
   } 
 
   
