@@ -42,9 +42,9 @@ export class PostComponent implements OnInit{
 
     if (this.newpost.id_user == null){
         this.newuser.login = this.newpost.username;
-        this.newuser.mail = " ";
-        this.newuser.password = " ";
-        this.newuser.bio = " ";
+        this.newuser.mail = ' ';
+        this.newuser.password = ' ';
+        this.newuser.bio = ' ';
         this.newuser.active = true;
         this._usersService.createUser(this.newuser).
         subscribe((data: Users) => this.usersToSearch.push(data));
