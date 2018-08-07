@@ -8,20 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
 
-  private _url: string = '/api/users'
+  private url: string = '/api/users';
 
   constructor(private http: HttpClient) { }
 
-  
+
   getUsers() {
-    return this.http.get(this._url);
+    return this.http.get(this.url);
   }
 
   getUser(id: number) {
-    return this.http.get(this._url + '/' + id.toString());
+    return this.http.get(this.url + '/' + id.toString());
   }
-  
+
   createUser(user: Users) {
-    return this.http.post(this._url, user);
+    return this.http.post(this.url, user);
   }
 }

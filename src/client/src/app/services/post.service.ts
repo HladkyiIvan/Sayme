@@ -9,18 +9,18 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class PostService {
 
-  private _url: string = '/api/post'
+  private url: string = '/api/post';
 
   constructor( private http: HttpClient) { }
 
-  
-  //GET
+
+  // GET
   getPosts() {
-    return this.http.get(this._url);
+    return this.http.get(this.url);
   }
-  
-  //POST
+
+  // POST
   createPost(post: Post) {
-    return this.http.post(this._url, post);
+    return this.http.post(this.url, post);
   }
 }
