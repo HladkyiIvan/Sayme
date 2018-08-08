@@ -9,9 +9,9 @@ namespace server.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UsersContext _context;
+        private readonly SaymedbContext _context;
 
-        public UsersController(UsersContext context)
+        public UsersController(SaymedbContext context)
         {
             _context = context;
         }  

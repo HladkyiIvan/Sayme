@@ -9,20 +9,19 @@ namespace server.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostContext _postcontext;
-        private readonly UsersContext _userscontext;
+        private readonly SaymedbContext _context;
 
-        public PostController(PostContext context, UsersContext userscontext)
+        public PostController(SaymedbContext context)
         {
-            _postcontext = context;
-            _userscontext = userscontext;
+            _context = context;
+           // _userscontext = userscontext;
         }  
         
         [HttpGet]
         public IEnumerable<PostTransport> Get()
         {
-            var posts = _postcontext.Post.ToList();
-            var users = _userscontext.Users.ToList();
+            var posts = _context.Post.ToList();
+            var users = _context.Users.ToList();
             List<PostTransport> sendingPosts = new List<PostTransport>();
 
             foreach (Post post in posts)
@@ -30,6 +29,19 @@ namespace server.Controllers
                 sendingPosts.Add(new PostTransport(post));
             }
 
+
+            
+
+           /* var temp=from post in sendingPosts
+                                let u=from user in users
+                                where post.id_user == user.id
+                                select user.login
+                    select post.Set(p=>
+                    {
+                        p.username = u.FirstOrDefault();
+                    });
+                */    
+            
             foreach(PostTransport post in sendingPosts)
             {
                 foreach (Users user in users)
@@ -47,7 +59,7 @@ namespace server.Controllers
         [HttpGet("{id}")]
         public ActionResult<Post> Get(long id)
         {
-            var item = _postcontext.Post.Find(id);
+            var item = _context.Post.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -62,8 +74,8 @@ namespace server.Controllers
 
             if(ModelState.IsValid)
             {
-                _postcontext.Post.Add(postTransport);
-                _postcontext.SaveChanges();
+                _context.Post.Add(postTransport);
+                _context.SaveChanges();
                 return Ok(postTransport);
             }
             return BadRequest(ModelState);

@@ -3,11 +3,12 @@ using Pomelo.EntityFrameworkCore.MySql;
 
 namespace server.Models
 {
-    public class UsersContext : DbContext
+    public class SaymedbContext : DbContext
     {
+        public DbSet<Post> Post { get; set; }
         public DbSet<Users> Users { get; set; }
 
-        public UsersContext(DbContextOptions<UsersContext> options)
+        public SaymedbContext(DbContextOptions<SaymedbContext> options)
             :base(options)
         { }
     }
