@@ -7,25 +7,25 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly SaymedbContext _context;
 
-        public UsersController(SaymedbContext context)
+        public UserController(SaymedbContext context)
         {
             _context = context;
         }  
         
         [HttpGet]
-        public IEnumerable<Users> Get()
+        public IEnumerable<User> Get()
         {
-            return _context.Users.ToList();
+            return _context.User.ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Users> Get(long id)
+        public ActionResult<User> Get(long id)
         {
-            var item = _context.Users.Find(id);
+            var item = _context.User.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -34,11 +34,11 @@ namespace server.Controllers
         } 
 
         [HttpPost]
-        public IActionResult Post([FromBody]Users user)
+        public IActionResult Post([FromBody]User user)
         {
             if(ModelState.IsValid)
             {
-                _context.Users.Add(user);
+                _context.User.Add(user);
                 _context.SaveChanges();
                 return Ok(user);
             }

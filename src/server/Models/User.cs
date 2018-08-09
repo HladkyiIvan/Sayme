@@ -1,6 +1,6 @@
 namespace server.Models
 {
-    public class Users
+    public class User
     {
         public long id { get; set; }
         public string login { get; set; }

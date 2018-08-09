@@ -14,14 +14,13 @@ namespace server.Controllers
         public PostController(SaymedbContext context)
         {
             _context = context;
-           // _userscontext = userscontext;
         }  
         
         [HttpGet]
         public IEnumerable<PostTransport> Get()
         {
             var posts = _context.Post.ToList();
-            var users = _context.Users.ToList();
+            var users = _context.User.ToList();
             List<PostTransport> sendingPosts = new List<PostTransport>();
 
             foreach (Post post in posts)
@@ -44,7 +43,7 @@ namespace server.Controllers
             
             foreach(PostTransport post in sendingPosts)
             {
-                foreach (Users user in users)
+                foreach (User user in users)
                 {
                     if (post.id_user == user.id)
                     {

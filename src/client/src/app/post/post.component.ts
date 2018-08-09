@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
-import { UsersService } from '../services/users.service';
-import { Users } from '../Models/users';
+import { UserService } from '../services/user.service';
+import { User } from '../Models/user';
 import { PostService } from '../services/post.service';
 import { Post } from '../Models/post';
 import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
@@ -11,18 +11,18 @@ import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  providers: [PostService, UsersService]
+  providers: [PostService, UserService]
 })
 export class PostComponent implements OnInit{
 
   posts = [];
   usersToSearch = [];
   newpost = new Post();
-  newuser = new Users();
+  newuser = new User();
   maxUserId = 0;
   timeit = timer(1, 10000);
 
-  constructor(private _postService: PostService, private _usersService: UsersService){}
+  constructor(private _postService: PostService, private _userService: UserService){}
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -46,8 +46,8 @@ export class PostComponent implements OnInit{
         this.newuser.password = ' ';
         this.newuser.bio = ' ';
         this.newuser.active = true;
-        this._usersService.createUser(this.newuser).
-        subscribe((data: Users) => this.usersToSearch.push(data));
+        this._userService.createUser(this.newuser).
+        subscribe((data: User) => this.usersToSearch.push(data));
 
         this.usersToSearch.forEach(element => {
           if(element.id > this.maxUserId){
@@ -64,12 +64,12 @@ export class PostComponent implements OnInit{
     .subscribe((data: Post) => this.posts.push(data));
 
     this.newpost = new Post();
-    this.newuser = new Users(); 
+    this.newuser = new User(); 
   }
 
   loadPosts() {
-    this._usersService.getUsers()
-        .subscribe((data: Users[]) => this.usersToSearch = data);
+    this._userService.getUsers()
+        .subscribe((data: User[]) => this.usersToSearch = data);
     this._postService.getPosts()
         .subscribe((data: Post[]) => this.posts = data);
     

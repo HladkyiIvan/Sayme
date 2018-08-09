@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Users } from '../Models/users';
+import { User } from '../Models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UserService {
 
-  private url: string = '/api/users';
+  private url = '/api/user';
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +21,7 @@ export class UsersService {
     return this.http.get(this.url + '/' + id.toString());
   }
 
-  createUser(user: Users) {
+  createUser(user: User) {
     return this.http.post(this.url, user);
   }
 }

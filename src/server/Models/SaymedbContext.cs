@@ -6,7 +6,7 @@ namespace server.Models
     public class SaymedbContext : DbContext
     {
         public DbSet<Post> Post { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> User { get; set; }
 
         public SaymedbContext(DbContextOptions<SaymedbContext> options)
             :base(options)
