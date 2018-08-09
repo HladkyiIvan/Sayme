@@ -9,18 +9,18 @@ namespace server.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly SaymedbContext _context;
+        private readonly SaymedbContext context;
 
         public PostController(SaymedbContext context)
         {
-            _context = context;
+            this.context = context;
         }  
         
         [HttpGet]
         public IEnumerable<PostTransport> Get()
         {
-            var posts = _context.Post.ToList();
-            var users = _context.User.ToList();
+            var posts = context.Post.ToList();
+            var users = context.User.ToList();
             List<PostTransport> sendingPosts = new List<PostTransport>();
 
             foreach (Post post in posts)
@@ -58,7 +58,7 @@ namespace server.Controllers
         [HttpGet("{id}")]
         public ActionResult<Post> Get(long id)
         {
-            var item = _context.Post.Find(id);
+            var item = context.Post.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -73,8 +73,8 @@ namespace server.Controllers
 
             if(ModelState.IsValid)
             {
-                _context.Post.Add(postTransport);
-                _context.SaveChanges();
+                context.Post.Add(postTransport);
+                context.SaveChanges();
                 return Ok(postTransport);
             }
             return BadRequest(ModelState);

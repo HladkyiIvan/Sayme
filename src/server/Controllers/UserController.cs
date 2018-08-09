@@ -9,23 +9,23 @@ namespace server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly SaymedbContext _context;
+        private readonly SaymedbContext context;
 
         public UserController(SaymedbContext context)
         {
-            _context = context;
+            this.context = context;
         }  
         
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            return _context.User.ToList();
+            return context.User.ToList();
         }
 
         [HttpGet("{id}")]
         public ActionResult<User> Get(long id)
         {
-            var item = _context.User.Find(id);
+            var item = context.User.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -38,8 +38,8 @@ namespace server.Controllers
         {
             if(ModelState.IsValid)
             {
-                _context.User.Add(user);
-                _context.SaveChanges();
+                context.User.Add(user);
+                context.SaveChanges();
                 return Ok(user);
             }
             return BadRequest(ModelState);

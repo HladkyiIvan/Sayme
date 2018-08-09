@@ -43,9 +43,5 @@
             "request": "attach",
             "processId": "${command:pickProcess}"
         }
-<<<<<<< HEAD
     ]
-=======
-    ,]
->>>>>>> origin/pleasework
-}
+    }
