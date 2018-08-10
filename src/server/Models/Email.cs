@@ -4,6 +4,6 @@ namespace server.Models
     {
         public long  id { get; set; }
         public string email_user { get; set; }
-        public string feedback { get; set; };;;;
+        public string feedback { get; set; }
     }
 }
