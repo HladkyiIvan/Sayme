@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class PostService {
 
-  private url: string = '/api/post';
+  private url = '/api/post';
 
   constructor( private http: HttpClient) { }
 

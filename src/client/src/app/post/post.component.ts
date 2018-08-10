@@ -15,38 +15,38 @@ import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
 })
 export class PostComponent implements OnInit{
 
-  posts = [];
-  usersToSearch = [];
-  newpost = new Post();
-  newuser = new User();
-  maxUserId = 0;
-  timeit = timer(1, 10000);
+  private posts = [];
+  private usersToSearch = [];
+  private newPost = new Post();
+  private newUser = new User();
+  private maxUserId = 0;
+  private timeIt = timer(1, 10000);
 
-  constructor(private _postService: PostService, private _userService: UserService){}
+  constructor(private postService: PostService, private userService: UserService){}
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла.
   ngOnInit(){
-    this.timeit.subscribe(x => this.loadPosts());
+    this.timeIt.subscribe(x => this.loadPosts());
   }
 
   // добавляет новый пост в список постов
   onSay(){
     this.usersToSearch.forEach(element => {
-      if (element.login == this.newpost.username){
-        this.newpost.id_user = element.id;
+      if (element.login == this.newPost.username){
+        this.newPost.id_user = element.id;
       }
     });
 
-    if (this.newpost.id_user == null){
-        this.newuser.login = this.newpost.username;
-        this.newuser.mail = ' ';
-        this.newuser.password = ' ';
-        this.newuser.bio = ' ';
-        this.newuser.active = true;
-        this._userService.createUser(this.newuser).
+    if (!this.newPost.id_user){
+        this.newUser.login = this.newPost.username;
+        this.newUser.mail = ' ';
+        this.newUser.password = ' ';
+        this.newUser.bio = ' ';
+        this.newUser.active = true;
+        this.userService.createUser(this.newUser).
         subscribe((data: User) => this.usersToSearch.push(data));
 
         this.usersToSearch.forEach(element => {
@@ -55,22 +55,22 @@ export class PostComponent implements OnInit{
           }
         });
 
-        this.newpost.id_user = this.maxUserId + 1;
+        this.newPost.id_user = this.maxUserId + 1;
     }
     
     this.loadPosts();
 
-    this._postService.createPost(this.newpost)
+    this.postService.createPost(this.newPost)
     .subscribe((data: Post) => this.posts.push(data));
 
-    this.newpost = new Post();
-    this.newuser = new User(); 
+    this.newPost = new Post();
+    this.newUser = new User(); 
   }
 
   loadPosts() {
-    this._userService.getUsers()
+    this.userService.getUsers()
         .subscribe((data: User[]) => this.usersToSearch = data);
-    this._postService.getPosts()
+    this.postService.getPosts()
         .subscribe((data: Post[]) => this.posts = data);
     
   } 
