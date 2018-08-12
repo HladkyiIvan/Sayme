@@ -4,7 +4,7 @@ import { UsersService } from '../services/users.service';
 import { Users } from '../Models/users';
 import { PostService } from '../services/post.service';
 import { Post } from '../Models/post';
-import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
+import { timer } from 'rxjs/internal/observable/timer';
 
 
 @Component({
@@ -46,8 +46,8 @@ export class PostComponent implements OnInit{
         this.newuser.password = " ";
         this.newuser.bio = " ";
         this.newuser.active = true;
-        this._usersService.createUser(this.newuser).
-        subscribe((data: Users) => this.usersToSearch.push(data));
+        this._usersService.createUser(this.newuser)
+            .subscribe((data: Users) => this.usersToSearch.push(data));
 
         this.usersToSearch.forEach(element => {
           if(element.id > this.maxUserId){
@@ -63,7 +63,7 @@ export class PostComponent implements OnInit{
     this.loadPosts();
 
     this._postService.createPost(this.newpost)
-    .subscribe((data: Post) => this.posts.push(data));
+        .subscribe((data: Post) => this.posts.push(data));
 
     this.newpost = new Post();
     this.newuser = new Users(); 

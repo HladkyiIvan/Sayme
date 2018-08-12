@@ -9,21 +9,24 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SendEmailController : ControllerBase
+    public class FeedbackController : ControllerBase
     {
-
         [HttpPost]
         public void SendFeedback()
         {
+            Email feedback = new Email();
+            string hostEmail = "sayme.help@gmail.com";
+            string userEmail = feedback.userEmail;
+
             SmtpClient client = new SmtpClient();
 
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("sayme.help@gmail.com", "sayme12345");
+            client.Credentials = new NetworkCredential(hostEmail, "sayme12345");
             
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("whoever@me.com");
-            mailMessage.To.Add("sayme.help@gmail.com");
-            mailMessage.Body = "body";
+            mailMessage.From = new MailAddress(feedback.userEmail);
+            mailMessage.To.Add(hostEmail);
+            mailMessage.Body = feedback.feedback;
             mailMessage.Subject = "FeedBack from site";
             client.Send(mailMessage);
         }

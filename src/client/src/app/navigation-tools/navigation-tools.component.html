@@ -4,12 +4,12 @@
     <input type="search" class="search-input" style="font-size: 15px;" pInputText placeholder="Search..." >
     <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
 </p-menubar>
-
+<h1>{{useremail | json}}, {{feedbackText | json }}</h1>
 <!-- Feedback modal form -->
-<p-dialog header="Feedback" [(visible)]="isEnabledFeedbackForm" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+<p-dialog header="Feedback" [(visible)]="isFeedbackFormVisible" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
     [maximizable]="true" [baseZIndex]="10000">
     <p>Left your answer or comment here:</p>
-    <form #postForm="ngForm" (keydown.enter)="onSay()">
+    <form #postForm="ngForm">
         <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email">
         <textarea required [(ngModel)]="feedbackText" class="feedback-text" name="feedbackText" placeholder="your comment"></textarea>
         <div style="float: right; margin-top: 5px;">
@@ -20,11 +20,11 @@
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
-<p-dialog header="Success!" [(visible)]="isEnabledSuccessForm" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+<p-dialog header="Success!" [(visible)]="isSuccessFormVisible" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
     [maximizable]="true" [baseZIndex]="10000">
     <p>Report was successfuly sent!</p>
     <div style="float: right;">
-        <button type="button" pButton (click)="isEnabledSuccessForm=false" label="OK" class="ui-button-info"></button>
+        <button type="button" pButton (click)="isSuccessFormVisible=false" label="OK" class="ui-button-info"></button>
     </div>
 </p-dialog>
 

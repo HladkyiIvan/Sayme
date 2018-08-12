@@ -1,22 +1,27 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FeedbackService } from '../services/feedback.service';
+import { Email } from '../Models/email';
 
 @Component({
   selector: 'app-navigation-tools',
   templateUrl: './navigation-tools.component.html',
-  styleUrls: ['./navigation-tools.component.css']
+  styleUrls: ['./navigation-tools.component.css'],
+  providers: [FeedbackService]
 })
 export class NavigationToolsComponent implements OnInit {
 
   items: MenuItem[];
   opened: boolean = false;
-  isEnabledFeedbackForm: boolean = false;
-  isEnabledSuccessForm: boolean = false;
-  feedbackText = '';
-  useremail = '';
+  isFeedbackFormVisible: boolean = false;
+  isSuccessFormVisible: boolean = false;
+  feedback = new Email()
+  feedbackText: string = ''
+  useremail: string = ''
 
   constructor(
+    private _feedbackService: FeedbackService, 
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -48,20 +53,24 @@ export class NavigationToolsComponent implements OnInit {
   }
 
   showDialog() {
-    this.isEnabledFeedbackForm = true;
+    this.isFeedbackFormVisible = true;
   }
 
   onSendFeedback() {
     if (this.feedbackText.length > 10 && this.useremail.length > 3 ) {
-      this.isEnabledFeedbackForm = false;
-      this.isEnabledSuccessForm = true;
-      this.feedbackText = '';
-      this.useremail = '';
+      this.isFeedbackFormVisible = false
+      this.isSuccessFormVisible = true
+
+      this.feedback = new Email(this.useremail, this.feedbackText)
+      this._feedbackService.sendFeedback(this.feedback)
+
+      this.feedbackText = ''
+      this.useremail = ''
     }
   }
 
   onCancelFeedBack() {
-    this.isEnabledFeedbackForm = false;
+    this.isFeedbackFormVisible = false;
   }
 
 }
