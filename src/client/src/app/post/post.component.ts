@@ -15,12 +15,12 @@ import { timer } from 'rxjs/internal/observable/timer';
 })
 export class PostComponent implements OnInit {
 
-  private posts = [];
-  private usersToSearch = [];
-  private newPost = new Post();
-  private newUser = new User();
-  private maxUserId = 0;
-  private timeIt = timer(1, 10000000);
+  posts = [];
+  usersToSearch = [];
+  newPost = new Post();
+  newUser = new User();
+  maxUserId = 0;
+  timeIt = timer(1, 10000);
 
   constructor(private postService: PostService, private userService: UserService) { }
 
@@ -64,8 +64,9 @@ export class PostComponent implements OnInit {
 
       this.loadPosts();
 
-      this.postService.createPost(this.newPost)
-        .subscribe((data: Post) => this.posts.push(data));
+    this.newPost.post_date = new Date();
+    this.postService.createPost(this.newPost)
+    .subscribe((data: Post) => this.posts.push(data));
 
       this.newPost = new Post();
       this.newUser = new User();
@@ -74,9 +75,21 @@ export class PostComponent implements OnInit {
 
   loadPosts() {
     this.userService.getUsers()
-      .subscribe((data: User[]) => this.usersToSearch = data);
+        .subscribe((data: User[]) => this.usersToSearch = data);
     this.postService.getPosts()
-      .subscribe((data: Post[]) => this.posts = data);
+        .subscribe((data: Post[]) => this.posts = data);
+    
+  } 
+
+  getPostDate(date: Date) {
+   var yyyy = date.getFullYear().toString();
+   var mm = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1).toString(); // getMonth() is zero-based
+   var dd  = date.getDate() < 10 ? "0" + date.getDate() : date.getDate().toString();
+   var hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours().toString();
+   var min = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes().toString();
+   return "".concat(yyyy).concat(mm).concat(dd).concat(hh).concat(min);
   }
+
+  
 }
 
