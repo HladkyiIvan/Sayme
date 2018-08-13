@@ -9,7 +9,7 @@
 <p-dialog header="Feedback" [(visible)]="isEnabledFeedbackForm" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
     [maximizable]="true" [baseZIndex]="10000">
     <p>Left your answer or comment here:</p>
-    <form #postForm="ngForm" (keydown.enter)="onSay()">
+    <form #postForm="ngForm" (keydown.enter)="onSendFeedback()">
         <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email">
         <textarea required [(ngModel)]="feedbackText" class="feedback-text" name="feedbackText" placeholder="your comment"></textarea>
         <div style="float: right; margin-top: 5px;">

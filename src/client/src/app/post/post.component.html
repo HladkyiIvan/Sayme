@@ -24,6 +24,7 @@
                     <div class="ui-g-12">
                         <p><b>{{post.username}}</b>:</p> 
                         <p><textarea class="post-text" readonly>{{post.message}}</textarea></p>
+                        <p>{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p> 
                     </div>
                 </div>
             </div>
