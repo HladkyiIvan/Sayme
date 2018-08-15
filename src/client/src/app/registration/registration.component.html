@@ -1,34 +1,30 @@
 <div class="outer" >
   <div class="logo">
-      <img src="assets/images/Logo-Sayme.svg" style= "width:280px; display: block; margin-left: auto; margin-right: auto">
+      <img src="assets/images/Logo-Sayme.svg" style= "width:280px; display: block; margin-left: 55%;">
   </div>
 <div class="inner">
     
-  <h1 class="labelSignup" style="padding: 10px; text-align: center">Registration</h1>
-  <div class="container_with_borders" >
+  <h1 class="labelSignup" style="padding: 10px; text-align: center" style="margin-left: 65%; font-family:Roboto, sans-serif;">Registration</h1>
+  <div class="container_with_borders" style="margin-left: 40%;">
     <div class="ui-inputgroup" style="padding-left: 17%; padding-right: 17%;padding-top: 5%;padding-bottom: 5%">
-          <label for="inputLogin"  style="  font-family: 'Lucida Sans';">Username</label>
+          <label for="inputLogin"  style="  font-family:Roboto, sans-serif;">Username</label>
           <input [(ngModel)]="newUser.login" id="inputLogin"  type="text" size="30" pInputText> 
           <br>
-          <label for="inputMail" style="  font-family: 'Lucida Sans'; " >Email</label> <br>
+          <label for="inputMail" style="  font-family:Roboto, sans-serif;" >Email</label> <br>
           <input id="inputMail" style="margin: 0;" [(ngModel)]="newUser.mail" type="text" size="30"  pPassword> 
           <br>
-          <label for="inputPassword" style="  font-family: 'Lucida Sans';" >Password</label>
+          <label for="inputPassword" style="  font-family:Roboto, sans-serif;" >Password</label>
           <input id="inputPassword"  [(ngModel)]="newUser.password" type="password" size="30"  pPassword>
           <br>
-          <label for="inputRepPass" style="  font-family: 'Lucida Sans';" >Repeat password</label>
+          <label for="inputRepPass" style="  font-family:Roboto, sans-serif;" >Repeat password</label>
           <input id="inputRepPass"  [(ngModel)]="RepPassword" type="password" size="30"  pPassword>
+          <br>
+
+          <button pButton type="button" class="ui-button-warning" pButton (click)="onRegister()" style="margin: 5%; display: block; left: 50%;">Sign up</button>
           
         </div>
 
-       
-  
-<div class="buttonCBContainer">
-    <button pButton type="button" class="ui-button-warning" pButton (click)="onRegister()" [disabled]="!isChecked" style="width: 30%;height: 25px; padding-left: 10px; padding-right: 10px; margin: 0">Sign up</button><br>
-    <br>
-  <input type="checkbox"[(ngModel)]="isChecked" class="checkbox" id="checkbox" style="padding: 50px;" />
-<label for="checkbox" style="  font-family: 'Lucida Sans'; ">I agree to the terms</label>
-</div>
+      
   
   
   </div>
