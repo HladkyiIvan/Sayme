@@ -1,7 +1,7 @@
 <div class="wrapper-body">
     <img src="assets/images/Logo-Sayme.svg" style= "width:280px">
 <p-menubar [model]="items" styleClass="menu">
-    <input type="search" class="search-input" style="font-size: 15px;" pInputText placeholder="Search..." >
+    <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 236, 153);" pInputText placeholder="Search..." >
     <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
 </p-menubar>
 <!-- Feedback modal form -->
@@ -30,13 +30,13 @@
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open()" >
     <h1>
-        <a routerLink=" ">Username</a>
+        <a routerLink=" " style="color: #cccccc;">Username</a>
     </h1>
     <h5>
-        <a routerLink=" ">followers: num</a>
+        <a routerLink=" " style="color: #cccccc;">followers: num</a>
     </h5>
     <h5>
-        <a routerLink=" ">following: num</a>
+        <a routerLink=" " style="color: #cccccc;">following: num</a>
     </h5>
     <button pButton type="button" label="Settings" class="ui-button-warning" style="width: 200px; margin: 10px 0px;"></button>
     <br>
