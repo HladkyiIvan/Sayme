@@ -25,6 +25,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { JwtInterceptor } from './helpers/index';
 import { AuthService } from './services/auth.service';
 import {UserService} from './services/user.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {UserService} from './services/user.service';
     PostComponent,
     NavigationToolsComponent,
     AuthorisationComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

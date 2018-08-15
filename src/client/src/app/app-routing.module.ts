@@ -3,13 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { PostComponent } from './post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
-
+import {RegistrationComponent} from './registration/registration.component';
 import { AuthorisationComponent } from './authorization/authorization.component';
 
 const routes: Routes = [
   {
     path:'login',
     component:AuthorisationComponent,
+    },
+    {
+      path:'registration',
+      component:RegistrationComponent
     },
     {
     path: '',
