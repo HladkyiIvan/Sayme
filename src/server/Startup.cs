@@ -20,6 +20,8 @@ namespace server
 {
     public class Startup
     {
+        string connection = "server=localhost; port=3306; database=c9; user=c9vmserv; password=;";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,7 +34,7 @@ namespace server
         {
             //services.AddDbContextPool<PostContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDbContextPool<UsersContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContextPool<SaymedbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextPool<SaymedbContext>(options => options.UseMySql(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
