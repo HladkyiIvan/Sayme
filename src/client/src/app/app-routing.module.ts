@@ -4,13 +4,19 @@ import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.com
 import { PostComponent } from './post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 
+import { AuthorisationComponent } from './authorization/authorization.component';
+
 const routes: Routes = [
   {
+    path:'login',
+    component:AuthorisationComponent,
+    },
+    {
     path: '',
     redirectTo: 'menu',
     pathMatch: 'full',
-  },
-  {
+    },
+    {
     path: 'menu',
     component: NavigationToolsComponent,
     children: [
@@ -25,13 +31,13 @@ const routes: Routes = [
       {
         path: '**',
         component: PostComponent,
-      },
+      }
     ]
-  },
-  {
+    },
+    {
     path: '**',
     redirectTo: 'menu'
-  }
+    },
 ];
 
 @NgModule({

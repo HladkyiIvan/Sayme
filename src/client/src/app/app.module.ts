@@ -17,8 +17,14 @@ import { LoginRegistrationHeaderComponent } from './ui/login-registration-header
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { PostComponent } from './post/post.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
+import { AuthorisationComponent } from './authorization/authorization.component';
+import { fakeBackendProvider } from './helpers/index';
+import { AuthGuard } from './guard/auth.guard';
+import { JwtInterceptor } from './helpers/index';
+import { AuthService } from './services/auth.service';
+import {UserService} from './services/user.service';
 
 
 @NgModule({
@@ -29,6 +35,7 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     FooterComponent,
     PostComponent,
     NavigationToolsComponent,
+    AuthorisationComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,18 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     AccordionModule,
     DataViewModule,
   ],
-  providers: [],
+  providers: [UserService,
+    AuthGuard,
+        AuthService,
+      
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+},
+
+// providers used to create fake backend
+fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

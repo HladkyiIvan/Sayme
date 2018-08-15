@@ -2,15 +2,10 @@
     <div class="inner">
         <div class="container">
             <form #postForm="ngForm" (keydown.enter)="onSay()">
-
-                <!-- {{ postForm.value | json}}
-                <br> -->
-                <!-- <hr> {{newPost | json}} -->
-                
                 <div class="ui-g ui-fluid" >
                     <div style="padding: 10px;" class="ui-g-12">
-                        <input [(ngModel)]="newPost.username" style="outline: none; border-radius: 40px; margin: 0 20px; margin-left: -10px;" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
-                        <input [(ngModel)]="newPost.message" style="outline: none; border-radius: 40px; margin-right: 20px;" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off">
+                        <input [(ngModel)]="newPost.username" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                        <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off">
                         <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
                     </div>
                 </div>
@@ -24,8 +19,10 @@
                     <div class="ui-g-12">
                         <p><b>{{post.username}}</b>:</p> 
                         <p><textarea class="post-text" readonly>{{post.message}}</textarea></p>
+                        <p>{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p> 
                     </div>
                 </div>
             </div>
         </ng-template>
     </p-dataView>
+</div>
