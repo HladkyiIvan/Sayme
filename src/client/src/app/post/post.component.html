@@ -7,8 +7,6 @@
                         <input [(ngModel)]="newPost.username" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
                         <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off">
                         <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
-                        <h1>username: {{newPost.username | json}}</h1>
-                        <h1>message: {{newPost.message | json}}</h1>
                     </div>
                 </div>
             </form>
