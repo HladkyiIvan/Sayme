@@ -3,6 +3,7 @@
 <p-menubar [model]="items" styleClass="menu">
     <input type="search" class="search-input" style="font-size: 15px;" pInputText placeholder="Search..." >
     <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
+    <a routerLink="/login"><button type="button">Logout</button></a>
 </p-menubar>
 <!-- Feedback modal form -->
 <p-dialog header="Feedback" [(visible)]="isFeedbackFormVisible" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"

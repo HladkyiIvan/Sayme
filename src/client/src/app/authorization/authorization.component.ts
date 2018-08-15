@@ -31,7 +31,7 @@ export class AuthorisationComponent implements OnInit {
     this.authService.logout();
  
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/menu';
    // this.timeIt.subscribe(x => this.loadUsers());
   }
 
@@ -49,7 +49,7 @@ export class AuthorisationComponent implements OnInit {
             });
           }
 
-  onLogin(){
+  /*onLogin(){
     this.usersToSearch.forEach(element => {
       if (element.login == this.user.login&&element.password==this.user.password){
         this.user.id = element.id;
@@ -59,7 +59,7 @@ export class AuthorisationComponent implements OnInit {
         
       }
     });
-  }
+  }*/
 
   loadUsers(){
     this.userService.getUsers()

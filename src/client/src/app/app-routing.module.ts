@@ -13,7 +13,7 @@ const routes: Routes = [
     },
     {
     path: '',
-    redirectTo: 'menu',
+    redirectTo: 'login',
     pathMatch: 'full',
     },
     {
@@ -31,7 +31,13 @@ const routes: Routes = [
       {
         path: '**',
         component: PostComponent,
+      },
+      {
+        path:'auth',
+        redirectTo: './login',
+    pathMatch: 'full',
       }
+
     ]
     },
     {
