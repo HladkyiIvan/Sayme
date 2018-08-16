@@ -23,6 +23,28 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/Models/email.ts":
+/*!*********************************!*\
+  !*** ./src/app/Models/email.ts ***!
+  \*********************************/
+/*! exports provided: Email */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Email", function() { return Email; });
+var Email = /** @class */ (function () {
+    function Email(userEmail, feedback) {
+        this.userEmail = userEmail;
+        this.feedback = feedback;
+    }
+    return Email;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/Models/post.ts":
 /*!********************************!*\
   !*** ./src/app/Models/post.ts ***!
@@ -77,7 +99,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ui_about_user_body_about_user_body_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui/about-user-body/about-user-body.component */ "./src/app/ui/about-user-body/about-user-body.component.ts");
 /* harmony import */ var _post_post_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./post/post.component */ "./src/app/post/post.component.ts");
-/* harmony import */ var _ui_navigation_tools_navigation_tools_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ui/navigation-tools/navigation-tools.component */ "./src/app/ui/navigation-tools/navigation-tools.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -88,34 +109,18 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var routes = [
     {
-        path: '',
-        redirectTo: 'menu',
-        pathMatch: 'full',
+        path: 'post',
+        component: _post_post_component__WEBPACK_IMPORTED_MODULE_3__["PostComponent"],
     },
     {
-        path: 'menu',
-        component: _ui_navigation_tools_navigation_tools_component__WEBPACK_IMPORTED_MODULE_4__["NavigationToolsComponent"],
-        children: [
-            {
-                path: 'post',
-                component: _post_post_component__WEBPACK_IMPORTED_MODULE_3__["PostComponent"],
-            },
-            {
-                path: 'interesting',
-                component: _ui_about_user_body_about_user_body_component__WEBPACK_IMPORTED_MODULE_2__["AboutUserBodyComponent"],
-            },
-            {
-                path: '**',
-                component: _post_post_component__WEBPACK_IMPORTED_MODULE_3__["PostComponent"],
-            },
-        ]
+        path: 'interesting',
+        component: _ui_about_user_body_about_user_body_component__WEBPACK_IMPORTED_MODULE_2__["AboutUserBodyComponent"],
     },
     {
         path: '**',
-        redirectTo: 'menu'
+        component: _post_post_component__WEBPACK_IMPORTED_MODULE_3__["PostComponent"],
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -141,7 +146,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".wrapper{\r\n    display: flex;\r\n    justify-content: center;\r\n}"
+module.exports = ".wrapper{\r\n    display: flex;\r\n}"
 
 /***/ }),
 
@@ -152,7 +157,7 @@ module.exports = ".wrapper{\r\n    display: flex;\r\n    justify-content: center
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper\">\r\n    <div style=\"width: 50vh\"></div>\r\n    <router-outlet></router-outlet>\r\n    <div style=\"width: 50vh\"></div>\r\n</div>\r\n<!-- <app-footer></app-footer> -->\r\n"
+module.exports = "<div class=\"wrapper\">\r\n    <div style=\"width: 50vh\"></div>\r\n    <app-navigation-tools></app-navigation-tools>\r\n    <router-outlet></router-outlet>\r\n    <div style=\"width: 50vh\"></div>\r\n</div>\r\n<!-- <app-footer></app-footer> -->\r\n"
 
 /***/ }),
 
@@ -307,7 +312,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "input{\r\n    padding: 5px;\r\n    border-radius: 5px; \r\n    border: powderblue solid 1px;\r\n}\r\n\r\n.post-text{\r\n    resize: none;\r\n    padding: 0;\r\n    margin: 0;\r\n    width: 100%;\r\n    border: none;\r\n    outline: none;\r\n}\r\n"
+module.exports = "input{\r\n    padding: 5px;\r\n    border-radius: 5px; \r\n    border: powderblue solid 1px;\r\n}\r\n\r\n.post-text{\r\n    resize: none;\r\n    padding: 0;\r\n    margin: 0;\r\n    width: 100%;\r\n    border: none;\r\n    outline: none;\r\n}\r\n\r\n.post-username{\r\n    outline: none; \r\n    border-radius: 40px; \r\n    margin: 0 20px; \r\n    margin-left: -10px;\r\n}\r\n\r\n.post-message{\r\n    outline: none;\r\n    border-radius: 40px;\r\n    margin-right: 20px;\r\n    background:  rgb(255, 236, 153);\r\n    border: none;\r\n}"
 
 /***/ }),
 
@@ -318,7 +323,7 @@ module.exports = "input{\r\n    padding: 5px;\r\n    border-radius: 5px; \r\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"outer\">\r\n    <div class=\"inner\">\r\n        <div class=\"container\">\r\n            <form #postForm=\"ngForm\" (keydown.enter)=\"onSay()\">\r\n\r\n                <!-- {{ postForm.value | json}}\r\n                <br> -->\r\n                <!-- <hr> {{newPost | json}} -->\r\n                \r\n                <div class=\"ui-g ui-fluid\" >\r\n                    <div style=\"padding: 10px;\" class=\"ui-g-12\">\r\n                        <input [(ngModel)]=\"newPost.username\" style=\"outline: none; border-radius: 40px; margin: 0 20px; margin-left: -10px;\" name=\"username\" type=\"text\" pInputText placeholder=\"Username\" autocomplete=\"off\">\r\n                        <input [(ngModel)]=\"newPost.message\" style=\"outline: none; border-radius: 40px; margin-right: 20px;\" name=\"text\" type=\"text\" pInputText placeholder=\"Say something...\" autocomplete=\"off\">\r\n                        <button style=\" width: 70px; border-radius: 50px;\" pButton (click)=\"onSay()\" icon=\"fa fa-comment\"></button>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n    <p-dataView [value]=\"posts.reverse()\">\r\n        <ng-template let-post pTemplate=\"listItem\">\r\n            <div class=\"ui-g\" style=\"padding: 0 10px; border-bottom: 1px solid #d9d9d9\">\r\n                <div class=\"ui-g-12 ui-md-12 post-container\">\r\n                    <div class=\"ui-g-12\">\r\n                        <p><b>{{post.username}}</b>:</p> \r\n                        <p><textarea class=\"post-text\" readonly>{{post.message}}</textarea></p>\r\n                        <p>{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p> \r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n    </p-dataView>"
+module.exports = "<div class=\"outer\">\r\n    <div class=\"inner\">\r\n        <div class=\"container\">\r\n            <form #postForm=\"ngForm\" (keydown.enter)=\"onSay()\">\r\n                <div class=\"ui-g ui-fluid\" >\r\n                    <div style=\"padding: 10px;\" class=\"ui-g-12\">\r\n                        <input [(ngModel)]=\"newPost.username\" class=\"post-username\" name=\"username\" type=\"text\" pInputText placeholder=\"Username\" autocomplete=\"off\">\r\n                        <input [(ngModel)]=\"newPost.message\" class=\"post-message\" name=\"text\" type=\"text\" pInputText placeholder=\"Say something...\" autocomplete=\"off\">\r\n                        <button style=\" width: 70px; border-radius: 50px;\" pButton (click)=\"onSay()\" icon=\"fa fa-comment\"></button>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n    <p-dataView [value]=\"posts.reverse()\">\r\n        <ng-template let-post pTemplate=\"listItem\">\r\n            <div class=\"ui-g\" style=\"padding: 0 10px; border-bottom: 1px solid #d9d9d9\">\r\n                <div class=\"ui-g-12 ui-md-12 post-container\">\r\n                    <div class=\"ui-g-12\">\r\n                        <p><b>{{post.username}}</b>:</p> \r\n                        <p><textarea class=\"post-text\" readonly style=\"background: black; color: #cccccc;\">{{post.message}}</textarea></p>\r\n                        <p>{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p> \r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </ng-template>\r\n    </p-dataView>\r\n</div>"
 
 /***/ }),
 
@@ -337,8 +342,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Models_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Models/user */ "./src/app/Models/user.ts");
 /* harmony import */ var _services_post_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/post.service */ "./src/app/services/post.service.ts");
 /* harmony import */ var _Models_post__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Models/post */ "./src/app/Models/post.ts");
-/* harmony import */ var _node_modules_rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../node_modules/rxjs/internal/observable/timer */ "./node_modules/rxjs/internal/observable/timer.js");
-/* harmony import */ var _node_modules_rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/internal/observable/timer */ "./node_modules/rxjs/internal/observable/timer.js");
+/* harmony import */ var rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -363,7 +368,7 @@ var PostComponent = /** @class */ (function () {
         this.newPost = new _Models_post__WEBPACK_IMPORTED_MODULE_4__["Post"]();
         this.newUser = new _Models_user__WEBPACK_IMPORTED_MODULE_2__["User"]();
         this.maxUserId = 0;
-        this.timeIt = Object(_node_modules_rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5__["timer"])(1, 10000);
+        this.timeIt = Object(rxjs_internal_observable_timer__WEBPACK_IMPORTED_MODULE_5__["timer"])(1, 10000);
     }
     // При первом вызове компонента вызывается метод сервиса, который
     // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -376,32 +381,37 @@ var PostComponent = /** @class */ (function () {
     // добавляет новый пост в список постов
     PostComponent.prototype.onSay = function () {
         var _this = this;
-        this.usersToSearch.forEach(function (element) {
-            if (element.login == _this.newPost.username) {
-                _this.newPost.id_user = element.id;
-            }
-        });
-        if (!this.newPost.id_user) {
-            this.newUser.login = this.newPost.username;
-            this.newUser.mail = ' ';
-            this.newUser.password = ' ';
-            this.newUser.bio = ' ';
-            this.newUser.active = true;
-            this.userService.createUser(this.newUser).
-                subscribe(function (data) { return _this.usersToSearch.push(data); });
+        if (this.newPost.username.length > 2 &&
+            this.newPost.username.length <= 16 &&
+            this.newPost.message.length <= 256 &&
+            this.newPost.message.length > 0) {
             this.usersToSearch.forEach(function (element) {
-                if (element.id > _this.maxUserId) {
-                    _this.maxUserId = element.id;
+                if (element.login == _this.newPost.username) {
+                    _this.newPost.id_user = element.id;
                 }
             });
-            this.newPost.id_user = this.maxUserId + 1;
+            if (!this.newPost.id_user) {
+                this.newUser.login = this.newPost.username;
+                this.newUser.mail = ' ';
+                this.newUser.password = ' ';
+                this.newUser.bio = ' ';
+                this.newUser.active = true;
+                this.userService.createUser(this.newUser).
+                    subscribe(function (data) { return _this.usersToSearch.push(data); });
+                this.usersToSearch.forEach(function (element) {
+                    if (element.id > _this.maxUserId) {
+                        _this.maxUserId = element.id;
+                    }
+                });
+                this.newPost.id_user = this.maxUserId + 1;
+            }
+            this.loadPosts();
+            this.newPost.post_date = new Date();
+            this.postService.createPost(this.newPost)
+                .subscribe(function (data) { return _this.posts.push(data); });
+            this.newPost = new _Models_post__WEBPACK_IMPORTED_MODULE_4__["Post"]();
+            this.newUser = new _Models_user__WEBPACK_IMPORTED_MODULE_2__["User"]();
         }
-        this.loadPosts();
-        this.newPost.post_date = new Date();
-        this.postService.createPost(this.newPost)
-            .subscribe(function (data) { return _this.posts.push(data); });
-        this.newPost = new _Models_post__WEBPACK_IMPORTED_MODULE_4__["Post"]();
-        this.newUser = new _Models_user__WEBPACK_IMPORTED_MODULE_2__["User"]();
     };
     PostComponent.prototype.loadPosts = function () {
         var _this = this;
@@ -428,6 +438,50 @@ var PostComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_post_service__WEBPACK_IMPORTED_MODULE_3__["PostService"], _services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
     ], PostComponent);
     return PostComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/feedback.service.ts":
+/*!**********************************************!*\
+  !*** ./src/app/services/feedback.service.ts ***!
+  \**********************************************/
+/*! exports provided: FeedbackService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FeedbackService", function() { return FeedbackService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var FeedbackService = /** @class */ (function () {
+    function FeedbackService(http) {
+        this.http = http;
+        this._url = 'api/feedback';
+    }
+    FeedbackService.prototype.sendFeedback = function (feedback) {
+        return this.http.post(this._url, feedback);
+    };
+    FeedbackService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], FeedbackService);
+    return FeedbackService;
 }());
 
 
@@ -740,7 +794,7 @@ module.exports = "\r\na{\r\n    text-decoration: none;\r\n}\r\n\r\n.search-input
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper-body\">\r\n    <img src=\"assets/images/Logo-Sayme.svg\" style= \"width:280px\">\r\n<p-menubar [model]=\"items\" styleClass=\"menu\">\r\n    <input type=\"search\" class=\"search-input\" style=\"font-size: 15px;\" pInputText placeholder=\"Search...\" >\r\n    <button type=\"button\" (click)=\"showDialog()\" pButton icon=\"fa fa-bug\"></button>\r\n</p-menubar>\r\n\r\n<!-- Feedback modal form -->\r\n<p-dialog header=\"Feedback\" [(visible)]=\"isEnabledFeedbackForm\" [modal]=\"true\" [responsive]=\"true\" [width]=\"350\" [minWidth]=\"200\" [minY]=\"70\"\r\n    [maximizable]=\"true\" [baseZIndex]=\"10000\">\r\n    <p>Left your answer or comment here:</p>\r\n    <form #postForm=\"ngForm\" (keydown.enter)=\"onSendFeedback()\">\r\n        <input pInputText required [(ngModel)]=\"useremail\" name=\"useremail\" type=\"email\" class=\"feedback-email\" placeholder=\"your email\">\r\n        <textarea required [(ngModel)]=\"feedbackText\" class=\"feedback-text\" name=\"feedbackText\" placeholder=\"your comment\"></textarea>\r\n        <div style=\"float: right; margin-top: 5px;\">\r\n            <button type=\"button\" style=\"margin-right: 10px;\" pButton (click)=\"onSendFeedback()\" label=\"Send\" class=\"ui-button-info\"></button>\r\n            <button type=\"button\" pButton (click)=\"onCancelFeedBack()\" label=\"Cancel\"></button>\r\n        </div>\r\n    </form>\r\n</p-dialog>\r\n\r\n<!-- Successfuly sent feedback modal form -->\r\n<p-dialog header=\"Success!\" [(visible)]=\"isEnabledSuccessForm\" [modal]=\"true\" [responsive]=\"true\" [width]=\"350\" [minWidth]=\"200\" [minY]=\"70\"\r\n    [maximizable]=\"true\" [baseZIndex]=\"10000\">\r\n    <p>Report was successfuly sent!</p>\r\n    <div style=\"float: right;\">\r\n        <button type=\"button\" pButton (click)=\"isEnabledSuccessForm=false\" label=\"OK\" class=\"ui-button-info\"></button>\r\n    </div>\r\n</p-dialog>\r\n\r\n<!-- Left slide sidebar -->\r\n<p-sidebar [(visible)]=\"opened\" id=\"sidebar\" [baseZIndex]=\"10000\" (onHide)=\"open()\" >\r\n    <h1>\r\n        <a routerLink=\" \">Username</a>\r\n    </h1>\r\n    <h5>\r\n        <a routerLink=\" \">followers: num</a>\r\n    </h5>\r\n    <h5>\r\n        <a routerLink=\" \">following: num</a>\r\n    </h5>\r\n    <button pButton type=\"button\" label=\"Settings\" class=\"ui-button-warning\" style=\"width: 200px; margin: 10px 0px;\"></button>\r\n    <br>\r\n    <button pButton type=\"button\" label=\"Log out\" class=\"ui-button-danger\" style=\"width: 200px;\"></button>\r\n</p-sidebar>\r\n<router-outlet></router-outlet>\r\n</div>"
+module.exports = "<div class=\"wrapper-body\">\r\n    <img src=\"assets/images/Logo-Sayme.svg\" style= \"width:280px\">\r\n<p-menubar [model]=\"items\" styleClass=\"menu\">\r\n    <input type=\"search\" class=\"search-input\" style=\"font-size: 15px; background: rgb(255, 236, 153);\" pInputText placeholder=\"Search...\" >\r\n    <button type=\"button\" (click)=\"showDialog()\" pButton icon=\"fa fa-bug\"></button>\r\n</p-menubar>\r\n<!-- Feedback modal form -->\r\n<p-dialog header=\"Feedback\" [(visible)]=\"isFeedbackFormVisible\" [modal]=\"true\" [responsive]=\"true\" [width]=\"350\" [minWidth]=\"200\" [minY]=\"70\"\r\n    [maximizable]=\"true\" [baseZIndex]=\"10000\">\r\n    <p>Left your answer or comment here:</p>\r\n    <form #postForm=\"ngForm\">\r\n        <input pInputText required [(ngModel)]=\"useremail\" name=\"useremail\" type=\"email\" class=\"feedback-email\" placeholder=\"your email\">\r\n        <textarea required [(ngModel)]=\"feedbackText\" class=\"feedback-text\" name=\"feedbackText\" placeholder=\"your comment\"></textarea>\r\n        <div style=\"float: right; margin-top: 5px;\">\r\n            <button type=\"button\" style=\"margin-right: 10px;\" pButton (click)=\"onSendFeedback()\" label=\"Send\" class=\"ui-button-info\"></button>\r\n            <button type=\"button\" pButton (click)=\"onCancelFeedBack()\" label=\"Cancel\"></button>\r\n        </div>\r\n    </form>\r\n</p-dialog>\r\n\r\n<!-- Successfuly sent feedback modal form -->\r\n<p-dialog header=\"Success!\" [(visible)]=\"isSuccessFormVisible\" [modal]=\"true\" [responsive]=\"true\" [width]=\"350\" [minWidth]=\"200\" [minY]=\"70\"\r\n    [maximizable]=\"true\" [baseZIndex]=\"10000\">\r\n    <p>Report was successfuly sent!</p>\r\n    <div style=\"float: right;\">\r\n        <button type=\"button\" pButton (click)=\"isSuccessFormVisible=false\" label=\"OK\" class=\"ui-button-info\"></button>\r\n    </div>\r\n</p-dialog>\r\n\r\n<!-- Left slide sidebar -->\r\n<p-sidebar [(visible)]=\"opened\" id=\"sidebar\" [baseZIndex]=\"10000\" (onHide)=\"open()\" >\r\n    <h1>\r\n        <a routerLink=\" \" style=\"color: #cccccc;\">Username</a>\r\n    </h1>\r\n    <h5>\r\n        <a routerLink=\" \" style=\"color: #cccccc;\">followers: num</a>\r\n    </h5>\r\n    <h5>\r\n        <a routerLink=\" \" style=\"color: #cccccc;\">following: num</a>\r\n    </h5>\r\n    <button pButton type=\"button\" label=\"Settings\" class=\"ui-button-warning\" style=\"width: 200px; margin: 10px 0px;\"></button>\r\n    <br>\r\n    <button pButton type=\"button\" label=\"Log out\" class=\"ui-button-danger\" style=\"width: 200px;\"></button>\r\n</p-sidebar>\r\n<router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -756,6 +810,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavigationToolsComponent", function() { return NavigationToolsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_feedback_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/feedback.service */ "./src/app/services/feedback.service.ts");
+/* harmony import */ var _Models_email__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Models/email */ "./src/app/Models/email.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -767,13 +823,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var NavigationToolsComponent = /** @class */ (function () {
-    function NavigationToolsComponent(router, route) {
+    function NavigationToolsComponent(_feedbackService, router, route) {
+        this._feedbackService = _feedbackService;
         this.router = router;
         this.route = route;
         this.opened = false;
-        this.isEnabledFeedbackForm = false;
-        this.isEnabledSuccessForm = false;
+        this.isFeedbackFormVisible = false;
+        this.isSuccessFormVisible = false;
+        this.feedback = new _Models_email__WEBPACK_IMPORTED_MODULE_3__["Email"]('', '');
         this.feedbackText = '';
         this.useremail = '';
     }
@@ -804,26 +864,31 @@ var NavigationToolsComponent = /** @class */ (function () {
         return this.opened;
     };
     NavigationToolsComponent.prototype.showDialog = function () {
-        this.isEnabledFeedbackForm = true;
+        this.isFeedbackFormVisible = true;
     };
     NavigationToolsComponent.prototype.onSendFeedback = function () {
         if (this.feedbackText.length > 10 && this.useremail.length > 3) {
-            this.isEnabledFeedbackForm = false;
-            this.isEnabledSuccessForm = true;
+            this.isFeedbackFormVisible = false;
+            this.isSuccessFormVisible = true;
+            this.feedback = new _Models_email__WEBPACK_IMPORTED_MODULE_3__["Email"](this.useremail, this.feedbackText);
+            this._feedbackService.sendFeedback(this.feedback)
+                .subscribe();
             this.feedbackText = '';
             this.useremail = '';
         }
     };
     NavigationToolsComponent.prototype.onCancelFeedBack = function () {
-        this.isEnabledFeedbackForm = false;
+        this.isFeedbackFormVisible = false;
     };
     NavigationToolsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-navigation-tools',
             template: __webpack_require__(/*! ./navigation-tools.component.html */ "./src/app/ui/navigation-tools/navigation-tools.component.html"),
-            styles: [__webpack_require__(/*! ./navigation-tools.component.css */ "./src/app/ui/navigation-tools/navigation-tools.component.css")]
+            styles: [__webpack_require__(/*! ./navigation-tools.component.css */ "./src/app/ui/navigation-tools/navigation-tools.component.css")],
+            providers: [_services_feedback_service__WEBPACK_IMPORTED_MODULE_2__["FeedbackService"]]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+        __metadata("design:paramtypes", [_services_feedback_service__WEBPACK_IMPORTED_MODULE_2__["FeedbackService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
     ], NavigationToolsComponent);
     return NavigationToolsComponent;
