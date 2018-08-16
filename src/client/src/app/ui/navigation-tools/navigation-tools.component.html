@@ -10,7 +10,7 @@
     [maximizable]="true" [baseZIndex]="10000">
     <p>Left your answer or comment here:</p>
     <form #postForm="ngForm" (keydown.enter)="onSay()">
-        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email">
+        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email" autocomplete="off">
         <textarea required [(ngModel)]="feedbackText" class="feedback-text" name="feedbackText" placeholder="your comment"></textarea>
         <div style="float: right; margin-top: 5px;">
             <button type="button" style="margin-right: 10px;" pButton (click)="onSendFeedback()" label="Send" class="ui-button-info"></button>
