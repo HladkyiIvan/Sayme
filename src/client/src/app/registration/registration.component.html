@@ -4,24 +4,20 @@
   </div>
 <div class="inner">
     
-  <h1 class="labelSignup" style="padding: 10px; text-align: center" style="margin-left: 65%; font-family:Roboto, sans-serif;">Registration</h1>
-  <div class="container_with_borders" style="margin-left: 40%;">
-    <div class="ui-inputgroup" style="padding-left: 17%; padding-right: 17%;padding-top: 5%;padding-bottom: 5%">
-          <label for="inputLogin"  style="  font-family:Roboto, sans-serif;">Username</label>
-          <input [(ngModel)]="newUser.login" id="inputLogin"  type="text" size="30" pInputText> 
-          <br>
-          <label for="inputMail" style="  font-family:Roboto, sans-serif;" >Email</label> <br>
-          <input id="inputMail" style="margin: 0;" [(ngModel)]="newUser.mail" type="text" size="30"  pPassword> 
-          <br>
-          <label for="inputPassword" style="  font-family:Roboto, sans-serif;" >Password</label>
-          <input id="inputPassword"  [(ngModel)]="newUser.password" type="password" size="30"  pPassword>
-          <br>
-          <label for="inputRepPass" style="  font-family:Roboto, sans-serif;" >Repeat password</label>
-          <input id="inputRepPass"  [(ngModel)]="RepPassword" type="password" size="30"  pPassword>
-          <br>
+  <h1 class="labelSignup" style="padding: 10px; text-align: center" style="margin-left: 70%; font-family:Roboto, sans-serif;">Registration</h1>
+  <br>
+  <div class="container_with_borders" style="margin-left: 42%;">
+    <div class="ui-inputgroup" style="left: 15px;">
+      <input  class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+          <br><br>
+          <input  class="post-email" name="email" type="text" pInputText placeholder="Email" autocomplete="off">
+          <br><br>
+          <input  class="post-pass" name="pass" type="text" pInputText placeholder="Password" autocomplete="off">
+          <br><br>
+          <input  class="post-reppas" name="reppass" type="text" pInputText placeholder="Repeat password" autocomplete="off">
+          <br><br>
 
-          <button pButton type="button" class="ui-button-warning" pButton (click)="onRegister()" style="margin: 5%; display: block; left: 50%;">Sign up</button>
-          
+          <button pButton type="button" class="button1" style="margin-top: 5%; margin-left: 10%;margin-right: 5%;margin-bottom: 15%; display: block; left: 10% ">Sign up</button>
         </div>
 
       
