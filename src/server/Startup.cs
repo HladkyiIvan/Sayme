@@ -20,7 +20,7 @@ namespace server
 {
     public class Startup
     {
-        string connection = "server=localhost; port=3306; database=c9; user=c9vmserv; password=;";
+        string connection = "server=localhost; port=3306; database=saymedb; user=sayme; password=;";
         
         public Startup(IConfiguration configuration)
         {
