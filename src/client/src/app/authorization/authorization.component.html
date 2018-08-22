@@ -8,19 +8,21 @@
     <br>
     <div class="container_with_borders" style="margin-left: 42%;">
       <div class="ui-inputgroup" style="left: 15px;">
-        <input  class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+        <input  class="post-username" [(ngModel)]="user.login" name="login" type="text" pInputText placeholder="Username" autocomplete="off">
             <br><br>
-            <input  class="post-email" name="email" type="text" pInputText placeholder="Password" autocomplete="off">
+            <input  class="post-email" [(ngModel)]="user.password" name="password" type="text" pInputText placeholder="Password" autocomplete="off">
             <br><br>
   
-            <button pButton type="button" class="button1" style="margin-top: 0%; margin-left: 10%;margin-right: 5%;margin-bottom: 5%; display: block; left: 10% ">Sign in</button>
-            <button pButton type="button" class="button1" style="margin-top: 0%; margin-left: 10%;margin-right: 5%;margin-bottom: 10%; display: block; left: 10% ">Sign up</button>
+            <button pButton type="button" class="button1" pButton (click)="onLogin()" style="margin-top: 0%; margin-left: 10%;margin-right: 5%;margin-bottom: 5%; display: block; left: 10% ">Sign in</button>
+            <button pButton type="button" class="button1" pButton (click)="onRegistration()" style="margin-top: 0%; margin-left: 10%;margin-right: 5%;margin-bottom: 10%; display: block; left: 10% ">Sign up</button>
           </div>
   
         
     
     
     </div>
+    <label style=' font-family:Roboto, sans-serif; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</label>
+
   </div>
   </div>
   

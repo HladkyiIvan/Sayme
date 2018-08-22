@@ -20,10 +20,6 @@ import { PostComponent } from './post/post.component';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import { AuthorisationComponent } from './authorization/authorization.component';
-import { fakeBackendProvider } from './helpers/index';
-import { AuthGuard } from './guard/auth.guard';
-import { JwtInterceptor } from './helpers/index';
-import { AuthService } from './services/auth.service';
 import {UserService} from './services/user.service';
 import { RegistrationComponent } from './registration/registration.component';
 
@@ -64,17 +60,12 @@ import { RegistrationComponent } from './registration/registration.component';
     DataViewModule,
   ],
   providers: [UserService,
-    AuthGuard,
-        AuthService,
+    
       
-    {
-    provide: HTTP_INTERCEPTORS,
-    useClass: JwtInterceptor,
-    multi: true
-},
+    
 
 // providers used to create fake backend
-fakeBackendProvider],
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

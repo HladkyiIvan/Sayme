@@ -6,4 +6,5 @@ export class User {
     public mail: string;
     public active: boolean;
     public avatar?: Blob;
+    public register_code:string;
 }

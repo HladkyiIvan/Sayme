@@ -12,14 +12,15 @@ const routes: Routes = [
     component:AuthorisationComponent,
     },
     {
+      path: '',
+      redirectTo: 'login',
+      pathMatch: 'full',
+      },
+    {
       path:'registration',
       component:RegistrationComponent
     },
-    {
-    path: '',
-    redirectTo: 'registration',
-    pathMatch: 'full',
-    },
+    
     {
     path: 'menu',
     component: NavigationToolsComponent,

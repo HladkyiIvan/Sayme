@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpResponse } from '@angular/common/http';
 import {Login} from '../Models/login';
 import {User} from '../Models/user';
+import { Observable, of } from 'rxjs';
 import {UserService} from '../services/user.service'
 
 @Injectable({
@@ -11,9 +12,16 @@ export class LoginService {
 
 private users:User[];
 
-  constructor(private http: HttpClient, private userService:UserService) { }
+  constructor(private http: HttpClient) { }
+ private url='/api/login';
+ // GET
+ getResponce(): Observable<HttpResponse<Login>> {
+  return this.http.get<Login>(
+    this.url, { observe: 'response' });
+}
 
- /* getLogins(): Login[] {
-   
-  } */
+// POST
+postLoginUser(login: Login) {
+  return this.http.post(this.url, login);
+}
 }

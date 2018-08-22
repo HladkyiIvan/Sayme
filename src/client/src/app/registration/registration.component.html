@@ -1,4 +1,29 @@
-<div class="outer" >
+ <div class="outer">
+        <div class="logo">
+                <img src="assets/images/Logo-Sayme.svg" style= "width:280px; display: block; margin-left: auto;margin-right: auto">
+            </div>
+  <div class="inner">
+      <div class="container_with_borders"  >
+          <form #postForm="ngForm" (keydown.enter)="onRegister()">
+              <div class="ui-g ui-fluid" style="justify-content: center" >
+                  <div style="padding: 10px;" class="ui-g-12">
+                      <input [(ngModel)]="newUser.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                      <br>
+                      <input [(ngModel)]="newUser.mail" class="post-username" name="username" type="text" pInputText placeholder="Email" autocomplete="off">
+                      <br>
+                      <input [(ngModel)]="newUser.password" class="post-username" name="username" type="text" pInputText placeholder="Password" autocomplete="off">
+                      <br>
+                      <input [(ngModel)]="repPassword" class="post-username" name="username" type="text" pInputText placeholder="Repeat password" autocomplete="off">
+                      <br>
+                      <button class="regButton" style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 50px;" pButton (click)="onRegister()" >{{buttonText}}</button>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <label style=' font-family:Roboto, sans-serif; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</label>
+  </div>
+ 
+  <!-- <div class="outer" >
   <div class="logo">
       <img src="assets/images/Logo-Sayme.svg" style= "width:280px; display: block; margin-left: 55%;">
   </div>
@@ -8,21 +33,30 @@
   <br>
   <div class="container_with_borders" style="margin-left: 42%;">
     <div class="ui-inputgroup" style="left: 15px;">
-      <input  class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+      <input [(ngModel)]="newUser.login"  class="post-username"  name="username" type="text" pInputText placeholder="Username" autocomplete="off">
           <br><br>
-          <input  class="post-email" name="email" type="text" pInputText placeholder="Email" autocomplete="off">
+          <input [(ngModel)]="newUser.mail"  class="post-email"  name="mail"  type="text" pInputText placeholder="Email" autocomplete="off">
           <br><br>
-          <input  class="post-pass" name="pass" type="text" pInputText placeholder="Password" autocomplete="off">
+          <input  [(ngModel)]="newUser.password"  class="post-pass" name="pass" type="password" pInputText placeholder="Password" autocomplete="off">
           <br><br>
-          <input  class="post-reppas" name="reppass" type="text" pInputText placeholder="Repeat password" autocomplete="off">
+          <input [(ngModel)]="repPassword" class="post-reppas"   name="reppass" type="password" pInputText placeholder="Repeat password" autocomplete="off">
           <br><br>
-
-          <button pButton type="button" class="button1" style="margin-top: 5%; margin-left: 10%;margin-right: 5%;margin-bottom: 15%; display: block; left: 10% ">Sign up</button>
+          <button pButton type="button" class="button1"  pButton (click)="onRegister()" style="margin-top: 5%; margin-left: 10%;margin-right: 5%;margin-bottom: 0%; display: block; left: 8% ">Send code</button>
+          <br>
         </div>
-
       
-  
-  
   </div>
+  
+  <label style=' font-family:Roboto, sans-serif; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</label>
 </div>
-</div>
+</div>  -->
+
+<!--confirm code modal form-->
+
+<p-dialog header="Confirm code" [(visible)]="display"  [resizable]=false >
+    <p style="text-align: center; font-family:Roboto, sans-serif;">Enter sent code here:</p>
+    <form #postForm="ngForm">
+        <input [(ngModel)]="enteredCode" class="code" style="margin-left: auto;margin-right: auto"  name="code" type="text" pInputText placeholder="Enter code we`ve sent on your mail" autocomplete="off">
+        <button pButton type="button" class="button2" pButton (click)="onConfirmCode()" style="margin-top: 4%; margin-left: 10%;margin-right: 5%;margin-bottom: 10%; display: block; left: 2%; ">Confirm code</button>
+    </form>
+</p-dialog>
