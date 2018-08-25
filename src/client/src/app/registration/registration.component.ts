@@ -22,6 +22,7 @@ export class RegistrationComponent implements OnInit {
   private errorMessage='';
   private buttonText='';
   private sendTo:Email;
+  isVisibleCodeInput=false;
   isDisabled=true;
   display=false;
   private timeIt = timer(1, 10000);
@@ -35,15 +36,16 @@ export class RegistrationComponent implements OnInit {
 
 
   onRegister(){
-    if(this.newUser.password&&this.newUser.login&&this.newUser.mail&&this.repPassword){
-    this.usersToSearch.forEach(element => {
-      if (element.mail === this.newUser.mail||element.login === this.newUser.login){
-        this.newUser.id = element.id;
+     if(this.newUser.password&&this.newUser.login&&this.newUser.mail&&this.repPassword){
+     this.usersToSearch.forEach(element => {
+       if (element.mail === this.newUser.mail||element.login === this.newUser.login){
+         this.newUser.id = element.id;
       }
     });
 
     if(!this.newUser.id)
     {
+      if(this.isEmail(this.newUser.mail)){
     
       if(this.newUser.password===this.repPassword)
       {
@@ -57,12 +59,17 @@ export class RegistrationComponent implements OnInit {
        this.feedbackService.sendCode(this.sendTo)
        .subscribe();
        this.display=true;
+       
+    this.isVisibleCodeInput=true;
       //this.userService.createUser(this.newUser).
         
      // subscribe((data: User) => this.usersToSearch.push(data));
-      }
+      
+    }
 
       else this.errorMessage='Your password and repeated password don`t match! Try again.';
+  }
+  else this.errorMessage='Please enter the email in the correct format';
     }
     else{
       this.errorMessage='We already have user with this email or login! Try again.';
@@ -102,4 +109,18 @@ export class RegistrationComponent implements OnInit {
 {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
+
+
+isEmail(search:string):boolean
+    {
+        var  serchfind:boolean;
+
+        var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        serchfind = regexp.test(search);
+
+        console.log(serchfind)
+        return serchfind
+    }
+
+
 }

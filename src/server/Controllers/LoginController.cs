@@ -26,6 +26,11 @@ namespace server.Controllers
             {
                 if (context.User.FirstOrDefault(u => (u.login == authUser.login && u.password == authUser.password)) != null)
                 {
+                    string cookieValueFromReq = Request.Cookies["access"];
+                    if (cookieValueFromReq == null)
+                    {
+                        Set("access","here is accesss",50);
+                    }
                     return Ok(ModelState);
                 }
                 else return BadRequest(Error);

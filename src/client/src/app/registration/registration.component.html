@@ -1,29 +1,46 @@
- <div class="outer">
-        <div class="logo">
-                <img src="assets/images/Logo-Sayme.svg" style= "width:280px; display: block; margin-left: auto;margin-right: auto">
-            </div>
-  <div class="inner">
-      <div class="container_with_borders"  >
-          <form #postForm="ngForm" (keydown.enter)="onRegister()">
-              <div class="ui-g ui-fluid" style="justify-content: center" >
-                  <div style="padding: 10px;" class="ui-g-12">
-                      <input [(ngModel)]="newUser.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
-                      <br>
-                      <input [(ngModel)]="newUser.mail" class="post-username" name="username" type="text" pInputText placeholder="Email" autocomplete="off">
-                      <br>
-                      <input [(ngModel)]="newUser.password" class="post-username" name="username" type="text" pInputText placeholder="Password" autocomplete="off">
-                      <br>
-                      <input [(ngModel)]="repPassword" class="post-username" name="username" type="text" pInputText placeholder="Repeat password" autocomplete="off">
-                      <br>
-                      <button class="regButton" style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 50px;" pButton (click)="onRegister()" >{{buttonText}}</button>
-                  </div>
-              </div>
-          </form>
-      </div>
-      <label style=' font-family:Roboto, sans-serif; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</label>
-  </div>
- 
-  <!-- <div class="outer" >
+<div class="outer">
+    <div class="logo">
+        <img src="assets/images/Logo-Sayme.svg" style="width:280px; display: block; margin-left: auto;margin-right: auto">
+    </div>
+    <div class="inner">
+        <div class="container_with_borders">
+            <form #postForm="ngForm" (keydown.enter)="onRegister()">
+                <div class="ui-g ui-fluid" style="justify-content: center">
+                    
+                    <div  style="padding: 0px;" class="ui-g-12">
+                        <input [(ngModel)]="newUser.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                        <br>
+                        <input [(ngModel)]="newUser.mail" class="post-username" name="username" type="text" pInputText placeholder="Email" autocomplete="off">
+                        <br>
+                        <input [(ngModel)]="newUser.password" class="post-username" name="username" type="password" pInputText placeholder="Password"
+                            autocomplete="off">
+                        <br>
+                        <input [(ngModel)]="repPassword" class="post-username" name="username" type="password" pInputText placeholder="Repeat password"
+                            autocomplete="off">
+                        <br>
+                        <ng-template #set>
+                                <button class="regButton"  style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
+                                pButton (click)="onRegister()">Get code</button>
+                        </ng-template>
+
+                        
+
+                            <ng-template #unset>
+                                    <input [(ngModel)]="enteredCode" class="post-username" style="margin-left: auto;margin-right: auto" name="code" type="text" pInputText
+                                        placeholder="Enter code we`ve sent on your mail" autocomplete="off">
+                                    <button pButton type="button" class="regButton" pButton (click)="onConfirmCode()"  style="padding:4%; margin-top: 20px; width: 150px;height: 40px;display: block; border-radius: 30px;margin-left: 30px;">Confirm code</button>
+                                </ng-template>
+                                
+                    <div *ngIf="!isVisibleCodeInput; then set else unset" ></div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <p style=' font-family:Roboto, sans-serif;text-align: center; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</p>
+    </div>
+
+    <!-- <div class="outer" >
   <div class="logo">
       <img src="assets/images/Logo-Sayme.svg" style= "width:280px; display: block; margin-left: 55%;">
   </div>
@@ -51,12 +68,12 @@
 </div>
 </div>  -->
 
-<!--confirm code modal form-->
+    <!--confirm code modal form-->
 
-<p-dialog header="Confirm code" [(visible)]="display"  [resizable]=false >
+    <!-- <p-dialog header="Confirm code" [(visible)]="display"  [resizable]=false >
     <p style="text-align: center; font-family:Roboto, sans-serif;">Enter sent code here:</p>
     <form #postForm="ngForm">
         <input [(ngModel)]="enteredCode" class="code" style="margin-left: auto;margin-right: auto"  name="code" type="text" pInputText placeholder="Enter code we`ve sent on your mail" autocomplete="off">
         <button pButton type="button" class="button2" pButton (click)="onConfirmCode()" style="margin-top: 4%; margin-left: 10%;margin-right: 5%;margin-bottom: 10%; display: block; left: 2%; ">Confirm code</button>
     </form>
-</p-dialog>
+</p-dialog> -->

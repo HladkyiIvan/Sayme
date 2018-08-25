@@ -7,11 +7,11 @@ body{
       font-family: fantasy
   }
   input{
-      padding: 5px;
-      border-radius: 5px; 
-      border-color: rgb(255, 222, 73);
-      width: 200px;
-  }
+    padding: 5px;
+    border-radius: 5px; 
+    border-color: rgb(255, 222, 73);
+    width: 200px;
+}
   .button1
   {
       font-weight: 700;
@@ -26,12 +26,11 @@ body{
     transition: 0.2s;
   }
   .post-username{
-      outline: none; 
-      border-radius: 40px; 
-      margin: 0 20px; 
-      margin-left: -10px;
-      margin-top: 20px
-  }
+    outline: none; 
+    border-radius: 40px; 
+    margin: 0 20px; 
+    margin-left: -10px;
+}
   .post-email{
       outline: none; 
       border-radius: 40px; 
@@ -63,19 +62,18 @@ body{
   }
   
   .container_with_borders{
-      border: 3 px;
-      border-color: rgb(46, 45, 45);
-      border-style: solid;  
-      border-radius: 20px;    
-      width: 300px;
-      position: relative;
-      left: 30px;
-      display: flex;
-      justify-content: center;
-      background-color: rgb(46, 45, 45);
-      margin-bottom:10px; 
-     /* background-image: url(assets/images/nebo.jpg);*/
-     box-shadow: 12px 13px 20px -5px rgba(0,0,0,0.75);
+    border: 3 px;
+    border-color: rgb(46, 45, 45);
+    border-style: solid;  
+    border-radius: 20px;    
+    width: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(46, 45, 45);
+    margin-bottom:10px; 
+   /* background-image: url(assets/images/nebo.jpg);*/
+   box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
   
   }
   

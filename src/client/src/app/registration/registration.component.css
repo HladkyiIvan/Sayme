@@ -8,8 +8,8 @@ body{
 }
 input{
     padding: 5px;
-    border-radius: 5px; 
-    border-color: rgb(255, 222, 73);
+    /* border-radius: 5px; 
+    border-color: rgb(255, 222, 73); */
     width: 200px;
 }
 .button1
@@ -40,11 +40,25 @@ input{
   transition: 0.2s;
 }
 
+
+
 .post-username{
     outline: none; 
-    border-radius: 40px; 
+    color: white;
+    background-color: rgb(46, 45, 45);
+    /* border-radius: 40px;  */
+    border-color: rgb(255, 222, 73);
+    border-width: 1px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     margin-left: 0px;
     margin-top: 20px 
+}
+
+p{
+    padding: 0px;
+    margin: 0px;
 }
 
 .regButton{
@@ -53,7 +67,7 @@ input{
     border-color: black;
     outline: none; 
     border-radius: 40px; 
-    margin-left: 0px;
+    /* margin-left: 0px; */
     margin-top: 20px ;
     margin-bottom: 15px;
 }
