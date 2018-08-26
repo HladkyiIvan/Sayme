@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
+    "ngx-cookie-service": "^1.0.10",
     "npm": "^6.3.0",
     "primeicons": "^1.0.0-beta.10",
     "primeng": "^6.0.1",

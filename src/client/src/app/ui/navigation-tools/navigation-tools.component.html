@@ -41,7 +41,7 @@
     </h5>
     <button pButton type="button" label="Settings" class="ui-button-warning" style="width: 200px; margin: 10px 0px;"></button>
     <br>
-    <button pButton type="button" label="Log out" class="ui-button-danger" style="width: 200px;"></button>
+    <button pButton type="button" pButton (click)="onSignOut()" label="Log out" class="ui-button-danger" style="width: 200px;"></button>
 </p-sidebar>
 <router-outlet></router-outlet>
 </div>

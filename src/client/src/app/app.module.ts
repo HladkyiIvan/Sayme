@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
 import { AuthorisationComponent } from './authorization/authorization.component';
 import {UserService} from './services/user.service';
 import { RegistrationComponent } from './registration/registration.component';
+import {Interceptor} from './interceptor/interceptor';
 
 
 @NgModule({
@@ -59,13 +61,12 @@ import { RegistrationComponent } from './registration/registration.component';
     AccordionModule,
     DataViewModule,
   ],
-  providers: [UserService,
-    
-      
-    
-
-// providers used to create fake backend
-],
+  providers: [UserService, CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

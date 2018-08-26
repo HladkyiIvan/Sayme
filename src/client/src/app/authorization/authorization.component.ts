@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from'../services/login.service';
-import { User } from '../Models/user';
 import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
-import { first } from 'rxjs/operators/first';
-
+import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Login } from '../Models/login';
-import { HttpResponse } from '../../../node_modules/@types/selenium-webdriver/http';
+
 
 @Component({
   selector: 'app-authorization',
@@ -26,9 +24,10 @@ export class AuthorisationComponent implements OnInit {
     returnUrl: string;
     error = '';
 
-  constructor(private LoginService: LoginService,  private router: Router, private route: ActivatedRoute) { }
+  constructor(private loginService: LoginService,  private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
+    //this.loginService.checkLoggingIn();
     // reset login status
    // this.authService.logout();
  
@@ -42,8 +41,13 @@ export class AuthorisationComponent implements OnInit {
   {
     if(this.user.login&&this.user.password)
     {
-      this.LoginService.postLoginUser(this.user)
+      this.loginService.postLoginUser(this.user)
       .subscribe((data:Login)=>this.usersToSearch.push(data));
+      const cookieExists: boolean = this.cookieService.check('access');
+      console.log(cookieExists);
+      if(cookieExists) this.router.navigate(['/menu']);
+      else this.errorMessage='Wrong login or password';
+      
     }
     else{
       this.errorMessage='Wrong input!';

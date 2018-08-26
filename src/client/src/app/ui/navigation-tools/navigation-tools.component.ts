@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
+import {LoginService} from'../../services/login.service';
 
 @Component({
   selector: 'app-navigation-tools',
@@ -23,9 +24,12 @@ export class NavigationToolsComponent implements OnInit {
   constructor(
     private _feedbackService: FeedbackService, 
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loginService: LoginService) { }
 
   ngOnInit() {
+    this.loginService.checkLoggingIn();
+
     this.items = [
       {
         label: ' ',
@@ -46,6 +50,12 @@ export class NavigationToolsComponent implements OnInit {
       }
 
     ]
+  }
+
+
+  onSignOut()
+  {
+    
   }
 
   open() {

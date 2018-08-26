@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using server.Models;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using System.IdentityModel;
+using Microsoft.AspNetCore.Authentication;
 
 
 namespace server.Controllers
@@ -22,6 +25,27 @@ namespace server.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]AuthUser authUser)
         {
+            // if (ModelState.IsValid)
+            // {
+            //     if (LoginUser(authUser))
+            //     {
+            //         var claims = new List<Claim>
+            //         {
+            //         new Claim(ClaimTypes.Name, authUser.login)
+            //         };
+
+            //         var userIdentity = new ClaimsIdentity(claims, "login");
+
+            //         ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+            //         HttpContext.SignInAsync(principal);
+
+            //         //Just redirect to our index after logging in. 
+            //         return Ok(ModelState);
+            //     }
+            //     else return BadRequest(Error);
+            // }
+            // return BadRequest(ModelState);
+
             if (ModelState.IsValid)
             {
                 if (context.User.FirstOrDefault(u => (u.login == authUser.login && u.password == authUser.password)) != null)
@@ -29,7 +53,7 @@ namespace server.Controllers
                     string cookieValueFromReq = Request.Cookies["access"];
                     if (cookieValueFromReq == null)
                     {
-                        Set("access","here is accesss",50);
+                        Set("access", authUser.login, 50);
                     }
                     return Ok(ModelState);
                 }
@@ -39,6 +63,13 @@ namespace server.Controllers
         }
 
 
+
+        private bool LoginUser(AuthUser authUser)
+        {
+            if (context.User.FirstOrDefault(u => (u.login == authUser.login && u.password == authUser.password)) != null)
+                return true;
+            else return false;
+        }
 
         public void Set(string key, string value, int? expireTime)
         {
