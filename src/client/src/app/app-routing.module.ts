@@ -6,31 +6,16 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'menu',
-    pathMatch: 'full',
+    path: 'post',
+    component: PostComponent,
   },
   {
-    path: 'menu',
-    component: NavigationToolsComponent,
-    children: [
-      {
-        path: 'post',
-        component: PostComponent,
-      },
-      {
-        path: 'interesting',
-        component: AboutUserBodyComponent,
-      },
-      {
-        path: '**',
-        component: PostComponent,
-      },
-    ]
+    path: 'interesting',
+    component: AboutUserBodyComponent,
   },
   {
     path: '**',
-    redirectTo: 'menu'
+    component: PostComponent,
   }
 ];
 
