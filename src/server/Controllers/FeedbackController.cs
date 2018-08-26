@@ -31,6 +31,13 @@ namespace server.Controllers
                 mailMessage.Body = email.feedback;
                 mailMessage.Subject = email.userEmail;
                 client.Send(mailMessage);
+
+                MailMessage mailtoClient = new MailMessage();
+                mailtoClient.From = new MailAddress(email.userEmail);
+                mailtoClient.To.Add(email.userEmail);
+                mailtoClient.Subject = "Feedback from Sayme";
+                mailtoClient.Body = "Thank you for your request! Our team will process it and we will contact you if necessary.";
+                client.Send(mailtoClient);
                 return Ok(email);
             }
             return BadRequest(ModelState);
