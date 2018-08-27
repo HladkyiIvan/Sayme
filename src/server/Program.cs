@@ -14,17 +14,18 @@ namespace server
     {
         public static void Main(string[] args)
         {
-            string ipAddress = args[0];
-            string port = args[1];
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseUrls("http://" + ipAddress + ":" + port + "/")
-                .Build();
+            CreateWebHostBuilder(args).Build().Run();
+            // string ipAddress = args[0];
+            // string port = args[1];
+            // var host = new WebHostBuilder()
+            //     .UseKestrel()
+            //     .UseContentRoot(Directory.GetCurrentDirectory())
+            //     .UseIISIntegration()
+            //     .UseStartup<Startup>()
+            //     .UseUrls("http://" + ipAddress + ":" + port + "/")
+            //     .Build();
             
-            host.Run();
+            // host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

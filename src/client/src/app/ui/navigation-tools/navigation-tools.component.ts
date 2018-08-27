@@ -3,12 +3,13 @@ import { MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-navigation-tools',
   templateUrl: './navigation-tools.component.html',
   styleUrls: ['./navigation-tools.component.css'],
-  providers: [FeedbackService]
+  providers: [FeedbackService, NGXLogger]
 })
 export class NavigationToolsComponent implements OnInit {
 
@@ -23,7 +24,8 @@ export class NavigationToolsComponent implements OnInit {
   constructor(
     private _feedbackService: FeedbackService, 
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private logger: NGXLogger) { }
 
   ngOnInit() {
     this.items = [
@@ -64,10 +66,11 @@ export class NavigationToolsComponent implements OnInit {
       this.feedback = new Email(this.useremail, this.feedbackText)
       this._feedbackService.sendFeedback(this.feedback)
           .subscribe()
-
+      this.logger.info('feedback was sent');
       this.feedbackText = ''
       this.useremail = ''
     }
+    else this.logger.info('Wrong size of entered info in feedback');
   }
 
   onCancelFeedBack() {

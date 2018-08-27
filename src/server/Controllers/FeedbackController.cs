@@ -5,6 +5,7 @@ using System.Linq;
 using server.Models;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.Extensions.Logging;
 
 namespace server.Controllers
 {
@@ -12,6 +13,7 @@ namespace server.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
+        readonly ILogger<UserController> log;
         [HttpPost]
         public IActionResult SendFeedback([FromBody]Email email)
         {
@@ -31,6 +33,7 @@ namespace server.Controllers
                 mailMessage.Body = email.feedback;
                 mailMessage.Subject = email.userEmail;
                 client.Send(mailMessage);
+                log.LogDebug("Letter from user was sent");
 
                 MailMessage mailtoClient = new MailMessage();
                 mailtoClient.From = new MailAddress(email.userEmail);
@@ -38,8 +41,10 @@ namespace server.Controllers
                 mailtoClient.Subject = "Feedback from Sayme";
                 mailtoClient.Body = "Thank you for your request! Our team will process it and we will contact you if necessary.";
                 client.Send(mailtoClient);
+                log.LogDebug("Letter to user was sent");
                 return Ok(email);
             }
+            log.LogWarning("Feedback model is invalid");
             return BadRequest(ModelState);
         }
     }

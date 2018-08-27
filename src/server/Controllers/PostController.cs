@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using server.Models;
+using Microsoft.Extensions.Logging;
 
 namespace server.Controllers
 {
@@ -9,6 +10,7 @@ namespace server.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
+        readonly ILogger<UserController> log;
         private readonly SaymedbContext context;
 
         public PostController(SaymedbContext context)
@@ -73,10 +75,13 @@ namespace server.Controllers
 
             if(ModelState.IsValid)
             {
+                log.LogDebug("post model is valid");
                 context.Post.Add(postTransport);
                 context.SaveChanges();
+                log.LogInformation("post was created");
                 return Ok(postTransport);
             }
+            log.LogWarning("post model is not valid");
             return BadRequest(ModelState);
         } 
     }

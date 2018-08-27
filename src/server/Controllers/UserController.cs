@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using server.Models;
+using Microsoft.Extensions.Logging;
 
 namespace server.Controllers
 {
@@ -9,6 +10,7 @@ namespace server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        readonly ILogger<UserController> log;
         private readonly SaymedbContext context;
 
         public UserController(SaymedbContext context)
@@ -38,10 +40,13 @@ namespace server.Controllers
         {
             if(ModelState.IsValid)
             {
+                log.LogDebug("user model is valid");
                 context.User.Add(user);
                 context.SaveChanges();
+                log.LogInformation("User was created");
                 return Ok(user);
             }
+            log.LogWarning("user model is not valid");
             return BadRequest(ModelState);
         } 
     }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +31,8 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     PostComponent,
     NavigationToolsComponent,
   ],
-  imports: [
+  imports: [LoggerModule.forRoot({
+    level: NgxLoggerLevel.DEBUG}),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
