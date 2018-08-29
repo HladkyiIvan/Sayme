@@ -27,3 +27,11 @@ input{
     background:  rgb(255, 236, 153);
     border: none;
 }
+
+.post-message{
+    outline: none;
+    border-radius: 40px;
+    margin-right: 20px;
+    background:  rgb(255, 236, 153);
+    border: none;
+}

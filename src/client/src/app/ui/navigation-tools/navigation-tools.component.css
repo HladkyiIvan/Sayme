@@ -43,3 +43,30 @@ a{
     outline: none;
     width: 320px;
 }
+
+.feedback-email:focus, .feedback-text:focus{
+    box-shadow: inset 0 0 8px gold;
+}
+
+.feedback-send-button{
+    border-radius: 5px;
+    background: gold;
+    margin-right: 10px; 
+    height: 30px;
+    border: 1px solid gold;
+}
+
+.feedback-send-button:hover{
+    background: rgb(192, 164, 6);
+}
+
+.feedback-cancel-button{
+    border-radius: 5px;
+    background: #eeeeee;
+    height: 30px;
+    border: 1px solid #eeeeee;
+}
+
+.feedback-cancel-button:hover{
+    background: #555555;
+}
