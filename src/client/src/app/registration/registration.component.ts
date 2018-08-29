@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FeedbackService } from '../services/feedback.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NGXLogger } from 'ngx-logger';
 import { User } from '../Models/user';
 import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
 import { Email } from '../Models/email';
@@ -10,7 +11,7 @@ import { Email } from '../Models/email';
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
-  providers: [UserService, FeedbackService]
+  providers: [UserService, FeedbackService, NGXLogger]
 })
 export class RegistrationComponent implements OnInit {
 
@@ -20,18 +21,13 @@ export class RegistrationComponent implements OnInit {
   private enteredCode: string;
   private generatedCode: number;
   private errorMessage = '';
-  private buttonText = '';
   private sendTo: Email;
   isVisibleCodeInput = false;
-  isDisabled = true;
-  display = false;
   private timeIt = timer(1, 10000);
 
-  constructor(private userService: UserService, private feedbackService: FeedbackService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private feedbackService: FeedbackService, private router: Router, private route: ActivatedRoute, private logger: NGXLogger) { }
 
   ngOnInit() {
-    this.timeIt.subscribe(x => this.loadUsers());
-    this.buttonText = 'Send code';
   }
 
 
@@ -45,50 +41,69 @@ export class RegistrationComponent implements OnInit {
 
       if (!this.newUser.id) {
         if (this.isEmail(this.newUser.mail)) {
-          if(this.newUser.password.length>=7||this.newUser.login.length>=5){
-          if (this.newUser.password === this.repPassword) {
-            this.generatedCode = this.randomInt(100000, 999999);
-            this.newUser.register_code = String(this.generatedCode);
-            this.errorMessage = '';
-            this.newUser.active = true;
-            this.newUser.bio = '';
-            this.isDisabled = false;
-            this.sendTo = new Email(this.newUser.mail, this.newUser.register_code);
-            this.feedbackService.sendCode(this.sendTo)
-              .subscribe();
-            this.display = true;
+          if ((this.newUser.password.length >= 7 &&this.newUser.password.length<=18)|| (this.newUser.login.length >= 5&&this.newUser.login.length<=18)) {
+            if (this.newUser.password === this.repPassword) {
+              this.generatedCode = this.randomInt(100000, 999999);
+              this.newUser.register_code = String(this.generatedCode);
+              this.errorMessage = '';
+              this.newUser.active = true;
+              this.newUser.bio = '';
+              this.sendTo = new Email(this.newUser.mail, this.newUser.register_code);
+              this.feedbackService.sendCode(this.sendTo)
+                .subscribe();
+              this.logger.debug('code for registration has been sent');
+              this.isVisibleCodeInput = true;
 
-            this.isVisibleCodeInput = true;
+            }
+
+            else{ this.errorMessage = 'Your password and repeated password don`t match! Try again.';
+            this.logger.info('not matching password and repeated password');
+          }
 
           }
-          
-          else this.errorMessage = 'Your password and repeated password don`t match! Try again.';
-        }
-        else this.errorMessage='Your login or password are too short';
+          else 
+          {
+            this.errorMessage = 'Wrong length of password or login';
+            this.logger.info('Wrong length of password or login');
 
+          }
         }
-        else this.errorMessage = 'Please enter the email in the correct format';
+        else {
+          this.errorMessage = 'Please enter the email in the correct format';
+          this.logger.info('Not passed email validation');
+      }
       }
       else {
         this.errorMessage = 'We already have user with this email or login! Try again.';
+        this.logger.info('existing user or email while registering');
       }
     }
-    else this.errorMessage = 'Wrong input!';
+    else {
+    this.errorMessage = 'Wrong input!';
+    this.logger.info('Some of the fields are empty');
+    }
   }
 
 
   onConfirmCode() {
     if (this.enteredCode) {
       if (this.enteredCode === this.newUser.register_code) {
+        this.logger.debug('sent and entered codes are equal');
         this.userService.createUser(this.newUser).
           subscribe((data: User) => this.usersToSearch.push(data));
+          this.logger.info('new user created');
         this.router.navigate(['/login']);
-        console.log(this.newUser.login);
+        
       }
 
-      else this.errorMessage = 'Entered code and sent code don`t match! Try again';
+      else {this.errorMessage = 'Entered code and sent code don`t match! Try again';
+      this.logger.info('sent and entered codes are different')
     }
-    else this.errorMessage = 'Wrong input!';
+    }
+    else {
+      this.errorMessage = 'Wrong input!';
+      this.logger.warn('Some of the fields are empty');
+    }
   }
 
   loadUsers() {
@@ -97,9 +112,7 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  sendCode() {
-
-  }
+ 
 
   randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -111,8 +124,6 @@ export class RegistrationComponent implements OnInit {
 
     var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     serchfind = regexp.test(search);
-
-    console.log(serchfind)
     return serchfind
   }
 

@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {UserService} from '../services/user.service'
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -15,23 +16,35 @@ export class LoginService {
 private users:User[];
 
   constructor(private http: HttpClient,private cookieService: CookieService,private router: Router, private route: ActivatedRoute) { }
- private url='/api/login';
+ private url='/api/account';
+ private url1='/api/account/authenticate';
  // GET
  getResponce(): Observable<HttpResponse<Login>> {
   return this.http.get<Login>(
     this.url, { observe: 'response' });
-}
+  }
+
+
+  postLogin(){
+    return this.http.post(this.url1,'').subscribe(()=>{},error=>console.log(error));
+    
+  }
 
 // POST
-postLoginUser(login: Login) {
-  return this.http.post(this.url, login);
-}
+  postLoginUser(login: Login) {
+    return this.http.post(this.url, login);
+  }
 
+  public getToken(): string {
+    return localStorage.getItem('token');
+  }
 
-//check if user is loggined in
-checkLoggingIn(){
-  const cookieExists: boolean = this.cookieService.check('access');
-  if(cookieExists) return true;
-  else this.router.navigate(['/login']);
-}
+  // public isAuthenticated(): boolean {
+  //   // get the token
+  //   const token = this.getToken();
+  //   // return a boolean reflecting 
+  //   // whether or not the token is expired
+  //   return tokenNotExpired(null, token);
+  // }
+
 }

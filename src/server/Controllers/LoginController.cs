@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System.IdentityModel;
 using Microsoft.AspNetCore.Authentication;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase

@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
 import {LoginService} from'../../services/login.service';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-navigation-tools',
   templateUrl: './navigation-tools.component.html',
   styleUrls: ['./navigation-tools.component.css'],
-  providers: [FeedbackService]
+  providers: [FeedbackService, NGXLogger]
 })
 export class NavigationToolsComponent implements OnInit {
 
@@ -25,10 +26,10 @@ export class NavigationToolsComponent implements OnInit {
     private _feedbackService: FeedbackService, 
     private router: Router,
     private route: ActivatedRoute,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private logger: NGXLogger) { }
 
   ngOnInit() {
-    this.loginService.checkLoggingIn();
 
     this.items = [
       {
@@ -79,6 +80,7 @@ export class NavigationToolsComponent implements OnInit {
       this.feedbackText = ''
       this.useremail = ''
     }
+    else this.logger.info('Wrong size of entered info in feedback');
   }
 
   onCancelFeedBack() {

@@ -6,13 +6,14 @@ import { PostService } from '../services/post.service';
 import {LoginService} from'../services/login.service';
 import { Post } from '../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
+import { NGXLogger } from 'ngx-logger';
 
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  providers: [PostService, UserService]
+  providers: [PostService, UserService, NGXLogger]
 })
 export class PostComponent implements OnInit {
 
@@ -23,14 +24,13 @@ export class PostComponent implements OnInit {
   maxUserId = 0;
   timeIt = timer(1, 10000);
 
-  constructor(private postService: PostService, private userService: UserService,private loginService: LoginService) { }
+  constructor(private postService: PostService, private userService: UserService,private loginService: LoginService, private logger: NGXLogger) { }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла.
   ngOnInit() {
-    this.loginService.checkLoggingIn();
     this.timeIt.subscribe(x => this.loadPosts());
     
   }
@@ -48,6 +48,7 @@ export class PostComponent implements OnInit {
       });
 
       if (!this.newPost.id_user) {
+        this.logger.debug('There are no user with entered login. Creating new user')
         this.newUser.login = this.newPost.username;
         this.newUser.mail = ' ';
         this.newUser.password = ' ';
@@ -56,7 +57,7 @@ export class PostComponent implements OnInit {
         this.newUser.register_code='';
         this.userService.createUser(this.newUser).
           subscribe((data: User) => this.usersToSearch.push(data));
-
+        this.logger.debug('new user created');
         this.usersToSearch.forEach(element => {
           if (element.id > this.maxUserId) {
             this.maxUserId = element.id;
@@ -65,13 +66,14 @@ export class PostComponent implements OnInit {
 
         this.newPost.id_user = this.maxUserId + 1;
       }
+      else this.logger.debug('user with this login exist');
 
       this.loadPosts();
 
     this.newPost.post_date = new Date();
     this.postService.createPost(this.newPost)
     .subscribe((data: Post) => this.posts.push(data));
-
+this.logger.info('Added new post');
       this.newPost = new Post();
       this.newUser = new User();
     }

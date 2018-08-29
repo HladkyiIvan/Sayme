@@ -4,6 +4,7 @@ import { timer } from '../../../node_modules/rxjs/internal/observable/timer';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Login } from '../Models/login';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { Login } from '../Models/login';
   providers: [ LoginService]
 })
 export class AuthorisationComponent implements OnInit {
+
+  private url = '/api/user/authenticate';
 
   private usersToSearch = [];
   private user=new Login();
@@ -24,71 +27,35 @@ export class AuthorisationComponent implements OnInit {
     returnUrl: string;
     error = '';
 
-  constructor(private loginService: LoginService,  private router: Router, private cookieService: CookieService) { }
+  constructor(private loginService: LoginService,  private router: Router, private cookieService: CookieService, private userserv: UserService) { }
 
   ngOnInit() {
-    //this.loginService.checkLoggingIn();
-    // reset login status
-   // this.authService.logout();
- 
-    // get return url from route parameters or default to '/'
-    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/menu';
-    //this.timeIt.subscribe(x => this.loadUsers());
   }
 
 
   onLogin()
   {
-    if(this.user.login&&this.user.password)
-    {
-      this.loginService.postLoginUser(this.user)
-      .subscribe((data:Login)=>this.usersToSearch.push(data));
-      const cookieExists: boolean = this.cookieService.check('access');
-      console.log(cookieExists);
-      if(cookieExists) this.router.navigate(['/menu']);
-      else this.errorMessage='Wrong login or password';
+    console.log('sdfsdf');
+    this.loginService.postLogin();
+    console.log('sdfsdf');
+    // if(this.user.login&&this.user.password)
+    // {
+    //   this.loginService.postLoginUser(this.user)
+    //   .subscribe((data:Login)=>this.usersToSearch.push(data));
       
-    }
-    else{
-      this.errorMessage='Wrong input!';
-    }
+    // }
+    // else{
+    //   this.errorMessage='Wrong input!';
+    // }
+
+
   }
 
   onRegistration(){
-    this.router.navigate(['/registration']);
+    this.userserv.getUsers().subscribe();
+    //this.router.navigate(['/registration']);
   }
 
-  /*login() {
-    this.loading = true;
-    this.authService.login(this.model.username, this.model.password)
-        .pipe(first())
-        .subscribe(
-            data => {
-                this.router.navigate([this.returnUrl]);
-            },
-            error => {
-                this.error = error;
-                this.loading = false;
-            });
-          }
-
-          */
-
-  /*onLogin(){
-    this.usersToSearch.forEach(element => {
-      if (element.login == this.user.login&&element.password==this.user.password){
-        this.user.id = element.id;
-      }
-      if(!this.user.id)
-      {
-        
-      }
-    });
-  }*/
-
-  /*loadUsers(){
-    this.LoginService.getLoginUsers()
-        .subscribe((data: Login[]) => this.usersToSearch = data);
-  }*/
+ 
 
 }

@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,8 @@ import {Interceptor} from './interceptor/interceptor';
     AuthorisationComponent,
     RegistrationComponent,
   ],
-  imports: [
+  imports: [LoggerModule.forRoot({
+    level: NgxLoggerLevel.DEBUG}),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -50,7 +52,7 @@ import {Interceptor} from './interceptor/interceptor';
     MenubarModule,
     MenuModule,
     DataViewModule,
-    DialogModule,
+    DialogModule
   ],
   exports: [
     LoginRegistrationHeaderComponent,
@@ -66,7 +68,8 @@ import {Interceptor} from './interceptor/interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
-    }],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
