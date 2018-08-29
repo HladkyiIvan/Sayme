@@ -12,6 +12,9 @@ import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { AccordionModule } from 'primeng/accordion';
 import { DataViewModule } from 'primeng/dataview';
+import { FileUploadModule } from 'primeng/fileupload';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
@@ -19,6 +22,7 @@ import { FooterComponent } from './ui/footer/footer.component';
 import { PostComponent } from './post/post.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 
 @NgModule({
@@ -29,6 +33,7 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     FooterComponent,
     PostComponent,
     NavigationToolsComponent,
+    UserpageComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,9 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     MenuModule,
     DataViewModule,
     DialogModule,
+    InputTextareaModule,
+    FileUploadModule,
+    TextareaAutosizeModule
   ],
   exports: [
     LoginRegistrationHeaderComponent,
@@ -53,6 +61,7 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     PostComponent,
     AccordionModule,
     DataViewModule,
+    UserpageComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

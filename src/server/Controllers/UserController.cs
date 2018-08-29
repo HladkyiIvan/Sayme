@@ -1,7 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using server.Models;
+using System.Diagnostics;
 
 namespace server.Controllers
 {
@@ -43,7 +47,61 @@ namespace server.Controllers
                 return Ok(user);
             }
             return BadRequest(ModelState);
-        } 
+        }
+
+        // [HttpPut("{id}")]
+        // public IActionResult Put([FromBody] User newUser)
+        // {
+        //     // var oldUser = context.User.Find(newUser.id);
+
+        //     // if (oldUser == null)
+        //     // {
+        //     //     return NotFound();
+        //     // }
+
+        //     // oldUser.avatar = System.Convert.FromBase64String(newUser.avatar);
+        //     // oldUser.bio = newUser.bio;
+        //     // oldUser.login = newUser.login;
+        //     // oldUser.mail = newUser.mail;
+        //     // oldUser.password = newUser.password;
+
+        //     // context.User.Update(oldUser);
+        //     // context.SaveChanges();
+        //     return NoContent();
+        // }
+        [HttpPut("{id}")]
+        public IActionResult UpdateImage(IFormFile image)
+        {
+            try
+            {
+                
+                if(image == null || !ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = context.User.Find((long)32);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    image.CopyTo(memoryStream);
+                    user.avatar = memoryStream.ToArray();
+                }
+
+                context.User.Update(user);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }  
     }
     
 }

@@ -56,15 +56,26 @@ namespace server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Post> Get(long id)
+        public IEnumerable<PostTransport> GetByUserId(long id)
         {
-            var item = context.Post.Find(id);
-            if (item == null)
+            var posts = context.Post.ToList();
+            List<PostTransport> sendingPosts = new List<PostTransport>();
+
+            foreach (Post post in posts)
             {
-                return NotFound();
+                if (post.id_user == id)
+                {
+                    sendingPosts.Add(new PostTransport(post));
+                }
             }
-            return item;
-        } 
+
+            foreach(PostTransport post in sendingPosts)
+            {
+                post.username = "";
+            }
+
+            return sendingPosts;
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody]Post postTransport)

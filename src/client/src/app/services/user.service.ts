@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams, HttpRequest, HttpEvent} from '@angular/common/http';
 import { User } from '../Models/user';
 import { Observable } from 'rxjs';
 
@@ -23,5 +23,17 @@ export class UserService {
 
   createUser(user: User) {
     return this.http.post(this.url, user);
+  }
+
+  updateUser(user: User){
+    return this.http.put(this.url + '/' + user.id.toString(), user);
+  }
+
+  updateAvatar(id_user: number, file: File) {
+
+    let formData = new FormData();
+    formData.append('image', file);
+
+    return this.http.put(this.url + '/' + id_user.toString(), formData);
   }
 }

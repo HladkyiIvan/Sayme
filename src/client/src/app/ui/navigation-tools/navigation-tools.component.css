@@ -1,3 +1,6 @@
+p{
+    color: #cccccc;
+}
 
 a{
     text-decoration: none;
@@ -8,7 +11,7 @@ a{
     margin-right: 10px; 
     padding: 5px 0;
     padding-left: 10px; 
-    border:rgb(204, 201, 53) solid 1px; 
+    border:rgb(0, 0, 0) solid 1px; 
     border-radius: 20px;
     outline: none;
 }
@@ -42,4 +45,9 @@ a{
     padding: 10px;
     outline: none;
     width: 320px;
+}
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }

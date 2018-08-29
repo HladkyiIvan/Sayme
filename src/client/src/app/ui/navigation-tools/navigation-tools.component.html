@@ -1,12 +1,15 @@
 <div class="wrapper-body">
     <img src="assets/images/Logo-Sayme.svg" style= "width:280px">
-<p-menubar [model]="items" styleClass="menu">
-    <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 236, 153);" pInputText placeholder="Search..." >
-    <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
-</p-menubar>
+<div class="sticky">
+    <p-menubar [model]="items" >
+        <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 241, 181);" pInputText placeholder="Search..." >
+        <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
+    </p-menubar>
+</div>
+    
 <!-- Feedback modal form -->
 <p-dialog header="Feedback" [(visible)]="isFeedbackFormVisible" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
-    [maximizable]="true" [baseZIndex]="10000">
+    [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [dismissableMask]="true">
     <p>Left your answer or comment here:</p>
     <form #postForm="ngForm">
         <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email">
@@ -20,7 +23,7 @@
 
 <!-- Successfuly sent feedback modal form -->
 <p-dialog header="Success!" [(visible)]="isSuccessFormVisible" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
-    [maximizable]="true" [baseZIndex]="10000">
+    [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [dismissableMask]="true">
     <p>Report was successfuly sent!</p>
     <div style="float: right;">
         <button type="button" pButton (click)="isSuccessFormVisible=false" label="OK" class="ui-button-info"></button>

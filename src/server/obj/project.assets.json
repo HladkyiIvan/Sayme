@@ -2578,6 +2578,31 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "Microsoft.Owin/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Owin": "1.0.0"
+        },
+        "compile": {
+          "lib/net451/Microsoft.Owin.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Owin.dll": {}
+        }
+      },
+      "Microsoft.Owin.Host.SystemWeb/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Owin": "4.0.0",
+          "Owin": "1.0.0"
+        },
+        "compile": {
+          "lib/net451/Microsoft.Owin.Host.SystemWeb.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Owin.Host.SystemWeb.dll": {}
+        }
+      },
       "Microsoft.Win32.Registry/4.5.0": {
         "type": "package",
         "dependencies": {
@@ -2645,6 +2670,15 @@
         },
         "runtime": {
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
+        }
+      },
+      "Owin/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Owin.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Owin.dll": {}
         }
       },
       "Pomelo.EntityFrameworkCore.MySql/2.1.1": {
@@ -4232,6 +4266,15 @@
         },
         "runtime": {
           "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
+      "System.Web.Http.Common/4.0.20126.16343": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Web.Http.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Web.Http.Common.dll": {}
         }
       },
       "System.Xml.ReaderWriter/4.3.0": {
@@ -6766,6 +6809,28 @@
         "version.txt"
       ]
     },
+    "Microsoft.Owin/4.0.0": {
+      "sha512": "3TNVMkgF+yhesPYwq67ZOcLGtfKEupNNXcqVO4FRNjkQ1v0gBNb3k8CSuJonrCC8EAUp+OeUYrDTQePiyaVzpw==",
+      "type": "package",
+      "path": "microsoft.owin/4.0.0",
+      "files": [
+        "lib/net451/Microsoft.Owin.XML",
+        "lib/net451/Microsoft.Owin.dll",
+        "microsoft.owin.4.0.0.nupkg.sha512",
+        "microsoft.owin.nuspec"
+      ]
+    },
+    "Microsoft.Owin.Host.SystemWeb/4.0.0": {
+      "sha512": "7zRXPcjn1OwHrhJ71KjfU07B//xxBhK3PfYZxVKDVdv1DhDPDAMAshmW1h7sFMcT7gLvSp78uDcKSucpuccCxw==",
+      "type": "package",
+      "path": "microsoft.owin.host.systemweb/4.0.0",
+      "files": [
+        "lib/net451/Microsoft.Owin.Host.SystemWeb.dll",
+        "lib/net451/Microsoft.Owin.Host.SystemWeb.xml",
+        "microsoft.owin.host.systemweb.4.0.0.nupkg.sha512",
+        "microsoft.owin.host.systemweb.nuspec"
+      ]
+    },
     "Microsoft.Win32.Registry/4.5.0": {
       "sha512": "vduxuHEqRgRrTE8wYG8Wxj/+6wwzddOmZzjKZx6rFMc/91aUBxI5etAFYxesoNaIja5NpgSTcnk6cN8BeYXf9A==",
       "type": "package",
@@ -6985,6 +7050,16 @@
         "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
         "newtonsoft.json.bson.1.0.1.nupkg.sha512",
         "newtonsoft.json.bson.nuspec"
+      ]
+    },
+    "Owin/1.0.0": {
+      "sha512": "OseTFniKmyp76mEzOBwIKGBRS5eMoYNkMKaMXOpxx9jv88+b6mh1rSaw43vjBOItNhaLFG3d0a20PfHyibH5sw==",
+      "type": "package",
+      "path": "owin/1.0.0",
+      "files": [
+        "lib/net40/Owin.dll",
+        "owin.1.0.0.nupkg.sha512",
+        "owin.nuspec"
       ]
     },
     "Pomelo.EntityFrameworkCore.MySql/2.1.1": {
@@ -11247,6 +11322,17 @@
         "system.valuetuple.nuspec"
       ]
     },
+    "System.Web.Http.Common/4.0.20126.16343": {
+      "sha512": "3tybnaxSQAWu2aLSAh+7PRZ8Cw4f/DIECPJZ5yBcnm5sQKjr95zViCasYH3p6Z1hxATSTmlecvCcvlt/FDy+8w==",
+      "type": "package",
+      "path": "system.web.http.common/4.0.20126.16343",
+      "files": [
+        "lib/net40/System.Web.Http.Common.dll",
+        "lib/net40/System.Web.Http.Common.xml",
+        "system.web.http.common.4.0.20126.16343.nupkg.sha512",
+        "system.web.http.common.nuspec"
+      ]
+    },
     "System.Xml.ReaderWriter/4.3.0": {
       "sha512": "GrprA+Z0RUXaR4N7/eW71j1rgMnEnEVlgii49GZyAjTH7uliMnrOU3HNFBr6fEDBCJCIdlVNq9hHbaDR621XBA==",
       "type": "package",
@@ -11570,7 +11656,9 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Pomelo.EntityFrameworkCore.MySql >= 2.1.1"
+      "Microsoft.Owin.Host.SystemWeb >= 4.0.0",
+      "Pomelo.EntityFrameworkCore.MySql >= 2.1.1",
+      "System.Web.Http.Common"
     ]
   },
   "packageFolders": {
@@ -11580,11 +11668,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Ivan\\Desktop\\ISD\\Sayme\\src\\server\\server.csproj",
+      "projectUniqueName": "C:\\Users\\Ivan\\Desktop\\ISD\\Sayme\\src\\server\\server.csproj",
       "projectName": "server",
-      "projectPath": "c:\\Users\\Ivan\\Desktop\\ISD\\Sayme\\src\\server\\server.csproj",
+      "projectPath": "C:\\Users\\Ivan\\Desktop\\ISD\\Sayme\\src\\server\\server.csproj",
       "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Ivan\\Desktop\\ISD\\Sayme\\src\\server\\obj\\",
+      "outputPath": "C:\\Users\\Ivan\\Desktop\\ISD\\Sayme\\src\\server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11623,9 +11711,17 @@
             "version": "[2.1.0, )",
             "autoReferenced": true
           },
+          "Microsoft.Owin.Host.SystemWeb": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[2.1.1, )"
+          },
+          "System.Web.Http.Common": {
+            "target": "Package",
+            "version": "(, )"
           }
         },
         "imports": [
@@ -11635,5 +11731,47 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Microsoft.Owin 4.0.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Microsoft.Owin",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Microsoft.Owin.Host.SystemWeb 4.0.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Microsoft.Owin.Host.SystemWeb",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Owin 1.0.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Owin",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"System.Web.Http.Common 4.0.20126.16343\" был восстановлен с помощью \".NETFramework,Version=v4.6.1\", а не целевой платформы проекта \".NETCoreApp,Version=v2.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "System.Web.Http.Common",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }

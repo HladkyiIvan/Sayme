@@ -79,17 +79,6 @@ export class PostComponent implements OnInit {
     this.postService.getPosts()
         .subscribe((data: Post[]) => this.posts = data);
     
-  } 
-
-  getPostDate(date: Date) {
-   var yyyy = date.getFullYear().toString();
-   var mm = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1).toString(); // getMonth() is zero-based
-   var dd  = date.getDate() < 10 ? "0" + date.getDate() : date.getDate().toString();
-   var hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours().toString();
-   var min = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes().toString();
-   return "".concat(yyyy).concat(mm).concat(dd).concat(hh).concat(min);
-  }
-
-  
+  }  
 }
 
