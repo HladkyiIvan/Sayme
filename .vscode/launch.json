@@ -4,48 +4,15 @@
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
-    {
-        "name": "Current TS Tests File",
-        "type": "node",
-        "request": "launch",
-        "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-        "args": ["-r", "ts-node/register", "${relativeFile}"],
-        "cwd": "${workspaceRoot}",
-        "protocol": "inspector"
-    },
-       {
-           "type": "node",
-           "request": "launch",
-           "name": "Yeoman generator",
-           "program": "${workspaceFolder}/node_modules/yo/lib/cli.js",
-           "args": [
-               "generator"
-           ],
-           "console": "integratedTerminal",
-           "internalConsoleOptions": "neverOpen"
-       },
-       
-    {
-        "name": "Current TS File",
-        "type": "node",
-        "request": "launch",
-        "args": ["${relativeFile}"],
-        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
-        "sourceMaps": true,
-        "cwd": "${workspaceRoot}",
-        "protocol": "inspector",
-    },
-
-    
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/server/bin/Debug/netcoreapp2.1/server.dll",
+            "program": "${workspaceFolder}/src/server/bin/Debug/netcoreapp2.1/server.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/server",
+            "cwd": "${workspaceFolder}/src/server",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
@@ -75,5 +42,5 @@
             "request": "attach",
             "processId": "${command:pickProcess}"
         }
-    ]
-    }
+    ,]
+}

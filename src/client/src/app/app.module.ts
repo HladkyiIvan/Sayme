@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { AppComponent } from './app.component';
 
@@ -19,9 +20,13 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { FooterComponent } from './ui/footer/footer.component';
-import { PostComponent } from './ui/post/post.component';
-import { HttpClientModule } from '@angular/common/http';
+import { PostComponent } from './post/post.component';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
+import { AuthorisationComponent } from './authorization/authorization.component';
+import {UserService} from './services/user.service';
+import { RegistrationComponent } from './registration/registration.component';
+import {Interceptor} from './interceptor/interceptor';
 import { UserpageComponent } from './userpage/userpage.component';
 
 
@@ -34,6 +39,8 @@ import { UserpageComponent } from './userpage/userpage.component';
     PostComponent,
     NavigationToolsComponent,
     UserpageComponent,
+    AuthorisationComponent,
+    RegistrationComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -63,7 +70,13 @@ import { UserpageComponent } from './userpage/userpage.component';
     DataViewModule,
     UserpageComponent
   ],
-  providers: [],
+  providers: [UserService, CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
+import {LoginService} from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
 
 @Component({
@@ -66,6 +67,7 @@ export class NavigationToolsComponent implements OnInit {
         label: `${navigationItems[2]}`,
         routerLink: '**'
       }
+
     ]
   }
 
