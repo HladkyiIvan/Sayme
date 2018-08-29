@@ -13,7 +13,7 @@ export class Interceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         req = req.clone({
             setHeaders: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1MzU1MzE1NjIsImV4cCI6MTUzNjEzNjM2MiwiaWF0IjoxNTM1NTMxNTYyfQ.4VbZSXr4auru5euTvq_1uM0aBoGHod-9G5NwA4K5uE0`
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1MzU1NzYzMzMsImV4cCI6MTUzNjE4MTEzMywiaWF0IjoxNTM1NTc2MzMzfQ.8RKSatsDQYRkv4UsDAsfpRjewi_Vgb4nmW0w-elnf8g`
             }
           });
           

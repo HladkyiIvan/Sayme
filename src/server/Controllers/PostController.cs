@@ -88,13 +88,10 @@ namespace server.Controllers
 
             if(ModelState.IsValid)
             {
-                log.LogDebug("post model is valid");
                 context.Post.Add(postTransport);
                 context.SaveChanges();
-                log.LogInformation("post was created");
                 return Ok(postTransport);
             }
-            log.LogWarning("post model is not valid");
             return BadRequest(ModelState);
         } 
     }

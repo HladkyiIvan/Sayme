@@ -48,6 +48,7 @@ namespace server.Controllers
             }
             log.LogWarning("Feedback model is invalid");
             return BadRequest(ModelState);
+        }
 
 
         [HttpPost]

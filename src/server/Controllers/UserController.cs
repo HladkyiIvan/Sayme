@@ -50,13 +50,10 @@ namespace server.Controllers
         {
             if(ModelState.IsValid)
             {
-                log.LogDebug("user model is valid");
                 context.User.Add(user);
                 context.SaveChanges();
-                log.LogInformation("User was created");
                 return Ok(user);
             }
-            log.LogWarning("user model is not valid");
             return BadRequest(ModelState);
         }
 

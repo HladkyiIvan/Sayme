@@ -20,7 +20,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { FooterComponent } from './ui/footer/footer.component';
-import { PostComponent } from './post/post.component';
+import { PostComponent } from './ui/post/post.component';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import { AuthorisationComponent } from './authorization/authorization.component';
