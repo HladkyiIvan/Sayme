@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { PostComponent } from './ui/post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PostComponent,
+    component: UserpageComponent,
   }
 ];
 

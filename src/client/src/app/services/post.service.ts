@@ -21,6 +21,10 @@ export class PostService {
     return this.http.get(this.url);
   }
 
+  getUserPosts(id) {
+    return this.http.get(this.url + "/" + id.toString());
+  }
+
   // POST
   createPost(post: Post) {
     this.logger.debug('creating posts from service');
