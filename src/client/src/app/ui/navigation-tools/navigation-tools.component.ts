@@ -20,6 +20,8 @@ export class NavigationToolsComponent implements OnInit {
   feedback = new Email('','')
   feedbackText: string = ''
   useremail: string = ''
+  language: string = '';
+
 
   constructor(
     private _feedbackService: FeedbackService, 
@@ -28,6 +30,24 @@ export class NavigationToolsComponent implements OnInit {
     private logger: NGXLogger) { }
 
   ngOnInit() {
+    this.selectLanguage();
+  }
+
+  //!!!FEATURE!!!
+  //switching on navigationbar button`s text 
+  selectLanguage(){
+    var navigationItems = [];
+    switch (this.language) {
+      case 'ru':
+        navigationItems = ['Новости', 'Интересное', 'Сказать'];
+        break;
+      case 'ua':
+        navigationItems = ['Новини', 'Цікаве', 'Сказати'];
+        break;
+      default:
+        navigationItems = ['News', 'Intresting', 'Say'];
+        break;
+    }
     this.items = [
       {
         label: ' ',
@@ -35,29 +55,42 @@ export class NavigationToolsComponent implements OnInit {
         command: (onclick) => { this.open(); }
       },
       {
-        label: 'News',
+        label: `${navigationItems[0]}`,
         routerLink: 'post',
       },
       {
-        label: 'Interesting',
+        label: `${navigationItems[1]}`,
         routerLink: 'interesting'
       },
       {
-        label: 'Say',
+        label: `${navigationItems[2]}`,
         routerLink: '**'
       }
     ]
   }
 
+  changelang(lang){
+    this.language = lang;
+    this.selectLanguage();
+  }
+
+  ///opens sidebar with user info
   open() {
     this.opened = !this.opened;
     return this.opened;
   }
 
+  //shows feedback dialog
   showDialog() {
     this.isFeedbackFormVisible = true;
   }
+  
+  //closes feedback dialog (info saves)
+  onCancelFeedBack() {
+    this.isFeedbackFormVisible = false;
+  }
 
+  //send feedback to server
   onSendFeedback() {
     if (this.feedbackText.length > 10 && this.useremail.length > 3 ) {
       this.isFeedbackFormVisible = false
@@ -73,8 +106,5 @@ export class NavigationToolsComponent implements OnInit {
     else this.logger.info('Wrong size of entered info in feedback');
   }
 
-  onCancelFeedBack() {
-    this.isFeedbackFormVisible = false;
-  }
 
 }

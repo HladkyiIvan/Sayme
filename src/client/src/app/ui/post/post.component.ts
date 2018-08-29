@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
-import { UserService } from '../services/user.service';
-import { User } from '../Models/user';
-import { PostService } from '../services/post.service';
-import { Post } from '../Models/post';
+import { UserService } from '../../services/user.service';
+import { User } from '../../Models/user';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
 import { NGXLogger } from 'ngx-logger';
 
@@ -45,6 +45,7 @@ export class PostComponent implements OnInit {
         }
       });
 
+<<<<<<< HEAD:src/client/src/app/post/post.component.ts
       if (!this.newPost.id_user) {
         this.logger.debug('There are no user with entered login. Creating new user')
         this.newUser.login = this.newPost.username;
@@ -65,14 +66,40 @@ export class PostComponent implements OnInit {
       }
       else this.logger.debug('user with this login exist');
       this.loadPosts();
+=======
+    if (!this.newPost.id_user) {
+      this.newUser.login = this.newPost.username;
+      this.newUser.mail = ' ';
+      this.newUser.password = ' ';
+      this.newUser.bio = ' ';
+      this.newUser.active = true;
+      this.userService.createUser(this.newUser).
+        subscribe((data: User) => this.usersToSearch.push(data));
+
+      this.usersToSearch.forEach(element => {
+        if (element.id > this.maxUserId) {
+          this.maxUserId = element.id;
+        }
+      });
+
+      this.newPost.id_user = this.maxUserId + 1;
+    }
+
+    this.loadPosts();
+>>>>>>> dev:src/client/src/app/ui/post/post.component.ts
 
     this.newPost.post_date = new Date();
     this.postService.createPost(this.newPost)
-    .subscribe((data: Post) => this.posts.push(data));
+        .subscribe((data: Post) => this.posts.push(data));
 
+<<<<<<< HEAD:src/client/src/app/post/post.component.ts
     this.logger.info('Added new post');
       this.newPost = new Post();
       this.newUser = new User();
+=======
+    this.newPost = new Post();
+    this.newUser = new User();
+>>>>>>> dev:src/client/src/app/ui/post/post.component.ts
     }
   }
 
@@ -81,7 +108,6 @@ export class PostComponent implements OnInit {
         .subscribe((data: User[]) => this.usersToSearch = data);
     this.postService.getPosts()
         .subscribe((data: Post[]) => this.posts = data);
-    
   } 
 
   getPostDate(date: Date) {
@@ -92,7 +118,5 @@ export class PostComponent implements OnInit {
    var min = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes().toString();
    return "".concat(yyyy).concat(mm).concat(dd).concat(hh).concat(min);
   }
-
-  
 }
 

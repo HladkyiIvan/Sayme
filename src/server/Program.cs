@@ -15,6 +15,7 @@ namespace server
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
+<<<<<<< HEAD
             // string ipAddress = args[0];
             // string port = args[1];
             // var host = new WebHostBuilder()
@@ -26,6 +27,8 @@ namespace server
             //     .Build();
             
             // host.Run();
+=======
+>>>>>>> dev
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
