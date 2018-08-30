@@ -51,6 +51,7 @@ export class PostComponent implements OnInit {
         this.newUser.mail = ' ';
         this.newUser.password = ' ';
         this.newUser.bio = ' ';
+        this.newUser.register_code='';
         this.newUser.active = true;
         this.userService.createUser(this.newUser).
           subscribe((data: User) => this.usersToSearch.push(data));

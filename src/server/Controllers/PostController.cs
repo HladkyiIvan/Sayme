@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using server.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
@@ -58,15 +60,26 @@ namespace server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Post> Get(long id)
+        public IEnumerable<PostTransport> GetByUserId(long id)
         {
-            var item = context.Post.Find(id);
-            if (item == null)
+            var posts = context.Post.ToList();
+            List<PostTransport> sendingPosts = new List<PostTransport>();
+
+            foreach (Post post in posts)
             {
-                return NotFound();
+                if (post.id_user == id)
+                {
+                    sendingPosts.Add(new PostTransport(post));
+                }
             }
-            return item;
-        } 
+
+            foreach(PostTransport post in sendingPosts)
+            {
+                post.username = "";
+            }
+
+            return sendingPosts;
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody]Post postTransport)
@@ -75,13 +88,10 @@ namespace server.Controllers
 
             if(ModelState.IsValid)
             {
-                log.LogDebug("post model is valid");
                 context.Post.Add(postTransport);
                 context.SaveChanges();
-                log.LogInformation("post was created");
                 return Ok(postTransport);
             }
-            log.LogWarning("post model is not valid");
             return BadRequest(ModelState);
         } 
     }

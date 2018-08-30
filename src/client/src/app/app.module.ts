@@ -4,8 +4,9 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //primeng
 import { SidebarModule } from 'primeng/sidebar';
@@ -14,6 +15,8 @@ import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { AccordionModule } from 'primeng/accordion';
 import { DataViewModule } from 'primeng/dataview';
+import { FileUploadModule } from 'primeng/fileupload';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +28,11 @@ import { PostComponent } from './ui/post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import { TranslatePipe } from './translate.pipe';
 import { TranslateService } from './services/translate.service';
+import { AuthorisationComponent } from './authorization/authorization.component';
+import { UserService} from './services/user.service';
+import { RegistrationComponent } from './registration/registration.component';
+import { Interceptor} from './interceptor/interceptor';
+import { UserpageComponent } from './userpage/userpage.component';
 
 
 @NgModule({
@@ -36,6 +44,9 @@ import { TranslateService } from './services/translate.service';
     PostComponent,
     NavigationToolsComponent,
     TranslatePipe,
+    UserpageComponent,
+    AuthorisationComponent,
+    RegistrationComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -52,6 +63,8 @@ import { TranslateService } from './services/translate.service';
     MenuModule,
     DataViewModule,
     DialogModule,
+    InputTextareaModule,
+    FileUploadModule    
   ],
   exports: [
     LoginRegistrationHeaderComponent,
@@ -61,8 +74,14 @@ import { TranslateService } from './services/translate.service';
     PostComponent,
     AccordionModule,
     DataViewModule,
+    UserpageComponent
   ],
-  providers: [
+  providers: [UserService, CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    },
     TranslateService,
     {
       provide: APP_INITIALIZER,

@@ -1,0 +1,61 @@
+p{
+    color: #cccccc;
+}
+
+
+.ui-button-text-icon-left .ui-button-text {
+    padding: .25em 1em .25em 1em;
+}
+
+#userimage{
+    width: 30%;
+    height: 30%; 
+    margin: 0 auto; 
+    float: left;
+    margin: 2%;
+}
+
+input{
+    padding: 5px;
+    border-radius: 5px; 
+    border: powderblue solid 1px;
+}
+
+.post-text{
+    resize: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border: none;
+    box-sizing:border-box;
+    outline: none; 
+}
+
+.bio{
+    word-wrap: break-word;
+    font-family: Roboto, sans-serif;
+}
+
+.userinfo{
+    display: block;
+    height: 220px;
+}
+
+.sub{
+    float: right
+}
+
+.post-username{
+    outline: none; 
+    border-radius: 40px; 
+    margin: 0 20px; 
+    margin-left: -10px;
+}
+
+.post-message{
+    outline: none;
+    border-radius: 40px;
+    margin-right: 20px;
+    background:  rgb(255, 236, 153);
+    border: none;
+}

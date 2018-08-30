@@ -1,11 +1,20 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using server.Models;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -17,6 +26,7 @@ namespace server.Controllers
         {
             this.context = context;
         }  
+        
         
         [HttpGet]
         public IEnumerable<User> Get()
@@ -40,15 +50,66 @@ namespace server.Controllers
         {
             if(ModelState.IsValid)
             {
-                log.LogDebug("user model is valid");
                 context.User.Add(user);
                 context.SaveChanges();
-                log.LogInformation("User was created");
                 return Ok(user);
             }
-            log.LogWarning("user model is not valid");
             return BadRequest(ModelState);
-        } 
+        }
+
+        // [HttpPut("{id}")]
+        // public IActionResult Put([FromBody] User newUser)
+        // {
+        //     // var oldUser = context.User.Find(newUser.id);
+
+        //     // if (oldUser == null)
+        //     // {
+        //     //     return NotFound();
+        //     // }
+
+        //     // oldUser.avatar = System.Convert.FromBase64String(newUser.avatar);
+        //     // oldUser.bio = newUser.bio;
+        //     // oldUser.login = newUser.login;
+        //     // oldUser.mail = newUser.mail;
+        //     // oldUser.password = newUser.password;
+
+        //     // context.User.Update(oldUser);
+        //     // context.SaveChanges();
+        //     return NoContent();
+        // }
+        [HttpPut("{id}")]
+        public IActionResult UpdateImage(IFormFile image)
+        {
+            try
+            {
+                
+                if(image == null || !ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = context.User.Find((long)32);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    image.CopyTo(memoryStream);
+                    user.avatar = memoryStream.ToArray();
+                }
+
+                context.User.Update(user);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }  
     }
     
 }

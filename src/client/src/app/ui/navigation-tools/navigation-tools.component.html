@@ -5,10 +5,12 @@
 <img src="assets/images/Logo-Sayme.svg" style= "width:280px">
 
 
+<div class="sticky">
 <p-menubar [model]="items" styleClass="menu">
     <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 236, 153);" pInputText placeholder="{{ 'Search...'| translate }}" >
     <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
 </p-menubar>
+</div>
 
 
 <!-- Feedback modal form -->
