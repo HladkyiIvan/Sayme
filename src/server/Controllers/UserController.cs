@@ -7,9 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using server.Models;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -21,6 +26,7 @@ namespace server.Controllers
         {
             this.context = context;
         }  
+        
         
         [HttpGet]
         public IEnumerable<User> Get()
@@ -44,13 +50,10 @@ namespace server.Controllers
         {
             if(ModelState.IsValid)
             {
-                log.LogDebug("user model is valid");
                 context.User.Add(user);
                 context.SaveChanges();
-                log.LogInformation("User was created");
                 return Ok(user);
             }
-            log.LogWarning("user model is not valid");
             return BadRequest(ModelState);
         }
 

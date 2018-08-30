@@ -3,7 +3,9 @@ import { MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
+import {LoginService} from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
+import { TranslateService } from '../../services/translate.service';
 
 @Component({
   selector: 'app-navigation-tools',
@@ -24,7 +26,8 @@ export class NavigationToolsComponent implements OnInit {
 
 
   constructor(
-    private _feedbackService: FeedbackService, 
+    private _feedbackService: FeedbackService,
+    private translate: TranslateService, 
     private router: Router,
     private route: ActivatedRoute,
     private logger: NGXLogger) { }
@@ -32,6 +35,8 @@ export class NavigationToolsComponent implements OnInit {
   ngOnInit() {
     this.selectLanguage();
   }
+
+
 
   //!!!FEATURE!!!
   //switching on navigationbar button`s text 
@@ -66,12 +71,14 @@ export class NavigationToolsComponent implements OnInit {
         label: `${navigationItems[2]}`,
         routerLink: '**'
       }
+
     ]
   }
 
-  changelang(lang){
+  setLang(lang: string) {
     this.language = lang;
     this.selectLanguage();
+    this.translate.use(lang);
   }
 
   ///opens sidebar with user info
