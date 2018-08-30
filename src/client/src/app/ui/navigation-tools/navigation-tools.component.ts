@@ -6,6 +6,8 @@ import { Email } from '../../Models/email';
 import {LoginService} from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '../../services/translate.service';
+import { CookieService } from 'ngx-cookie-service';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navigation-tools',
@@ -24,19 +26,17 @@ export class NavigationToolsComponent implements OnInit {
   useremail: string = ''
   language: string = '';
 
-
   constructor(
     private _feedbackService: FeedbackService,
     private translate: TranslateService, 
     private router: Router,
     private route: ActivatedRoute,
-    private logger: NGXLogger) { }
+    private logger: NGXLogger,
+    private _cookie: CookieService) { }
 
   ngOnInit() {
     this.selectLanguage();
   }
-
-
 
   //!!!FEATURE!!!
   //switching on navigationbar button`s text 
@@ -79,6 +79,9 @@ export class NavigationToolsComponent implements OnInit {
     this.language = lang;
     this.selectLanguage();
     this.translate.use(lang);
+    this._cookie.set('language', lang);
+    console.log(this._cookie);
+    
   }
 
   ///opens sidebar with user info

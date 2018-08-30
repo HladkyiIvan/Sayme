@@ -14,7 +14,7 @@
 
 
 <!-- Feedback modal form -->
-<p-dialog header="Feedback" 
+<p-dialog header="{{ 'Feedback' | translate }}" 
         [(visible)]="isFeedbackFormVisible" 
         [resizable]='false' 
         [closeOnEscape]='true' 
@@ -36,7 +36,7 @@
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
-<p-dialog header="Success!" 
+<p-dialog header="{{ 'Success!' | translate }}'" 
         [(visible)]="isSuccessFormVisible" 
         [modal]="true" 
         [resizable]='false' 

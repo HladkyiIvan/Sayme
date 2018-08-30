@@ -5,6 +5,7 @@ import { PostComponent } from './ui/post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import {RegistrationComponent} from './registration/registration.component';
 import { AuthorisationComponent } from './authorization/authorization.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
       },
       {
         path: 'interesting',
-        component: AboutUserBodyComponent,
+        component: UserpageComponent,
       },
       {
         path: '**',
