@@ -1,13 +1,14 @@
+//angular
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { AppComponent } from './app.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+//primeng
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule, DialogModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/button';
@@ -17,16 +18,20 @@ import { DataViewModule } from 'primeng/dataview';
 import { FileUploadModule } from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 
+//project
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { PostComponent } from './ui/post/post.component';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
+import { TranslatePipe } from './translate.pipe';
+import { TranslateService } from './services/translate.service';
 import { AuthorisationComponent } from './authorization/authorization.component';
-import {UserService} from './services/user.service';
+import { UserService} from './services/user.service';
 import { RegistrationComponent } from './registration/registration.component';
-import {Interceptor} from './interceptor/interceptor';
+import { Interceptor} from './interceptor/interceptor';
 import { UserpageComponent } from './userpage/userpage.component';
 
 
@@ -38,6 +43,7 @@ import { UserpageComponent } from './userpage/userpage.component';
     FooterComponent,
     PostComponent,
     NavigationToolsComponent,
+    TranslatePipe,
     UserpageComponent,
     AuthorisationComponent,
     RegistrationComponent,
@@ -75,9 +81,19 @@ import { UserpageComponent } from './userpage/userpage.component';
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi: true
+    },
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [ TranslateService ],
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
+export function setupTranslateFactory(service: TranslateService): Function {
+  return () => service.use('en');
+}

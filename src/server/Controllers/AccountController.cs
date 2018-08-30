@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace server.Controllers
 {
@@ -33,8 +34,8 @@ namespace server.Controllers
         {
             AuthUser authUser = Authenticate(user.login, user.password);
 
-             if (authUser == null)
-               return BadRequest(new { message = "Username or password are incorrect!" });
+            if (authUser == null)
+                return BadRequest(new { message = "Username or password are incorrect!" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("authorization_sayme");
@@ -45,7 +46,7 @@ namespace server.Controllers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-            Set("token",tokenString,1);
+            Set("token", tokenString, 1);
             // return basic user info (without password) and token to store client side
             return Ok(new
             {
@@ -57,6 +58,16 @@ namespace server.Controllers
 
         }
 
+
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
+        }
 
         private AuthUser Authenticate(string login, string password)
         {

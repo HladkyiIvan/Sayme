@@ -3,6 +3,8 @@
 
 
 <img src="assets/images/Logo-Sayme.svg" style= "width:280px">
+
+
 <div class="sticky">
     <p-menubar [model]="items" >
         <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 241, 181);" pInputText placeholder="Search..." >
@@ -23,13 +25,13 @@
         [width]="350" 
         [minWidth]="350" 
         [maximizable]="true">
-    <p style="margin: 0 0 17px 0;">Left your answer or comment here:</p>
+    <p style="margin: 0 0 17px 0;">{{ 'Left your answer or comment here:' | translate }}</p>
     <form #postForm="ngForm" style="margin: 0;">
-        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="your email" autocomplete="off">
-        <textarea required [(ngModel)]="feedbackText" style="overflow:hidden;" class="feedback-text" name="feedbackText" placeholder="your comment"></textarea>
+        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="{{ 'your email'| translate }}" autocomplete="off">
+        <textarea required [(ngModel)]="feedbackText" style="overflow:hidden;" class="feedback-text" name="feedbackText" placeholder="{{ 'your comment' | translate }}"></textarea>
         <div style="float: right; margin-top: 5px;">
-            <button type="button" class="feedback-send-button" (click)="onSendFeedback()">Send</button>
-            <button type="button" class="feedback-cancel-button" (click)="onCancelFeedBack()">Cancel</button>
+            <button type="button" class="feedback-send-button" (click)="onSendFeedback()">{{ 'Send' | translate }}</button>
+            <button type="button" class="feedback-cancel-button" (click)="onCancelFeedBack()">{{ 'Cancel' | translate }}</button>
         </div>
     </form>
 </p-dialog>
@@ -48,26 +50,33 @@
         [minY]="70"
         [maximizable]="true" 
         [baseZIndex]="10000">
-    <p>Report was successfuly sent!</p>
+    <p>{{ 'Report was successfuly sent!' | translate }}</p>
     <div style="float: right;">
         <button type="button" pButton (click)="isSuccessFormVisible=false" label="OK" class="ui-button-info"></button>
     </div>
 </p-dialog>
 
 <!-- Left slide sidebar -->
-<p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open()" >
+<p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
     <h1>
-        <a routerLink=" " style="color: #cccccc;">Username</a>
+        <a routerLink=" " style="color: #cccccc;">{{ 'Username' | translate }}</a>
     </h1>
     <h5>
-        <a routerLink=" " style="color: #cccccc;">followers:</a>
+        <a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a>
     </h5>
     <h5>
-        <a routerLink=" " style="color: #cccccc;">following:</a>
+        <a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a>
     </h5>
-    <button pButton type="button" class="ui-button-warning" style="width: 200px; height: 30px; margin: 10px 0px;">Settings</button>
+    <button pButton type="button" class="ui-button-warning" style="width: 200px; height: 30px; margin: 10px 0px;">{{ 'Settings' | translate }}</button>
     <br>
-    <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">Log out</button>
+    <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>
+    <br>
+    <br>
+    <select name="language" id="selectLanguage" (change)="setLang($event.target.value);">
+        <option value="en" selected>{{ 'english' | translate }}</option>
+        <option value="ua">{{ 'ukranian' | translate }}</option>
+        <option value="ru">{{ 'russian' | translate }}</option>
+    </select>
 </p-sidebar>
 <router-outlet></router-outlet>
 </div>

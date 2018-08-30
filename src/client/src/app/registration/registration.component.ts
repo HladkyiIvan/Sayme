@@ -30,7 +30,6 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
 
-
   onRegister() {
     if (this.newUser.password && this.newUser.login && this.newUser.mail && this.repPassword) {
       this.usersToSearch.forEach(element => {
@@ -53,16 +52,13 @@ export class RegistrationComponent implements OnInit {
                 .subscribe();
               this.logger.debug('code for registration has been sent');
               this.isVisibleCodeInput = true;
-
             }
-
-            else{ this.errorMessage = 'Your password and repeated password don`t match! Try again.';
-            this.logger.info('not matching password and repeated password');
+            else { 
+              this.errorMessage = 'Your password and repeated password don`t match! Try again.';
+              this.logger.info('not matching password and repeated password');
+            }
           }
-
-          }
-          else 
-          {
+          else {
             this.errorMessage = 'Wrong length of password or login';
             this.logger.info('Wrong length of password or login');
 
@@ -71,7 +67,7 @@ export class RegistrationComponent implements OnInit {
         else {
           this.errorMessage = 'Please enter the email in the correct format';
           this.logger.info('Not passed email validation');
-      }
+        }
       }
       else {
         this.errorMessage = 'We already have user with this email or login! Try again.';
@@ -79,8 +75,8 @@ export class RegistrationComponent implements OnInit {
       }
     }
     else {
-    this.errorMessage = 'Wrong input!';
-    this.logger.info('Some of the fields are empty');
+      this.errorMessage = 'Wrong input!';
+      this.logger.info('Some of the fields are empty');
     }
   }
 
@@ -89,16 +85,15 @@ export class RegistrationComponent implements OnInit {
     if (this.enteredCode) {
       if (this.enteredCode === this.newUser.register_code) {
         this.logger.debug('sent and entered codes are equal');
-        this.userService.createUser(this.newUser).
-          subscribe((data: User) => this.usersToSearch.push(data));
-          this.logger.info('new user created');
+        this.userService.createUser(this.newUser)
+          .subscribe((data: User) => this.usersToSearch.push(data));
+        this.logger.info('new user created');
         this.router.navigate(['/login']);
-        
       }
-
-      else {this.errorMessage = 'Entered code and sent code don`t match! Try again';
-      this.logger.info('sent and entered codes are different')
-    }
+      else {
+        this.errorMessage = 'Entered code and sent code don`t match! Try again';
+        this.logger.info('sent and entered codes are different')
+      }
     }
     else {
       this.errorMessage = 'Wrong input!';
@@ -109,19 +104,14 @@ export class RegistrationComponent implements OnInit {
   loadUsers() {
     this.userService.getUsers()
       .subscribe((data: User[]) => this.usersToSearch = data);
-
   }
-
- 
 
   randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-
   isEmail(search: string): boolean {
     var serchfind: boolean;
-
     var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     serchfind = regexp.test(search);
     return serchfind

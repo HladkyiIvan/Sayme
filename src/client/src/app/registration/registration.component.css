@@ -1,46 +1,53 @@
 body{
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
-.labelSignup{
-    font-family: fantasy
-}
 input{
     padding: 5px;
     /* border-radius: 5px; 
     border-color: rgb(255, 222, 73); */
     width: 200px;
 }
-.button1
-{
-    font-weight: 700;
-  color: rgb(10, 3, 3);
-  text-decoration: none;
-  justify-content: center;
-  padding: .4em 1em calc(.8em + 3px);
-  background: rgb(255, 222, 73);
-  width: 120px;
-  height: 35px;
-  box-shadow: 0 -3px rgb(185, 177, 53) inset;
-  transition: 0.2s;
+
+p{
+    padding: 0px;
+    margin: 0px;
 }
 
-.button2
-{
-    font-weight: 700;
-  color: rgb(10, 3, 3);
-  text-decoration: none;
-  justify-content: center;
-  padding: .4em 1em calc(.8em + 3px);
-  background: rgb(255, 222, 73);
-  width: 150px;
-  height: 35px;
-  box-shadow: 0 -3px rgb(185, 177, 53) inset;
-  transition: 0.2s;
+/* only dashes '-' (not underscores '_') are allowed in css selector`s names */
+/* just lowercase symbols are allowed in selector`s names */
+.labelSignup{
+    font-family: fantasy;
 }
 
+/* fix name (use real logic name instead of abstract)*/
+.button1{
+    font-weight: 700;
+    color: rgb(10, 3, 3);
+    text-decoration: none;
+    justify-content: center;
+    padding: .4em 1em calc(.8em + 3px);
+    background: rgb(255, 222, 73);
+    width: 120px;
+    height: 35px;
+    box-shadow: 0 -3px rgb(185, 177, 53) inset;
+    transition: 0.2s;
+}
 
+/* fix name */
+.button2{
+    font-weight: 700;
+    color: rgb(10, 3, 3);
+    text-decoration: none;
+    justify-content: center;
+    padding: .4em 1em calc(.8em + 3px);
+    background: rgb(255, 222, 73);
+    width: 150px;
+    height: 35px;
+    box-shadow: 0 -3px rgb(185, 177, 53) inset;
+    transition: 0.2s;
+}
 
 .post-username{
     outline: none; 
@@ -56,11 +63,7 @@ input{
     margin-top: 20px 
 }
 
-p{
-    padding: 0px;
-    margin: 0px;
-}
-
+/* fix selector`s name with dash separator */
 .regButton{
     color: rgb(10, 3, 3);
     background: rgb(255, 222, 73);
@@ -92,6 +95,7 @@ p{
     margin: 0 20px; 
     margin-left: -10px;
 }
+
 .post-reppas{
     outline: none; 
     border-radius: 40px; 
@@ -102,6 +106,7 @@ p{
 .outer{
     display: block;
 }
+
 .inner{
     display: block;
     margin-left: auto;
@@ -110,6 +115,7 @@ p{
     margin-bottom: auto;
 }
 
+/* only dashes '-' (not underscores '_') are allowed in css selector`s names */
 .container_with_borders{
     border: 3 px;
     border-color: rgb(46, 45, 45);
@@ -121,22 +127,20 @@ p{
     justify-content: center;
     background-color: rgb(46, 45, 45);
     margin-bottom:10px; 
-   /* background-image: url(assets/images/nebo.jpg);*/
-   box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
+    /* background-image: url(assets/images/nebo.jpg);*/
+    box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
 }
 
 .ui-inputgroup{
     display: block;
     position: relative;
-    
-   
 }
 
-
-  .buttonCBContainer{
+/* use dashes to separate subnames from each other */
+.buttonCBContainer{
     display: block;
     left: 50%
-  }
+}
 
  
     
