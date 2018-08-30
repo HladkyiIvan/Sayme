@@ -17,7 +17,7 @@ private users:User[];
 
   constructor(private http: HttpClient,private cookieService: CookieService,private router: Router, private route: ActivatedRoute) { }
  private url='/api/account';
- private url1='/api/account/authenticate';
+ private url1='/api/account/authorizate';
  // GET
  getResponce(): Observable<HttpResponse<Login>> {
   return this.http.get<Login>(
@@ -25,8 +25,8 @@ private users:User[];
   }
 
 
-  postLogin(){
-    return this.http.post(this.url1,'').subscribe(()=>{},error=>console.log(error));
+  postLogin(login:Login){
+    return this.http.post(this.url1, login);
     
   }
 

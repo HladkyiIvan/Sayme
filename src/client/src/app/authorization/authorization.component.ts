@@ -35,25 +35,26 @@ export class AuthorisationComponent implements OnInit {
 
   onLogin()
   {
-    console.log('sdfsdf');
-    this.loginService.postLogin();
-    console.log('sdfsdf');
-    // if(this.user.login&&this.user.password)
-    // {
-    //   this.loginService.postLoginUser(this.user)
-    //   .subscribe((data:Login)=>this.usersToSearch.push(data));
+    if(this.user.login&&this.user.password)
+    {
+    this.loginService.postLogin(this.user).
+    subscribe((response : Response) => {
+        console.log('I am here');
+        this.router.navigate(['/menu']);
       
-    // }
-    // else{
-    //   this.errorMessage='Wrong input!';
-    // }
+    }, error=>console.log(error));
+    
+  }
+    else{
+      this.errorMessage='Wrong input!';
+    }
 
 
   }
 
   onRegistration(){
-    this.userserv.getUsers().subscribe();
-    //this.router.navigate(['/registration']);
+    //this.userserv.getUsers().subscribe();
+    this.router.navigate(['/registration']);
   }
 
  

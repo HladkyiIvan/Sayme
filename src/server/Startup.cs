@@ -43,15 +43,16 @@ namespace server
                         options.RequireHttpsMetadata = false;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
+                            
                             // укзывает, будет ли валидироваться издатель при валидации токена
                             ValidateIssuer = false,
                             // строка, представляющая издателя
-                           // ValidIssuer = AuthOptions.ISSUER,
+                            ValidIssuer = AuthOptions.ISSUER,
  
                             // будет ли валидироваться потребитель токена
                             ValidateAudience = false,
                             // установка потребителя токена
-                           // ValidAudience = AuthOptions.AUDIENCE,
+                            ValidAudience = AuthOptions.AUDIENCE,
                             // будет ли валидироваться время существования
                             ValidateLifetime = true,
  

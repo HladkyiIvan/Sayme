@@ -25,9 +25,9 @@ namespace server.Controllers
         public UserController(SaymedbContext context)
         {
             this.context = context;
-        }  
-        
-        
+        }
+
+
         [HttpGet]
         public IEnumerable<User> Get()
         {
@@ -43,12 +43,13 @@ namespace server.Controllers
                 return NotFound();
             }
             return item;
-        } 
+        }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody]User user)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 context.User.Add(user);
                 context.SaveChanges();
@@ -82,8 +83,8 @@ namespace server.Controllers
         {
             try
             {
-                
-                if(image == null || !ModelState.IsValid)
+
+                if (image == null || !ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
@@ -109,7 +110,7 @@ namespace server.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }  
+        }
     }
-    
+
 }

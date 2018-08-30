@@ -84,7 +84,6 @@ namespace server.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Post postTransport)
         {
-            // Post post = new Post(postTransport); 
 
             if(ModelState.IsValid)
             {
