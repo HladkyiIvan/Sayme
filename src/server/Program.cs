@@ -15,20 +15,6 @@ namespace server
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
-<<<<<<< HEAD
-            // string ipAddress = args[0];
-            // string port = args[1];
-            // var host = new WebHostBuilder()
-            //     .UseKestrel()
-            //     .UseContentRoot(Directory.GetCurrentDirectory())
-            //     .UseIISIntegration()
-            //     .UseStartup<Startup>()
-            //     .UseUrls("http://" + ipAddress + ":" + port + "/")
-            //     .Build();
-            
-            // host.Run();
-=======
->>>>>>> dev
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

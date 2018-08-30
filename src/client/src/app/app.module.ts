@@ -1,12 +1,13 @@
+//angular
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
-import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+//primeng
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule, DialogModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/button';
@@ -14,12 +15,16 @@ import { MenubarModule } from 'primeng/menubar';
 import { AccordionModule } from 'primeng/accordion';
 import { DataViewModule } from 'primeng/dataview';
 
+//project
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { PostComponent } from './ui/post/post.component';
-import { HttpClientModule } from '@angular/common/http';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
+import { TranslatePipe } from './translate.pipe';
+import { TranslateService } from './services/translate.service';
 
 
 @NgModule({
@@ -30,6 +35,7 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     FooterComponent,
     PostComponent,
     NavigationToolsComponent,
+    TranslatePipe,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -56,8 +62,19 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
     AccordionModule,
     DataViewModule,
   ],
-  providers: [],
+  providers: [
+    TranslateService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: setupTranslateFactory,
+      deps: [ TranslateService ],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
+export function setupTranslateFactory(service: TranslateService): Function {
+  return () => service.use('en');
+}
