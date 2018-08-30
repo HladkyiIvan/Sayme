@@ -22,7 +22,7 @@ namespace server
 {
     public class Startup
     {
-        string connection = "server=localhost; port=3306; database=saymedb; user=root; password=;";
+        string connection = "server=saymedb.mysql.database.azure.com; port=3306; database=saymedb; user=myadmin@saymedb; password=sayme2018!;";
         
         public Startup(IConfiguration configuration)
         {
@@ -34,7 +34,7 @@ namespace server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<SaymedbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextPool<SaymedbContext>(options => options.UseMySql(connection);
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
