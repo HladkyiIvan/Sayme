@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using System;
+using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Security.Cryptography;
@@ -41,9 +42,10 @@ namespace server.Controllers
             var key = Encoding.ASCII.GetBytes("authorization_sayme");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = System.DateTime.UtcNow.AddMinutes(2),
+                Expires = System.DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
             };
+            HttpContext.Session.SetString("Username",user.login);
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
             Set("token", tokenString, 1);
@@ -78,39 +80,7 @@ namespace server.Controllers
 
             return null;
         }
-        // [AllowAnonymous]
-        // [HttpPost("authenticate")]
-        // public async Task Token(AuthUser user)
-        // {
-        //     var identity = GetIdentity(user.login, user.password);
-        //     if (identity == null)
-        //     {
-        //         Response.StatusCode = 401;
-        //         await Response.WriteAsync("Invalid username or password.");
-        //         return;
-        //     }
-
-        //     var now = System.DateTime.UtcNow;
-        //     // создаем JWT-токен
-        //     var jwt = new JwtSecurityToken(
-        //             issuer: AuthOptions.ISSUER,
-        //             audience: AuthOptions.AUDIENCE,
-        //             notBefore: now,
-        //             claims: identity.Claims,
-        //             expires: now.Add(System.TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-        //             signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-        //     var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-        //     var response = new
-        //     {
-        //         access_token = encodedJwt,
-        //         username = identity.Name
-        //     };
-
-        //     // сериализация ответа
-        //     Response.ContentType = "application/json";
-        //     await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
-        // }
+        
 
         public void Set(string key, string value, int? expireTime)
         {
@@ -124,24 +94,6 @@ namespace server.Controllers
             Response.Cookies.Append(key, value, option);
         }
 
-        private ClaimsIdentity GetIdentity(string username, string password)
-        {
-            User user = context.User.FirstOrDefault(x => x.login == username && x.password == password);
-            if (user != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, username)
-                };
-                ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-
-            // если пользователя не найдено
-            return null;
-        }
 
     }
 

@@ -8,7 +8,7 @@
                 <div class="ui-g ui-fluid" style="justify-content: center">
                     
                     <div  style="padding: 0px;" class="ui-g-12">
-                        <input [(ngModel)]="newUser.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                        <input  title="From 5 till 20 letters" [(ngModel)]="newUser.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
                         <br>
                         <input [(ngModel)]="newUser.mail" class="post-username" name="username" type="text" pInputText placeholder="Email" autocomplete="off">
                         <br>
@@ -37,7 +37,11 @@
                 </div>
             </form>
         </div>
-        <p style=' font-family:Roboto, sans-serif;text-align: center; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</p>
+        <!-- <p style=' font-family:Roboto, sans-serif;text-align: center; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</p> -->
+        <div class="isa_error" [hidden]=isErrorHidden>
+            <i class="fa fa-times-circle"></i>
+            {{errorMessage}}
+         </div>
     </div>
 
  

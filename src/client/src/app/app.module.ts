@@ -17,6 +17,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { DataViewModule } from 'primeng/dataview';
 import { FileUploadModule } from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {TooltipModule} from 'primeng/tooltip';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -61,6 +62,7 @@ import { UserpageComponent } from './userpage/userpage.component';
     HttpClientModule,
     MenubarModule,
     MenuModule,
+    TooltipModule,
     DataViewModule,
     DialogModule,
     InputTextareaModule,
@@ -74,7 +76,8 @@ import { UserpageComponent } from './userpage/userpage.component';
     PostComponent,
     AccordionModule,
     DataViewModule,
-    UserpageComponent
+    UserpageComponent,
+    TooltipModule
   ],
   providers: [UserService, CookieService,
     {
