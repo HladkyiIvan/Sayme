@@ -71,7 +71,7 @@
     <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>
     <br>
     <br>
-    <select ngModel="selectBoxLanguage" id="changeLang" (change)="setLang($event.target.value);">
+    <select id="changeLang" (change)="setLang($event.target.value);">
         <option value="en">english</option>
         <option value="ua">українська</option>
         <option value="ru">русский</option>
