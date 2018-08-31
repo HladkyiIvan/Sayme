@@ -1,0 +1,747 @@
+2018-08-31T00:03:57.6768462+03:00 0HLGELIKTLMTB:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 40 (ca22a1cb)
+2018-08-31T00:03:57.6778180+03:00 0HLGELIKTLMTB:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:03:57.6784051+03:00 0HLGELIKTLMTB:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T00:03:57.6800072+03:00 0HLGELIKTLMTB:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:03:58.6897798+03:00 0HLGELIKTLMTB:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T00:03:58.6909197+03:00 0HLGELIKTLMTB:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1010.4064ms. (50a9e262)
+2018-08-31T00:03:58.6911727+03:00 0HLGELIKTLMTB:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T00:03:58.6920562+03:00 0HLGELIKTLMTB:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1013.2847ms (afa2e885)
+2018-08-31T00:03:58.6924515+03:00 0HLGELIKTLMTB:00000001 [INF] Request finished in 1015.9097ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:03:58.8145656+03:00 0HLGELIKTLMTC:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:03:58.8150391+03:00 0HLGELIKTLMTC:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:03:58.8152687+03:00 0HLGELIKTLMTC:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:03:58.8155961+03:00 0HLGELIKTLMTC:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:03:58.8157177+03:00 0HLGELIKTLMTC:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:03:58.8181643+03:00 0HLGELIKTLMTC:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:03:58.8183376+03:00 0HLGELIKTLMTC:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.5562ms. (50a9e262)
+2018-08-31T00:03:58.8184252+03:00 0HLGELIKTLMTC:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:03:58.8186918+03:00 0HLGELIKTLMTC:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 3.2717ms (afa2e885)
+2018-08-31T00:03:58.8188160+03:00 0HLGELIKTLMTC:00000001 [INF] Request finished in 4.2896ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:03:59.1348222+03:00 0HLGELIKTLMTD:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:03:59.1355925+03:00 0HLGELIKTLMTD:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:03:59.1360565+03:00 0HLGELIKTLMTD:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:03:59.1362166+03:00 0HLGELIKTLMTD:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:03:59.1365096+03:00 0HLGELIKTLMTD:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:03:59.1417169+03:00 0HLGELIKTLMTD:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:03:59.1420318+03:00 0HLGELIKTLMTD:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 5.4099ms. (50a9e262)
+2018-08-31T00:03:59.1422228+03:00 0HLGELIKTLMTD:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:03:59.1425585+03:00 0HLGELIKTLMTD:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 6.3709ms (afa2e885)
+2018-08-31T00:03:59.1428228+03:00 0HLGELIKTLMTD:00000001 [INF] Request finished in 8.2233ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:03:59.2165600+03:00 0HLGELIKTLMTE:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/56   (ca22a1cb)
+2018-08-31T00:03:59.2169070+03:00 0HLGELIKTLMTE:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:03:59.2170569+03:00 0HLGELIKTLMTE:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-08-31T00:03:59.2171192+03:00 0HLGELIKTLMTE:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:03:59.2172525+03:00 0HLGELIKTLMTE:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["56"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:03:59.2183287+03:00 0HLGELIKTLMTE:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:03:59.2186609+03:00 0HLGELIKTLMTE:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.2988ms. (50a9e262)
+2018-08-31T00:03:59.2187550+03:00 0HLGELIKTLMTE:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:03:59.2191310+03:00 0HLGELIKTLMTE:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 2.0015ms (afa2e885)
+2018-08-31T00:03:59.2192738+03:00 0HLGELIKTLMTE:00000001 [INF] Request finished in 2.7997ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:01.9658395+03:00 0HLGELIKTLMTF:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:01.9672010+03:00 0HLGELIKTLMTF:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:01.9674393+03:00 0HLGELIKTLMTF:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:01.9675560+03:00 0HLGELIKTLMTF:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:01.9676806+03:00 0HLGELIKTLMTF:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:01.9705298+03:00 0HLGELIKTLMTF:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:01.9706891+03:00 0HLGELIKTLMTF:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.9523ms. (50a9e262)
+2018-08-31T00:04:01.9707748+03:00 0HLGELIKTLMTF:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:04:01.9709542+03:00 0HLGELIKTLMTF:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 3.4522ms (afa2e885)
+2018-08-31T00:04:01.9710746+03:00 0HLGELIKTLMTF:00000001 [INF] Request finished in 5.3027ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:02.2886001+03:00 0HLGELIKTLMTG:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user   (ca22a1cb)
+2018-08-31T00:04:02.2897873+03:00 0HLGELIKTLMTG:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:02.2904129+03:00 0HLGELIKTLMTG:00000001 [INF] Route matched with "{action = \"Get\", controller = \"User\"}". Executing action "server.Controllers.UserController.Get (server)" (a44c0341)
+2018-08-31T00:04:02.2906614+03:00 0HLGELIKTLMTG:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:02.2908917+03:00 0HLGELIKTLMTG:00000001 [INF] Executing action method "server.Controllers.UserController.Get (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:02.2941657+03:00 0HLGELIKTLMTG:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`" (0723d8ff)
+2018-08-31T00:04:02.2960589+03:00 0HLGELIKTLMTG:00000001 [INF] Executed action method "server.Controllers.UserController.Get (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 4.9629ms. (50a9e262)
+2018-08-31T00:04:02.2963254+03:00 0HLGELIKTLMTG:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.User, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:04:02.2984505+03:00 0HLGELIKTLMTG:00000001 [INF] Executed action "server.Controllers.UserController.Get (server)" in 7.8159ms (afa2e885)
+2018-08-31T00:04:02.2988447+03:00 0HLGELIKTLMTG:00000001 [INF] Request finished in 10.2886ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:02.3033198+03:00 0HLGELIKTLMTH:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post   (ca22a1cb)
+2018-08-31T00:04:02.3049222+03:00 0HLGELIKTLMTH:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:02.3055585+03:00 0HLGELIKTLMTH:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Post\"}". Executing action "server.Controllers.PostController.Get (server)" (a44c0341)
+2018-08-31T00:04:02.3057669+03:00 0HLGELIKTLMTH:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:02.3064703+03:00 0HLGELIKTLMTH:00000001 [INF] Executing action method "server.Controllers.PostController.Get (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:02.3082079+03:00 0HLGELIKTLMTH:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:04:02.3103321+03:00 0HLGELIKTLMTH:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`" (0723d8ff)
+2018-08-31T00:04:02.3110579+03:00 0HLGELIKTLMTH:00000001 [INF] Executed action method "server.Controllers.PostController.Get (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 4.4901ms. (50a9e262)
+2018-08-31T00:04:02.3111741+03:00 0HLGELIKTLMTH:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:04:02.3115102+03:00 0HLGELIKTLMTH:00000001 [INF] Executed action "server.Controllers.PostController.Get (server)" in 5.8623ms (afa2e885)
+2018-08-31T00:04:02.3116579+03:00 0HLGELIKTLMTH:00000001 [INF] Request finished in 8.4555ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:12.2901596+03:00 0HLGELIKTLMTI:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user   (ca22a1cb)
+2018-08-31T00:04:12.2904103+03:00 0HLGELIKTLMTI:00000001 [INF] Route matched with "{action = \"Get\", controller = \"User\"}". Executing action "server.Controllers.UserController.Get (server)" (a44c0341)
+2018-08-31T00:04:12.2904821+03:00 0HLGELIKTLMTI:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:04:12.2905327+03:00 0HLGELIKTLMTI:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:04:12.2905870+03:00 0HLGELIKTLMTI:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:04:12.2906286+03:00 0HLGELIKTLMTI:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:04:12.2906618+03:00 0HLGELIKTLMTI:00000001 [INF] Executed action "server.Controllers.UserController.Get (server)" in 0.2106ms (afa2e885)
+2018-08-31T00:04:12.2907600+03:00 0HLGELIKTLMTI:00000001 [INF] Request finished in 0.6551ms 401  (791a596a)
+2018-08-31T00:04:12.3050491+03:00 0HLGELIKTLMTJ:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post   (ca22a1cb)
+2018-08-31T00:04:12.3052821+03:00 0HLGELIKTLMTJ:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Post\"}". Executing action "server.Controllers.PostController.Get (server)" (a44c0341)
+2018-08-31T00:04:12.3053467+03:00 0HLGELIKTLMTJ:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:04:12.3053901+03:00 0HLGELIKTLMTJ:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:04:12.3054305+03:00 0HLGELIKTLMTJ:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:04:12.3054728+03:00 0HLGELIKTLMTJ:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:04:12.3055049+03:00 0HLGELIKTLMTJ:00000001 [INF] Executed action "server.Controllers.PostController.Get (server)" in 0.1835ms (afa2e885)
+2018-08-31T00:04:12.3056189+03:00 0HLGELIKTLMTJ:00000001 [INF] Request finished in 0.609ms 401  (791a596a)
+2018-08-31T00:04:13.7291618+03:00 0HLGELIKTLMTK:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 49 (ca22a1cb)
+2018-08-31T00:04:13.7294949+03:00 0HLGELIKTLMTK:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T00:04:13.7298256+03:00 0HLGELIKTLMTK:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:04:13.7307688+03:00 0HLGELIKTLMTK:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:13.7310611+03:00 0HLGELIKTLMTK:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.1742ms. (50a9e262)
+2018-08-31T00:04:13.7311472+03:00 0HLGELIKTLMTK:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T00:04:13.7312948+03:00 0HLGELIKTLMTK:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1.7455ms (afa2e885)
+2018-08-31T00:04:13.7314360+03:00 0HLGELIKTLMTK:00000001 [INF] Request finished in 2.3149ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:14.1433532+03:00 0HLGELIKTLMTL:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:14.1439471+03:00 0HLGELIKTLMTL:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:14.1446438+03:00 0HLGELIKTLMTL:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:14.1448300+03:00 0HLGELIKTLMTL:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:14.1449821+03:00 0HLGELIKTLMTL:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:14.1484645+03:00 0HLGELIKTLMTL:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:14.1487201+03:00 0HLGELIKTLMTL:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 3.633ms. (50a9e262)
+2018-08-31T00:04:14.1488727+03:00 0HLGELIKTLMTL:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:04:14.1492831+03:00 0HLGELIKTLMTL:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 4.4599ms (afa2e885)
+2018-08-31T00:04:14.1495274+03:00 0HLGELIKTLMTL:00000001 [INF] Request finished in 6.2946ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:14.1757542+03:00 0HLGELIKTLMTM:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:14.1763149+03:00 0HLGELIKTLMTM:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:14.1765112+03:00 0HLGELIKTLMTM:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:14.1766143+03:00 0HLGELIKTLMTM:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:14.1768012+03:00 0HLGELIKTLMTM:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:14.1800556+03:00 0HLGELIKTLMTM:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:14.1802490+03:00 0HLGELIKTLMTM:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 3.3638ms. (50a9e262)
+2018-08-31T00:04:14.1803724+03:00 0HLGELIKTLMTM:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:04:14.1809301+03:00 0HLGELIKTLMTM:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 4.3361ms (afa2e885)
+2018-08-31T00:04:14.1810834+03:00 0HLGELIKTLMTM:00000001 [INF] Request finished in 5.3763ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:14.3966565+03:00 0HLGELIKTLMTN:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/50   (ca22a1cb)
+2018-08-31T00:04:14.3971436+03:00 0HLGELIKTLMTN:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:14.3973468+03:00 0HLGELIKTLMTN:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-08-31T00:04:14.3974600+03:00 0HLGELIKTLMTN:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:14.3977206+03:00 0HLGELIKTLMTN:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["50"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:04:14.3988511+03:00 0HLGELIKTLMTN:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:04:14.3993895+03:00 0HLGELIKTLMTN:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.5624ms. (50a9e262)
+2018-08-31T00:04:14.3995575+03:00 0HLGELIKTLMTN:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:04:14.3999751+03:00 0HLGELIKTLMTN:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 2.5339ms (afa2e885)
+2018-08-31T00:04:14.4001911+03:00 0HLGELIKTLMTN:00000001 [INF] Request finished in 3.6564ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:22.5407661+03:00 0HLGELIKTLMTO:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user   (ca22a1cb)
+2018-08-31T00:04:22.5411901+03:00 0HLGELIKTLMTO:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:22.5413208+03:00 0HLGELIKTLMTO:00000001 [INF] Route matched with "{action = \"Get\", controller = \"User\"}". Executing action "server.Controllers.UserController.Get (server)" (a44c0341)
+2018-08-31T00:04:22.5413831+03:00 0HLGELIKTLMTO:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:22.5414446+03:00 0HLGELIKTLMTO:00000001 [INF] Executing action method "server.Controllers.UserController.Get (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:22.5455221+03:00 0HLGELIKTLMTO:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`" (0723d8ff)
+2018-08-31T00:04:22.5459069+03:00 0HLGELIKTLMTO:00000001 [INF] Executed action method "server.Controllers.UserController.Get (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 4.412ms. (50a9e262)
+2018-08-31T00:04:22.5459851+03:00 0HLGELIKTLMTO:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.User, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:04:22.5463641+03:00 0HLGELIKTLMTO:00000001 [INF] Executed action "server.Controllers.UserController.Get (server)" in 5.0014ms (afa2e885)
+2018-08-31T00:04:22.5464585+03:00 0HLGELIKTLMTO:00000001 [INF] Request finished in 5.7758ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:22.5512002+03:00 0HLGELIKTLMTP:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post   (ca22a1cb)
+2018-08-31T00:04:22.5516896+03:00 0HLGELIKTLMTP:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:22.5522495+03:00 0HLGELIKTLMTP:00000001 [INF] Route matched with "{action = \"Get\", controller = \"Post\"}". Executing action "server.Controllers.PostController.Get (server)" (a44c0341)
+2018-08-31T00:04:22.5524556+03:00 0HLGELIKTLMTP:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:22.5526437+03:00 0HLGELIKTLMTP:00000001 [INF] Executing action method "server.Controllers.PostController.Get (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:22.5538406+03:00 0HLGELIKTLMTP:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:04:22.5550945+03:00 0HLGELIKTLMTP:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`" (0723d8ff)
+2018-08-31T00:04:22.5555499+03:00 0HLGELIKTLMTP:00000001 [INF] Executed action method "server.Controllers.PostController.Get (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.8084ms. (50a9e262)
+2018-08-31T00:04:22.5556428+03:00 0HLGELIKTLMTP:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:04:22.5558746+03:00 0HLGELIKTLMTP:00000001 [INF] Executed action "server.Controllers.PostController.Get (server)" in 3.536ms (afa2e885)
+2018-08-31T00:04:22.5560717+03:00 0HLGELIKTLMTP:00000001 [INF] Request finished in 4.8994ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:25.9538939+03:00 0HLGELIKTLMTQ:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:25.9541163+03:00 0HLGELIKTLMTQ:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:04:25.9542269+03:00 0HLGELIKTLMTQ:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:25.9543009+03:00 0HLGELIKTLMTQ:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:04:25.9543440+03:00 0HLGELIKTLMTQ:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:04:25.9543961+03:00 0HLGELIKTLMTQ:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:04:25.9544452+03:00 0HLGELIKTLMTQ:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:04:25.9544833+03:00 0HLGELIKTLMTQ:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.214ms (afa2e885)
+2018-08-31T00:04:25.9546162+03:00 0HLGELIKTLMTQ:00000001 [INF] Request finished in 0.7766ms 401  (791a596a)
+2018-08-31T00:04:25.9662676+03:00 0HLGELIKTLMTR:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:25.9664968+03:00 0HLGELIKTLMTR:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:04:25.9667086+03:00 0HLGELIKTLMTR:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:25.9668030+03:00 0HLGELIKTLMTR:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:04:25.9668453+03:00 0HLGELIKTLMTR:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:04:25.9668925+03:00 0HLGELIKTLMTR:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:04:25.9669431+03:00 0HLGELIKTLMTR:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:04:25.9669937+03:00 0HLGELIKTLMTR:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.2239ms (afa2e885)
+2018-08-31T00:04:25.9671855+03:00 0HLGELIKTLMTR:00000001 [INF] Request finished in 0.9522ms 401  (791a596a)
+2018-08-31T00:04:40.5393177+03:00 0HLGELIKTLMTS:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:40.5397312+03:00 0HLGELIKTLMTS:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:04:40.5399789+03:00 0HLGELIKTLMTS:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:40.5401839+03:00 0HLGELIKTLMTS:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:04:40.5402976+03:00 0HLGELIKTLMTS:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:04:40.5404210+03:00 0HLGELIKTLMTS:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:04:40.5405456+03:00 0HLGELIKTLMTS:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:04:40.5406691+03:00 0HLGELIKTLMTS:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.5625ms (afa2e885)
+2018-08-31T00:04:40.5410440+03:00 0HLGELIKTLMTS:00000001 [INF] Request finished in 1.8055ms 401  (791a596a)
+2018-08-31T00:04:40.5907408+03:00 0HLGELIKTLMTT:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:40.5910463+03:00 0HLGELIKTLMTT:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:04:40.5912226+03:00 0HLGELIKTLMTT:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:40.5913170+03:00 0HLGELIKTLMTT:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:04:40.5913695+03:00 0HLGELIKTLMTT:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:04:40.5914258+03:00 0HLGELIKTLMTT:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:04:40.5914866+03:00 0HLGELIKTLMTT:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:04:40.5915523+03:00 0HLGELIKTLMTT:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.2548ms (afa2e885)
+2018-08-31T00:04:40.5917139+03:00 0HLGELIKTLMTT:00000001 [INF] Request finished in 1.0088ms 401  (791a596a)
+2018-08-31T00:04:56.0271801+03:00 0HLGELIKTLMTU:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 49 (ca22a1cb)
+2018-08-31T00:04:56.0279514+03:00 0HLGELIKTLMTU:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:04:56.0284291+03:00 0HLGELIKTLMTU:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T00:04:56.0294399+03:00 0HLGELIKTLMTU:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:04:56.0325590+03:00 0HLGELIKTLMTU:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:56.0331024+03:00 0HLGELIKTLMTU:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.4941ms. (50a9e262)
+2018-08-31T00:04:56.0332621+03:00 0HLGELIKTLMTU:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T00:04:56.0335389+03:00 0HLGELIKTLMTU:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 4.9629ms (afa2e885)
+2018-08-31T00:04:56.0337503+03:00 0HLGELIKTLMTU:00000001 [INF] Request finished in 6.9452ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:56.2653503+03:00 0HLGELIKTLMTV:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:56.2656732+03:00 0HLGELIKTLMTV:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:56.2658087+03:00 0HLGELIKTLMTV:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:56.2659144+03:00 0HLGELIKTLMTV:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:56.2660096+03:00 0HLGELIKTLMTV:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:56.2675685+03:00 0HLGELIKTLMTV:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:56.2677146+03:00 0HLGELIKTLMTV:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.5797ms. (50a9e262)
+2018-08-31T00:04:56.2678623+03:00 0HLGELIKTLMTV:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:04:56.2681534+03:00 0HLGELIKTLMTV:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 2.2915ms (afa2e885)
+2018-08-31T00:04:56.2683007+03:00 0HLGELIKTLMTV:00000001 [INF] Request finished in 2.9651ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:56.4401085+03:00 0HLGELIKTLMU0:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:04:56.4406398+03:00 0HLGELIKTLMU0:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:56.4408452+03:00 0HLGELIKTLMU0:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:04:56.4409588+03:00 0HLGELIKTLMU0:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:56.4410785+03:00 0HLGELIKTLMU0:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:04:56.4452723+03:00 0HLGELIKTLMU0:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:04:56.4454837+03:00 0HLGELIKTLMU0:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 4.3304ms. (50a9e262)
+2018-08-31T00:04:56.4456076+03:00 0HLGELIKTLMU0:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:04:56.4458364+03:00 0HLGELIKTLMU0:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 4.9093ms (afa2e885)
+2018-08-31T00:04:56.4460169+03:00 0HLGELIKTLMU0:00000001 [INF] Request finished in 5.9472ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:04:56.4953579+03:00 0HLGELIKTLMU1:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/50   (ca22a1cb)
+2018-08-31T00:04:56.4956781+03:00 0HLGELIKTLMU1:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:04:56.4958167+03:00 0HLGELIKTLMU1:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-08-31T00:04:56.4958873+03:00 0HLGELIKTLMU1:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:04:56.4960655+03:00 0HLGELIKTLMU1:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["50"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:04:56.4968396+03:00 0HLGELIKTLMU1:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:04:56.4971552+03:00 0HLGELIKTLMU1:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.0289ms. (50a9e262)
+2018-08-31T00:04:56.4972410+03:00 0HLGELIKTLMU1:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:04:56.4974056+03:00 0HLGELIKTLMU1:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 1.5409ms (afa2e885)
+2018-08-31T00:04:56.4975223+03:00 0HLGELIKTLMU1:00000001 [INF] Request finished in 2.2054ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:11:47.6634576+03:00 0HLGENKP4C0DH:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:11:47.7368762+03:00 0HLGENKP4C0DH:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:11:47.8619101+03:00 0HLGENKP4C0DH:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:11:47.8725469+03:00 0HLGENKP4C0DH:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:11:47.8763680+03:00 0HLGENKP4C0DH:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:11:47.8886431+03:00 0HLGENKP4C0DH:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:11:47.9054417+03:00 0HLGENKP4C0DH:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:11:47.9121457+03:00 0HLGENKP4C0DH:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 43.4032ms (afa2e885)
+2018-08-31T00:11:47.9304931+03:00 0HLGENKP4C0DH:00000001 [INF] Request finished in 288.7169ms 401  (791a596a)
+2018-08-31T00:11:47.9523575+03:00 0HLGENKP4C0DI:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:11:47.9530693+03:00 0HLGENKP4C0DI:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:11:47.9536810+03:00 0HLGENKP4C0DI:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:11:47.9540948+03:00 0HLGENKP4C0DI:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:11:47.9542066+03:00 0HLGENKP4C0DI:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:11:47.9543738+03:00 0HLGENKP4C0DI:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:11:47.9546767+03:00 0HLGENKP4C0DI:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:11:47.9547628+03:00 0HLGENKP4C0DI:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.9945ms (afa2e885)
+2018-08-31T00:11:47.9551917+03:00 0HLGENKP4C0DI:00000001 [INF] Request finished in 2.8714ms 401  (791a596a)
+2018-08-31T00:12:07.5779137+03:00 0HLGENKP4C0DJ:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 40 (ca22a1cb)
+2018-08-31T00:12:07.5782456+03:00 0HLGENKP4C0DJ:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:12:07.5951064+03:00 0HLGENKP4C0DJ:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T00:12:07.8151712+03:00 0HLGENKP4C0DJ:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:12:07.9782517+03:00 0HLGENKP4C0DJ:00000001 [INF] Entity Framework Core "2.1.1-rtm-30846" initialized '"SaymedbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "MaxPoolSize=128 " (9958f5bb)
+2018-08-31T00:12:09.2790327+03:00 0HLGENKP4C0DJ:00000001 [INF] Executed DbCommand ("44"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T00:12:09.3498558+03:00 0HLGENKP4C0DJ:00000001 [INF] Accessing expired session, Key:"af31fd7f-c6e1-6dfa-4de8-98c172ba8344" (08c5a9e7)
+2018-08-31T00:12:09.3616393+03:00 0HLGENKP4C0DJ:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1543.7778ms. (50a9e262)
+2018-08-31T00:12:09.3656488+03:00 0HLGENKP4C0DJ:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T00:12:09.3700371+03:00 0HLGENKP4C0DJ:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1774.8264ms (afa2e885)
+2018-08-31T00:12:09.3703022+03:00 0HLGENKP4C0DJ:00000001 [INF] Session started; Key:"af31fd7f-c6e1-6dfa-4de8-98c172ba8344", Id:"11e2a250-65a1-b77e-5570-3bc578e2ecbc" (1d7cf8c0)
+2018-08-31T00:12:09.3745548+03:00 0HLGENKP4C0DJ:00000001 [INF] Request finished in 1796.6891ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:09.4773183+03:00 0HLGENKP4C0DK:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:12:09.4853030+03:00 0HLGENKP4C0DK:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:12:09.4878026+03:00 0HLGENKP4C0DK:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:12:09.4883145+03:00 0HLGENKP4C0DK:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:12:09.4941451+03:00 0HLGENKP4C0DK:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:12:09.5566657+03:00 0HLGENKP4C0DK:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:12:09.5583037+03:00 0HLGENKP4C0DK:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 64.0191ms. (50a9e262)
+2018-08-31T00:12:09.5586099+03:00 0HLGENKP4C0DK:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:12:09.5628584+03:00 0HLGENKP4C0DK:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 74.9497ms (afa2e885)
+2018-08-31T00:12:09.5631627+03:00 0HLGENKP4C0DK:00000001 [INF] Request finished in 85.9059ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:09.8195682+03:00 0HLGENKP4C0DL:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:12:09.8199571+03:00 0HLGENKP4C0DL:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:12:09.8201459+03:00 0HLGENKP4C0DL:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:12:09.8202347+03:00 0HLGENKP4C0DL:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:12:09.8203713+03:00 0HLGENKP4C0DL:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:12:09.8227523+03:00 0HLGENKP4C0DL:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:12:09.8229328+03:00 0HLGENKP4C0DL:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.5112ms. (50a9e262)
+2018-08-31T00:12:09.8230068+03:00 0HLGENKP4C0DL:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:12:09.8232073+03:00 0HLGENKP4C0DL:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 3.0176ms (afa2e885)
+2018-08-31T00:12:09.8233493+03:00 0HLGENKP4C0DL:00000001 [INF] Request finished in 3.8109ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:09.8752911+03:00 0HLGENKP4C0DM:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/56   (ca22a1cb)
+2018-08-31T00:12:09.8757268+03:00 0HLGENKP4C0DM:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:12:09.8787082+03:00 0HLGENKP4C0DM:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-08-31T00:12:09.8788090+03:00 0HLGENKP4C0DM:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:12:09.8796771+03:00 0HLGENKP4C0DM:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["56"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:12:09.8907825+03:00 0HLGENKP4C0DM:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:12:09.9036602+03:00 0HLGENKP4C0DM:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 23.88ms. (50a9e262)
+2018-08-31T00:12:09.9038199+03:00 0HLGENKP4C0DM:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:12:09.9087553+03:00 0HLGENKP4C0DM:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 29.9636ms (afa2e885)
+2018-08-31T00:12:09.9088950+03:00 0HLGENKP4C0DM:00000001 [INF] Request finished in 33.9486ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:12.4878706+03:00 0HLGENKP4C0DN:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:12:12.4893102+03:00 0HLGENKP4C0DN:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:12:12.4894866+03:00 0HLGENKP4C0DN:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:12:12.4895885+03:00 0HLGENKP4C0DN:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:12:12.4896538+03:00 0HLGENKP4C0DN:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:12:12.4897063+03:00 0HLGENKP4C0DN:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:12:12.4897701+03:00 0HLGENKP4C0DN:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:12:12.4898075+03:00 0HLGENKP4C0DN:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.268ms (afa2e885)
+2018-08-31T00:12:12.4899476+03:00 0HLGENKP4C0DN:00000001 [INF] Request finished in 2.2428ms 401  (791a596a)
+2018-08-31T00:12:12.5018500+03:00 0HLGENKP4C0DO:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:12:12.5020943+03:00 0HLGENKP4C0DO:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:12:12.5113919+03:00 0HLGENKP4C0DO:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:12:12.5115531+03:00 0HLGENKP4C0DO:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T00:12:12.5116139+03:00 0HLGENKP4C0DO:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T00:12:12.5116622+03:00 0HLGENKP4C0DO:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T00:12:12.5117204+03:00 0HLGENKP4C0DO:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T00:12:12.5117762+03:00 0HLGENKP4C0DO:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.3092ms (afa2e885)
+2018-08-31T00:12:12.5119084+03:00 0HLGENKP4C0DO:00000001 [INF] Request finished in 10.101ms 401  (791a596a)
+2018-08-31T00:12:20.1336645+03:00 0HLGENKP4C0DP:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 40 (ca22a1cb)
+2018-08-31T00:12:20.1338907+03:00 0HLGENKP4C0DP:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T00:12:20.1340070+03:00 0HLGENKP4C0DP:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T00:12:20.1350548+03:00 0HLGENKP4C0DP:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:12:20.1368853+03:00 0HLGENKP4C0DP:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T00:12:20.1375344+03:00 0HLGENKP4C0DP:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.39ms. (50a9e262)
+2018-08-31T00:12:20.1376564+03:00 0HLGENKP4C0DP:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T00:12:20.1378739+03:00 0HLGENKP4C0DP:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 3.8154ms (afa2e885)
+2018-08-31T00:12:20.1384285+03:00 0HLGENKP4C0DP:00000001 [INF] Request finished in 4.802ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:20.2256783+03:00 0HLGENKP4C0DQ:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:12:20.2261242+03:00 0HLGENKP4C0DQ:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:12:20.2263466+03:00 0HLGENKP4C0DQ:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:12:20.2264436+03:00 0HLGENKP4C0DQ:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:12:20.2265422+03:00 0HLGENKP4C0DQ:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:12:20.2288152+03:00 0HLGENKP4C0DQ:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:12:20.2291452+03:00 0HLGENKP4C0DQ:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.4455ms. (50a9e262)
+2018-08-31T00:12:20.2292985+03:00 0HLGENKP4C0DQ:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:12:20.2298618+03:00 0HLGENKP4C0DQ:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 3.3918ms (afa2e885)
+2018-08-31T00:12:20.2300381+03:00 0HLGENKP4C0DQ:00000001 [INF] Request finished in 4.432ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:20.5481977+03:00 0HLGENKP4C0DR:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T00:12:20.5488890+03:00 0HLGENKP4C0DR:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:12:20.5491885+03:00 0HLGENKP4C0DR:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T00:12:20.5493912+03:00 0HLGENKP4C0DR:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:12:20.5497107+03:00 0HLGENKP4C0DR:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T00:12:20.5551999+03:00 0HLGENKP4C0DR:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T00:12:20.5555718+03:00 0HLGENKP4C0DR:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 5.6939ms. (50a9e262)
+2018-08-31T00:12:20.5557625+03:00 0HLGENKP4C0DR:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T00:12:20.5562658+03:00 0HLGENKP4C0DR:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 6.9527ms (afa2e885)
+2018-08-31T00:12:20.5565804+03:00 0HLGENKP4C0DR:00000001 [INF] Request finished in 8.4268ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:20.6017605+03:00 0HLGENKP4C0DS:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/56   (ca22a1cb)
+2018-08-31T00:12:20.6021785+03:00 0HLGENKP4C0DS:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T00:12:20.6023711+03:00 0HLGENKP4C0DS:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-08-31T00:12:20.6024655+03:00 0HLGENKP4C0DS:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T00:12:20.6068163+03:00 0HLGENKP4C0DS:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["56"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:12:20.6077791+03:00 0HLGENKP4C0DS:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T00:12:20.6082421+03:00 0HLGENKP4C0DS:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.3309ms. (50a9e262)
+2018-08-31T00:12:20.6083704+03:00 0HLGENKP4C0DS:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T00:12:20.6086710+03:00 0HLGENKP4C0DS:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 6.2198ms (afa2e885)
+2018-08-31T00:12:20.6088126+03:00 0HLGENKP4C0DS:00000001 [INF] Request finished in 7.0951ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:12:58.7785335+03:00 0HLGENKP4C0DT:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/feedback/sendcode application/json 68 (ca22a1cb)
+2018-08-31T00:12:58.8062260+03:00 0HLGENKP4C0DT:00000001 [INF] Route matched with "{action = \"SendMail\", controller = \"Feedback\"}". Executing action "server.Controllers.FeedbackController.SendMail (server)" (a44c0341)
+2018-08-31T00:12:58.8115896+03:00 0HLGENKP4C0DT:00000001 [INF] Executing action method "server.Controllers.FeedbackController.SendMail (server)" with arguments (["server.Models.Email"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:13:00.4697927+03:00 0HLGENKP4C0DT:00000001 [INF] Executed action method "server.Controllers.FeedbackController.SendMail (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1658.0801ms. (50a9e262)
+2018-08-31T00:13:00.4699105+03:00 0HLGENKP4C0DT:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.Email"'. (8a1b66c8)
+2018-08-31T00:13:00.4707805+03:00 0HLGENKP4C0DT:00000001 [INF] Executed action "server.Controllers.FeedbackController.SendMail (server)" in 1664.4208ms (afa2e885)
+2018-08-31T00:13:00.4711260+03:00 0HLGENKP4C0DT:00000001 [INF] Request finished in 1692.9734ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:13:14.4125036+03:00 0HLGENKP4C0DU:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/user application/json 138 (ca22a1cb)
+2018-08-31T00:13:14.4172728+03:00 0HLGENKP4C0DU:00000001 [INF] Route matched with "{action = \"Post\", controller = \"User\"}". Executing action "server.Controllers.UserController.Post (server)" (a44c0341)
+2018-08-31T00:13:14.4281512+03:00 0HLGENKP4C0DU:00000001 [INF] Executing action method "server.Controllers.UserController.Post (server)" with arguments (["server.Models.User"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:13:14.4299953+03:00 0HLGENKP4C0DU:00000001 [INF] Executed action "server.Controllers.UserController.Post (server)" in 12.5428ms (afa2e885)
+2018-08-31T00:13:14.4838482+03:00 0HLGENKP4C0DU:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.ArgumentNullException: Value cannot be null.
+Parameter name: logger
+   at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, String message, Object[] args)
+   at Microsoft.Extensions.Logging.LoggerExtensions.LogDebug(ILogger logger, String message, Object[] args)
+   at server.Controllers.UserController.Post(User user) in C:\Users\Анастасия\Documents\GitHub\Sayme\src\server\Controllers\UserController.cs:line 62
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-08-31T00:13:14.5182049+03:00 0HLGENKP4C0DU:00000001 [INF] Request finished in 105.7659ms 500 text/html; charset=utf-8 (791a596a)
+2018-08-31T00:14:57.4457843+03:00 0HLGENMHN49CV:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/feedback/sendcode application/json 68 (ca22a1cb)
+2018-08-31T00:14:57.5993625+03:00 0HLGENMHN49CV:00000001 [INF] Route matched with "{action = \"SendMail\", controller = \"Feedback\"}". Executing action "server.Controllers.FeedbackController.SendMail (server)" (a44c0341)
+2018-08-31T00:14:57.6710650+03:00 0HLGENMHN49CV:00000001 [INF] Executing action method "server.Controllers.FeedbackController.SendMail (server)" with arguments (["server.Models.Email"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:14:59.1800405+03:00 0HLGENMHN49CV:00000001 [INF] Executed action method "server.Controllers.FeedbackController.SendMail (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1500.1491ms. (50a9e262)
+2018-08-31T00:14:59.1970916+03:00 0HLGENMHN49CV:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.Email"'. (8a1b66c8)
+2018-08-31T00:14:59.2315757+03:00 0HLGENMHN49CV:00000001 [INF] Executed action "server.Controllers.FeedbackController.SendMail (server)" in 1622.6392ms (afa2e885)
+2018-08-31T00:14:59.2434068+03:00 0HLGENMHN49CV:00000001 [INF] Request finished in 1801.9994ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T00:15:10.9906163+03:00 0HLGENMHN49D0:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/user application/json 131 (ca22a1cb)
+2018-08-31T00:15:10.9973893+03:00 0HLGENMHN49D0:00000001 [INF] Route matched with "{action = \"Post\", controller = \"User\"}". Executing action "server.Controllers.UserController.Post (server)" (a44c0341)
+2018-08-31T00:15:11.0918864+03:00 0HLGENMHN49D0:00000001 [INF] Executing action method "server.Controllers.UserController.Post (server)" with arguments (["server.Models.User"]) - Validation state: Valid (4e3479ed)
+2018-08-31T00:15:11.2378782+03:00 0HLGENMHN49D0:00000001 [INF] Entity Framework Core "2.1.1-rtm-30846" initialized '"SaymedbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "MaxPoolSize=128 " (9958f5bb)
+2018-08-31T00:15:12.6000308+03:00 0HLGENMHN49D0:00000001 [ERR] Failed executing DbCommand ("31"ms) [Parameters=["@p0='?' (DbType = Boolean), @p1='?' (Size = 8000) (DbType = Binary), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO `User` (`active`, `avatar`, `bio`, `login`, `mail`, `password`, `register_code`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `id`
+FROM `User`
+WHERE ROW_COUNT() = 1 AND `id` = LAST_INSERT_ID();" (627a98df)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry 'nastushka' for key 'login' ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry 'nastushka' for key 'login'
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\Core\ResultSet.cs:line 44
+   at MySql.Data.MySqlClient.MySqlDataReader.ActivateResultSet(ResultSet resultSet) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 93
+   at MySql.Data.MySqlClient.MySqlDataReader.ReadFirstResultSetAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 328
+   at MySql.Data.MySqlClient.MySqlDataReader.CreateAsync(MySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 313
+   at MySqlConnector.Core.TextCommandExecutor.ExecuteReaderAsync(String commandText, MySqlParameterCollection parameterCollection, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in C:\projects\mysqlconnector\src\MySqlConnector\Core\TextCommandExecutor.cs:line 73
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlCommand.cs:line 168
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+2018-08-31T00:15:12.6219871+03:00 0HLGENMHN49D0:00000001 [ERR] An exception occurred in the database while saving changes for context type '"server.Models.SaymedbContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry 'nastushka' for key 'login' ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry 'nastushka' for key 'login'
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\Core\ResultSet.cs:line 44
+   --- End of inner exception stack trace ---
+   at MySql.Data.MySqlClient.MySqlDataReader.ActivateResultSet(ResultSet resultSet) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 93
+   at MySql.Data.MySqlClient.MySqlDataReader.ReadFirstResultSetAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 328
+   at MySql.Data.MySqlClient.MySqlDataReader.CreateAsync(MySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 313
+   at MySqlConnector.Core.TextCommandExecutor.ExecuteReaderAsync(String commandText, MySqlParameterCollection parameterCollection, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in C:\projects\mysqlconnector\src\MySqlConnector\Core\TextCommandExecutor.cs:line 73
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlCommand.cs:line 168
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(DbContext _, ValueTuple`2 parameters)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry 'nastushka' for key 'login' ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry 'nastushka' for key 'login'
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\Core\ResultSet.cs:line 44
+   --- End of inner exception stack trace ---
+   at MySql.Data.MySqlClient.MySqlDataReader.ActivateResultSet(ResultSet resultSet) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 93
+   at MySql.Data.MySqlClient.MySqlDataReader.ReadFirstResultSetAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 328
+   at MySql.Data.MySqlClient.MySqlDataReader.CreateAsync(MySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 313
+   at MySqlConnector.Core.TextCommandExecutor.ExecuteReaderAsync(String commandText, MySqlParameterCollection parameterCollection, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in C:\projects\mysqlconnector\src\MySqlConnector\Core\TextCommandExecutor.cs:line 73
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlCommand.cs:line 168
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(DbContext _, ValueTuple`2 parameters)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at server.Controllers.UserController.Post(User user) in C:\Users\Анастасия\Documents\GitHub\Sayme\src\server\Controllers\UserController.cs:line 65
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+2018-08-31T00:15:12.6227242+03:00 0HLGENMHN49D0:00000001 [INF] Executed action "server.Controllers.UserController.Post (server)" in 1625.0131ms (afa2e885)
+2018-08-31T00:15:12.6312609+03:00 0HLGENMHN49D0:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry 'nastushka' for key 'login' ---> MySql.Data.MySqlClient.MySqlException: Duplicate entry 'nastushka' for key 'login'
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\Core\ResultSet.cs:line 44
+   --- End of inner exception stack trace ---
+   at MySql.Data.MySqlClient.MySqlDataReader.ActivateResultSet(ResultSet resultSet) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 93
+   at MySql.Data.MySqlClient.MySqlDataReader.ReadFirstResultSetAsync(IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 328
+   at MySql.Data.MySqlClient.MySqlDataReader.CreateAsync(MySqlCommand command, CommandBehavior behavior, IOBehavior ioBehavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlDataReader.cs:line 313
+   at MySqlConnector.Core.TextCommandExecutor.ExecuteReaderAsync(String commandText, MySqlParameterCollection parameterCollection, CommandBehavior behavior, IOBehavior ioBehavior, CancellationToken cancellationToken) in C:\projects\mysqlconnector\src\MySqlConnector\Core\TextCommandExecutor.cs:line 73
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior) in C:\projects\mysqlconnector\src\MySqlConnector\MySql.Data.MySqlClient\MySqlCommand.cs:line 168
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(DbContext _, ValueTuple`2 parameters)
+   at Pomelo.EntityFrameworkCore.MySql.Storage.Internal.MySqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at server.Controllers.UserController.Post(User user) in C:\Users\Анастасия\Documents\GitHub\Sayme\src\server\Controllers\UserController.cs:line 65
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2018-08-31T00:15:12.6832730+03:00 0HLGENMHN49D0:00000001 [INF] Request finished in 1692.7321ms 500 text/html; charset=utf-8 (791a596a)
+2018-08-31T01:24:30.7824356+03:00 0HLGENMHN49D1:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 35 (ca22a1cb)
+2018-08-31T01:24:30.8055013+03:00 0HLGENMHN49D1:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T01:24:30.8341366+03:00 0HLGENMHN49D1:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T01:24:30.8647320+03:00 0HLGENMHN49D1:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T01:24:32.0929163+03:00 0HLGENMHN49D1:00000001 [INF] Executed DbCommand ("19"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T01:24:32.1164520+03:00 0HLGENMHN49D1:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 1251.5686ms. (50a9e262)
+2018-08-31T01:24:32.1178661+03:00 0HLGENMHN49D1:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T01:24:32.1258089+03:00 0HLGENMHN49D1:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1291.48ms (afa2e885)
+2018-08-31T01:24:32.1262601+03:00 0HLGENMHN49D1:00000001 [INF] Request finished in 1351.9185ms 400 application/json; charset=utf-8 (791a596a)
+2018-08-31T01:26:49.6057257+03:00 0HLGENMHN49D2:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 31 (ca22a1cb)
+2018-08-31T01:26:49.6060217+03:00 0HLGENMHN49D2:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T01:26:49.6062543+03:00 0HLGENMHN49D2:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T01:26:49.6126540+03:00 0HLGENMHN49D2:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T01:26:49.6372718+03:00 0HLGENMHN49D2:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T01:26:49.6375044+03:00 0HLGENMHN49D2:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 24.7772ms. (50a9e262)
+2018-08-31T01:26:49.6375826+03:00 0HLGENMHN49D2:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T01:26:49.6378959+03:00 0HLGENMHN49D2:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 31.6ms (afa2e885)
+2018-08-31T01:26:49.6380179+03:00 0HLGENMHN49D2:00000001 [INF] Request finished in 32.348ms 400 application/json; charset=utf-8 (791a596a)
+2018-08-31T01:27:09.3126496+03:00 0HLGENMHN49D3:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 31 (ca22a1cb)
+2018-08-31T01:27:09.3128615+03:00 0HLGENMHN49D3:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T01:27:09.3129713+03:00 0HLGENMHN49D3:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T01:27:09.3133644+03:00 0HLGENMHN49D3:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T01:27:09.3142816+03:00 0HLGENMHN49D3:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T01:27:09.3144035+03:00 0HLGENMHN49D3:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 0.9794ms. (50a9e262)
+2018-08-31T01:27:09.3149544+03:00 0HLGENMHN49D3:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T01:27:09.3153082+03:00 0HLGENMHN49D3:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 2.2836ms (afa2e885)
+2018-08-31T01:27:09.3154604+03:00 0HLGENMHN49D3:00000001 [INF] Request finished in 3.2762ms 400 application/json; charset=utf-8 (791a596a)
+2018-08-31T01:32:47.9409927+03:00 0HLGENMHN49D4:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 35 (ca22a1cb)
+2018-08-31T01:32:47.9413502+03:00 0HLGENMHN49D4:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T01:32:47.9415216+03:00 0HLGENMHN49D4:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T01:32:47.9420804+03:00 0HLGENMHN49D4:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T01:32:48.9559278+03:00 0HLGENMHN49D4:00000001 [INF] Executed DbCommand ("7"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T01:32:48.9562548+03:00 0HLGENMHN49D4:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 1014.0452ms. (50a9e262)
+2018-08-31T01:32:48.9566762+03:00 0HLGENMHN49D4:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T01:32:48.9582900+03:00 0HLGENMHN49D4:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1016.6516ms (afa2e885)
+2018-08-31T01:32:48.9587608+03:00 0HLGENMHN49D4:00000001 [INF] Request finished in 1017.7836ms 400 application/json; charset=utf-8 (791a596a)
+2018-08-31T01:38:33.3969154+03:00 0HLGENMHN49D5:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 32 (ca22a1cb)
+2018-08-31T01:38:33.3972220+03:00 0HLGENMHN49D5:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T01:38:33.3973780+03:00 0HLGENMHN49D5:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T01:38:33.3979851+03:00 0HLGENMHN49D5:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T01:38:34.4214154+03:00 0HLGENMHN49D5:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T01:38:34.4216654+03:00 0HLGENMHN49D5:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.BadRequestObjectResult" in 1023.5285ms. (50a9e262)
+2018-08-31T01:38:34.4218297+03:00 0HLGENMHN49D5:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T01:38:34.4240072+03:00 0HLGENMHN49D5:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1026.5193ms (afa2e885)
+2018-08-31T01:38:34.4242904+03:00 0HLGENMHN49D5:00000001 [INF] Request finished in 1027.4417ms 400 application/json; charset=utf-8 (791a596a)
+2018-08-31T11:15:15.2767475+03:00 0HLGENMHN49D6:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 36 (ca22a1cb)
+2018-08-31T11:15:15.2783847+03:00 0HLGENMHN49D6:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T11:15:15.2797221+03:00 0HLGENMHN49D6:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
+2018-08-31T11:15:15.2817818+03:00 0HLGENMHN49D6:00000001 [INF] Executing action method "server.Controllers.AccountController.Authorizate (server)" with arguments (["server.Models.AuthUser"]) - Validation state: Valid (4e3479ed)
+2018-08-31T11:15:16.2997516+03:00 0HLGENMHN49D6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__login_0='?' (Size = 4000), @__password_1='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id`, `x`.`active`, `x`.`avatar`, `x`.`bio`, `x`.`login`, `x`.`mail`, `x`.`password`, `x`.`register_code`
+FROM `User` AS `x`
+WHERE (`x`.`login` = @__login_0) AND (`x`.`password` = @__password_1)
+LIMIT 1" (0723d8ff)
+2018-08-31T11:15:16.3704082+03:00 0HLGENMHN49D6:00000001 [INF] Accessing expired session, Key:"af31fd7f-c6e1-6dfa-4de8-98c172ba8344" (08c5a9e7)
+2018-08-31T11:15:16.4121955+03:00 0HLGENMHN49D6:00000001 [INF] Executed action method "server.Controllers.AccountController.Authorizate (server)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1130.1059ms. (50a9e262)
+2018-08-31T11:15:16.4126248+03:00 0HLGENMHN49D6:00000001 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-08-31T11:15:16.4182918+03:00 0HLGENMHN49D6:00000001 [INF] Executed action "server.Controllers.AccountController.Authorizate (server)" in 1138.256ms (afa2e885)
+2018-08-31T11:15:16.4196779+03:00 0HLGENMHN49D6:00000001 [INF] Session started; Key:"af31fd7f-c6e1-6dfa-4de8-98c172ba8344", Id:"c0afe1e0-604a-306d-7f86-5851a324a9ea" (1d7cf8c0)
+2018-08-31T11:15:16.4270155+03:00 0HLGENMHN49D6:00000001 [INF] Request finished in 1150.5009ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T11:15:16.5840474+03:00 0HLGENMHN49D7:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T11:15:16.5992008+03:00 0HLGENMHN49D7:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T11:15:16.6062503+03:00 0HLGENMHN49D7:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T11:15:16.6151173+03:00 0HLGENMHN49D7:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T11:15:16.6193837+03:00 0HLGENMHN49D7:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T11:15:16.6339318+03:00 0HLGENMHN49D7:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T11:15:16.6355075+03:00 0HLGENMHN49D7:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 16.0079ms. (50a9e262)
+2018-08-31T11:15:16.6356329+03:00 0HLGENMHN49D7:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T11:15:16.6382797+03:00 0HLGENMHN49D7:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 31.9206ms (afa2e885)
+2018-08-31T11:15:16.6384424+03:00 0HLGENMHN49D7:00000001 [INF] Request finished in 54.4637ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T11:15:16.9621656+03:00 0HLGENMHN49D8:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T11:15:16.9652164+03:00 0HLGENMHN49D8:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T11:15:16.9661498+03:00 0HLGENMHN49D8:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T11:15:16.9672339+03:00 0HLGENMHN49D8:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T11:15:16.9681155+03:00 0HLGENMHN49D8:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-08-31T11:15:16.9788659+03:00 0HLGENMHN49D8:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-08-31T11:15:16.9794531+03:00 0HLGENMHN49D8:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 11.1095ms. (50a9e262)
+2018-08-31T11:15:16.9797057+03:00 0HLGENMHN49D8:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-08-31T11:15:16.9805587+03:00 0HLGENMHN49D8:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 14.1894ms (afa2e885)
+2018-08-31T11:15:16.9809593+03:00 0HLGENMHN49D8:00000001 [INF] Request finished in 18.9972ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T11:15:17.0440141+03:00 0HLGENMHN49D9:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/8   (ca22a1cb)
+2018-08-31T11:15:17.0445223+03:00 0HLGENMHN49D9:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T11:15:17.0518187+03:00 0HLGENMHN49D9:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-08-31T11:15:17.0519474+03:00 0HLGENMHN49D9:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T11:15:17.0590006+03:00 0HLGENMHN49D9:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["8"]) - Validation state: Valid (4e3479ed)
+2018-08-31T11:15:17.0729764+03:00 0HLGENMHN49D9:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-08-31T11:15:17.0899569+03:00 0HLGENMHN49D9:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 30.8566ms. (50a9e262)
+2018-08-31T11:15:17.0900842+03:00 0HLGENMHN49D9:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-08-31T11:15:17.0936523+03:00 0HLGENMHN49D9:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 41.7332ms (afa2e885)
+2018-08-31T11:15:17.0938203+03:00 0HLGENMHN49D9:00000001 [INF] Request finished in 50.137ms 200 application/json; charset=utf-8 (791a596a)
+2018-08-31T11:15:30.0628225+03:00 0HLGENMHN49DA:00000001 [INF] Request starting HTTP/1.1 PUT https://localhost:5001/api/user/8 multipart/form-data; boundary=----WebKitFormBoundaryFl30QZ71NhqY1Fat 13908 (ca22a1cb)
+2018-08-31T11:15:30.0639345+03:00 0HLGENMHN49DA:00000001 [INF] Successfully validated the token. (60169667)
+2018-08-31T11:15:30.0687399+03:00 0HLGENMHN49DA:00000001 [INF] Route matched with "{action = \"UpdateImage\", controller = \"User\"}". Executing action "server.Controllers.UserController.UpdateImage (server)" (a44c0341)
+2018-08-31T11:15:30.0690043+03:00 0HLGENMHN49DA:00000001 [INF] Authorization was successful. (0d575a54)
+2018-08-31T11:15:30.1173610+03:00 0HLGENMHN49DA:00000001 [INF] Executing action method "server.Controllers.UserController.UpdateImage (server)" with arguments (["Microsoft.AspNetCore.Http.Internal.FormFile"]) - Validation state: Valid (4e3479ed)
+2018-08-31T11:15:30.1413619+03:00 0HLGENMHN49DA:00000001 [INF] Executed DbCommand ("5"ms) [Parameters=["@__get_Item_0='?' (DbType = Int64)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `e`.`id`, `e`.`active`, `e`.`avatar`, `e`.`bio`, `e`.`login`, `e`.`mail`, `e`.`password`, `e`.`register_code`
+FROM `User` AS `e`
+WHERE `e`.`id` = @__get_Item_0
+LIMIT 1" (0723d8ff)
+2018-08-31T11:15:30.1416371+03:00 0HLGENMHN49DA:00000001 [INF] Executed action method "server.Controllers.UserController.UpdateImage (server)", returned result "Microsoft.AspNetCore.Mvc.NotFoundResult" in 24.1655ms. (50a9e262)
+2018-08-31T11:15:30.1453378+03:00 0HLGENMHN49DA:00000001 [INF] Executing HttpStatusCodeResult, setting HTTP status code 404 (e28ccfae)
+2018-08-31T11:15:30.1466650+03:00 0HLGENMHN49DA:00000001 [INF] Executed action "server.Controllers.UserController.UpdateImage (server)" in 77.763ms (afa2e885)
+2018-08-31T11:15:30.1483569+03:00 0HLGENMHN49DA:00000001 [INF] Request finished in 85.6409ms 404  (791a596a)
+2018-08-31T11:15:32.8156164+03:00 0HLGENMHN49DB:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T11:15:32.8159215+03:00 0HLGENMHN49DB:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T11:15:32.8160828+03:00 0HLGENMHN49DB:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T11:15:32.8162753+03:00 0HLGENMHN49DB:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T11:15:32.8166517+03:00 0HLGENMHN49DB:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T11:15:32.8208017+03:00 0HLGENMHN49DB:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T11:15:32.8384314+03:00 0HLGENMHN49DB:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T11:15:32.8385280+03:00 0HLGENMHN49DB:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 22.3927ms (afa2e885)
+2018-08-31T11:15:32.8388448+03:00 0HLGENMHN49DB:00000001 [INF] Request finished in 23.291ms 401  (791a596a)
+2018-08-31T11:15:32.8490451+03:00 0HLGENMHN49DC:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-08-31T11:15:32.8492818+03:00 0HLGENMHN49DC:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
+2018-08-31T11:15:32.8494933+03:00 0HLGENMHN49DC:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-08-31T11:15:32.8495911+03:00 0HLGENMHN49DC:00000001 [INF] Authorization failed. (b15dd539)
+2018-08-31T11:15:32.8497957+03:00 0HLGENMHN49DC:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-08-31T11:15:32.8499339+03:00 0HLGENMHN49DC:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-08-31T11:15:32.8501684+03:00 0HLGENMHN49DC:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-08-31T11:15:32.8502141+03:00 0HLGENMHN49DC:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.6671ms (afa2e885)
+2018-08-31T11:15:32.8503470+03:00 0HLGENMHN49DC:00000001 [INF] Request finished in 1.3438ms 401  (791a596a)

@@ -50,7 +50,7 @@ namespace server.Controllers
             return BadRequest(ModelState);
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         [Route("sendcode")]
         public IActionResult SendMail([FromBody]Email email)

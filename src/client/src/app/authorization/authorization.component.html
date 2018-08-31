@@ -26,37 +26,12 @@
               </div>
           </form>
       </div>
-      <p style=' font-family:Roboto, sans-serif;text-align: center; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</p>
-
+      <div class="isa_error" [hidden]=isErrorHidden>
+        <i class="fa fa-times-circle"></i>
+        {{errorMessage}}
+     </div>
   </div>
 
-
-
-<!-- <div class="outer">
-  <div class="logo">
-    <img src="assets/images/Logo-Sayme.svg" style="width:280px; display: block; margin-left: auto;margin-right: auto">
-  </div>
-  <div class="inner">
-    <div class="container_with_borders">
-      <form #postForm="ngForm" (keydown.enter)="onLogin()">
-        <div class="ui-g ui-fluid" style="justify-content: center">
-          <div style="padding: 10px;" class="ui-g-12">
-            <input [(ngModel)]="user.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
-            <br>
-            <input [(ngModel)]="user.password" class="post-username" name="username" type="password" pInputText placeholder="Password"
-              autocomplete="off">
-            <br>
-
-            <button class="regButton" style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
-              pButton (click)="onLogin()">Sign in</button>
-            <button class="regButton" style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
-              pButton (click)="onRegistration()">Sign up</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    <p style=' font-family:Roboto, sans-serif;text-align: center; text-decoration: underline ;text-decoration-color: red ;color:black'>{{errorMessage}}</p>
-  </div> -->
 
 
   

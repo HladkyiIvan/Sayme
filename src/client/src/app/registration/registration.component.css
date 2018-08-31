@@ -1,3 +1,5 @@
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
 body{
     display: flex;
     justify-content: center;
@@ -47,6 +49,18 @@ p{
     height: 35px;
     box-shadow: 0 -3px rgb(185, 177, 53) inset;
     transition: 0.2s;
+}
+
+.isa_error {
+    padding:10px;
+    color: rgb(255, 251, 252);
+    background-color: rgb(240, 0, 0);
+    border-radius: 20px;
+    margin:10px 22px;
+    font-size:1em;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    vertical-align:middle;
+    text-align: center;
 }
 
 .post-username{
@@ -127,7 +141,6 @@ p{
     justify-content: center;
     background-color: rgb(46, 45, 45);
     margin-bottom:10px; 
-    /* background-image: url(assets/images/nebo.jpg);*/
     box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
 }
 

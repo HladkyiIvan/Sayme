@@ -31,7 +31,17 @@ namespace server.Controllers
         [HttpGet]
         public IEnumerable<User> Get()
         {
+        
             return context.User.ToList();
+        }
+
+        [HttpGet("current")]
+        public ActionResult<User> GetCurrent()
+        {
+            var user=context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
+            if(user==null) 
+            return NotFound();
+            return user; 
         }
 
         [HttpGet("{id}")]
@@ -53,10 +63,13 @@ namespace server.Controllers
             {
                 context.User.Add(user);
                 context.SaveChanges();
+                log.LogInformation("User added");
                 return Ok(user);
             }
             return BadRequest(ModelState);
         }
+
+
 
         // [HttpPut("{id}")]
         // public IActionResult Put([FromBody] User newUser)

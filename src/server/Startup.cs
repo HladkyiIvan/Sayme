@@ -23,7 +23,7 @@ namespace server
     public class Startup
     {
         string connection = "server=localhost; port=3306; database=saymedb; user=root; password=;";
-        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,6 +36,12 @@ namespace server
         {
             services.AddDbContextPool<SaymedbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDistributedMemoryCache();
+            services.AddSession(options=>
+            {
+                options.IdleTimeout=TimeSpan.FromDays(1);
+            }
+            );
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
@@ -43,19 +49,19 @@ namespace server
                         options.RequireHttpsMetadata = false;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
-                            
+
                             // укзывает, будет ли валидироваться издатель при валидации токена
                             ValidateIssuer = false,
                             // строка, представляющая издателя
                             ValidIssuer = AuthOptions.ISSUER,
- 
+
                             // будет ли валидироваться потребитель токена
                             ValidateAudience = false,
                             // установка потребителя токена
                             ValidAudience = AuthOptions.AUDIENCE,
                             // будет ли валидироваться время существования
                             ValidateLifetime = true,
- 
+
                             // установка ключа безопасности
                             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
                             // валидация ключа безопасности
@@ -79,6 +85,8 @@ namespace server
             {
                 app.UseHsts();
             }
+            app.UseSession();
+
             app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseStaticFiles();

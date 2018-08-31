@@ -2,23 +2,28 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { tap } from '../../../node_modules/rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import {LoginService} from '../services/login.service';
 
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
-    constructor(private router:Router, private cookieService: CookieService) { }
+    constructor(private router:Router, private cookieService: CookieService, private loginService:LoginService) { }
 
+
+    //Перехватывает каждый запрос на сервер, добавляет в хедеры запроса
+    //авторизационный токен(если такой имеется). Если пользователь неавторизирован,
+    //то редирект на логинпейдж
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         var authToken=this.getToken();
         if(authToken!=null)
         {
             this.setItem(authToken);
         }
-        var token=this.getTokenFromLocalstorage();
 
+       var token=this.loginService.token;
         req = req.clone({
             setHeaders: {
               Authorization: `Bearer ${token}`
@@ -26,7 +31,7 @@ export class Interceptor implements HttpInterceptor {
           });
           
         return next.handle(req).pipe(tap(
-            (event:any)=>{},
+            () => { },
             (error:any)=>{
                 if(error instanceof HttpErrorResponse)
                 {
@@ -39,24 +44,17 @@ export class Interceptor implements HttpInterceptor {
 
     }
 
-    private getTokenFromLocalstorage(){
-        var item=localStorage.getItem('token');
-        if(!item){
-            return null;
-        }
-        else return item;
-    }
-
+    //Размещает токен в сервисе
     private setItem(token:string)
     {
-        localStorage.setItem('token',token);
+        this.loginService.token=token;
     }
 
     private getToken(){
         if(this.cookieService.check('token'))
         {
             var authToken=this.cookieService.get('token');
-            console.log(authToken);
+            this.cookieService.delete('token');
             return authToken;
         }
         else return null;

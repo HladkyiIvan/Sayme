@@ -27,7 +27,6 @@
         [maximizable]="true">
     <p style="margin: 0 0 17px 0;">{{ 'Left your answer or comment here:' | translate }}</p>
     <form #postForm="ngForm" style="margin: 0;">
-        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="{{ 'your email'| translate }}" autocomplete="off">
         <textarea required [(ngModel)]="feedbackText" style="overflow:hidden;" class="feedback-text" name="feedbackText" placeholder="{{ 'your comment' | translate }}"></textarea>
         <div style="float: right; margin-top: 5px;">
             <button type="button" class="feedback-send-button" (click)="onSendFeedback()">{{ 'Send' | translate }}</button>
@@ -59,7 +58,7 @@
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
     <h1>
-        <a routerLink=" " style="color: #cccccc;">{{ 'Username' | translate }}</a>
+        <a routerLink=" "  style="color: #cccccc;">{{ 'Username' | translate }}</a>
     </h1>
     <h5>
         <a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a>

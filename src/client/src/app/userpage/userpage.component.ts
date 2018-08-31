@@ -13,6 +13,7 @@ import { User } from '../Models/user';
 export class UserpageComponent implements OnInit {
 
   posts = [];
+  curUser:User;
   imageData;
   user = new User();
   userToChange = new User();
@@ -23,10 +24,11 @@ export class UserpageComponent implements OnInit {
 
   ngOnInit() {
     this.loadUserPosts();
+    
   }
 
   loadUserPosts(){
-      this.userService.getUser(32)
+      this.userService.getCurrent()
     .subscribe((data: User) => {
       this.user = data;
 
@@ -51,6 +53,7 @@ export class UserpageComponent implements OnInit {
     .subscribe((data: Post) => this.posts.push(data));
       this.newPost = new Post();
     }
+    this.userService.getCurrent().subscribe((data:User)=>this.curUser=data);
   }
 
   // Открыть диалог настройки аккаунта

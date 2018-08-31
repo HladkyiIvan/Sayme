@@ -1,11 +1,13 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
 import { LoginService } from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '../../services/translate.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../Models/user';
 
 @Component({
   selector: 'app-navigation-tools',
@@ -19,17 +21,18 @@ export class NavigationToolsComponent implements OnInit {
   opened: boolean = false;
   isFeedbackFormVisible: boolean = false;
   isSuccessFormVisible: boolean = false;
-  feedback = new Email('','');
+  feedback = new Email('','')
   feedbackText: string = '';
-  useremail: string = '';
+  user:User;
   language: string = '';
 
   constructor(
     private _feedbackService: FeedbackService,
     private translate: TranslateService, 
     private router: Router,
-    private route: ActivatedRoute,
-    private logger: NGXLogger) { }
+    private logger: NGXLogger,
+    private userService: UserService,
+    private loginService:LoginService) { }
 
   ngOnInit() {
     if(!localStorage.getItem('language')){
@@ -39,9 +42,20 @@ export class NavigationToolsComponent implements OnInit {
       this.setLang(localStorage.getItem('language'));
     }
     this.selectLanguage();
+    this.loadCurUser();
   }
 
 
+  loadCurUser(){
+    this.userService.getCurrent()
+    .subscribe((data: User) => {
+      this.user = data;})
+  }
+
+  signOut(){
+    this.loginService.token=''; 
+    this.router.navigate(['']);
+  }
 
   //!!!FEATURE!!!
   //switching on navigationbar button`s text 
@@ -104,16 +118,15 @@ export class NavigationToolsComponent implements OnInit {
 
   //send feedback to server
   onSendFeedback() {
-    if (this.feedbackText.length > 10 && this.useremail.length > 3 ) {
+    if (this.feedbackText.length > 10  ) {
       this.isFeedbackFormVisible = false
       this.isSuccessFormVisible = true
 
-      this.feedback = new Email(this.useremail, this.feedbackText)
+      this.feedback = new Email(this.user.mail, this.feedbackText)
       this._feedbackService.sendFeedback(this.feedback)
           .subscribe()
       this.logger.info('feedback was sent');
       this.feedbackText = ''
-      this.useremail = ''
     }
     else this.logger.info('Wrong size of entered info in feedback');
   }
