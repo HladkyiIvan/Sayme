@@ -3,7 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
-import {LoginService} from'../../services/login.service';
+import { LoginService } from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '../../services/translate.service';
 
@@ -19,11 +19,10 @@ export class NavigationToolsComponent implements OnInit {
   opened: boolean = false;
   isFeedbackFormVisible: boolean = false;
   isSuccessFormVisible: boolean = false;
-  feedback = new Email('','')
-  feedbackText: string = ''
-  useremail: string = ''
+  feedback = new Email('','');
+  feedbackText: string = '';
+  useremail: string = '';
   language: string = '';
-
 
   constructor(
     private _feedbackService: FeedbackService,
@@ -33,6 +32,12 @@ export class NavigationToolsComponent implements OnInit {
     private logger: NGXLogger) { }
 
   ngOnInit() {
+    if(!localStorage.getItem('language')){
+      this.setLang('en');
+    }
+    else{
+      this.setLang(localStorage.getItem('language'));
+    }
     this.selectLanguage();
   }
 
@@ -71,7 +76,6 @@ export class NavigationToolsComponent implements OnInit {
         label: `${navigationItems[2]}`,
         routerLink: '**'
       }
-
     ]
   }
 
@@ -79,6 +83,7 @@ export class NavigationToolsComponent implements OnInit {
     this.language = lang;
     this.selectLanguage();
     this.translate.use(lang);
+    localStorage.setItem('language', lang);
   }
 
   ///opens sidebar with user info
@@ -112,6 +117,4 @@ export class NavigationToolsComponent implements OnInit {
     }
     else this.logger.info('Wrong size of entered info in feedback');
   }
-
-
 }

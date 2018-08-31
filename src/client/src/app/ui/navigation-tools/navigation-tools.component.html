@@ -7,7 +7,7 @@
 
 <div class="sticky">
     <p-menubar [model]="items" >
-        <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 241, 181);" pInputText placeholder="Search..." >
+        <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 241, 181);" pInputText placeholder="{{ 'Search...' | translate }}" >
         <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
         <button type="button" (click)="signOut()" style="margin-left: 12px" pButton icon="fas fa-sign-out-alt"></button>
     </p-menubar>
@@ -15,7 +15,7 @@
 
 
 <!-- Feedback modal form -->
-<p-dialog header="Feedback" 
+<p-dialog header="{{ 'Feedback' | translate }}" 
         [(visible)]="isFeedbackFormVisible" 
         [resizable]='false' 
         [closeOnEscape]='true' 
@@ -37,7 +37,7 @@
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
-<p-dialog header="Success!" 
+<p-dialog header="{{ 'Success!' | translate }}" 
         [(visible)]="isSuccessFormVisible" 
         [modal]="true" 
         [resizable]='false' 
@@ -72,10 +72,10 @@
     <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>
     <br>
     <br>
-    <select name="language" id="selectLanguage" (change)="setLang($event.target.value);">
-        <option value="en" selected>{{ 'english' | translate }}</option>
-        <option value="ua">{{ 'ukranian' | translate }}</option>
-        <option value="ru">{{ 'russian' | translate }}</option>
+    <select ngModel="selectBoxLanguage" id="changeLang" (change)="setLang($event.target.value);">
+        <option value="en">english</option>
+        <option value="ua">українська</option>
+        <option value="ru">русский</option>
     </select>
 </p-sidebar>
 <router-outlet></router-outlet>
