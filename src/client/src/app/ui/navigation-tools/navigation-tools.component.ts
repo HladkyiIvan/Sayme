@@ -28,6 +28,7 @@ export class NavigationToolsComponent implements OnInit {
 
 
   constructor(
+    
     private _feedbackService: FeedbackService,
     private translate: TranslateService, 
     private router: Router,
