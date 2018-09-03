@@ -24,7 +24,7 @@ export class NavigationToolsComponent implements OnInit {
   feedback = new Email('','')
   feedbackText: string = '';
   user:User;
-  language: string = '';
+  language: string = localStorage.getItem('language');
 
   constructor(
     private _feedbackService: FeedbackService,
@@ -35,11 +35,13 @@ export class NavigationToolsComponent implements OnInit {
     private loginService:LoginService) { }
 
   ngOnInit() {
-    if(!localStorage.getItem('language')){
+    if(!this.language){
       this.setLang('en');
+      localStorage.setItem('language', 'en');
+      this.language = localStorage.getItem('language');
     }
     else{
-      this.setLang(localStorage.getItem('language'));
+      this.setLang(this.language);
     }
     this.selectLanguage();
     this.loadCurUser();
