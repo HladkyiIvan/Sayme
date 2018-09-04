@@ -7,28 +7,28 @@
             <form #postForm="ngForm" (keydown.enter)="onRegister()">
                 <div class="ui-g ui-fluid" style="justify-content: center">
                     
-                    <div  style="padding: 0px;" class="ui-g-12">
-                        <input  title="From 5 till 20 letters" [(ngModel)]="newUser.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                    <div  style="padding: 0px;"  class="ui-g-12">
+                        <input  title="From 5 till 20 letters" [disabled]="isTextboxesDisabled" [(ngModel)]="newUser.login"  name="username" type="text" pInputText placeholder="Username" autocomplete="off">
                         <br>
-                        <input [(ngModel)]="newUser.mail" class="post-username" name="username" type="text" pInputText placeholder="Email" autocomplete="off">
+                        <input [disabled]="isTextboxesDisabled" [(ngModel)]="newUser.mail"  name="email" type="text" pInputText placeholder="Email" autocomplete="off">
                         <br>
-                        <input [(ngModel)]="newUser.password" class="post-username" name="username" type="password" pInputText placeholder="Password"
+                        <input [disabled]="isTextboxesDisabled" [(ngModel)]="newUser.password" name="password" type="password" pInputText placeholder="Password"
                             autocomplete="off">
                         <br>
-                        <input [(ngModel)]="repPassword" class="post-username" name="username" type="password" pInputText placeholder="Repeat password"
+                        <input [disabled]="isTextboxesDisabled" [(ngModel)]="repPassword" name="repeatedPassword" type="password" pInputText placeholder="Repeat password"
                             autocomplete="off">
                         <br>
                         <ng-template #set>
-                                <button class="regButton"  style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
+                                <button   style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
                                 pButton (click)="onRegister()">Get code</button>
                         </ng-template>
 
                         
 
                             <ng-template #unset>
-                                    <input [(ngModel)]="enteredCode" class="post-username" style="margin-left: auto;margin-right: auto" name="code" type="text" pInputText
+                                    <input [(ngModel)]="enteredCode" style="margin-left: auto;margin-right: auto" name="code" type="text" pInputText
                                         placeholder="Enter code we`ve sent on your mail" autocomplete="off">
-                                    <button pButton type="button" class="regButton" pButton (click)="onConfirmCode()"  style="padding:4%; margin-top: 20px; width: 150px;height: 40px;display: block; border-radius: 30px;margin-left: 30px;">Confirm code</button>
+                                    <button pButton type="button" pButton (click)="onConfirmCode()"  style="padding:4%; margin-top: 20px; width: 150px;height: 40px;display: block; border-radius: 30px;margin-left: 30px;">Confirm code</button>
                                 </ng-template>
                                 
                     <div *ngIf="!isVisibleCodeInput; then set else unset" ></div>

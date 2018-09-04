@@ -38,37 +38,31 @@ namespace server.Controllers
             if (authUser == null)
                 return BadRequest(new { message = "Username or password are incorrect!" });
 
+            var tokenString=GenerateToken();
+            Set("token", tokenString, 1);
+            HttpContext.Session.SetString("Username", user.login);
+            return Ok(new
+            {
+                Token = tokenString
+            });
+        }
+
+        public string GenerateToken(){
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("authorization_sayme");
+            var key = Encoding.ASCII.GetBytes("authorization_saymetoken");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Expires = System.DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
             };
-            HttpContext.Session.SetString("Username",user.login);
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-            Set("token", tokenString, 1);
-            // return basic user info (without password) and token to store client side
-            return Ok(new
-            {
-                Token = tokenString
-            });
-
-
-
-
+            return tokenString;
         }
 
-
-        public string GenerateRefreshToken()
+        private User GetCurrentUser()
         {
-            var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(randomNumber);
-                return Convert.ToBase64String(randomNumber);
-            }
+            return context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
         }
 
         private AuthUser Authenticate(string login, string password)
@@ -80,7 +74,7 @@ namespace server.Controllers
 
             return null;
         }
-        
+
 
         public void Set(string key, string value, int? expireTime)
         {
@@ -95,6 +89,10 @@ namespace server.Controllers
         }
 
 
+
+
     }
+
+
 
 }
