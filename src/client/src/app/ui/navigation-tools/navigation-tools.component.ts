@@ -27,6 +27,7 @@ export class NavigationToolsComponent implements OnInit {
   language: string = localStorage.getItem('language');
 
   constructor(
+    
     private _feedbackService: FeedbackService,
     private translate: TranslateService, 
     private router: Router,
@@ -56,6 +57,7 @@ export class NavigationToolsComponent implements OnInit {
 
   signOut(){
     this.loginService.token=''; 
+    localStorage.removeItem('token');
     this.router.navigate(['']);
   }
 

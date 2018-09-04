@@ -58,7 +58,7 @@
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
     <h1>
-        <a routerLink=" "  style="color: #cccccc;">{{ 'Username' | translate }}</a>
+        <a routerLink=" " ngModel style="color: #cccccc;">{{ user.login }}</a>
     </h1>
     <h5>
         <a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a>

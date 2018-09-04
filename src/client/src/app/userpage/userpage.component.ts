@@ -53,7 +53,6 @@ export class UserpageComponent implements OnInit {
     .subscribe((data: Post) => this.posts.push(data));
       this.newPost = new Post();
     }
-    this.userService.getCurrent().subscribe((data:User)=>this.curUser=data);
   }
 
   // Открыть диалог настройки аккаунта
