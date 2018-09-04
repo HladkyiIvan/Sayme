@@ -8,17 +8,17 @@
               <div class="ui-g ui-fluid" style="justify-content: center">
                   
                   <div  style="padding: 0px;" class="ui-g-12">
-                      <input [(ngModel)]="user.login" class="post-username" name="username" type="text" pInputText placeholder="Username" autocomplete="off">
+                      <input [(ngModel)]="user.login" class="post-username" name="username" type="text" pInputText placeholder="{{ 'Username' | translate }}" autocomplete="off">
                       <br>
-                      <input [(ngModel)]="user.password" class="post-username" name="username" type="password" pInputText placeholder="Password"
+                      <input [(ngModel)]="user.password" class="post-username" name="username" type="password" pInputText placeholder="{{ 'Password' | translate }}"
                           autocomplete="off">
                       <br>
                               <button class="regButton"  style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
-                              pButton (click)="onLogin()">Sign in</button>
+                              pButton (click)="onLogin()">{{ 'Sign in' | translate }}</button>
                               <br>
 
                                <button class="regButton"  style="padding:4%;vertical-align:middle; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
-                              pButton (click)="onRegistration()">Sign up</button> 
+                              pButton (click)="onRegistration()">{{ 'Sign up' | translate }}</button> 
                       
                               
                   </div>
