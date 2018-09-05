@@ -18,6 +18,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { FileUploadModule } from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TooltipModule} from 'primeng/tooltip';
+import {TabViewModule} from 'primeng/tabview';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -66,7 +67,8 @@ import { UserpageComponent } from './userpage/userpage.component';
     DataViewModule,
     DialogModule,
     InputTextareaModule,
-    FileUploadModule    
+    FileUploadModule,
+    TabViewModule    
   ],
   exports: [
     LoginRegistrationHeaderComponent,

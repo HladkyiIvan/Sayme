@@ -2,7 +2,12 @@
   <div class="userinfo">
       <br>
           <div style= "float:left; padding-right:3%">
-                <img id="image" [src]="imageData" style=" width:240px;">
+              <div *ngIf="haveAvatar;else other_img">
+                    <img [src]="imageData" style=" width:240px;">
+              </div>
+              <ng-template #other_img>
+                    <img src="assets/images/default_avatar.svg" style= "width:240px">
+              </ng-template>   
           </div>
           <div>
               <div style="padding: 10px;">
@@ -15,11 +20,11 @@
   </div>
   
   <form #postForm="ngForm">
-      <div class="ui-g ui-fluid" >
+    <div class="ui-g ui-fluid" >
         <div style="padding: 10px;" class="ui-g-12">
               <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off" style="width: 35%;">
           <p-button (click)="onSay()" icon="fa fa-comment" style="width:70px;"></p-button>
-          <p-button label="Submit" class="sub"></p-button>
+          <p-button label="Subscribe" class="sub"></p-button>
         </div>
     </div>
   </form>
@@ -38,10 +43,36 @@
 </div>
 
 <p-dialog header="Profile settings" [(visible)]="displayProfileSettings" [width]="600" [draggable]="false" 
-[dismissableMask]="true" [modal]="true" [responsive]="true" [resizable]="false">
-    <p>Avatar:</p>
-    <p-fileUpload #form name="myfile[]" customUpload="true" accept="image/*" maxFileSize="1000000"
-     (uploadHandler)="myUploader($event, form)" showCancelButton="false"></p-fileUpload>
-    <p>About:</p>
-    <p><textarea rows="4" maxlength="256" class="post-text" style="color: black;">{{user.bio}}</textarea></p>
+[dismissableMask]="true" [modal]="true" [responsive]="true" [resizable]="false" (onHide)="closePasswordChange();">
+    <p-tabView orientation="left">
+        <p-tabPanel header="Avatar">
+            <p>Set new avatar:</p>
+            <p-fileUpload #form name="myfile[]" customUpload="true" accept="image/*" maxFileSize="1000000"
+            (uploadHandler)="myUploader($event, form)" showUploadButton="false" mode="advanced" uploadLabel="Save"></p-fileUpload>
+        </p-tabPanel>
+        <p-tabPanel header="Bio">
+            <p>Change info about yourself:</p>
+            <p><textarea pInputTextarea  [(ngModel)]="newBio" rows="4" maxlength="256" class="post-text" style="color: black; background: white; padding: 0.2em"></textarea></p>
+            <p-button label="Save" class="sub" (click)="saveNewBio()" style="display: block;"></p-button>
+        </p-tabPanel>
+        <p-tabPanel header="Password">
+            <p class="p-password">Enter old password:</p>
+                <input [(ngModel)]="checkPassword" class="check-password" type="password" pInputText placeholder="old password" autocomplete="off" >
+                <p-button label="Check" class="sub" (click)="checkOldPassword()" style="display: block;"></p-button>
+            <div *ngIf="displayNewPasswordInput;">
+                <p class="p-password">New password:</p>
+                <input [(ngModel)]="checkPassword" class="check-password" type="password" pInputText placeholder="new password" autocomplete="off" >
+                <p class="p-password">Confirm new password:</p>
+                <input [(ngModel)]="checkPassword" class="check-password" type="password" pInputText placeholder="repeat password" autocomplete="off" >
+                <p-button label="Save password" class="sub" (click)="closePasswordChange()" style="display: block;"></p-button>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Email">
+            Content 3
+        </p-tabPanel>
+        <p-tabPanel header="Common">
+            Content 3
+        </p-tabPanel>
+    </p-tabView>
+    <br>
 </p-dialog>

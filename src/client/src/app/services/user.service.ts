@@ -32,8 +32,8 @@ export class UserService {
     return this.http.post(this.url, user);
   }
 
-  updateUser(user: User){
-    return this.http.put(this.url + '/' + user.id.toString(), user);
+  updateBio(user: User){
+    return this.http.put(this.url + '/bio', user);
   }
 
   updateAvatar(id_user: number, file: File) {

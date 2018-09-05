@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { PostService } from '../services/post.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Post } from '../Models/post';
 import { User } from '../Models/user';
 
@@ -13,28 +14,33 @@ import { User } from '../Models/user';
 export class UserpageComponent implements OnInit {
 
   posts = [];
-  curUser:User;
   imageData;
   user = new User();
-  userToChange = new User();
+  newBio:string;
+  checkPassword:string;
   newPost = new Post();
+  haveAvatar = true;
   displayProfileSettings: boolean = false;
+  displayNewPasswordInput: boolean = false;
 
   constructor(private postService: PostService, private userService: UserService) { }
 
   ngOnInit() {
     this.loadUserPosts();
-    
   }
 
   loadUserPosts(){
-      this.userService.getCurrent()
+      this.userService.getUser(31)
     .subscribe((data: User) => {
       this.user = data;
-
+      this.newBio = this.user.bio;
       this.getPostsFromService(data);
       this.imageData = 'data:image/jpg;base64,' + data.avatar;
     }, err => console.error(err));
+
+    if(this.user.avatar == null){
+      this.haveAvatar = false;
+    }
   }
   getPostsFromService(user: User){
         this.postService.getUserPosts(user.id)
@@ -53,7 +59,6 @@ export class UserpageComponent implements OnInit {
     .subscribe((data: Post) => this.posts.push(data));
       this.newPost = new Post();
     }
-    this.userService.getCurrent().subscribe((data:User)=>this.curUser=data);
   }
 
   // Открыть диалог настройки аккаунта
@@ -62,7 +67,6 @@ export class UserpageComponent implements OnInit {
   }
 
   myUploader(event, form){
-    
 
     let file: File = event.files[0];
     console.log("file:", file)
@@ -73,6 +77,24 @@ export class UserpageComponent implements OnInit {
     form.clear();
   }
 
+  saveNewBio(){
+    let oldBio = this.user.bio;
+    this.user.bio = this.newBio;
+
+    this.userService.updateBio(this.user)
+    .subscribe(
+      () => { },
+      (error:any)=>{
+        if(error instanceof HttpErrorResponse)
+        {
+            if(error.status != 200){
+              console.log(error);
+              this.user.bio = oldBio;
+            }
+        }
+      });
+  }
+
   convertToBase64(file){
     let that = this;
 
@@ -80,7 +102,17 @@ export class UserpageComponent implements OnInit {
     reader.readAsDataURL(file); 
     reader.onloadend = function() {
       that.imageData = reader.result.toString();
-      that.imageData = that.imageData.replace(/^data:image\/[a-z]+;base64,/, "");
     }
+  }
+
+  checkOldPassword(){
+    if(this.checkPassword == this.user.password && this.displayNewPasswordInput != true){
+      this.displayNewPasswordInput = true;
+    }
+  }
+
+  closePasswordChange(){
+    this.displayNewPasswordInput = false;
+    this.checkPassword = "";
   }
 }
