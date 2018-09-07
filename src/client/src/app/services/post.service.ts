@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Post } from '../Models/post';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 import { NGXLogger } from 'ngx-logger';
 
 @Injectable({

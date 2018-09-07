@@ -36,7 +36,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        component: PostComponent,
+        component: UserpageComponent,
       },
       {
         path:'auth',

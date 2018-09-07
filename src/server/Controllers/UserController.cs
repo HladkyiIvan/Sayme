@@ -25,13 +25,23 @@ namespace server.Controllers
         public UserController(SaymedbContext context)
         {
             this.context = context;
-        }  
-        
-        
+        }
+
+
         [HttpGet]
         public IEnumerable<User> Get()
         {
+        
             return context.User.ToList();
+        }
+
+        [HttpGet("current")]
+        public ActionResult<User> GetCurrent()
+        {
+            var user=context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
+            if(user==null) 
+            return NotFound();
+            return user; 
         }
 
         [HttpGet("{id}")]
@@ -43,19 +53,23 @@ namespace server.Controllers
                 return NotFound();
             }
             return item;
-        } 
+        }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody]User user)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 context.User.Add(user);
                 context.SaveChanges();
+                log.LogInformation("User added");
                 return Ok(user);
             }
             return BadRequest(ModelState);
         }
+
+
 
         // [HttpPut("{id}")]
         // public IActionResult Put([FromBody] User newUser)
@@ -82,8 +96,8 @@ namespace server.Controllers
         {
             try
             {
-                
-                if(image == null || !ModelState.IsValid)
+
+                if (image == null || !ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
@@ -109,7 +123,7 @@ namespace server.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }  
+        }
     }
-    
+
 }

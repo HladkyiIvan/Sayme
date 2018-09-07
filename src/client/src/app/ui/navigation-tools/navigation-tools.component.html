@@ -1,15 +1,12 @@
 <div class="wrapper-body">
-
-
-
 <img src="assets/images/Logo-Sayme.svg" style= "width:280px">
 
-
 <div class="sticky">
-<p-menubar [model]="items" styleClass="menu">
-    <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 236, 153);" pInputText placeholder="{{ 'Search...'| translate }}" >
-    <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
-</p-menubar>
+    <p-menubar [model]="items" >
+        <input type="search" class="search-input" style="font-size: 15px; background: rgb(255, 241, 181);" pInputText placeholder="{{ 'Search...' | translate }}" >
+        <button type="button" (click)="showDialog()" pButton icon="fa fa-bug"></button>
+        <button type="button" (click)="signOut()" style="margin-left: 12px" pButton icon="fas fa-sign-out-alt"></button>
+    </p-menubar>
 </div>
 
 
@@ -57,24 +54,18 @@
 
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
-    <h1>
-        <a routerLink=" " style="color: #cccccc;">{{ 'Username' | translate }}</a>
-    </h1>
-    <h5>
-        <a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a>
-    </h5>
-    <h5>
-        <a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a>
-    </h5>
+    <h1><a routerLink=" " style="color: #cccccc;">{{ 'Username' | translate }}</a></h1>
+    <h5><a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a></h5>
+    <h5><a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a></h5>
     <button pButton type="button" class="ui-button-warning" style="width: 200px; height: 30px; margin: 10px 0px;">{{ 'Settings' | translate }}</button>
     <br>
     <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>
     <br>
     <br>
-    <select name="language" id="selectLanguage" (change)="setLang($event.target.value);">
-        <option value="en" selected>{{ 'english' | translate }}</option>
-        <option value="ua">{{ 'ukranian' | translate }}</option>
-        <option value="ru">{{ 'russian' | translate }}</option>
+    <select name="language" [(ngModel)]="language" id="selectLanguage" (change)="setLang($event.target.value);">
+        <option value="en" selected>english</option>
+        <option value="ua">українська</option>
+        <option value="ru">русский</option>
     </select>
 </p-sidebar>
 <router-outlet></router-outlet>

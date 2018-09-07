@@ -16,7 +16,9 @@ import { MenubarModule } from 'primeng/menubar';
 import { AccordionModule } from 'primeng/accordion';
 import { DataViewModule } from 'primeng/dataview';
 import { FileUploadModule } from 'primeng/fileupload';
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TooltipModule } from 'primeng/tooltip';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -61,20 +63,12 @@ import { UserpageComponent } from './userpage/userpage.component';
     HttpClientModule,
     MenubarModule,
     MenuModule,
+    TooltipModule,
     DataViewModule,
     DialogModule,
     InputTextareaModule,
-    FileUploadModule    
-  ],
-  exports: [
-    LoginRegistrationHeaderComponent,
-    AboutUserBodyComponent,
-    FooterComponent,
-    NavigationToolsComponent,
-    PostComponent,
-    AccordionModule,
-    DataViewModule,
-    UserpageComponent
+    FileUploadModule,
+    SplitButtonModule 
   ],
   providers: [UserService, CookieService,
     {

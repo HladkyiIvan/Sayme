@@ -10,16 +10,16 @@
                     <p-button (click)="showProfileSettings()" icon="fas fa-cog" style="float:right"></p-button>
               </div>
               <br>
-              <h4 class="bio">About: {{user.bio}}</h4>
+              <h4 class="bio">{{ 'About' | translate }}: {{user.bio}}</h4>
           </div>
   </div>
   
   <form #postForm="ngForm">
       <div class="ui-g ui-fluid" >
         <div style="padding: 10px;" class="ui-g-12">
-              <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off" style="width: 35%;">
+              <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="{{ 'Say something...' | translate }}" autocomplete="off" style="width: 35%;">
           <p-button (click)="onSay()" icon="fa fa-comment" style="width:70px;"></p-button>
-          <p-button label="Submit" class="sub"></p-button>
+          <p-button label="{{ 'Submit' | translate }}" class="sub"></p-button>
         </div>
     </div>
   </form>
@@ -28,8 +28,22 @@
           <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9">
               <div class="ui-g-12 ui-md-12 post-container">
                   <div class="ui-g-12">
-                      <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
-                      <p style="color: black">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p> 
+                        <p style="margin:0px;">
+                            <button pButton style="float: right;" icon="fas fa-edit" (click)="changePost($event, post.id)"></button>
+                        </p> 
+                        <div *ngIf="post.is_changing; else editing">
+                            <p><textarea class="post-text" [readonly]="!post.is_changing" style="color: purple">{{post.message}}</textarea></p>
+                        </div>
+                        <ng-template #editing >
+                            <p><textarea class="post-text" id="postText" [readonly]="!post.is_changing" style="color: black">{{post.message}}</textarea></p>
+                        </ng-template>
+                        <div>
+                            <p style="color: black;">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                            <div *ngIf="post.is_changing">
+                                <button pButton style="float: right;" icon="fas fa-times" (click)="cancelEditPost($event, post.id);"></button>
+                                <button pButton style="float: right;" icon="fas fa-check" (click)="submitEditPost($event, post.id);"></button>
+                            </div>
+                        </div> 
                   </div>
               </div>
           </div>
@@ -37,11 +51,22 @@
   </p-dataView>
 </div>
 
-<p-dialog header="Profile settings" [(visible)]="displayProfileSettings" [width]="600" [draggable]="false" 
-[dismissableMask]="true" [modal]="true" [responsive]="true" [resizable]="false">
-    <p>Avatar:</p>
-    <p-fileUpload #form name="myfile[]" customUpload="true" accept="image/*" maxFileSize="1000000"
-     (uploadHandler)="myUploader($event, form)" showCancelButton="false"></p-fileUpload>
-    <p>About:</p>
+<p-dialog header="Profile settings" 
+        [(visible)]="displayProfileSettings" 
+        [width]="600" 
+        [draggable]="false" 
+        [dismissableMask]="true" 
+        [modal]="true" 
+        [responsive]="true" 
+        [resizable]="false">
+    <p>{{ 'Avatar' | translate }}:</p>
+    <p-fileUpload #form name="myfile[]" 
+            customUpload="true" 
+            accept="image/*" 
+            maxFileSize="1000000"
+            (uploadHandler)="myUploader($event, form)" 
+            showCancelButton="false">
+    </p-fileUpload>
+    <p>{{ 'About' | translate }}:</p>
     <p><textarea rows="4" maxlength="256" class="post-text" style="color: black;">{{user.bio}}</textarea></p>
-</p-dialog>
+</p-dialog> 
