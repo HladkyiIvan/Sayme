@@ -15823,3 +15823,43 @@ FROM `Post` AS `p`" (0723d8ff)
 2018-09-07T20:52:55.1411003+03:00 0HLGKT9UMRTLG:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
 2018-09-07T20:52:55.1412813+03:00 0HLGKT9UMRTLG:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 1.756ms (afa2e885)
 2018-09-07T20:52:55.1413974+03:00 0HLGKT9UMRTLG:00000001 [INF] Request finished in 2.3755ms 200 application/json; charset=utf-8 (791a596a)
+2018-09-07T20:54:30.1000977+03:00 0HLGKT9UMRTLH:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-09-07T20:54:30.1010328+03:00 0HLGKT9UMRTLH:00000001 [INF] Successfully validated the token. (60169667)
+2018-09-07T20:54:30.1014160+03:00 0HLGKT9UMRTLH:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-09-07T20:54:30.1015871+03:00 0HLGKT9UMRTLH:00000001 [INF] Authorization was successful. (0d575a54)
+2018-09-07T20:54:30.1017206+03:00 0HLGKT9UMRTLH:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-09-07T20:54:30.1039285+03:00 0HLGKT9UMRTLH:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-09-07T20:54:30.1040972+03:00 0HLGKT9UMRTLH:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2.3198ms. (50a9e262)
+2018-09-07T20:54:30.1042086+03:00 0HLGKT9UMRTLH:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-09-07T20:54:30.1043797+03:00 0HLGKT9UMRTLH:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 2.8649ms (afa2e885)
+2018-09-07T20:54:30.1044911+03:00 0HLGKT9UMRTLH:00000001 [INF] Request finished in 4.4543ms 200 application/json; charset=utf-8 (791a596a)
+2018-09-07T20:54:30.1151053+03:00 0HLGKT9UMRTLI:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
+2018-09-07T20:54:30.1154395+03:00 0HLGKT9UMRTLI:00000001 [INF] Successfully validated the token. (60169667)
+2018-09-07T20:54:30.1155999+03:00 0HLGKT9UMRTLI:00000001 [INF] Route matched with "{action = \"GetCurrent\", controller = \"User\"}". Executing action "server.Controllers.UserController.GetCurrent (server)" (a44c0341)
+2018-09-07T20:54:30.1157512+03:00 0HLGKT9UMRTLI:00000001 [INF] Authorization was successful. (0d575a54)
+2018-09-07T20:54:30.1158270+03:00 0HLGKT9UMRTLI:00000001 [INF] Executing action method "server.Controllers.UserController.GetCurrent (server)" - Validation state: Valid (dad538d7)
+2018-09-07T20:54:30.1196687+03:00 0HLGKT9UMRTLI:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=["@__GetString_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT `u`.`id`, `u`.`active`, `u`.`avatar`, `u`.`bio`, `u`.`login`, `u`.`mail`, `u`.`password`, `u`.`register_code`
+FROM `User` AS `u`
+WHERE `u`.`login` = @__GetString_0
+LIMIT 1" (0723d8ff)
+2018-09-07T20:54:30.1198061+03:00 0HLGKT9UMRTLI:00000001 [INF] Executed action method "server.Controllers.UserController.GetCurrent (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 3.9344ms. (50a9e262)
+2018-09-07T20:54:30.1198970+03:00 0HLGKT9UMRTLI:00000001 [INF] Executing ObjectResult, writing value of type '"server.Models.User"'. (8a1b66c8)
+2018-09-07T20:54:30.1200724+03:00 0HLGKT9UMRTLI:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 4.4179ms (afa2e885)
+2018-09-07T20:54:30.1201838+03:00 0HLGKT9UMRTLI:00000001 [INF] Request finished in 5.1306ms 200 application/json; charset=utf-8 (791a596a)
+2018-09-07T20:54:30.2537083+03:00 0HLGKT9UMRTLJ:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/post/42   (ca22a1cb)
+2018-09-07T20:54:30.2540251+03:00 0HLGKT9UMRTLJ:00000001 [INF] Successfully validated the token. (60169667)
+2018-09-07T20:54:30.2541638+03:00 0HLGKT9UMRTLJ:00000001 [INF] Route matched with "{action = \"GetByUserId\", controller = \"Post\"}". Executing action "server.Controllers.PostController.GetByUserId (server)" (a44c0341)
+2018-09-07T20:54:30.2542301+03:00 0HLGKT9UMRTLJ:00000001 [INF] Authorization was successful. (0d575a54)
+2018-09-07T20:54:30.2543779+03:00 0HLGKT9UMRTLJ:00000001 [INF] Executing action method "server.Controllers.PostController.GetByUserId (server)" with arguments (["42"]) - Validation state: Valid (4e3479ed)
+2018-09-07T20:54:30.2550447+03:00 0HLGKT9UMRTLJ:00000001 [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `p`.`id`, `p`.`id_user`, `p`.`message`, `p`.`post_date`
+FROM `Post` AS `p`" (0723d8ff)
+2018-09-07T20:54:30.2553434+03:00 0HLGKT9UMRTLJ:00000001 [INF] Executed action method "server.Controllers.PostController.GetByUserId (server)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 0.9212ms. (50a9e262)
+2018-09-07T20:54:30.2554268+03:00 0HLGKT9UMRTLJ:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-09-07T20:54:30.2555879+03:00 0HLGKT9UMRTLJ:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 1.3823ms (afa2e885)
+2018-09-07T20:54:30.2556938+03:00 0HLGKT9UMRTLJ:00000001 [INF] Request finished in 2.0187ms 200 application/json; charset=utf-8 (791a596a)
