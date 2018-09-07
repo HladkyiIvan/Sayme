@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { PostService } from '../services/post.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Post } from '../Models/post';
 import { User } from '../Models/user';
 
@@ -13,15 +14,23 @@ import { User } from '../Models/user';
 export class UserpageComponent implements OnInit {
 
   posts = [];
-  curUser:User;
   imageData;
   user = new User();
-  userToChange = new User();
+  newBio:string;
+  checkPassword:string;
+  newPassword:string;
+  newPasswordCheck:string;
   newPost = new Post();
+  haveAvatar = true;
   displayProfileSettings: boolean = false;
+  passwordCheckBtnIsDisabled: boolean = false;
+  newPasswordCheckBtnIsDisabled: boolean = false;
+  isErrorHidden: boolean = true;
+  isMessageHidden: boolean = true
+  errorMessage:string;
+  message:string;
   somePost: Post;
   editedPostMessage: string;
-  postID: number;
 
   constructor(private postService: PostService, private userService: UserService) { }
 
@@ -33,9 +42,14 @@ export class UserpageComponent implements OnInit {
     this.userService.getCurrent()
       .subscribe((data: User) => {
         this.user = data;
+        this.newBio = this.user.bio;
         this.getPostsFromService(data);
         this.imageData = 'data:image/jpg;base64,' + data.avatar;
       }, err => console.error(err));
+
+      if(this.user.avatar == null){
+        this.haveAvatar = false;
+      }
   }
 
   getPostsFromService(user: User){
@@ -71,14 +85,72 @@ export class UserpageComponent implements OnInit {
     form.clear();
   }
 
+  saveNewBio(){
+    let oldBio = this.user.bio;
+    this.user.bio = this.newBio;
+
+    this.userService.updateBio(this.user)
+    .subscribe(
+      () => { },
+      (error:any)=>{
+        if(error instanceof HttpErrorResponse)
+        {
+            if(error.status != 200){
+              console.log(error);
+              this.user.bio = oldBio;
+            }
+        }
+      });
+  }
+
   convertToBase64(file){
     let that = this;
     var reader = new FileReader();
     reader.readAsDataURL(file); 
     reader.onloadend = function() {
       that.imageData = reader.result.toString();
-      that.imageData = that.imageData.replace(/^data:image\/[a-z]+;base64,/, "");
     }
+  }
+
+
+  checkOldPassword(){
+    if(this.checkPassword == this.user.password){
+      this.isErrorHidden = true;
+      this.passwordCheckBtnIsDisabled = true;
+    }
+    else{
+      this.isErrorHidden = false;
+      this.errorMessage="Password is incorrect!";
+    }
+  }
+
+  checkNewPassword(){
+    if(this.newPassword.length <= 7){
+      this.isErrorHidden = false;
+      this.errorMessage= "Password must have at least 8 characters!";
+      return;
+    }
+
+    if(this.newPassword == this.newPasswordCheck){
+      this.isErrorHidden = true;
+      this.newPasswordCheckBtnIsDisabled = true;
+      this.isMessageHidden = false;
+      this.message = "The password change code was sent to your email!"
+    }
+    else{
+      this.isErrorHidden = false;
+      this.errorMessage= "Passwords are not the same!";
+    }
+  }
+
+  closePasswordChange(){
+    this.checkPassword = "";
+    this.newPassword = "";
+    this.newPasswordCheck = "";
+    this.isErrorHidden = true;
+    this.isMessageHidden = true;
+    this.passwordCheckBtnIsDisabled = false;
+    this.newPasswordCheckBtnIsDisabled = false;
   }
 
   changePost(idPost: number){

@@ -16,8 +16,9 @@ import { MenubarModule } from 'primeng/menubar';
 import { AccordionModule } from 'primeng/accordion';
 import { DataViewModule } from 'primeng/dataview';
 import { FileUploadModule } from 'primeng/fileupload';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { TooltipModule } from 'primeng/tooltip';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {TooltipModule} from 'primeng/tooltip';
+import {TabViewModule} from 'primeng/tabview';
 import { SplitButtonModule } from 'primeng/splitbutton';
 
 //project
@@ -68,6 +69,18 @@ import { UserpageComponent } from './userpage/userpage.component';
     DialogModule,
     InputTextareaModule,
     FileUploadModule,
+    TabViewModule    
+  ],
+  exports: [
+    LoginRegistrationHeaderComponent,
+    AboutUserBodyComponent,
+    FooterComponent,
+    NavigationToolsComponent,
+    PostComponent,
+    AccordionModule,
+    DataViewModule,
+    UserpageComponent,
+    TooltipModule,
     SplitButtonModule 
   ],
   providers: [UserService, CookieService,

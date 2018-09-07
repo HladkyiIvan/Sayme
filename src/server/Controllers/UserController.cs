@@ -124,6 +124,31 @@ namespace server.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        [Route("bio")]
+        public IActionResult UpdateBio(User newUser)
+        {
+            try
+            {
+                var oldUser = context.User.Find(newUser.id);
+
+                if (oldUser == null)
+                {
+                    return NotFound();
+                }
+
+                oldUser.bio = newUser.bio;
+
+                context.User.Update(oldUser);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 
 }

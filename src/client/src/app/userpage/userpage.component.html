@@ -2,7 +2,12 @@
   <div class="userinfo">
       <br>
           <div style= "float:left; padding-right:3%">
-                <img id="image" [src]="imageData" style=" width:240px;">
+              <div *ngIf="haveAvatar;else other_img">
+                    <img [src]="imageData" style=" width:240px;">
+              </div>
+              <ng-template #other_img>
+                    <img src="assets/images/default_avatar.svg" style= "width:240px">
+              </ng-template>   
           </div>
           <div>
               <div style="padding: 10px;">
@@ -15,11 +20,11 @@
   </div>
   
   <form #postForm="ngForm">
-      <div class="ui-g ui-fluid" >
+    <div class="ui-g ui-fluid" >
         <div style="padding: 10px;" class="ui-g-12">
-              <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="{{ 'Say something...' | translate }}" autocomplete="off" style="width: 35%;">
+              <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off" style="width: 35%;">
           <p-button (click)="onSay()" icon="fa fa-comment" style="width:70px;"></p-button>
-          <p-button label="{{ 'Submit' | translate }}" class="sub"></p-button>
+          <p-button label="{{ 'Subscribe' | translate }}" class="sub"></p-button>
         </div>
     </div>
   </form>
@@ -51,22 +56,50 @@
   </p-dataView>
 </div>
 
-<p-dialog header="Profile settings" 
-        [(visible)]="displayProfileSettings" 
-        [width]="600" 
-        [draggable]="false" 
-        [dismissableMask]="true" 
-        [modal]="true" 
-        [responsive]="true" 
-        [resizable]="false">
-    <p>{{ 'Avatar' | translate }}:</p>
-    <p-fileUpload #form name="myfile[]" 
-            customUpload="true" 
-            accept="image/*" 
-            maxFileSize="1000000"
-            (uploadHandler)="myUploader($event, form)" 
-            showCancelButton="false">
-    </p-fileUpload>
-    <p>{{ 'About' | translate }}:</p>
-    <p><textarea rows="4" maxlength="256" class="post-text" style="color: black;">{{user.bio}}</textarea></p>
-</p-dialog> 
+<p-dialog header="Profile settings" [(visible)]="displayProfileSettings" [width]="600" [draggable]="false" 
+[dismissableMask]="true" [modal]="true" [responsive]="true" [resizable]="false" (onHide)="closePasswordChange();">
+    <p-tabView orientation="left">
+        <p-tabPanel header="Avatar">
+            <p>Set new avatar:</p>
+            <p-fileUpload #form name="myfile[]" customUpload="true" accept="image/*" maxFileSize="1000000"
+            (uploadHandler)="myUploader($event, form)" showUploadButton="false" mode="advanced" uploadLabel="Save"></p-fileUpload>
+        </p-tabPanel>
+        <p-tabPanel header="Bio">
+            <p>Change info about yourself:</p>
+            <p><textarea pInputTextarea  [(ngModel)]="newBio" rows="4" maxlength="256" class="post-text" style="color: black; background: white; padding: 0.2em"></textarea></p>
+            <p-button label="Save" class="sub" (click)="saveNewBio()" style="display: block;"></p-button>
+        </p-tabPanel>
+        <p-tabPanel header="Password">
+            <p class="p-password">Enter old password:</p>
+                <input [(ngModel)]="checkPassword" class="check" type="password" pInputText placeholder="old password" autocomplete="off" [disabled]="passwordCheckBtnIsDisabled">
+                <p-button label="Check" class="sub" (click)="checkOldPassword(); disabled = true;" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!passwordCheckBtnIsDisabled;"></p-button>
+            <div *ngIf="passwordCheckBtnIsDisabled;">
+                <p class="p-password">New password:</p>
+                <input [(ngModel)]="newPassword" class="check" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p class="p-password">Confirm new password:</p>
+                <input [(ngModel)]="newPasswordCheck" class="check" type="password" pInputText placeholder="repeat new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p-button label="Save password" class="sub" (click)="checkNewPassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
+            </div>
+            <div *ngIf="newPasswordCheckBtnIsDisabled;">
+                <p class="p-password">Enter code:</p>
+                <input [(ngModel)]="passwordCode" class="check" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p-button label="Save password" class="sub" (click)="checkNewPassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
+            </div>
+            <div class="isa_error" [hidden]=isErrorHidden>
+                <i class="fa fa-times-circle"></i>
+                {{errorMessage}}
+            </div>
+            <div class="isa_message" [hidden]=isMessageHidden>
+                <i class="fas fa-info-circle"></i>
+                {{message}}
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Email">
+            Content 3
+        </p-tabPanel>
+        <p-tabPanel header="Common">
+            Content 3
+        </p-tabPanel>
+    </p-tabView>
+    <br>
+</p-dialog>
