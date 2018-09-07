@@ -18,10 +18,17 @@ export class UserpageComponent implements OnInit {
   user = new User();
   newBio:string;
   checkPassword:string;
+  newPassword:string;
+  newPasswordCheck:string;
   newPost = new Post();
   haveAvatar = true;
   displayProfileSettings: boolean = false;
-  displayNewPasswordInput: boolean = false;
+  passwordCheckBtnIsDisabled: boolean = false;
+  newPasswordCheckBtnIsDisabled: boolean = false;
+  isErrorHidden: boolean = true;
+  isMessageHidden: boolean = true
+  errorMessage:string;
+  message:string;
 
   constructor(private postService: PostService, private userService: UserService) { }
 
@@ -106,13 +113,43 @@ export class UserpageComponent implements OnInit {
   }
 
   checkOldPassword(){
-    if(this.checkPassword == this.user.password && this.displayNewPasswordInput != true){
-      this.displayNewPasswordInput = true;
+    if(this.checkPassword == this.user.password){
+      this.isErrorHidden = true;
+      this.passwordCheckBtnIsDisabled = true;
+    }
+    else{
+      this.isErrorHidden = false;
+      this.errorMessage="Password is incorrect!";
+    }
+  }
+
+  checkNewPassword(){
+    if(this.newPassword.length <= 7){
+      this.isErrorHidden = false;
+      this.errorMessage= "Password must have at least 8 characters!";
+      return;
+    }
+
+    if(this.newPassword == this.newPasswordCheck){
+      this.isErrorHidden = true;
+      this.newPasswordCheckBtnIsDisabled = true;
+      this.isMessageHidden = false;
+      this.message = "The password change code was sent to your email!"
+    }
+    else{
+      this.isErrorHidden = false;
+      this.errorMessage= "Passwords are not the same!";
     }
   }
 
   closePasswordChange(){
-    this.displayNewPasswordInput = false;
     this.checkPassword = "";
+    this.newPassword = "";
+    this.newPasswordCheck = "";
+    this.isErrorHidden = true;
+    this.isMessageHidden = true;
+    this.passwordCheckBtnIsDisabled = false;
+    this.newPasswordCheckBtnIsDisabled = false;
   }
+
 }
