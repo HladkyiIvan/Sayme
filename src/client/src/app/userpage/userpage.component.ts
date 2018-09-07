@@ -176,8 +176,11 @@ export class UserpageComponent implements OnInit {
 
   submitEditPost(){
     this.somePost.is_changing = false;
-    this.somePost.message = this.editedPostMessage;
-    this.postService.updatePost(this.somePost).subscribe();
+    if(this.somePost.message !== this.editedPostMessage)
+    {
+      this.somePost.message = this.editedPostMessage;
+      this.postService.updatePost(this.somePost).subscribe();
+    }
   }
 
   cancelEditPost(){
