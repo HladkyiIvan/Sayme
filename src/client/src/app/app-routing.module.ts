@@ -32,7 +32,7 @@ const routes: Routes = [
       },
       {
         path: 'interesting',
-        component: AboutUserBodyComponent,
+        component: UserpageComponent,
       },
       {
         path: '**',

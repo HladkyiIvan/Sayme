@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
 import { LoginService } from'../../services/login.service';
@@ -8,12 +8,13 @@ import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '../../services/translate.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
+import { TranslatePipe } from '../../translate.pipe';
 
 @Component({
   selector: 'app-navigation-tools',
   templateUrl: './navigation-tools.component.html',
   styleUrls: ['./navigation-tools.component.css'],
-  providers: [FeedbackService, NGXLogger]
+  providers: [FeedbackService, NGXLogger, TranslatePipe]
 })
 export class NavigationToolsComponent implements OnInit {
 
@@ -21,57 +22,46 @@ export class NavigationToolsComponent implements OnInit {
   opened: boolean = false;
   isFeedbackFormVisible: boolean = false;
   isSuccessFormVisible: boolean = false;
-  feedback = new Email('','')
+  feedback = new Email('','');
   feedbackText: string = '';
-  user:User;
-  language: string = '';
+  user: User;
+  language: string = localStorage.getItem('language');
 
   constructor(
     private _feedbackService: FeedbackService,
     private translate: TranslateService, 
+    private translPipe: TranslatePipe,
     private router: Router,
     private logger: NGXLogger,
     private userService: UserService,
     private loginService:LoginService) { }
 
   ngOnInit() {
-    if(!localStorage.getItem('language')){
+    if(!this.language){
       this.setLang('en');
+      localStorage.setItem('language', 'en');
+      this.language = localStorage.getItem('language');
     }
-    else{
-      this.setLang(localStorage.getItem('language'));
+    else {
+      this.setLang(this.language);
     }
-    this.selectLanguage();
     this.loadCurUser();
   }
 
-
   loadCurUser(){
     this.userService.getCurrent()
-    .subscribe((data: User) => {
-      this.user = data;})
+      .subscribe((data: User) => {
+        this.user = data;
+    })
   }
 
   signOut(){
     this.loginService.token=''; 
+    localStorage.removeItem('token');
     this.router.navigate(['']);
   }
 
-  //!!!FEATURE!!!
-  //switching on navigationbar button`s text 
-  selectLanguage(){
-    var navigationItems = [];
-    switch (this.language) {
-      case 'ru':
-        navigationItems = ['Новости', 'Интересное', 'Сказать'];
-        break;
-      case 'ua':
-        navigationItems = ['Новини', 'Цікаве', 'Сказати'];
-        break;
-      default:
-        navigationItems = ['News', 'Intresting', 'Say'];
-        break;
-    }
+  setNavPanelLang(){
     this.items = [
       {
         label: ' ',
@@ -79,23 +69,24 @@ export class NavigationToolsComponent implements OnInit {
         command: (onclick) => { this.open(); }
       },
       {
-        label: `${navigationItems[0]}`,
+        label: this.translPipe.transform('News'),
         routerLink: 'post',
       },
       {
-        label: `${navigationItems[1]}`,
+        label: this.translPipe.transform('Interesting'),
         routerLink: 'interesting'
       },
       {
-        label: `${navigationItems[2]}`,
+        label: this.translPipe.transform('Say'),
         routerLink: '**'
       }
     ]
   }
 
+  //param --lang-- is a shortcut like one of those: 'ru', 'en' or 'ua' etc.
   setLang(lang: string) {
+    this.setNavPanelLang();
     this.language = lang;
-    this.selectLanguage();
     this.translate.use(lang);
     localStorage.setItem('language', lang);
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpRequest, HttpEvent} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { User } from '../Models/user';
 import { NGXLogger } from 'ngx-logger';
 

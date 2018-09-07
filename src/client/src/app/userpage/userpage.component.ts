@@ -29,6 +29,7 @@ export class UserpageComponent implements OnInit {
   isMessageHidden: boolean = true
   errorMessage:string;
   message:string;
+  somePost: Post;
 
   constructor(private postService: PostService, private userService: UserService) { }
 
@@ -37,33 +38,36 @@ export class UserpageComponent implements OnInit {
   }
 
   loadUserPosts(){
-      this.userService.getUser(31)
-    .subscribe((data: User) => {
-      this.user = data;
-      this.newBio = this.user.bio;
-      this.getPostsFromService(data);
-      this.imageData = 'data:image/jpg;base64,' + data.avatar;
-    }, err => console.error(err));
+    this.userService.getCurrent()
+      .subscribe((data: User) => {
+        this.user = data;
+        this.newBio = this.user.bio;
+        this.getPostsFromService(data);
+        this.imageData = 'data:image/jpg;base64,' + data.avatar;
+      }, err => console.error(err));
 
-    if(this.user.avatar == null){
-      this.haveAvatar = false;
-    }
+      if(this.user.avatar == null){
+        this.haveAvatar = false;
+      }
   }
+
   getPostsFromService(user: User){
-        this.postService.getUserPosts(user.id)
+    this.postService.getUserPosts(user.id)
       .subscribe((data: Post[]) => this.posts = data);
+    this.posts.forEach(post => {
+      post.is_changing = false;
+    });
   }
 
   // добавляет новый пост в список постов
   onSay() {
     if (this.newPost.message.length <= 256 &&
         this.newPost.message.length > 0 ) {
-
-    this.newPost.id_user = this.user.id;
-    this.newPost.username = this.user.login;
-    this.newPost.post_date = new Date();
-    this.postService.createPost(this.newPost)
-    .subscribe((data: Post) => this.posts.push(data));
+      this.newPost.id_user = this.user.id;
+      this.newPost.username = this.user.login;
+      this.newPost.post_date = new Date();
+      this.postService.createPost(this.newPost)
+        .subscribe((data: Post) => this.posts.push(data));
       this.newPost = new Post();
     }
   }
@@ -74,13 +78,9 @@ export class UserpageComponent implements OnInit {
   }
 
   myUploader(event, form){
-
     let file: File = event.files[0];
-    console.log("file:", file)
-
     this.userService.updateAvatar(this.user.id ,file)
-    .subscribe(() => (this.convertToBase64(file)),(err) => console.error(err));
-
+      .subscribe(() => (this.convertToBase64(file)),(err) => console.error(err));
     form.clear();
   }
 
@@ -104,7 +104,6 @@ export class UserpageComponent implements OnInit {
 
   convertToBase64(file){
     let that = this;
-
     var reader = new FileReader();
     reader.readAsDataURL(file); 
     reader.onloadend = function() {
@@ -152,4 +151,23 @@ export class UserpageComponent implements OnInit {
     this.newPasswordCheckBtnIsDisabled = false;
   }
 
+  changePost($event, idPost: number){
+    this.somePost= this.posts.find(post => post.id === idPost);
+    console.log(this.somePost);
+    this.somePost.is_changing = !this.somePost.is_changing;
+  }
+
+  submitEditPost($event, idPost: number){
+    this.somePost = this.posts.find(post => post.id === idPost);
+    console.log("Submited!" + this.somePost);
+    this.somePost.is_changing = false;
+    this.somePost.message = document.getElementById("postText").textContent;
+    console.log(this.somePost.message);
+  }
+
+  cancelEditPost($event, idPost){
+    this.somePost= this.posts.find(post => post.id === idPost);
+    console.log("Cancelled!" + this.somePost);
+    this.somePost.is_changing = false;
+  }
 }

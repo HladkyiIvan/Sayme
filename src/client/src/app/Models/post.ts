@@ -4,4 +4,5 @@ export class Post {
     public id_user: number;
     public post_date: Date;
     public username: string;
+    public is_changing: boolean;
 }

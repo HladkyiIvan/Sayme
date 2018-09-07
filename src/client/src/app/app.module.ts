@@ -19,6 +19,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TooltipModule} from 'primeng/tooltip';
 import {TabViewModule} from 'primeng/tabview';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -79,7 +80,8 @@ import { UserpageComponent } from './userpage/userpage.component';
     AccordionModule,
     DataViewModule,
     UserpageComponent,
-    TooltipModule
+    TooltipModule,
+    SplitButtonModule 
   ],
   providers: [UserService, CookieService,
     {

@@ -3,82 +3,36 @@ body{
     justify-content: center;
   }
   
-  .labelSignup{
+input{
+    padding: 5px;
+    width: 200px;
+    outline: none; 
+    color: white;
+    background-color: rgb(46, 45, 45);
+    border-color: rgb(255, 222, 73);
+    border-width: 1px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin-left: 0px;
+    margin-top: 20px 
+}
+
+
+button{
+    color: rgb(10, 3, 3);
+    background: rgb(255, 222, 73);
+    border-color: black;
+    outline: none; 
+    border-radius: 40px; 
+    margin-bottom: 15px;
+}
+
+.labelSignup{
       font-family: fantasy
   }
-  input{
-      padding: 5px;
-      /* border-radius: 5px; 
-      border-color: rgb(255, 222, 73); */
-      width: 200px;
-  }
-  .button1
-  {
-      font-weight: 700;
-    color: rgb(10, 3, 3);
-    text-decoration: none;
-    justify-content: center;
-    padding: .4em 1em calc(.8em + 3px);
-    background: rgb(255, 222, 73);
-    width: 120px;
-    height: 35px;
-    box-shadow: 0 -3px rgb(185, 177, 53) inset;
-    transition: 0.2s;
-  }
   
-  .button2
-  {
-      font-weight: 700;
-    color: rgb(10, 3, 3);
-    text-decoration: none;
-    justify-content: center;
-    padding: .4em 1em calc(.8em + 3px);
-    background: rgb(255, 222, 73);
-    width: 150px;
-    height: 35px;
-    box-shadow: 0 -3px rgb(185, 177, 53) inset;
-    transition: 0.2s;
-  }
-  
-  
-  
-  .post-username{
-      outline: none; 
-      color: white;
-      background-color: rgb(46, 45, 45);
-      /* border-radius: 40px;  */
-      border-color: rgb(255, 222, 73);
-      border-width: 1px;
-      border-top: none;
-      border-right: none;
-      border-left: none;
-      margin-left: 0px;
-      margin-top: 20px 
-  }
-  
-  p{
-      padding: 0px;
-      margin: 0px;
-  }
-  
-  .regButton{
-      color: rgb(10, 3, 3);
-      background: rgb(255, 222, 73);
-      border-color: black;
-      outline: none; 
-      border-radius: 40px; 
-      /* margin-left: 0px; */
-      margin-bottom: 15px;
-  }
-  
-  .post-email{
-      outline: none; 
-      border-radius: 40px; 
-      margin: 0 20px; 
-      margin-left: 10px;
-  }
-  
-  .isa_error {
+.isa-error {
     padding:10px;
     color: rgb(255, 251, 252);
     background-color: rgb(240, 0, 0);
@@ -90,38 +44,8 @@ body{
     text-align: center;
 }
 
-  .code{
-      outline: none; 
-      border-radius: 40px; 
-      margin: 0 20px; 
-      margin-left: -10px;
-  }
   
-  .post-pass{
-      outline: none; 
-      border-radius: 40px; 
-      margin: 0 20px; 
-      margin-left: -10px;
-  }
-  .post-reppas{
-      outline: none; 
-      border-radius: 40px; 
-      margin: 0 20px; 
-      margin-left: -10px;
-  }
-  
-  .outer{
-      display: block;
-  }
-  .inner{
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 5%;
-      margin-bottom: auto;
-  }
-  
-  .container_with_borders{
+.container_with_borders{
       border: 3 px;
       border-color: rgb(46, 45, 45);
       border-style: solid;  
@@ -132,22 +56,11 @@ body{
       justify-content: center;
       background-color: rgb(46, 45, 45);
       margin-bottom:10px; 
-     /* background-image: url(assets/images/nebo.jpg);*/
      box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
   }
   
-  .ui-inputgroup{
-      display: block;
-      position: relative;
-      
-     
-  }
   
   
-    .buttonCBContainer{
-      display: block;
-      left: 50%
-    }
   
    
       

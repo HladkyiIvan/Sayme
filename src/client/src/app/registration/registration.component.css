@@ -1,73 +1,14 @@
-@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
 body{
     display: flex;
     justify-content: center;
-}
-
+  }
+  
 input{
     padding: 5px;
-    /* border-radius: 5px; 
-    border-color: rgb(255, 222, 73); */
     width: 200px;
-}
-
-p{
-    padding: 0px;
-    margin: 0px;
-}
-
-/* only dashes '-' (not underscores '_') are allowed in css selector`s names */
-/* just lowercase symbols are allowed in selector`s names */
-.labelSignup{
-    font-family: fantasy;
-}
-
-/* fix name (use real logic name instead of abstract)*/
-.button1{
-    font-weight: 700;
-    color: rgb(10, 3, 3);
-    text-decoration: none;
-    justify-content: center;
-    padding: .4em 1em calc(.8em + 3px);
-    background: rgb(255, 222, 73);
-    width: 120px;
-    height: 35px;
-    box-shadow: 0 -3px rgb(185, 177, 53) inset;
-    transition: 0.2s;
-}
-
-/* fix name */
-.button2{
-    font-weight: 700;
-    color: rgb(10, 3, 3);
-    text-decoration: none;
-    justify-content: center;
-    padding: .4em 1em calc(.8em + 3px);
-    background: rgb(255, 222, 73);
-    width: 150px;
-    height: 35px;
-    box-shadow: 0 -3px rgb(185, 177, 53) inset;
-    transition: 0.2s;
-}
-
-.isa_error {
-    padding:10px;
-    color: rgb(255, 251, 252);
-    background-color: rgb(240, 0, 0);
-    border-radius: 20px;
-    margin:10px 22px;
-    font-size:1em;
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    vertical-align:middle;
-    text-align: center;
-}
-
-.post-username{
     outline: none; 
     color: white;
     background-color: rgb(46, 45, 45);
-    /* border-radius: 40px;  */
     border-color: rgb(255, 222, 73);
     border-width: 1px;
     border-top: none;
@@ -77,83 +18,49 @@ p{
     margin-top: 20px 
 }
 
-/* fix selector`s name with dash separator */
-.regButton{
+
+button{
     color: rgb(10, 3, 3);
     background: rgb(255, 222, 73);
     border-color: black;
     outline: none; 
     border-radius: 40px; 
-    /* margin-left: 0px; */
-    margin-top: 20px ;
     margin-bottom: 15px;
 }
 
-.post-email{
-    outline: none; 
-    border-radius: 40px; 
-    margin: 0 20px; 
-    margin-left: 10px;
+.labelSignup{
+      font-family: fantasy
+  }
+  
+.isa-error {
+    padding:10px;
+    color: rgb(255, 251, 252);
+    background-color: rgb(240, 0, 0);
+    border-radius: 20px;
+    margin:10px 22px;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size:1em;
+    vertical-align:middle;
+    text-align: center;
 }
 
-.code{
-    outline: none; 
-    border-radius: 40px; 
-    margin: 0 20px; 
-    margin-left: -10px;
-}
-
-.post-pass{
-    outline: none; 
-    border-radius: 40px; 
-    margin: 0 20px; 
-    margin-left: -10px;
-}
-
-.post-reppas{
-    outline: none; 
-    border-radius: 40px; 
-    margin: 0 20px; 
-    margin-left: -10px;
-}
-
-.outer{
-    display: block;
-}
-
-.inner{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    margin-bottom: auto;
-}
-
-/* only dashes '-' (not underscores '_') are allowed in css selector`s names */
+  
 .container_with_borders{
-    border: 3 px;
-    border-color: rgb(46, 45, 45);
-    border-style: solid;  
-    border-radius: 20px;    
-    width: 300px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(46, 45, 45);
-    margin-bottom:10px; 
-    box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
-}
-
-.ui-inputgroup{
-    display: block;
-    position: relative;
-}
-
-/* use dashes to separate subnames from each other */
-.buttonCBContainer{
-    display: block;
-    left: 50%
-}
-
- 
-    
+      border: 3 px;
+      border-color: rgb(46, 45, 45);
+      border-style: solid;  
+      border-radius: 20px;    
+      width: 300px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      background-color: rgb(46, 45, 45);
+      margin-bottom:10px; 
+     box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
+  }
+  
+  
+  
+  
+   
+      
