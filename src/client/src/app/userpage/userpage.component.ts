@@ -20,7 +20,8 @@ export class UserpageComponent implements OnInit {
   newPost = new Post();
   displayProfileSettings: boolean = false;
   somePost: Post;
-  message: string;
+  editedPostMessage: string;
+  postID: number;
 
   constructor(private postService: PostService, private userService: UserService) { }
 
@@ -80,23 +81,34 @@ export class UserpageComponent implements OnInit {
     }
   }
 
-  changePost($event, idPost: number){
-    this.somePost= this.posts.find(post => post.id === idPost);
-    console.log(this.somePost);
-    this.somePost.is_changing = !this.somePost.is_changing;
-  }
+  changePost(idPost: number){
 
-  submitEditPost($event, idPost: number){
+    this.posts.forEach(post => {
+      post.is_changing = false;
+    });
     this.somePost = this.posts.find(post => post.id === idPost);
-    console.log("Submited!" + this.somePost);
-    this.somePost.is_changing = false;
-    this.somePost.message = document.getElementById("postText").textContent;
-    console.log(this.somePost.message);
+    this.somePost.is_changing = !this.somePost.is_changing;
+    console.log(this.somePost.is_changing);
+    this.editedPostMessage = this.somePost.message;
+
+    var temp;
+    if(temp = this.posts.filter(post => {
+      post.is_changing === true && post.id !== idPost
+    }))
+    {
+      temp.forEach(element => {
+        element.is_changing = false;
+      });
+    }
   }
 
-  cancelEditPost($event, idPost){
-    this.somePost= this.posts.find(post => post.id === idPost);
-    console.log("Cancelled!" + this.somePost);
+  submitEditPost(){
+    this.somePost.is_changing = false;
+    this.somePost.message = this.editedPostMessage;
+    this.postService.updatePost(this.somePost).subscribe();
+  }
+
+  cancelEditPost(){
     this.somePost.is_changing = false;
   }
 }

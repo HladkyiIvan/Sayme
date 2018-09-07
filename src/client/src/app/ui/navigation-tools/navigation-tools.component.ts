@@ -85,10 +85,11 @@ export class NavigationToolsComponent implements OnInit {
 
   //param --lang-- is a shortcut like one of those: 'ru', 'en' or 'ua' etc.
   setLang(lang: string) {
-    this.setNavPanelLang();
+    console.log(lang);
     this.language = lang;
     this.translate.use(lang);
     localStorage.setItem('language', lang);
+    this.setNavPanelLang();
   }
 
   ///opens sidebar with user info

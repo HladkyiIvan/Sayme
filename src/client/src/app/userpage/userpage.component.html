@@ -29,19 +29,19 @@
               <div class="ui-g-12 ui-md-12 post-container">
                   <div class="ui-g-12">
                         <p style="margin:0px;">
-                            <button pButton style="float: right;" icon="fas fa-edit" (click)="changePost($event, post.id)"></button>
+                            <button pButton style="float: right;" icon="fas fa-edit" (click)="changePost(post.id)"></button>
                         </p> 
-                        <div *ngIf="post.is_changing; else editing">
-                            <p><textarea class="post-text" [readonly]="!post.is_changing" style="color: purple">{{post.message}}</textarea></p>
+                        <div *ngIf="!post.is_changing; else editing">
+                            <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
                         </div>
-                        <ng-template #editing >
-                            <p><textarea class="post-text" id="postText" [readonly]="!post.is_changing" style="color: black">{{post.message}}</textarea></p>
+                        <ng-template #editing>
+                            <p><textarea class="post-text" [(ngModel)]="editedPostMessage" style="color: purple">{{editedPostMessage}}</textarea></p>
                         </ng-template>
                         <div>
                             <p style="color: black;">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
                             <div *ngIf="post.is_changing">
-                                <button pButton style="float: right;" icon="fas fa-times" (click)="cancelEditPost($event, post.id);"></button>
-                                <button pButton style="float: right;" icon="fas fa-check" (click)="submitEditPost($event, post.id);"></button>
+                                <button pButton style="width: 150px; float: right;" icon="fas fa-times" (click)="cancelEditPost();"></button>
+                                <button pButton style="width: 150px; float: right; margin-right: 10px;" icon="fas fa-check" (click)="submitEditPost();"></button>
                             </div>
                         </div> 
                   </div>
