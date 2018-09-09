@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { PostService } from '../services/post.service';
+import { FeedbackService } from '../services/feedback.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Post } from '../Models/post';
 import { User } from '../Models/user';
+import { Email } from '../Models/email';
 
 @Component({
   selector: 'app-userpage',
   templateUrl: './userpage.component.html',
   styleUrls: ['./userpage.component.css'],
-  providers: [PostService, UserService]
+  providers: [PostService, UserService, FeedbackService]
 })
 export class UserpageComponent implements OnInit {
 
@@ -25,13 +27,15 @@ export class UserpageComponent implements OnInit {
   displayProfileSettings: boolean = false;
   passwordCheckBtnIsDisabled: boolean = false;
   newPasswordCheckBtnIsDisabled: boolean = false;
+  codeCheckBtbIsDisabled: boolean = false;
   isErrorHidden: boolean = true;
   isMessageHidden: boolean = true
   errorMessage:string;
   message:string;
+  code: string;
   somePost: Post;
 
-  constructor(private postService: PostService, private userService: UserService) { }
+  constructor(private postService: PostService, private userService: UserService, private feedbackService: FeedbackService) { }
 
   ngOnInit() {
     this.loadUserPosts();
@@ -80,7 +84,9 @@ export class UserpageComponent implements OnInit {
   myUploader(event, form){
     let file: File = event.files[0];
     this.userService.updateAvatar(this.user.id ,file)
-      .subscribe(() => (this.convertToBase64(file)),(err) => console.error(err));
+      .subscribe(() => {this.convertToBase64(file);
+      this.haveAvatar = true;}
+      ,(err) => console.error(err));
     form.clear();
   }
 
@@ -108,6 +114,7 @@ export class UserpageComponent implements OnInit {
     reader.readAsDataURL(file); 
     reader.onloadend = function() {
       that.imageData = reader.result.toString();
+      console.log(that.imageData);
     }
   }
 
@@ -122,23 +129,42 @@ export class UserpageComponent implements OnInit {
     }
   }
 
-  checkNewPassword(){
+  checkNewPasswordAndSendCode(){
     if(this.newPassword.length <= 7){
       this.isErrorHidden = false;
       this.errorMessage= "Password must have at least 8 characters!";
       return;
     }
 
-    if(this.newPassword == this.newPasswordCheck){
-      this.isErrorHidden = true;
-      this.newPasswordCheckBtnIsDisabled = true;
-      this.isMessageHidden = false;
-      this.message = "The password change code was sent to your email!"
+    if(this.newPassword == this.newPasswordCheck){      
+      this.feedbackService.sendCode(new Email(this.user.mail, "Your change password code", ""))
+      .subscribe(() => {
+        this.message = "The password change code was sent to your email!";
+        this.isMessageHidden = false;
+        this.isErrorHidden = true;
+        this.newPasswordCheckBtnIsDisabled = true;}
+      );
     }
     else{
       this.isErrorHidden = false;
       this.errorMessage= "Passwords are not the same!";
     }
+  }
+
+  сheckCode(){
+    this.feedbackService.checkCode(this.code)
+    .subscribe((respone: Response) => {
+      if(respone.ok){
+        this.message = "Your email was successufully changed!";
+        this.isMessageHidden = false;
+        this.codeCheckBtbIsDisabled = true;
+      }
+      else{
+        this.errorMessage= "Incorrect code!";
+        this.isErrorHidden = false;
+      }
+    });
+
   }
 
   closePasswordChange(){
@@ -149,25 +175,6 @@ export class UserpageComponent implements OnInit {
     this.isMessageHidden = true;
     this.passwordCheckBtnIsDisabled = false;
     this.newPasswordCheckBtnIsDisabled = false;
-  }
-
-  changePost($event, idPost: number){
-    this.somePost= this.posts.find(post => post.id === idPost);
-    console.log(this.somePost);
-    this.somePost.is_changing = !this.somePost.is_changing;
-  }
-
-  submitEditPost($event, idPost: number){
-    this.somePost = this.posts.find(post => post.id === idPost);
-    console.log("Submited!" + this.somePost);
-    this.somePost.is_changing = false;
-    this.somePost.message = document.getElementById("postText").textContent;
-    console.log(this.somePost.message);
-  }
-
-  cancelEditPost($event, idPost){
-    this.somePost= this.posts.find(post => post.id === idPost);
-    console.log("Cancelled!" + this.somePost);
-    this.somePost.is_changing = false;
+    this.codeCheckBtbIsDisabled = false;
   }
 }

@@ -57,19 +57,19 @@
         </p-tabPanel>
         <p-tabPanel header="Password">
             <p class="p-password">Enter old password:</p>
-                <input [(ngModel)]="checkPassword" class="check" type="password" pInputText placeholder="old password" autocomplete="off" [disabled]="passwordCheckBtnIsDisabled">
+                <input [(ngModel)]="checkPassword" class="check-password" type="password" pInputText placeholder="old password" autocomplete="off" [disabled]="passwordCheckBtnIsDisabled">
                 <p-button label="Check" class="sub" (click)="checkOldPassword(); disabled = true;" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!passwordCheckBtnIsDisabled;"></p-button>
             <div *ngIf="passwordCheckBtnIsDisabled;">
                 <p class="p-password">New password:</p>
-                <input [(ngModel)]="newPassword" class="check" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <input [(ngModel)]="newPassword" class="check-password" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
                 <p class="p-password">Confirm new password:</p>
-                <input [(ngModel)]="newPasswordCheck" class="check" type="password" pInputText placeholder="repeat new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
-                <p-button label="Save password" class="sub" (click)="checkNewPassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
+                <input [(ngModel)]="newPasswordCheck" class="check-password" type="password" pInputText placeholder="repeat new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p-button label="Submit" class="sub" (click)="checkNewPasswordAndSendCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
             </div>
             <div *ngIf="newPasswordCheckBtnIsDisabled;">
                 <p class="p-password">Enter code:</p>
-                <input [(ngModel)]="passwordCode" class="check" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
-                <p-button label="Save password" class="sub" (click)="checkNewPassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
+                <input [(ngModel)]="passwordCode" class="check-password" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="codeCheckBtnIsDisabled">
+                <p-button label="Check code" class="sub" (click)="checkCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtnIsDisabled;"></p-button>
             </div>
             <div class="isa_error" [hidden]=isErrorHidden>
                 <i class="fa fa-times-circle"></i>

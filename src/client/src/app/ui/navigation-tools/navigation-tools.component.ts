@@ -22,7 +22,7 @@ export class NavigationToolsComponent implements OnInit {
   opened: boolean = false;
   isFeedbackFormVisible: boolean = false;
   isSuccessFormVisible: boolean = false;
-  feedback = new Email('','');
+  feedback = new Email('','','');
   feedbackText: string = '';
   user: User;
   language: string = localStorage.getItem('language');
@@ -113,7 +113,7 @@ export class NavigationToolsComponent implements OnInit {
       this.isFeedbackFormVisible = false
       this.isSuccessFormVisible = true
 
-      this.feedback = new Email(this.user.mail, this.feedbackText)
+      this.feedback = new Email(this.user.mail, "Feedback from Sayme", this.feedbackText)
       this._feedbackService.sendFeedback(this.feedback)
           .subscribe()
       this.logger.info('feedback was sent');

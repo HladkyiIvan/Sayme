@@ -44,17 +44,16 @@ export class RegistrationComponent implements OnInit {
           if ((this.newUser.password.length >= 7 && this.newUser.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
             if (this.newUser.password === this.repPassword) {
               this.isErrorHidden = true;
-              this.generatedCode = this.randomInt(100000, 999999);
-              this.newUser.register_code = String(this.generatedCode);
               this.errorMessage = '';
               this.newUser.active = true;
               this.newUser.bio = '';
-              this.sendTo = new Email(this.newUser.mail, this.newUser.register_code);
+              this.sendTo = new Email(this.newUser.mail,"Code for registration", "");
               this.feedbackService.sendCode(this.sendTo)
-                .subscribe();
-              this.logger.debug('code for registration has been sent');
-              this.isVisibleCodeInput = true;
-              this.isTextboxesDisabled = true;
+                .subscribe((code:string) => {this.logger.debug('code for registration has been sent');
+                this.isVisibleCodeInput = true;
+                this.isTextboxesDisabled = true;
+                this.newUser.register_code = code;
+                console.log(code);});
             }
             else {
               this.errorMessage = 'Your password and repeated password don`t match! Try again.';
@@ -91,7 +90,7 @@ export class RegistrationComponent implements OnInit {
 
   onConfirmCode() {
     if (this.enteredCode) {
-      if (this.enteredCode === this.newUser.register_code) {
+      if (this.enteredCode == this.newUser.register_code) {
         this.isErrorHidden = true;
         this.logger.debug('sent and entered codes are equal');
         this.userService.createUser(this.newUser)
