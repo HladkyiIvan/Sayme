@@ -84,17 +84,10 @@ export class UserpageComponent implements OnInit {
 
   myUploader(event, form){
     let file: File = event.files[0];
-<<<<<<< HEAD
-    console.log("file:", file);
-
-    this.userService.updateAvatar(this.user.id ,file)
-    .subscribe(() => (this.convertToBase64(file)),(err) => console.error(err));
-=======
     this.userService.updateAvatar(this.user.id ,file)
       .subscribe(() => {this.convertToBase64(file);
       this.haveAvatar = true;}
       ,(err) => console.error(err));
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
     form.clear();
   }
 

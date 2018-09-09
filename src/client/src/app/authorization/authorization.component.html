@@ -4,7 +4,7 @@
     </div>
     <div class="inner">
         <div class="container_with_borders">
-            <form #postForm="ngForm" (keydown.enter)="onRegister()">
+            <form #postForm="ngForm" (keydown.enter)="onLogin()">
                 <div class="ui-g ui-fluid" style="justify-content: center">
                     <div style="padding: 0px;" class="ui-g-12">
                         <input [(ngModel)]="user.login" name="username" type="text" pInputText placeholder="{{ 'Username' | translate }}" autocomplete="on">

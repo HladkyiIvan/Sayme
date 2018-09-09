@@ -22,8 +22,9 @@ export class PostComponent implements OnInit {
   posts = [];
   usersToSearch = [];
   currentUser: User;
-  postAndImage=[];
+  postAndImage = [];
   newPost = new Post();
+  haveAvatar = true;
   timeIt = timer(1, 10000);
 
   constructor(private postService: PostService, private userService: UserService, private logger: NGXLogger) { }
@@ -34,13 +35,11 @@ export class PostComponent implements OnInit {
   // хтмл файла. 
   ngOnInit() {
     this.postService.getPosts()
-    .subscribe((data: Post[]) => 
-    {
-      this.posts = data;
-      this.renovateImages(data);
-    });
+      .subscribe((data: Post[]) => {
+        this.posts = data;
+        this.renovateImages(data);
+      });
     this.timeIt.subscribe(x => this.loadPosts());
-    this.loadCurrentUser();
     this.renovateImages(this.posts);
   }
 
@@ -50,8 +49,8 @@ export class PostComponent implements OnInit {
       this.newPost.message.length <= 256 &&
       this.newPost.message.length > 0) {
       this.loadPosts();
-      this.newPost.id_user=this.currentUser.id;
-      this.newPost.username=this.currentUser.login;
+      this.newPost.id_user = this.currentUser.id;
+      this.newPost.username = this.currentUser.login;
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
         .subscribe((data: Post) => this.posts.push(data));
@@ -64,18 +63,12 @@ export class PostComponent implements OnInit {
     this.userService.getUsers()
       .subscribe((data: User[]) => this.usersToSearch = data);
     this.postService.getPosts()
-      .subscribe((data: Post[]) => 
-      {
+      .subscribe((data: Post[]) => {
         this.posts = data;
-
       });
 
   }
 
-  loadCurrentUser() {
-    this.userService.getCurrent()
-      .subscribe((data: User) => this.currentUser = data);
-  }
 
   getPostDate(date: Date) {
     var yyyy = date.getFullYear().toString();
@@ -86,15 +79,12 @@ export class PostComponent implements OnInit {
     return "".concat(yyyy).concat(mm).concat(dd).concat(hh).concat(min);
   }
 
-  renovateImages(data)
-  {
-    
-    
-    for(let i=0;i<data.length;i++)
-    {
-      this.postAndImage.push(new PostImage(data[i],'data:image/jpg;base64,'+data[i].avatar));
-      console.log('hui');
-      //this.photos[i].avatar= 'data:image/jpg;base64,'+data[i].avatar;
+  renovateImages(data) {
+    for (let post of data) {
+      if (post.avatar == null)
+        this.postAndImage.push(new PostImage(post, null));
+      else
+        this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
     }
   }
 }

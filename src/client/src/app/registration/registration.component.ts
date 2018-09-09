@@ -90,21 +90,10 @@ export class RegistrationComponent implements OnInit {
           if ((this.password.length >= 7 && this.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
             if (this.password === this.repPassword) {
               this.isErrorHidden = true;
-<<<<<<< HEAD
-              this.generatedCode = this.randomInt(100000, 999999);
-              this.newUser.register_code = String(this.generatedCode);
-              this.newUser.password=Md5.init(this.repPassword);
-              this.errorMessage = '';
-              this.newUser.active = true;
-              this.newUser.bio = '';
-
-              this.sendTo = new Email(this.newUser.mail, this.newUser.register_code);
-=======
               this.errorMessage = '';
               this.newUser.active = true;
               this.newUser.bio = '';
               this.sendTo = new Email(this.newUser.mail,"Code for registration", "");
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
               this.feedbackService.sendCode(this.sendTo)
                 .subscribe((code:string) => {this.logger.debug('code for registration has been sent');
                 this.isVisibleCodeInput = true;

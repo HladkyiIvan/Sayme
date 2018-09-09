@@ -86,11 +86,8 @@ import { FollowingComponent } from './following/following.component';
     DataViewModule,
     UserpageComponent,
     TooltipModule,
-<<<<<<< HEAD
-    FollowedComponent
-=======
+    FollowedComponent,
     SplitButtonModule 
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
   ],
   providers: [UserService, CookieService,SubscriptionService,
     {

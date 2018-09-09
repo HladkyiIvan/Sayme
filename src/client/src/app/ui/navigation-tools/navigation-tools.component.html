@@ -54,21 +54,9 @@
 
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
-<<<<<<< HEAD
-    <h1>
-        <a routerLink=" " ngModel style="color: #cccccc;">{{ username }}</a>
-    </h1>
-    <h5>
-        <a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a>
-    </h5>
-    <h5>
-        <a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a>
-    </h5>
-=======
-    <h1><a routerLink=" " style="color: #cccccc;">{{ 'Username' | translate }}</a></h1>
+    <h1><a routerLink=" " style="color: #cccccc;">{{ username }}</a></h1>
     <h5><a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a></h5>
     <h5><a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a></h5>
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
     <button pButton type="button" class="ui-button-warning" style="width: 200px; height: 30px; margin: 10px 0px;">{{ 'Settings' | translate }}</button>
     <br>
     <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>

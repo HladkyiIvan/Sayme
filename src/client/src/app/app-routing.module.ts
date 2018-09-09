@@ -10,47 +10,12 @@ import { FollowingComponent } from './following/following.component'
 
 const routes: Routes = [
   {
-<<<<<<< HEAD
     path: 'login',
     component: AuthorisationComponent,
   },
   {
     path: '',
     redirectTo: 'login',
-=======
-    path:'login',
-    component:AuthorisationComponent,
-    },
-    {
-      path: '',
-      redirectTo: 'login',
-      pathMatch: 'full',
-      },
-    {
-      path:'registration',
-      component:RegistrationComponent
-    },
-    
-    {
-    path: 'menu',
-    component: NavigationToolsComponent,
-    children: [
-      {
-        path: 'post',
-        component: PostComponent,
-      },
-      {
-        path: 'interesting',
-        component: UserpageComponent,
-      },
-      {
-        path: '**',
-        component: UserpageComponent,
-      },
-      {
-        path:'auth',
-        redirectTo: './login',
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
     pathMatch: 'full',
   },
   {

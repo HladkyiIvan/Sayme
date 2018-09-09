@@ -24,14 +24,9 @@ export class NavigationToolsComponent implements OnInit {
   isSuccessFormVisible: boolean = false;
   feedback = new Email('','','');
   feedbackText: string = '';
-<<<<<<< HEAD
-  username:string;
-  user:User;
-  language: string = '';
-=======
   user: User;
+  username:string;
   language: string = localStorage.getItem('language');
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
 
   constructor(
     private _feedbackService: FeedbackService,
@@ -46,34 +41,18 @@ export class NavigationToolsComponent implements OnInit {
     if(!localStorage.getItem('language')){
       this.setLang('en');
     }
-<<<<<<< HEAD
-    else{
-      this.setLang(localStorage.getItem('language'));
-    }
-    this.selectLanguage();
-    this.username=localStorage.getItem('curUser');
-  }
-
-
-  // loadCurUser(){
-  //   this.userService.getCurrent()
-  //   .subscribe((data: User) => {
-  //     this.user = data;})
-  // }
-=======
     else {
       this.setLang(this.language);
     }
-    this.loadCurUser();
+    this.username=localStorage.getItem('curUser');
   }
 
-  loadCurUser(){
-    this.userService.getCurrent()
-      .subscribe((data: User) => {
-        this.user = data;
-    })
-  }
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
+  // loadCurUser(){
+  //   this.userService.getCurrent()
+  //     .subscribe((data: User) => {
+  //       this.user = data;
+  //   })
+  // }
 
   signOut(){
     this.loginService.token=''; 
@@ -89,16 +68,33 @@ export class NavigationToolsComponent implements OnInit {
         command: (onclick) => { this.open(); }
       },
       {
-<<<<<<< HEAD
-        label: `${navigationItems[0]}`,
-        command:(onclick)=>{this.router.navigate(['/post']);}
+      //   label: `${navigationItems[0]}`,
+      //   command:(onclick)=>{this.router.navigate(['/post']);}
+      // },
+      // {
+      //   label: `${navigationItems[1]}`,
+      //   command:(onclick)=>{this.router.navigate(['/interesting']);}
+      // },
+      // {
+      //   label: `${navigationItems[2]}`,
+      //   command:(onclick)=>{this.router.navigate(['/**']);}
+      // },
+      // {
+      //   label: 'followed',
+      //   command:(onclick)=>{this.router.navigate(['/followed']);}
+      // },
+      // {
+      //   label: 'following',
+      //   command:(onclick)=>{this.router.navigate(['/following']);}
+        label: this.translPipe.transform('News'),
+        command:(onclick)=>{this.router.navigate(['/post'])}
       },
       {
-        label: `${navigationItems[1]}`,
-        command:(onclick)=>{this.router.navigate(['/interesting']);}
+        label: this.translPipe.transform('Interesting'),
+        command:(onclick)=>{this.router.navigate(['/interesting'])}
       },
       {
-        label: `${navigationItems[2]}`,
+        label: this.translPipe.transform('Say'),
         command:(onclick)=>{this.router.navigate(['/**']);}
       },
       {
@@ -108,18 +104,6 @@ export class NavigationToolsComponent implements OnInit {
       {
         label: 'following',
         command:(onclick)=>{this.router.navigate(['/following']);}
-=======
-        label: this.translPipe.transform('News'),
-        routerLink: 'post',
-      },
-      {
-        label: this.translPipe.transform('Interesting'),
-        routerLink: 'interesting'
-      },
-      {
-        label: this.translPipe.transform('Say'),
-        routerLink: '**'
->>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
       }
     ]
   }

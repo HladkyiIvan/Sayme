@@ -2236,7 +2236,6 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root
    at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
-<<<<<<< HEAD
 2018-08-31T14:12:29.6009137+03:00 0HLGF4MQPQRR9:00000001 [INF] Request finished in 1476.6896ms 500 text/html; charset=utf-8 (791a596a)
 2018-08-31T14:12:37.4183079+03:00 0HLGF4MQPQRRA:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 44 (ca22a1cb)
 2018-08-31T14:12:37.4185352+03:00 0HLGF4MQPQRRA:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
@@ -2304,7 +2303,6 @@ FROM `Post` AS `p`" (0723d8ff)
 2018-08-31T14:12:47.5663700+03:00 0HLGF4MQPQRRE:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[server.Models.PostTransport, server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
 2018-08-31T14:12:47.5666705+03:00 0HLGF4MQPQRRE:00000001 [INF] Executed action "server.Controllers.PostController.GetByUserId (server)" in 2.7125ms (afa2e885)
 2018-08-31T14:12:47.5668378+03:00 0HLGF4MQPQRRE:00000001 [INF] Request finished in 4.0023ms 200 application/json; charset=utf-8 (791a596a)
-=======
 2018-08-31T12:40:10.1138962+03:00 0HLGF4MRV5IN4:00000001 [INF] Request finished in 47.5595ms 500 text/html; charset=utf-8 (791a596a)
 2018-08-31T12:41:19.0226608+03:00 0HLGF4MRV5IN5:00000001 [INF] Request starting HTTP/1.1 GET https://localhost:5001/api/user/current   (ca22a1cb)
 2018-08-31T12:41:19.0232086+03:00 0HLGF4MRV5IN5:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
@@ -2342,4 +2340,3 @@ FROM `Post` AS `p`" (0723d8ff)
 2018-08-31T12:41:24.7960654+03:00 0HLGF4MRV5IN8:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
 2018-08-31T12:41:24.7962306+03:00 0HLGF4MRV5IN8:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.8234ms (afa2e885)
 2018-08-31T12:41:24.7965287+03:00 0HLGF4MRV5IN8:00000001 [INF] Request finished in 1.9181ms 401  (791a596a)
->>>>>>> c518fc08b3ba7c328c31965a3206eafa78553954
