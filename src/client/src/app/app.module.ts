@@ -18,6 +18,8 @@ import { DataViewModule } from 'primeng/dataview';
 import { FileUploadModule } from 'primeng/fileupload';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TooltipModule} from 'primeng/tooltip';
+import {TabViewModule} from 'primeng/tabview';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -71,7 +73,8 @@ import { FollowingComponent } from './following/following.component';
     DataViewModule,
     DialogModule,
     InputTextareaModule,
-    FileUploadModule    
+    FileUploadModule,
+    TabViewModule    
   ],
   exports: [
     LoginRegistrationHeaderComponent,
@@ -83,7 +86,11 @@ import { FollowingComponent } from './following/following.component';
     DataViewModule,
     UserpageComponent,
     TooltipModule,
+<<<<<<< HEAD
     FollowedComponent
+=======
+    SplitButtonModule 
+>>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
   ],
   providers: [UserService, CookieService,SubscriptionService,
     {

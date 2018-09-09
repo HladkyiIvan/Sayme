@@ -1,9 +1,5 @@
 <div class="wrapper-body">
-
-
-
 <img src="assets/images/Logo-Sayme.svg" style= "width:280px">
-
 
 <div class="sticky">
     <p-menubar [model]="items" >
@@ -27,6 +23,7 @@
         [maximizable]="true">
     <p style="margin: 0 0 17px 0;">{{ 'Left your answer or comment here:' | translate }}</p>
     <form #postForm="ngForm" style="margin: 0;">
+        <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email" placeholder="{{ 'your email'| translate }}" autocomplete="off">
         <textarea required [(ngModel)]="feedbackText" style="overflow:hidden;" class="feedback-text" name="feedbackText" placeholder="{{ 'your comment' | translate }}"></textarea>
         <div style="float: right; margin-top: 5px;">
             <button type="button" class="feedback-send-button" (click)="onSendFeedback()">{{ 'Send' | translate }}</button>
@@ -36,7 +33,7 @@
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
-<p-dialog header="{{ 'Success!' | translate }}" 
+<p-dialog header="{{ 'Success!' | translate }}'" 
         [(visible)]="isSuccessFormVisible" 
         [modal]="true" 
         [resizable]='false' 
@@ -57,6 +54,7 @@
 
 <!-- Left slide sidebar -->
 <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
+<<<<<<< HEAD
     <h1>
         <a routerLink=" " ngModel style="color: #cccccc;">{{ username }}</a>
     </h1>
@@ -66,15 +64,20 @@
     <h5>
         <a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a>
     </h5>
+=======
+    <h1><a routerLink=" " style="color: #cccccc;">{{ 'Username' | translate }}</a></h1>
+    <h5><a routerLink=" " style="color: #cccccc;">{{ 'Followers' | translate}}:</a></h5>
+    <h5><a routerLink=" " style="color: #cccccc;">{{ 'Following' | translate}}:</a></h5>
+>>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
     <button pButton type="button" class="ui-button-warning" style="width: 200px; height: 30px; margin: 10px 0px;">{{ 'Settings' | translate }}</button>
     <br>
     <button pButton type="button" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>
     <br>
     <br>
-    <select id="changeLang" [ngModel]="language" (change)="setLang($event.target.value);">
+    <select name="language" [(ngModel)]="language" id="selectLanguage" (change)="setLang($event.target.value);">
         <option value="en" selected>english</option>
-        <option value="ua" >українська</option>
-        <option value="ru" >русский</option>
+        <option value="ua">українська</option>
+        <option value="ru">русский</option>
     </select>
 </p-sidebar>
 <router-outlet></router-outlet>

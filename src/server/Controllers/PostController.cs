@@ -31,19 +31,6 @@ namespace server.Controllers
             {
                 sendingPosts.Add(new PostTransport(post));
             }
-
-
-            
-
-           /* var temp=from post in sendingPosts
-                                let u=from user in users
-                                where post.id_user == user.id
-                                select user.login
-                    select post.Set(p=>
-                    {
-                        p.username = u.FirstOrDefault();
-                    });
-                */    
             
             foreach(PostTransport post in sendingPosts)
             {
@@ -82,10 +69,10 @@ namespace server.Controllers
             return sendingPosts;
         }
 
+
         [HttpPost]
         public IActionResult Post([FromBody]Post postTransport)
         {
-
             if(ModelState.IsValid)
             {
                 context.Post.Add(postTransport);
@@ -94,6 +81,21 @@ namespace server.Controllers
             }
             return BadRequest(ModelState);
         } 
+        
+        [Route("update")]
+        [HttpPost]
+        public IActionResult Update([FromBody]Post postTransport)
+        {
+            if(ModelState.IsValid)
+            {
+                var editedPost = context.Post
+                    .Where(c => c.id == postTransport.id)
+                    .FirstOrDefault();
+                editedPost.message = postTransport.message;
+                context.SaveChanges();
+            }
+            return BadRequest(ModelState);
+        }
     }
     
 }

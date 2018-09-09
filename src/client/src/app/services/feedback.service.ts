@@ -9,7 +9,6 @@ import { NGXLogger } from 'ngx-logger';
 export class FeedbackService {
 
   private _url: string = 'api/feedback'
-  private urlCode='api/feedback/sendcode';
 
   constructor(private http: HttpClient, private logger: NGXLogger) { }
 
@@ -20,6 +19,13 @@ export class FeedbackService {
 
   sendCode(email:Email){
     this.logger.debug('sending code in service');
-    return this.http.post(this.urlCode, email);
+    return this.http.post(this._url + "/sendcode", email);
+  }
+
+  checkCode(code:string){
+    let formData = new FormData();
+    formData.append('code', code);
+
+    return this.http.put(this._url + "/checkcode", formData);
   }
 }

@@ -8,10 +8,9 @@ import { NGXLogger } from 'ngx-logger';
 })
 export class PostService {
 
-  private url = '/api/post';
+  private url  = '/api/post';
 
   constructor( private http: HttpClient, private logger: NGXLogger) { }
-
 
   // GET
   getPosts() {
@@ -27,5 +26,9 @@ export class PostService {
   createPost(post: Post) {
     this.logger.debug('creating posts from service');
     return this.http.post(this.url, post);
+  }
+
+  updatePost(post: Post) {
+    return this.http.post(this.url + "/update", post);
   }
 }

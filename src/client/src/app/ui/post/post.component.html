@@ -18,6 +18,7 @@
             <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9">
                 <div class="ui-g-12 ui-md-12 post-container">
                     <div class="ui-g-12">
+<<<<<<< HEAD
                         <div style="float:left; padding-right:2%">
                             <img id="image" [src]="post.avatar" style=" width:25px;margin-top: 2%">
                         </div>
@@ -27,6 +28,11 @@
                             <textarea class="post-text" readonly style="color: black">{{post.post.message}}</textarea>
                         </p>
                         <p>{{post.post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+=======
+                        <p style="margin:0px;"><b>{{post.username}}</b></p> 
+                        <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
+                        <p>{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+>>>>>>> 0ee7b1cd8fef7b0d3af8246afe6b3ee8d9060769
                     </div>
                 </div>
             </div>
