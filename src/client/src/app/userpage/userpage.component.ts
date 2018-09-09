@@ -34,6 +34,7 @@ export class UserpageComponent implements OnInit {
   message:string;
   code: string;
   somePost: Post;
+  editedPostMessage: string;
 
   constructor(private postService: PostService, private userService: UserService, private feedbackService: FeedbackService) { }
 
@@ -118,6 +119,7 @@ export class UserpageComponent implements OnInit {
     }
   }
 
+
   checkOldPassword(){
     if(this.checkPassword == this.user.password){
       this.isErrorHidden = true;
@@ -176,5 +178,39 @@ export class UserpageComponent implements OnInit {
     this.passwordCheckBtnIsDisabled = false;
     this.newPasswordCheckBtnIsDisabled = false;
     this.codeCheckBtbIsDisabled = false;
+  }
+
+  changePost(idPost: number){
+
+    this.posts.forEach(post => {
+      post.is_changing = false;
+    });
+    this.somePost = this.posts.find(post => post.id === idPost);
+    this.somePost.is_changing = !this.somePost.is_changing;
+    console.log(this.somePost.is_changing);
+    this.editedPostMessage = this.somePost.message;
+
+    var temp;
+    if(temp = this.posts.filter(post => {
+      post.is_changing === true && post.id !== idPost
+    }))
+    {
+      temp.forEach(element => {
+        element.is_changing = false;
+      });
+    }
+  }
+
+  submitEditPost(){
+    this.somePost.is_changing = false;
+    if(this.somePost.message !== this.editedPostMessage)
+    {
+      this.somePost.message = this.editedPostMessage;
+      this.postService.updatePost(this.somePost).subscribe();
+    }
+  }
+
+  cancelEditPost(){
+    this.somePost.is_changing = false;
   }
 }

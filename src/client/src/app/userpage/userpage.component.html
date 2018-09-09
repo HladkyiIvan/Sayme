@@ -33,8 +33,22 @@
           <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9">
               <div class="ui-g-12 ui-md-12 post-container">
                   <div class="ui-g-12">
-                      <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
-                      <p style="color: black">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p> 
+                        <p style="margin:0px;">
+                            <button pButton style="float: right;" icon="fas fa-edit" (click)="changePost(post.id)"></button>
+                        </p> 
+                        <div *ngIf="!post.is_changing; else editing">
+                            <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
+                        </div>
+                        <ng-template #editing>
+                            <p><textarea class="post-text" [(ngModel)]="editedPostMessage" style="color: purple">{{editedPostMessage}}</textarea></p>
+                        </ng-template>
+                        <div>
+                            <p style="color: black;">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                            <div *ngIf="post.is_changing">
+                                <button pButton style="width: 150px; float: right;" icon="fas fa-times" (click)="cancelEditPost();"></button>
+                                <button pButton style="width: 150px; float: right; margin-right: 10px;" icon="fas fa-check" (click)="submitEditPost();"></button>
+                            </div>
+                        </div> 
                   </div>
               </div>
           </div>
