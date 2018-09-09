@@ -1,0 +1,13 @@
+<app-navigation-tools></app-navigation-tools>
+<br>
+<p-dataView [value]="followed">
+    <ng-template let-user pTemplate="listItem">
+        <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9;margin-top: 15px">
+            <div class="ui-g-12 ui-md-12 post-container">
+                <div class="ui-g-12">
+                    <p><b>{{user.login}}</b></p> 
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>

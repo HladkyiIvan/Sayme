@@ -18,17 +18,16 @@ export class Interceptor implements HttpInterceptor {
     //то редирект на логинпейдж
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         var authToken = this.getToken();
-        // if(!this.loginService.TokenStringFromLocalstorage())
-        // {
-        if (authToken != null) {
+        if (authToken) {
             this.setItem(authToken);
         }
-        this.loginService.TokenStringFromLocalstorage();
+        //this.loginService.TokenStringFromLocalstorage();
         var token = this.loginService.token;
         req = req.clone({
             setHeaders: {
                 Authorization: `Bearer ${token}`
             }
+            
         });
 
         return next.handle(req).pipe(tap(
@@ -47,7 +46,7 @@ export class Interceptor implements HttpInterceptor {
     //Размещает токен в сервисе
     private setItem(token: string) {
         this.loginService.token = token;
-        localStorage.setItem('token', token);
+        //localStorage.setItem('token', token);
     }
 
     private getToken() {

@@ -745,7 +745,6 @@ LIMIT 1" (0723d8ff)
 2018-08-31T11:15:32.8501684+03:00 0HLGENMHN49DC:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
 2018-08-31T11:15:32.8502141+03:00 0HLGENMHN49DC:00000001 [INF] Executed action "server.Controllers.UserController.GetCurrent (server)" in 0.6671ms (afa2e885)
 2018-08-31T11:15:32.8503470+03:00 0HLGENMHN49DC:00000001 [INF] Request finished in 1.3438ms 401  (791a596a)
-<<<<<<< HEAD
 2018-08-31T12:09:05.4707045+03:00 0HLGF45JCVFBA:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 39 (ca22a1cb)
 2018-08-31T12:09:05.5357851+03:00 0HLGF45JCVFBA:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
 2018-08-31T12:09:05.7154198+03:00 0HLGF45JCVFBA:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
@@ -1561,7 +1560,6 @@ Parameter name: logger
    at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, String message, Object[] args)
    at Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(ILogger logger, String message, Object[] args)
    at server.Controllers.UserController.Post(User user) in C:\Users\Анастасия\Documents\GitHub\Sayme\src\server\Controllers\UserController.cs:line 66
-=======
 2018-08-31T12:39:59.6491347+03:00 0HLGF4MRV5IN1:00000001 [INF] Request starting HTTP/1.1 POST https://localhost:5001/api/account/authorizate application/json 41 (ca22a1cb)
 2018-08-31T12:39:59.7413438+03:00 0HLGF4MRV5IN1:00000001 [INF] "Bearer" was not authenticated. Failure message: "No SecurityTokenValidator available for token: undefined" (48071232)
 2018-08-31T12:39:59.8298690+03:00 0HLGF4MRV5IN1:00000001 [INF] Route matched with "{action = \"Authorizate\", controller = \"Account\"}". Executing action "server.Controllers.AccountController.Authorizate (server)" (a44c0341)
@@ -2219,7 +2217,6 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'root
    at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
    at server.Controllers.AccountController.Authenticate(String login, String password) in /home/ashepeta/projects/SayMe/src/server/Controllers/AccountController.cs:line 77
    at server.Controllers.AccountController.Authorizate(AuthUser user) in /home/ashepeta/projects/SayMe/src/server/Controllers/AccountController.cs:line 36
->>>>>>> c518fc08b3ba7c328c31965a3206eafa78553954
    at lambda_method(Closure , Object , Object[] )
    at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
    at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)

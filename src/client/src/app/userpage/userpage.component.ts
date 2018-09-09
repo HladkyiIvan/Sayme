@@ -64,11 +64,10 @@ export class UserpageComponent implements OnInit {
     
 
     let file: File = event.files[0];
-    console.log("file:", file)
+    console.log("file:", file);
 
     this.userService.updateAvatar(this.user.id ,file)
     .subscribe(() => (this.convertToBase64(file)),(err) => console.error(err));
-
     form.clear();
   }
 

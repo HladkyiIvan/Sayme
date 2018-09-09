@@ -23,8 +23,9 @@ export class NavigationToolsComponent implements OnInit {
   isSuccessFormVisible: boolean = false;
   feedback = new Email('','')
   feedbackText: string = '';
+  username:string;
   user:User;
-  language: string = localStorage.getItem('language');
+  language: string = '';
 
   constructor(
     
@@ -36,24 +37,22 @@ export class NavigationToolsComponent implements OnInit {
     private loginService:LoginService) { }
 
   ngOnInit() {
-    if(!this.language){
+    if(!localStorage.getItem('language')){
       this.setLang('en');
-      localStorage.setItem('language', 'en');
-      this.language = localStorage.getItem('language');
     }
     else{
-      this.setLang(this.language);
+      this.setLang(localStorage.getItem('language'));
     }
     this.selectLanguage();
-    this.loadCurUser();
+    this.username=localStorage.getItem('curUser');
   }
 
 
-  loadCurUser(){
-    this.userService.getCurrent()
-    .subscribe((data: User) => {
-      this.user = data;})
-  }
+  // loadCurUser(){
+  //   this.userService.getCurrent()
+  //   .subscribe((data: User) => {
+  //     this.user = data;})
+  // }
 
   signOut(){
     this.loginService.token=''; 
@@ -84,15 +83,23 @@ export class NavigationToolsComponent implements OnInit {
       },
       {
         label: `${navigationItems[0]}`,
-        routerLink: 'post',
+        command:(onclick)=>{this.router.navigate(['/post']);}
       },
       {
         label: `${navigationItems[1]}`,
-        routerLink: 'interesting'
+        command:(onclick)=>{this.router.navigate(['/interesting']);}
       },
       {
         label: `${navigationItems[2]}`,
-        routerLink: '**'
+        command:(onclick)=>{this.router.navigate(['/**']);}
+      },
+      {
+        label: 'followed',
+        command:(onclick)=>{this.router.navigate(['/followed']);}
+      },
+      {
+        label: 'following',
+        command:(onclick)=>{this.router.navigate(['/following']);}
       }
     ]
   }

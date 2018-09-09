@@ -13,6 +13,7 @@ using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Security.Cryptography;
+using System.ComponentModel.DataAnnotations;
 
 namespace server.Controllers
 {
@@ -38,7 +39,7 @@ namespace server.Controllers
             if (authUser == null)
                 return BadRequest(new { message = "Username or password are incorrect!" });
 
-            var tokenString=GenerateToken();
+            var tokenString = GenerateToken();
             Set("token", tokenString, 1);
             HttpContext.Session.SetString("Username", user.login);
             return Ok(new
@@ -47,7 +48,50 @@ namespace server.Controllers
             });
         }
 
-        public string GenerateToken(){
+        [AllowAnonymous]
+        // [HttpPost("registrate")]
+        // public IActionResult Registrate(User user)
+        // {
+        //     var repeatUser = context.User.FirstOrDefault(x => (x.mail == user.mail || x.login == user.login));
+        //     if (repeatUser != null)
+        //         return BadRequest("There is a user with the same email or login");
+        //     var emailValidator = new EmailAddressAttribute();
+        //     bool isEmailCorrect = emailValidator.IsValid(user.mail);
+        //     if (!isEmailCorrect)
+        //         return BadRequest("Email in wrong format");
+        //     var codeForRegistration=GetCode();
+        //     return Ok(codeForRegistration);
+
+        // }
+
+
+
+        private string GetMd5Hash(MD5 md5Hash, string input)
+        {
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
+
+        private bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
+        {
+            string hashOfInput = GetMd5Hash(md5Hash, input);
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+            if (0 == comparer.Compare(hashOfInput, hash))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public string GenerateToken()
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("authorization_saymetoken");
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -65,12 +109,23 @@ namespace server.Controllers
             return context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
         }
 
+
+        private string GetCode()
+        {
+            Random rnd = new Random();
+            var code = rnd.Next(100000, 999999);
+            return code.ToString();
+        }
+
         private AuthUser Authenticate(string login, string password)
         {
+            
+            MD5 md5=MD5.Create();
+            var HashedPassword=GetMd5Hash(md5,password);
+            User user = context.User.FirstOrDefault(x => x.login == login && x.password == HashedPassword);
 
-            User user = context.User.FirstOrDefault(x => x.login == login && x.password == password);
             if (user != null)
-                return new AuthUser(login, password);
+                return new AuthUser(login, HashedPassword);
 
             return null;
         }
