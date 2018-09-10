@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { FeedbackService } from '../services/feedback.service';
+import { UserService } from '../../services/user.service';
+import { FeedbackService } from '../../services/feedback.service';
 import { Router } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
-import { User } from '../Models/user';
-import { Email } from '../Models/email';
+import { User } from '../../Models/user';
+import { Email } from '../../Models/email';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({

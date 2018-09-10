@@ -31,11 +31,11 @@ import { PostComponent } from './ui/post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import { TranslatePipe } from './translate.pipe';
 import { TranslateService } from './services/translate.service';
-import { AuthorisationComponent } from './authorization/authorization.component';
+import { AuthorisationComponent } from './ui/authorization/authorization.component';
 import { UserService} from './services/user.service';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './ui/registration/registration.component';
 import { Interceptor} from './interceptor/interceptor';
-import { UserpageComponent } from './userpage/userpage.component';
+import { UserpageComponent } from './ui/userpage/userpage.component';
 
 
 @NgModule({

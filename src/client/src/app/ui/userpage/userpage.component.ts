@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { PostService } from '../services/post.service';
-import { FeedbackService } from '../services/feedback.service';
+import { UserService } from '../../services/user.service';
+import { PostService } from '../../services/post.service';
+import { FeedbackService } from '../../services/feedback.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Post } from '../Models/post';
-import { User } from '../Models/user';
-import { Email } from '../Models/email';
-import { Code } from '../Models/code';
+import { Post } from '../../Models/post';
+import { User } from '../../Models/user';
+import { Email } from '../../Models/email';
+import { Code } from '../../Models/code';
 
 @Component({
   selector: 'app-userpage',
@@ -27,8 +27,8 @@ export class UserpageComponent implements OnInit {
   haveAvatar = true;
   displayProfileSettings: boolean = false;
   passwordCheckBtnIsDisabled: boolean = false;
-  newPasswordCheckBtnIsDisabled: boolean = false;
-  codeCheckBtbIsDisabled: boolean = false;
+  newPasswordCheckBtnIsDisabled: boolean = true;
+  codeCheckBtbIsDisabled: boolean = true;
   isErrorHidden: boolean = true;
   isMessageHidden: boolean = true
   errorMessage:string;
@@ -127,6 +127,7 @@ export class UserpageComponent implements OnInit {
     if(this.checkPassword == this.user.password){
       this.isErrorHidden = true;
       this.passwordCheckBtnIsDisabled = true;
+      this.newPasswordCheckBtnIsDisabled = false;
     }
     else{
       this.isErrorHidden = false;
@@ -147,7 +148,8 @@ export class UserpageComponent implements OnInit {
         this.message = "The password change code was sent to your email!";
         this.isMessageHidden = false;
         this.isErrorHidden = true;
-        this.newPasswordCheckBtnIsDisabled = true;}
+        this.newPasswordCheckBtnIsDisabled = true;
+        this.codeCheckBtbIsDisabled = false;}
       );
     }
     else{
@@ -185,15 +187,15 @@ export class UserpageComponent implements OnInit {
     this.checkPassword = "";
     this.newPassword = "";
     this.newPasswordCheck = "";
+    this.code = "";
     this.isErrorHidden = true;
     this.isMessageHidden = true;
     this.passwordCheckBtnIsDisabled = false;
-    this.newPasswordCheckBtnIsDisabled = false;
-    this.codeCheckBtbIsDisabled = false;
+    this.newPasswordCheckBtnIsDisabled = true;
+    this.codeCheckBtbIsDisabled = true;
   }
 
   changePost(idPost: number){
-
     this.posts.forEach(post => {
       post.is_changing = false;
     });
