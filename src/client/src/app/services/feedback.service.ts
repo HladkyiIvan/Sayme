@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Email } from '../Models/email';
+import { Code } from '../Models/code';
 import { NGXLogger } from 'ngx-logger';
 
 @Injectable({
@@ -22,10 +23,7 @@ export class FeedbackService {
     return this.http.post(this._url + "/sendcode", email);
   }
 
-  checkCode(code:string){
-    let formData = new FormData();
-    formData.append('code', code);
-
-    return this.http.put(this._url + "/checkcode", formData);
+  checkCode(code:Code){
+    return this.http.post(this._url + "/checkcode", code, {observe: "response"});
   }
 }

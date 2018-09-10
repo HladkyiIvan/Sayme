@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Post } from '../Models/post';
 import { User } from '../Models/user';
 import { Email } from '../Models/email';
+import { Code } from '../Models/code';
 
 @Component({
   selector: 'app-userpage',
@@ -48,12 +49,14 @@ export class UserpageComponent implements OnInit {
         this.user = data;
         this.newBio = this.user.bio;
         this.getPostsFromService(data);
-        this.imageData = 'data:image/jpg;base64,' + data.avatar;
+        if(data.avatar == null){
+          this.haveAvatar = false;
+        }
+        else{
+          this.user.avatar = data.avatar;
+          this.imageData = 'data:image/jpg;base64,' + data.avatar;
+        }
       }, err => console.error(err));
-
-      if(this.user.avatar == null){
-        this.haveAvatar = false;
-      }
   }
 
   getPostsFromService(user: User){
@@ -91,6 +94,16 @@ export class UserpageComponent implements OnInit {
     form.clear();
   }
 
+  convertToBase64(file){
+    let that = this;
+    var reader = new FileReader();
+    reader.readAsDataURL(file); 
+    reader.onloadend = function() {
+      that.imageData = reader.result.toString();
+      console.log(that.imageData);
+    }
+  }
+
   saveNewBio(){
     let oldBio = this.user.bio;
     this.user.bio = this.newBio;
@@ -107,16 +120,6 @@ export class UserpageComponent implements OnInit {
             }
         }
       });
-  }
-
-  convertToBase64(file){
-    let that = this;
-    var reader = new FileReader();
-    reader.readAsDataURL(file); 
-    reader.onloadend = function() {
-      that.imageData = reader.result.toString();
-      console.log(that.imageData);
-    }
   }
 
 
@@ -153,20 +156,29 @@ export class UserpageComponent implements OnInit {
     }
   }
 
-  сheckCode(){
-    this.feedbackService.checkCode(this.code)
-    .subscribe((respone: Response) => {
+  checkCode(){
+    console.log(this.code);
+    this.feedbackService.checkCode(new Code(this.code))
+    .subscribe((respone) => {
       if(respone.ok){
-        this.message = "Your email was successufully changed!";
-        this.isMessageHidden = false;
-        this.codeCheckBtbIsDisabled = true;
+        this.isErrorHidden = true;
+        this.user.password = this.newPassword;
+        this.userService.updatePassword(this.user)
+        .subscribe((respone) => {
+          if(respone.ok){
+            this.message = "Your password was successufully changed!";
+            this.isMessageHidden = false;
+            this.codeCheckBtbIsDisabled = true;
+          }
+        });
       }
-      else{
+    }, (error: HttpErrorResponse) =>{ 
+      if (error.status == 400){
         this.errorMessage= "Incorrect code!";
+        this.isMessageHidden = true;
         this.isErrorHidden = false;
       }
     });
-
   }
 
   closePasswordChange(){

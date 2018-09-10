@@ -82,8 +82,8 @@
             </div>
             <div *ngIf="newPasswordCheckBtnIsDisabled;">
                 <p class="p-password">Enter code:</p>
-                <input [(ngModel)]="passwordCode" class="check-password" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="codeCheckBtnIsDisabled">
-                <p-button label="Check code" class="sub" (click)="checkCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtnIsDisabled;"></p-button>
+                <input [(ngModel)]="code" class="check-password" type="text" pInputText placeholder="code" autocomplete="off" [disabled]="codeCheckBtbIsDisabled">
+                <p-button label="Check code" class="sub" (click)="checkCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtbIsDisabled;"></p-button>
             </div>
             <div class="isa_error" [hidden]=isErrorHidden>
                 <i class="fa fa-times-circle"></i>

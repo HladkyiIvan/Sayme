@@ -33,14 +33,15 @@ namespace server.Controllers
         [HttpPost("authorizate")]
         public IActionResult Authorizate(AuthUser user)
         {
-            AuthUser authUser = Authenticate(user.login, user.password);
+            AuthUser authUser = Authenticate(user.id, user.login, user.password);
 
             if (authUser == null)
                 return BadRequest(new { message = "Username or password are incorrect!" });
 
             var tokenString=GenerateToken();
             Set("token", tokenString, 1);
-            HttpContext.Session.SetString("Username", user.login);
+            HttpContext.Session.SetString("Username", authUser.login);
+            HttpContext.Session.SetString("ID", Convert.ToString(authUser.id));
             return Ok(new
             {
                 Token = tokenString
@@ -65,12 +66,12 @@ namespace server.Controllers
             return context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
         }
 
-        private AuthUser Authenticate(string login, string password)
+        private AuthUser Authenticate(long id, string login, string password)
         {
 
             User user = context.User.FirstOrDefault(x => x.login == login && x.password == password);
             if (user != null)
-                return new AuthUser(login, password);
+                return new AuthUser(user.id, login, password);
 
             return null;
         }

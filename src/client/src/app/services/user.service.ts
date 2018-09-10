@@ -33,7 +33,11 @@ export class UserService {
   }
 
   updateBio(user: User){
-    return this.http.put(this.url + '/bio', user);
+    return this.http.put(this.url + '/bio', user, {observe: "response"});
+  }
+
+  updatePassword(user: User){
+    return this.http.put(this.url + '/password', user, {observe: "response"});
   }
 
   updateAvatar(id_user: number, file: File) {

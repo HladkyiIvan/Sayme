@@ -12,7 +12,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
   private url = '/api/account';
-  private url1 = '/api/account/authorizate';
   token: string;
 
   TokenStringFromLocalstorage(){
@@ -32,7 +31,7 @@ export class LoginService {
 
 
   postLogin(login: AuthUser) {
-    return this.http.post(this.url1, login);
+    return this.http.post(this.url + "/authorizate", login);
 
   }
 
