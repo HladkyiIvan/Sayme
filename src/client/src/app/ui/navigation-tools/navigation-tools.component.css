@@ -14,6 +14,7 @@ a{
     border:rgb(0, 0, 0) solid 1px; 
     border-radius: 20px;
     outline: none;
+    transition: 300ms;
 }
 
 .search-input:focus{
@@ -27,7 +28,7 @@ a{
 }
 
 .feedback-text{
-    font-size: 12px;
+    font-size: 16px;
     width: 320px;
     height: 150px;
     resize: none; 
@@ -38,7 +39,7 @@ a{
 }
 
 .feedback-email{
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 15px;
     border: rgb(201, 201, 38) solid 1px;
     border-radius: 10px;
