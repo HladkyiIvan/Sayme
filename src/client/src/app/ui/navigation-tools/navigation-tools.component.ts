@@ -9,6 +9,7 @@ import { TranslateService } from '../../services/translate.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { TranslatePipe } from '../../translate.pipe';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-navigation-tools',
@@ -35,7 +36,9 @@ export class NavigationToolsComponent implements OnInit {
     private router: Router,
     private logger: NGXLogger,
     private userService: UserService,
-    private loginService:LoginService) { }
+    private loginService:LoginService,
+    private tokenService:TokenService,
+  ) { }
 
   ngOnInit() {
     if(!localStorage.getItem('language')){
@@ -55,7 +58,7 @@ export class NavigationToolsComponent implements OnInit {
   // }
 
   signOut(){
-    this.loginService.token=''; 
+    this.tokenService.token=''; 
     localStorage.removeItem('token');
     this.router.navigate(['']);
   }
@@ -68,24 +71,6 @@ export class NavigationToolsComponent implements OnInit {
         command: (onclick) => { this.open(); }
       },
       {
-      //   label: `${navigationItems[0]}`,
-      //   command:(onclick)=>{this.router.navigate(['/post']);}
-      // },
-      // {
-      //   label: `${navigationItems[1]}`,
-      //   command:(onclick)=>{this.router.navigate(['/interesting']);}
-      // },
-      // {
-      //   label: `${navigationItems[2]}`,
-      //   command:(onclick)=>{this.router.navigate(['/**']);}
-      // },
-      // {
-      //   label: 'followed',
-      //   command:(onclick)=>{this.router.navigate(['/followed']);}
-      // },
-      // {
-      //   label: 'following',
-      //   command:(onclick)=>{this.router.navigate(['/following']);}
         label: this.translPipe.transform('News'),
         command:(onclick)=>{this.router.navigate(['/post'])}
       },

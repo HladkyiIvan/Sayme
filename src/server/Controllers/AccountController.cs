@@ -39,16 +39,17 @@ namespace server.Controllers
             if (authUser == null)
                 return BadRequest(new { message = "Username or password are incorrect!" });
 
-            var tokenString = GenerateToken();
-            Set("token", tokenString, 1);
+            //var tokenString = GenerateToken();
             HttpContext.Session.SetString("Username", user.login);
-            return Ok(new
-            {
-                Token = tokenString
-            });
+            //Set("token", tokenString, 1);
+            return Ok(user);
+            // (new
+            // {
+            //     //Token = tokenString
+            // });
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         // [HttpPost("registrate")]
         // public IActionResult Registrate(User user)
         // {
@@ -90,18 +91,24 @@ namespace server.Controllers
                 return false;
             }
         }
-        public string GenerateToken()
+        [AllowAnonymous]
+        [HttpPost("generateToken")]
+        public IActionResult GenerateToken()
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("authorization_saymetoken");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = System.DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
+                Expires = System.DateTime.UtcNow.AddMinutes(1),
+                SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature),
+
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
-            return tokenString;
+            return Ok(new
+            {
+                Token = tokenString
+            });
         }
 
         private User GetCurrentUser()
@@ -119,9 +126,9 @@ namespace server.Controllers
 
         private AuthUser Authenticate(string login, string password)
         {
-            
-            MD5 md5=MD5.Create();
-            var HashedPassword=GetMd5Hash(md5,password);
+
+            MD5 md5 = MD5.Create();
+            var HashedPassword = GetMd5Hash(md5, password);
             User user = context.User.FirstOrDefault(x => x.login == login && x.password == HashedPassword);
 
             if (user != null)

@@ -1,11 +1,19 @@
 <app-navigation-tools></app-navigation-tools>
 <br>
-<p-dataView [value]="following">
+<p-dataView [value]="usersAndImage">
     <ng-template let-user pTemplate="listItem">
         <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9;margin-top: 15px">
             <div class="ui-g-12 ui-md-12 post-container">
                 <div class="ui-g-12">
-                    <p><b>{{user.login}}</b></p> 
+                        <div *ngIf="user.avatar;else other_img" style="float:left; padding-right:1%;padding-top: 10px">
+                                <img id="image" [src]="user.avatar" style=" width:25px;">
+                            </div>
+                            <ng-template #other_img >
+                                <div style="float:left; padding-right: 1%;padding-top: 10px">
+                                    <img src="assets/images/default_avatar.svg" style="width:25px;">
+                                </div>
+                            </ng-template>
+                    <p><b>{{user.user.login}}</b></p> 
                 </div>
             </div>
         </div>

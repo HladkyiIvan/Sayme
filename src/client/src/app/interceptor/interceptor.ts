@@ -5,12 +5,18 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from '../services/login.service';
+import {TokenService} from '../services/token.service';
 
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
-    constructor(private router: Router, private cookieService: CookieService, private loginService: LoginService) { }
+    constructor(
+        private router: Router, 
+        private cookieService: CookieService, 
+        private loginService: LoginService,
+        private tokenService:TokenService,
+    ) { }
 
 
     //Перехватывает каждый запрос на сервер, добавляет в хедеры запроса
@@ -18,16 +24,18 @@ export class Interceptor implements HttpInterceptor {
     //то редирект на логинпейдж
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         var authToken = this.getToken();
-        if (authToken) {
+        // if(!this.loginService.TokenStringFromLocalstorage())
+        // {
+        if (authToken != null) {
             this.setItem(authToken);
         }
-        //this.loginService.TokenStringFromLocalstorage();
-        var token = this.loginService.token;
+        this.tokenService.TokenStringFromLocalstorage();
+        var token = this.tokenService.token;
+        console.log(token);
         req = req.clone({
             setHeaders: {
                 Authorization: `Bearer ${token}`
             }
-            
         });
 
         return next.handle(req).pipe(tap(
@@ -40,13 +48,12 @@ export class Interceptor implements HttpInterceptor {
             }
         ))
             ;
-
     }
 
     //Размещает токен в сервисе
     private setItem(token: string) {
-        this.loginService.token = token;
-        //localStorage.setItem('token', token);
+        this.tokenService.token = token;
+        localStorage.setItem('token', token);
     }
 
     private getToken() {

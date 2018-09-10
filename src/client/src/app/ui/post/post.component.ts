@@ -34,38 +34,39 @@ export class PostComponent implements OnInit {
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
-    this.postService.getPosts()
-      .subscribe((data: Post[]) => {
-        this.posts = data;
-        this.renovateImages(data);
-      });
+   this.loadCurrentUser()
     this.timeIt.subscribe(x => this.loadPosts());
-    this.renovateImages(this.posts);
+    this.updateImages(this.posts);
   }
 
   // добавляет новый пост в список постов залогиненого юзера
   onSay() {
-    if (
-      this.newPost.message.length <= 256 &&
-      this.newPost.message.length > 0) {
-      this.loadPosts();
+      if (this.newPost.message.length <= 256 &&
+        this.newPost.message.length > 0 ) {
       this.newPost.id_user = this.currentUser.id;
       this.newPost.username = this.currentUser.login;
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
-        .subscribe((data: Post) => this.posts.push(data));
-
+        .subscribe((data: Post) => {this.posts.push(data),this.loadPosts();});
       this.newPost = new Post();
     }
+  }
+
+  loadCurrentUser() {
+    this.userService.getCurrent()
+      .subscribe((data: User) => this.currentUser = data);
   }
 
   loadPosts() {
     this.userService.getUsers()
       .subscribe((data: User[]) => this.usersToSearch = data);
-    this.postService.getPosts()
+     
+      this.postService.getPosts()
       .subscribe((data: Post[]) => {
         this.posts = data;
+        this.updateImages(data);
       });
+      
 
   }
 
@@ -79,7 +80,7 @@ export class PostComponent implements OnInit {
     return "".concat(yyyy).concat(mm).concat(dd).concat(hh).concat(min);
   }
 
-  renovateImages(data) {
+  updateImages(data) {
     for (let post of data) {
       if (post.avatar == null)
         this.postAndImage.push(new PostImage(post, null));

@@ -11,16 +11,9 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
   private url = '/api/account/authorizate';
-  token: string;
+  
 
-  TokenStringFromLocalstorage(){
-    if(localStorage.getItem('token'))
-    {
-      this.token=localStorage.getItem('token');
-      return true
-    }
-    return false
-  }
+  
 
   postLogin(login: AuthUser) {
     return this.http.post(this.url, login);
