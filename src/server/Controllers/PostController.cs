@@ -39,6 +39,7 @@ namespace server.Controllers
                     if (post.id_user == user.id)
                     {
                         post.username = user.login;
+                        post.avatar=user.avatar;
                     }
                 }
             }

@@ -6,33 +6,79 @@ import { NGXLogger } from 'ngx-logger';
 import { User } from '../Models/user';
 import { Email } from '../Models/email';
 import { TooltipModule } from 'primeng/tooltip';
+import { RegistrationService } from '../services/registration.service'
+import { HttpErrorResponse } from '@angular/common/http';
+import {Md5} from "md5-typescript";
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
-  providers: [UserService, FeedbackService, NGXLogger, TooltipModule]
+  providers: [UserService, FeedbackService, NGXLogger, TooltipModule, RegistrationService]
 })
 export class RegistrationComponent implements OnInit {
 
   private usersToSearch = [];
   private newUser = new User();
+  private password:string;
   private repPassword: string;
   private enteredCode: string;
-  private generatedCode: number;
   private errorMessage = '';
   private isErrorHidden = true;
   isTextboxesDisabled = false;
+  private generatedCode;
   private sendTo: Email;
   isVisibleCodeInput = false;
 
-  constructor(private userService: UserService, private feedbackService: FeedbackService, private router: Router, private logger: NGXLogger) { }
+  constructor(
+    private userService: UserService,
+    private feedbackService: FeedbackService,
+    private router: Router,
+    private logger: NGXLogger) { }
 
   ngOnInit() {
   }
 
   onRegister() {
-    if (this.newUser.password && this.newUser.login && this.newUser.mail && this.repPassword) {
+    // if (this.newUser.password && this.newUser.login && this.newUser.mail && this.repPassword) {
+    //   if ((this.newUser.password.length >= 7 && this.newUser.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
+    //     if (this.newUser.password === this.repPassword) {
+    //       this.registrationService.postRegistration(this.newUser)
+    //         .subscribe(
+    //           (data) => {
+    //             this.answerFromServer = data,
+    //             this.isErrorHidden = true;
+    //             this.newUser.register_code = this.answerFromServer;
+    //             this.errorMessage = '';
+    //             this.newUser.active = true;
+    //             this.newUser.bio = '';
+    //             this.sendTo = new Email(this.newUser.mail, this.newUser.register_code);
+    //             this.feedbackService.sendCode(this.sendTo)
+    //               .subscribe();
+    //             this.isVisibleCodeInput = true;
+    //             this.isTextboxesDisabled = true;
+    //           },
+    //           (error: HttpErrorResponse) => {
+    //             this.answerFromServer = error.error,
+    //               this.errorMessage = this.answerFromServer;
+    //             this.isErrorHidden = false;
+    //           });
+    //     }
+    //     else {
+    //       this.errorMessage = 'Your password and repeated password don`t match! Try again.';
+    //       this.isErrorHidden = false;
+    //     }
+    //   }
+    //   else {
+    //     this.errorMessage = 'Wrong length!';
+    //     this.isErrorHidden = false;
+    //   }
+    // }
+    // else {
+    //   this.errorMessage = 'Wrong input!';
+    //   this.isErrorHidden = false;
+    // }
+    if (this.password && this.newUser.login && this.newUser.mail && this.repPassword) {
       this.usersToSearch.forEach(element => {
         if (element.mail === this.newUser.mail || element.login === this.newUser.login) {
           this.newUser.id = element.id;
@@ -41,8 +87,8 @@ export class RegistrationComponent implements OnInit {
 
       if (!this.newUser.id) {
         if (this.isEmail(this.newUser.mail)) {
-          if ((this.newUser.password.length >= 7 && this.newUser.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
-            if (this.newUser.password === this.repPassword) {
+          if ((this.password.length >= 7 && this.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
+            if (this.password === this.repPassword) {
               this.isErrorHidden = true;
               this.errorMessage = '';
               this.newUser.active = true;
