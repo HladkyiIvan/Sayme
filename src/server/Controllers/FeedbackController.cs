@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace server.Controllers
 {
@@ -40,7 +41,7 @@ namespace server.Controllers
                 MailMessage mailtoClient = new MailMessage();
                 mailtoClient.From = new MailAddress(email.userEmail);
                 mailtoClient.To.Add(email.userEmail);
-                mailtoClient.Subject = "Feedback from Sayme";
+                mailtoClient.Subject = email.subject;
                 mailtoClient.Body = "Thank you for your request! Our team will process it and we will contact you if necessary.";
                 client.Send(mailtoClient);
                 log.LogDebug("Letter to user was sent");
@@ -53,7 +54,7 @@ namespace server.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("sendcode")]
-        public IActionResult SendMail([FromBody]Email email)
+        public ActionResult<string> SendMail([FromBody]Email email)
         {
                 string hostEmail = "sayme.help@gmail.com";
 
@@ -64,11 +65,28 @@ namespace server.Controllers
 
                 MailMessage mailtoClient = new MailMessage();
                 mailtoClient.From = new MailAddress(email.userEmail);
+                Random rnd = new Random();
+                int code = rnd.Next(100000, 1000000);
                 mailtoClient.To.Add(email.userEmail);
-                mailtoClient.Subject = "Code for registration";
-                mailtoClient.Body = "Thank you for using Sayme! Here is your code for registration: "+email.feedback;
+                mailtoClient.Subject = email.subject;
+                mailtoClient.Body = "Thank you for using Sayme! Here is your code: "+ Convert.ToString(code);
                 client.Send(mailtoClient);
-                return Ok(email);
+                return Convert.ToString(code);
+        }
+
+        [HttpPost]
+        [Route("checkcode")]
+        public IActionResult CheckCode(IFormFile code)
+        {
+            try
+            {
+                
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

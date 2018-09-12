@@ -68,35 +68,12 @@ namespace server.Controllers
             }
             return BadRequest(ModelState);
         }
-
-
-
-        // [HttpPut("{id}")]
-        // public IActionResult Put([FromBody] User newUser)
-        // {
-        //     // var oldUser = context.User.Find(newUser.id);
-
-        //     // if (oldUser == null)
-        //     // {
-        //     //     return NotFound();
-        //     // }
-
-        //     // oldUser.avatar = System.Convert.FromBase64String(newUser.avatar);
-        //     // oldUser.bio = newUser.bio;
-        //     // oldUser.login = newUser.login;
-        //     // oldUser.mail = newUser.mail;
-        //     // oldUser.password = newUser.password;
-
-        //     // context.User.Update(oldUser);
-        //     // context.SaveChanges();
-        //     return NoContent();
-        // }
+        
         [HttpPut("{id}")]
         public IActionResult UpdateImage(IFormFile image)
         {
             try
             {
-
                 if (image == null || !ModelState.IsValid)
                 {
                     return BadRequest(ModelState);

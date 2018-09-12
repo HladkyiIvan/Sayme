@@ -37,10 +37,10 @@
                             <button pButton style="float: right;" icon="fas fa-edit" (click)="changePost(post.id)"></button>
                         </p> 
                         <div *ngIf="!post.is_changing; else editing">
-                            <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
+                            <p><textarea class="post-text" readonly>{{post.message}}</textarea></p>
                         </div>
                         <ng-template #editing>
-                            <p><textarea class="post-text" [(ngModel)]="editedPostMessage" style="color: purple">{{editedPostMessage}}</textarea></p>
+                            <p><textarea class="post-text-change" [(ngModel)]="editedPostMessage">{{editedPostMessage}}</textarea></p>
                         </ng-template>
                         <div>
                             <p style="color: black;">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>

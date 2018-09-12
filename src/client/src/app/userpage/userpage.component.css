@@ -36,6 +36,15 @@ input{
     outline: none; 
 }
 
+.post-text-change{
+    resize: none;
+    width: 100%;
+    border: 2px solid rgb(201, 201, 38);
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none; 
+}
+
 .bio{
     word-wrap: break-word;
     font-family: Roboto, sans-serif;
@@ -64,7 +73,7 @@ input{
     border: none;
 }
 
-.check{
+.check-password{
     outline: none;
     border-radius: 40px;
     margin-right: 20px;
