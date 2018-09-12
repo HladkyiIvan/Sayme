@@ -3,19 +3,13 @@ import { Observable } from 'rxjs';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { LoginService } from '../services/login.service';
-import {TokenService} from '../services/token.service';
 
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
     constructor(
-        private router: Router, 
-        private cookieService: CookieService, 
-        private loginService: LoginService,
-        private tokenService:TokenService,
+        private router: Router,
     ) { }
 
 
@@ -23,20 +17,16 @@ export class Interceptor implements HttpInterceptor {
     //авторизационный токен(если такой имеется). Если пользователь неавторизирован,
     //то редирект на логинпейдж
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        var authToken = this.getToken();
-        // if(!this.loginService.TokenStringFromLocalstorage())
-        // {
-        if (authToken != null) {
-            this.setItem(authToken);
+        let authToken: string = localStorage.getItem('token');
+        if (authToken) {
+            console.log(authToken);
+            req = req.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${authToken}`
+                }
+            });
         }
-        this.tokenService.TokenStringFromLocalstorage();
-        var token = this.tokenService.token;
-        console.log(token);
-        req = req.clone({
-            setHeaders: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+
 
         return next.handle(req).pipe(tap(
             () => { },
@@ -50,18 +40,6 @@ export class Interceptor implements HttpInterceptor {
             ;
     }
 
-    //Размещает токен в сервисе
-    private setItem(token: string) {
-        this.tokenService.token = token;
-        localStorage.setItem('token', token);
-    }
 
-    private getToken() {
-        if (this.cookieService.check('token')) {
-            var authToken = this.cookieService.get('token');
-            this.cookieService.delete('token');
-            return authToken;
-        }
-        else return null;
-    }
+
 }

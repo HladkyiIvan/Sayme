@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthUser } from '../Models/authUser';
 import { HttpErrorResponse } from '@angular/common/http';
 import {TokenService} from '../services/token.service';
+import { Token } from '../Models/token';
 
 
 @Component({
@@ -35,8 +36,14 @@ export class AuthorisationComponent implements OnInit {
       this.loginService.postLogin(this.user).
         subscribe((response: Response) => {
           localStorage.setItem('curUser', this.user.login);
-          this.tokenService.getToken();
-          this.router.navigate(['/post']);
+          this.tokenService.getToken()
+          .subscribe(
+            (data:Token)=>{
+              localStorage.setItem('token',data.text)
+              this.router.navigate(['/post']);
+            }
+          );
+          
         }, (error: HttpErrorResponse) => {
           if (error.status == 400) {
             this.errorMessage = "There is no user with this login or password";
