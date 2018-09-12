@@ -9,6 +9,7 @@ import { TranslateService } from '../../services/translate.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { TranslatePipe } from '../../translate.pipe';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-navigation-tools',
@@ -25,6 +26,7 @@ export class NavigationToolsComponent implements OnInit {
   feedback = new Email('','','');
   feedbackText: string = '';
   user: User;
+  username:string;
   language: string = localStorage.getItem('language');
 
   constructor(
@@ -34,29 +36,29 @@ export class NavigationToolsComponent implements OnInit {
     private router: Router,
     private logger: NGXLogger,
     private userService: UserService,
-    private loginService:LoginService) { }
+    private loginService:LoginService,
+    private tokenService:TokenService,
+  ) { }
 
   ngOnInit() {
-    if(!this.language){
+    if(!localStorage.getItem('language')){
       this.setLang('en');
-      localStorage.setItem('language', 'en');
-      this.language = localStorage.getItem('language');
     }
     else {
       this.setLang(this.language);
     }
-    this.loadCurUser();
+    this.username=localStorage.getItem('curUser');
   }
 
-  loadCurUser(){
-    this.userService.getCurrent()
-      .subscribe((data: User) => {
-        this.user = data;
-    })
-  }
+  // loadCurUser(){
+  //   this.userService.getCurrent()
+  //     .subscribe((data: User) => {
+  //       this.user = data;
+  //   })
+  // }
 
   signOut(){
-    this.loginService.token=''; 
+    this.tokenService.token=''; 
     localStorage.removeItem('token');
     this.router.navigate(['']);
   }

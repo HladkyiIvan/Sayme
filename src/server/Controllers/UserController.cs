@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using System;
 
 namespace server.Controllers
 {
@@ -79,7 +80,7 @@ namespace server.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var user = context.User.Find((long)32);
+                var user = context.User.Find(Convert.ToInt64(HttpContext.Session.GetString("ID")));
 
                 if (user == null)
                 {
@@ -116,6 +117,30 @@ namespace server.Controllers
                 }
 
                 oldUser.bio = newUser.bio;
+
+                context.User.Update(oldUser);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut]
+        [Route("password")]
+        public IActionResult UpdatePassword(User newUser)
+        {
+            try
+            {
+                var oldUser = context.User.Find(newUser.id);
+
+                if (oldUser == null)
+                {
+                    return NotFound();
+                }
+
+                oldUser.password = newUser.password;
 
                 context.User.Update(oldUser);
                 context.SaveChanges();
