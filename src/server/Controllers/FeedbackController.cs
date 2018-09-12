@@ -72,6 +72,7 @@ namespace server.Controllers
 
                 MailMessage mailtoClient = new MailMessage();
                 mailtoClient.From = new MailAddress(email.userEmail);
+                code = rnd.Next(100000, 1000000);
                 mailtoClient.To.Add(email.userEmail);
                 mailtoClient.Subject = email.subject;
                 mailtoClient.Body = "Thank you for using Sayme! Here is your code: "+ Convert.ToString(code);

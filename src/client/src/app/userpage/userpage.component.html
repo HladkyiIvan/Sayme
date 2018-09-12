@@ -23,7 +23,7 @@
   <form #postForm="ngForm">
     <div class="ui-g ui-fluid" >
         <div style="padding: 10px;" class="ui-g-12">
-              <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..." autocomplete="off" style="width: 35%;">
+              <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="{{ 'Say something...' | translate }}" autocomplete="off" style="width: 35%;">
           <p-button (click)="onSay()" icon="fa fa-comment" style="width:70px;"></p-button>
           <p-button label="{{ 'Subscribe' | translate }}" class="sub"></p-button>
         </div>
@@ -38,16 +38,18 @@
                             <button pButton style="float: right;" icon="fas fa-edit" (click)="changePost(post.id)"></button>
                         </p> 
                         <div *ngIf="!post.is_changing; else editing">
-                            <p><textarea class="post-text" readonly style="color: black">{{post.message}}</textarea></p>
+                            <p><textarea class="post-text" readonly>{{post.message}}</textarea></p>
                         </div>
                         <ng-template #editing>
-                            <p><textarea class="post-text" [(ngModel)]="editedPostMessage" style="color: purple">{{editedPostMessage}}</textarea></p>
+                            <p><textarea class="post-text-change" [(ngModel)]="editedPostMessage">{{editedPostMessage}}</textarea></p>
                         </ng-template>
                         <div>
                             <p style="color: black;">{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
                             <div *ngIf="post.is_changing">
-                                <button pButton style="width: 150px; float: right;" icon="fas fa-times" (click)="cancelEditPost();"></button>
-                                <button pButton style="width: 150px; float: right; margin-right: 10px;" icon="fas fa-check" (click)="submitEditPost();"></button>
+                                <div style="margin: 0; padding: 0; float: right">
+                                    <button pButton style="width: 150px; margin-right: 10px;" icon="fas fa-check" (click)="submitEditPost();"></button>
+                                    <button pButton style="width: 150px;" icon="fas fa-times" (click)="cancelEditPost();"></button>
+                                </div>
                             </div>
                         </div> 
                   </div>
@@ -57,34 +59,34 @@
   </p-dataView>
 </div>
 
-<p-dialog header="Profile settings" [(visible)]="displayProfileSettings" [width]="600" [draggable]="false" 
+<p-dialog header="{{ 'Profile settings' | translate }}" [(visible)]="displayProfileSettings" [width]="700" [draggable]="false" 
 [dismissableMask]="true" [modal]="true" [responsive]="true" [resizable]="false" (onHide)="closePasswordChange();">
     <p-tabView orientation="left">
-        <p-tabPanel header="Avatar">
-            <p>Set new avatar:</p>
+        <p-tabPanel header="{{ 'Avatar' | translate }}">
+            <p>{{ 'Set new avatar' | translate }}:</p>
             <p-fileUpload #form name="myfile[]" customUpload="true" accept="image/*" maxFileSize="1000000"
-            (uploadHandler)="myUploader($event, form)" showUploadButton="false" mode="advanced" uploadLabel="Save"></p-fileUpload>
+            (uploadHandler)="myUploader($event, form)" showUploadButton="false" mode="advanced" cancelLabel="{{ 'Cancel' | translate }}" chooseLabel="{{ 'Choose' | translate }}" uploadLabel="{{ 'Save' | translate }}"></p-fileUpload>
         </p-tabPanel>
-        <p-tabPanel header="Bio">
-            <p>Change info about yourself:</p>
+        <p-tabPanel header="{{ 'About' | translate }}">
+            <p>{{ 'Change info about yourself' | translate }}:</p>
             <p><textarea pInputTextarea  [(ngModel)]="newBio" rows="4" maxlength="256" class="post-text" style="color: black; background: white; padding: 0.2em"></textarea></p>
-            <p-button label="Save" class="sub" (click)="saveNewBio()" style="display: block;"></p-button>
+            <p-button label="{{ 'Save' | translate }}" class="sub" (click)="saveNewBio()" style="display: block;"></p-button>
         </p-tabPanel>
-        <p-tabPanel header="Password">
-            <p class="p-password">Enter old password:</p>
-                <input [(ngModel)]="checkPassword" class="check-password" type="password" pInputText placeholder="old password" autocomplete="off" [disabled]="passwordCheckBtnIsDisabled">
+        <p-tabPanel header="{{ 'Password' | translate }}">
+            <p class="p-password">{{ 'Enter old password' | translate }}:</p>
+                <input [(ngModel)]="checkPassword" class="check" type="password" pInputText placeholder="{{ 'old password' | translate }}" autocomplete="off" [disabled]="passwordCheckBtnIsDisabled">
                 <p-button label="Check" class="sub" (click)="checkOldPassword(); disabled = true;" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!passwordCheckBtnIsDisabled;"></p-button>
             <div *ngIf="passwordCheckBtnIsDisabled;">
-                <p class="p-password">New password:</p>
-                <input [(ngModel)]="newPassword" class="check-password" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
-                <p class="p-password">Confirm new password:</p>
-                <input [(ngModel)]="newPasswordCheck" class="check-password" type="password" pInputText placeholder="repeat new password" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
-                <p-button label="Submit" class="sub" (click)="checkNewPasswordAndSendCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
+                <p class="p-password">{{ 'New password' | translate }}:</p>
+                <input [(ngModel)]="newPassword" class="check" type="password" pInputText placeholder="{{ 'new password' | translate }}" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p class="p-password">{{ 'Confirm new password' | translate }}:</p>
+                <input [(ngModel)]="newPasswordCheck" class="check" type="password" pInputText placeholder="{{ 'repeat new password' | translate }}" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p-button label="{{ 'Save password' | translate }}" class="sub" (click)="checkNewPassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
             </div>
             <div *ngIf="newPasswordCheckBtnIsDisabled;">
-                <p class="p-password">Enter code:</p>
-                <input [(ngModel)]="code" class="check-password" type="text" pInputText placeholder="code" autocomplete="off" [disabled]="codeCheckBtbIsDisabled">
-                <p-button label="Check code" class="sub" (click)="checkCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtbIsDisabled;"></p-button>
+                <p class="p-password">{{ 'Enter code' | translate }}:</p>
+                <input [(ngModel)]="passwordCode" class="check" type="password" pInputText placeholder="{{ 'new password' | translate }}" autocomplete="off" [disabled]="newPasswordCheckBtnIsDisabled">
+                <p-button label="{{ 'Save password' | translate }}" class="sub" (click)="checkNewPassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newPasswordCheckBtnIsDisabled;"></p-button>
             </div>
             <div class="isa_error" [hidden]=isErrorHidden>
                 <i class="fa fa-times-circle"></i>
@@ -95,10 +97,10 @@
                 {{message}}
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Email">
+        <p-tabPanel header="{{ 'Email' | translate }}">
             Content 3
         </p-tabPanel>
-        <p-tabPanel header="Common">
+        <p-tabPanel header="{{ 'Common' | translate }}">
             Content 3
         </p-tabPanel>
     </p-tabView>

@@ -52,7 +52,21 @@ export class NavigationToolsComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  setNavPanelLang(){
+  //!!!FEATURE!!!
+  //switching on navigationbar button`s text 
+  selectLanguage(){
+    var navigationItems = [];
+    switch (this.language) {
+      case 'ru':
+        navigationItems = ['Новости', 'Интересное', 'Сказать', 'Подписчики', 'Читаю'];
+        break;
+      case 'ua':
+        navigationItems = ['Новини', 'Цікаве', 'Сказати', 'Підписники', 'Читаю'];
+        break;
+      default:
+        navigationItems = ['News', 'Intresting', 'Say', 'Followed', 'Following'];
+        break;
+    }
     this.items = [
       {
         label: ' ',
@@ -60,15 +74,15 @@ export class NavigationToolsComponent implements OnInit {
         command: (onclick) => { this.open(); }
       },
       {
-        label: this.translPipe.transform('News'),
+        label: `${navigationItems[0]}`,
         command:(onclick)=>{this.router.navigate(['/post'])}
       },
       {
-        label: this.translPipe.transform('Interesting'),
+        label: `${navigationItems[1]}`,
         command:(onclick)=>{this.router.navigate(['/interesting'])}
       },
       {
-        label: this.translPipe.transform('Say'),
+        label: `${navigationItems[2]}`,
         command:(onclick)=>{this.router.navigate(['/**']);}
       },
     ]
@@ -80,7 +94,7 @@ export class NavigationToolsComponent implements OnInit {
     this.language = lang;
     this.translate.use(lang);
     localStorage.setItem('language', lang);
-    this.setNavPanelLang();
+    this.selectLanguage();
   }
 
   ///opens sidebar with user info

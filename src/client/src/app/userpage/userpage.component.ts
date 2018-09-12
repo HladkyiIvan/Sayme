@@ -122,7 +122,6 @@ export class UserpageComponent implements OnInit {
       });
   }
 
-
   checkOldPassword(){
     if(this.checkPassword == this.user.password){
       this.isErrorHidden = true;
@@ -215,7 +214,9 @@ export class UserpageComponent implements OnInit {
 
   submitEditPost(){
     this.somePost.is_changing = false;
-    if(this.somePost.message !== this.editedPostMessage)
+    if(this.somePost.message !== this.editedPostMessage
+        && this.editedPostMessage.length < 256
+        && this.editedPostMessage.replace(/\s/g, '').length > 0)
     {
       this.somePost.message = this.editedPostMessage;
       this.postService.updatePost(this.somePost).subscribe();

@@ -21,5 +21,20 @@
     "Avatar": "Фото",
     "News": "Новости",
     "Interesting": "Интересное",
-    "Say": "Сказать"
+    "Say": "Сказать",
+
+    "Profile settings": "Настройки профиля",
+    "Set new avatar": "Изменить аватар",
+    "Change info about yourself": "Изменить информацию о себе",
+    "Save": "Сохранить",
+    "Choose": "Выбрать",
+    "Password": "Пароль",
+    "Enter old password": "Введите старый пароль",
+    "old password": "старый пароль",
+    "New password": "Новый пароль",
+    "new password": "новый пароль",
+    "Confirm new password": "Подтвердить новый пароль",
+    "repeat new password":"повторите новый пароль",
+    "Subscribe": "Подписаться",
+    "Common": "Основные"
 }
