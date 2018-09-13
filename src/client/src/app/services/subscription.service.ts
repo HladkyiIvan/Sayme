@@ -23,4 +23,8 @@ numOfSubscriptions:number=0;
   getBlackList(){
     return this.http.get(this.url+'/blacklist')
   }
+
+  addToBlackList(idWhom:number){
+    return this.http.post(this.url+'/blacklist',idWhom);
+  }
 }

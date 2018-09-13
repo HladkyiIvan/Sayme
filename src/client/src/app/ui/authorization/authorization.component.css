@@ -1,0 +1,66 @@
+body{
+    display: flex;
+    justify-content: center;
+  }
+  
+input{
+    padding: 5px;
+    width: 200px;
+    outline: none; 
+    color: white;
+    background-color: rgb(46, 45, 45);
+    border-color: rgb(255, 222, 73);
+    border-width: 1px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    margin-left: 0px;
+    margin-top: 20px 
+}
+
+
+button{
+    color: rgb(10, 3, 3);
+    background: rgb(255, 222, 73);
+    border-color: black;
+    outline: none; 
+    border-radius: 40px; 
+    margin-bottom: 15px;
+}
+
+.labelSignup{
+      font-family: fantasy
+  }
+  
+.isa-error {
+    padding:10px;
+    color: rgb(255, 251, 252);
+    background-color: rgb(240, 0, 0);
+    border-radius: 20px;
+    margin:10px 22px;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size:1em;
+    vertical-align:middle;
+    text-align: center;
+}
+
+  
+.container_with_borders{
+      border: 3 px;
+      border-color: rgb(46, 45, 45);
+      border-style: solid;  
+      border-radius: 20px;    
+      width: 300px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      background-color: rgb(46, 45, 45);
+      margin-bottom:10px; 
+     box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
+  }
+  
+  
+  
+  
+   
+      

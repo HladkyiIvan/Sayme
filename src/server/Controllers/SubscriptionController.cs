@@ -60,7 +60,7 @@ namespace server.Controllers
         public IEnumerable<User> GetBlacklist()
         {
             var user=context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
-            var blacklist = context.Blackist.ToList();
+            var blacklist = context.Blacklist.ToList();
             List<User> blacklistOfUser = new List<User> { };
             foreach (var item in blacklist)
             {
@@ -74,9 +74,11 @@ namespace server.Controllers
         }
 
         [HttpPost("blacklist")]
-        public IActionResult AddUserToBlacklist([FromBody]Blacklist blacklist){
+        public IActionResult AddUserToBlacklist(long idWhom){
             if(ModelState.IsValid){
-                context.Blackist.Add(blacklist);
+                var user=context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
+                var blacklist=new Blacklist(user.id,idWhom);
+                context.Blacklist.Add(blacklist);
                 context.SaveChanges();
                 return Ok(blacklist);
             }

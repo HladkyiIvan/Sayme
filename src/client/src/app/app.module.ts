@@ -24,29 +24,26 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 //project
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
-import { FooterComponent } from './ui/footer/footer.component';
 import { PostComponent } from './ui/post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import { TranslatePipe } from './translate.pipe';
 import { TranslateService } from './services/translate.service';
-import { AuthorisationComponent } from './authorization/authorization.component';
+import { AuthorisationComponent } from './ui/authorization/authorization.component';
 import { UserService} from './services/user.service';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './ui/registration/registration.component';
 import { Interceptor} from './interceptor/interceptor';
-import { UserpageComponent } from './userpage/userpage.component';
-import { FollowedComponent } from './followed/followed.component';
+import { UserpageComponent } from './ui/userpage/userpage.component';
+import { FollowedComponent } from './ui/followed/followed.component';
 import {SubscriptionService} from './services/subscription.service';
-import { FollowingComponent } from './following/following.component';
+import { FollowingComponent } from './ui/following/following.component';
+import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRegistrationHeaderComponent,
     AboutUserBodyComponent,
-    FooterComponent,
     PostComponent,
     NavigationToolsComponent,
     TranslatePipe,
@@ -55,6 +52,7 @@ import { FollowingComponent } from './following/following.component';
     RegistrationComponent,
     FollowedComponent,
     FollowingComponent,
+    BlacklistComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -77,9 +75,7 @@ import { FollowingComponent } from './following/following.component';
     TabViewModule    
   ],
   exports: [
-    LoginRegistrationHeaderComponent,
     AboutUserBodyComponent,
-    FooterComponent,
     NavigationToolsComponent,
     PostComponent,
     AccordionModule,
