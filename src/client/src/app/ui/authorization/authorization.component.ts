@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthUser } from '../../Models/authUser';
 import { HttpErrorResponse } from '@angular/common/http';
+import {TokenService} from '../../services/token.service';
 
 
 @Component({
@@ -14,14 +15,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AuthorisationComponent implements OnInit {
 
-  private url = '/api/user/authenticate';
 
-  private usersToSearch = [];
   private user = new AuthUser();
   private errorMessage = '';
   private isErrorHidden = true;
 
-  constructor(private loginService: LoginService, private router: Router, private cookieService: CookieService) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router, 
+    private tokenService : TokenService
+  ) { }
 
   ngOnInit() {
   }
@@ -32,9 +35,9 @@ export class AuthorisationComponent implements OnInit {
       this.isErrorHidden = true;
       this.loginService.postLogin(this.user).
         subscribe((response: Response) => {
-          this.router.navigate(['/menu']);
-
-
+          localStorage.setItem('curUser', this.user.login);
+          this.tokenService.getToken();
+          this.router.navigate(['/post']);
         }, (error: HttpErrorResponse) => {
           if (error.status == 400) {
             this.errorMessage = "There is no user with this login or password";
@@ -48,10 +51,9 @@ export class AuthorisationComponent implements OnInit {
       this.isErrorHidden = false;
     }
 
-
   }
 
-  onRegistration() {
+  onPressRegistration() {
     this.router.navigate(['/registration']);
   }
 

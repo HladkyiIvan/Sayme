@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { User } from '../Models/user';
 import { NGXLogger } from 'ngx-logger';
+import { Code } from '../Models/code';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +33,12 @@ export class UserService {
     return this.http.post(this.url, user);
   }
 
-  updateBio(user: User){
-    return this.http.put(this.url + '/bio', user, {observe: "response"});
+  updateBio(bio: Code){
+    return this.http.put(this.url + '/bio', bio, {observe: "response"});
   }
 
-  updatePassword(user: User){
-    return this.http.put(this.url + '/password', user, {observe: "response"});
+  updatePassword(password: Code){
+    return this.http.put(this.url + '/password', password, {observe: "response"});
   }
 
   updateAvatar(id_user: number, file: File) {
@@ -46,5 +47,9 @@ export class UserService {
     formData.append('image', file);
 
     return this.http.put(this.url + '/' + id_user.toString(), formData);
+  }
+
+  checkPassword(passwordCheck: Code){
+    return this.http.post(this.url + '/checkpassword', passwordCheck, {observe: "response"});
   }
 }

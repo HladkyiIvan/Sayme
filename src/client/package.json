@@ -26,6 +26,7 @@
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
+    "md5-typescript": "^1.0.5",
     "ngx-cookie-service": "^1.0.10",
     "ngx-logger": "^3.0.5",
     "npm": "^6.3.0",

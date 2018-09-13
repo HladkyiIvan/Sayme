@@ -10,7 +10,7 @@ namespace server.Models
         public DateTime post_date { get; set; }
 
         public string username { get; set; }
-
+        public byte[] avatar { get; set; }
         public PostTransport (Post post)
         {
             id = post.id;

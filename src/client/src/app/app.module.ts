@@ -36,6 +36,10 @@ import { UserService} from './services/user.service';
 import { RegistrationComponent } from './ui/registration/registration.component';
 import { Interceptor} from './interceptor/interceptor';
 import { UserpageComponent } from './ui/userpage/userpage.component';
+import { FollowedComponent } from './ui/followed/followed.component';
+import {SubscriptionService} from './services/subscription.service';
+import { FollowingComponent } from './ui/following/following.component';
+import { SettingsComponent } from './ui/settings/settings.component';
 
 
 @NgModule({
@@ -50,6 +54,9 @@ import { UserpageComponent } from './ui/userpage/userpage.component';
     UserpageComponent,
     AuthorisationComponent,
     RegistrationComponent,
+    FollowedComponent,
+    FollowingComponent,
+    SettingsComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -81,9 +88,10 @@ import { UserpageComponent } from './ui/userpage/userpage.component';
     DataViewModule,
     UserpageComponent,
     TooltipModule,
+    FollowedComponent,
     SplitButtonModule 
   ],
-  providers: [UserService, CookieService,
+  providers: [UserService, CookieService,SubscriptionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

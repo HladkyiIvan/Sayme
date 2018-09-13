@@ -6,6 +6,8 @@ import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools
 import { RegistrationComponent } from './ui/registration/registration.component';
 import { AuthorisationComponent } from './ui/authorization/authorization.component';
 import { UserpageComponent } from './ui/userpage/userpage.component';
+import { FollowingComponent } from './ui/following/following.component'
+import { FollowedComponent } from './ui/followed/followed.component'
 
 const routes: Routes = [
   {
@@ -21,35 +23,26 @@ const routes: Routes = [
     path: 'registration',
     component: RegistrationComponent
   },
-
   {
-    path: 'menu',
-    component: NavigationToolsComponent,
-    children: [
-      {
-        path: 'post',
-        component: PostComponent,
-      },
-      {
-        path: 'interesting',
-        component: UserpageComponent,
-      },
-      {
-        path: '**',
-        component: UserpageComponent,
-      },
-      {
-        path: 'auth',
-        redirectTo: './login',
-        pathMatch: 'full',
-      }
-
-    ]
+    path: 'post',
+    component: PostComponent,
+  },
+  {
+    path: 'interesting',
+    component: AboutUserBodyComponent,
+  },
+  {
+    path: 'followed',
+    component: FollowedComponent,
+  },
+  {
+    path: 'following',
+    component: FollowingComponent,
   },
   {
     path: '**',
-    redirectTo: ''
-  },
+    component: UserpageComponent,
+  }
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ import { NGXLogger } from 'ngx-logger';
 import { User } from '../../Models/user';
 import { Email } from '../../Models/email';
 import { TooltipModule } from 'primeng/tooltip';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -17,22 +18,27 @@ export class RegistrationComponent implements OnInit {
 
   private usersToSearch = [];
   private newUser = new User();
+  private password:string;
   private repPassword: string;
   private enteredCode: string;
-  private generatedCode: number;
   private errorMessage = '';
   private isErrorHidden = true;
   isTextboxesDisabled = false;
+  private generatedCode;
   private sendTo: Email;
   isVisibleCodeInput = false;
 
-  constructor(private userService: UserService, private feedbackService: FeedbackService, private router: Router, private logger: NGXLogger) { }
+  constructor(
+    private userService: UserService,
+    private feedbackService: FeedbackService,
+    private router: Router,
+    private logger: NGXLogger) { }
 
   ngOnInit() {
   }
 
   onRegister() {
-    if (this.newUser.password && this.newUser.login && this.newUser.mail && this.repPassword) {
+    if (this.password && this.newUser.login && this.newUser.mail && this.repPassword) {
       this.usersToSearch.forEach(element => {
         if (element.mail === this.newUser.mail || element.login === this.newUser.login) {
           this.newUser.id = element.id;
@@ -41,8 +47,8 @@ export class RegistrationComponent implements OnInit {
 
       if (!this.newUser.id) {
         if (this.isEmail(this.newUser.mail)) {
-          if ((this.newUser.password.length >= 7 && this.newUser.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
-            if (this.newUser.password === this.repPassword) {
+          if ((this.password.length >= 7 && this.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
+            if (this.password === this.repPassword) {
               this.isErrorHidden = true;
               this.errorMessage = '';
               this.newUser.active = true;

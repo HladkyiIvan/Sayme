@@ -13,6 +13,7 @@ using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Security.Cryptography;
+using System.ComponentModel.DataAnnotations;
 
 namespace server.Controllers
 {
@@ -37,28 +38,44 @@ namespace server.Controllers
 
             if (authUser == null)
                 return BadRequest(new { message = "Username or password are incorrect!" });
-
-            var tokenString=GenerateToken();
-            Set("token", tokenString, 1);
+            
             HttpContext.Session.SetString("Username", authUser.login);
             HttpContext.Session.SetString("ID", Convert.ToString(authUser.id));
-            return Ok(new
-            {
-                Token = tokenString
-            });
+           
+            return Ok(user);
+           
         }
 
-        public string GenerateToken(){
+        private string GetMd5Hash(MD5 md5Hash, string input)
+        {
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
+
+        
+        [AllowAnonymous]
+        [HttpGet("generateToken")]
+        public IActionResult GenerateToken()
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("authorization_saymetoken");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = System.DateTime.UtcNow.AddDays(1),
-                SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
+                Expires = System.DateTime.UtcNow.AddMinutes(1),
+                SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature),
+
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-            return tokenString;
+            var tokenString = tokenHandler.WriteToken(token);Set("token", tokenString, 1);
+            return Ok(new
+            {
+                Token = tokenString
+            });
         }
 
         private User GetCurrentUser()
@@ -69,7 +86,10 @@ namespace server.Controllers
         private AuthUser Authenticate(long id, string login, string password)
         {
 
-            User user = context.User.FirstOrDefault(x => x.login == login && x.password == password);
+            MD5 md5 = MD5.Create();
+            var HashedPassword = GetMd5Hash(md5, password);
+            User user = context.User.FirstOrDefault(x => x.login == login && x.password == HashedPassword);
+
             if (user != null)
                 return new AuthUser(user.id, login, password);
 
