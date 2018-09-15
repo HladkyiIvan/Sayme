@@ -24,9 +24,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 //project
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginRegistrationHeaderComponent } from './ui/login-registration-header/login-registration-header.component';
 import { AboutUserBodyComponent } from './ui/about-user-body/about-user-body.component';
-import { FooterComponent } from './ui/footer/footer.component';
 import { PostComponent } from './ui/post/post.component';
 import { NavigationToolsComponent } from './ui/navigation-tools/navigation-tools.component';
 import { TranslatePipe } from './translate.pipe';
@@ -40,14 +38,13 @@ import { FollowedComponent } from './ui/followed/followed.component';
 import {SubscriptionService} from './services/subscription.service';
 import { FollowingComponent } from './ui/following/following.component';
 import { SettingsComponent } from './ui/settings/settings.component';
+import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRegistrationHeaderComponent,
     AboutUserBodyComponent,
-    FooterComponent,
     PostComponent,
     NavigationToolsComponent,
     TranslatePipe,
@@ -57,6 +54,7 @@ import { SettingsComponent } from './ui/settings/settings.component';
     FollowedComponent,
     FollowingComponent,
     SettingsComponent,
+    BlacklistComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -79,9 +77,7 @@ import { SettingsComponent } from './ui/settings/settings.component';
     TabViewModule    
   ],
   exports: [
-    LoginRegistrationHeaderComponent,
     AboutUserBodyComponent,
-    FooterComponent,
     NavigationToolsComponent,
     PostComponent,
     AccordionModule,

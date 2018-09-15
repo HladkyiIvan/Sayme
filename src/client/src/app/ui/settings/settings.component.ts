@@ -14,26 +14,25 @@ import { User } from '../../Models/user';
 })
 export class SettingsComponent implements OnInit {
   @Input() user:User;
+  @Input() newBio:string;
   @Output() onAvatarChange = new EventEmitter<File>();
   @Output() onBioChange = new EventEmitter<string>();
   
-  passwordCheckBtnIsDisabled: boolean = false;
-  newPasswordCheckBtnIsDisabled: boolean = true;
+  oldDataCheckBtnIsDisabled: boolean = false;
+  newDataCheckBtnIsDisabled: boolean = true;
   codeCheckBtbIsDisabled: boolean = true;
   isErrorHidden: boolean = true;
   isMessageHidden: boolean = true
   errorMessage:string;
   message:string;
   code: string;
-  checkPassword:string;
-  newPassword:string;
-  newPasswordCheck:string;
-  newBio:string;
+  oldDataCheck:string;
+  newData:string;
+  newDataCheck:string;
 
   constructor(private feedbackService: FeedbackService, private userService: UserService) { }
 
   ngOnInit() {
-    this.newBio = this.user.bio;
     console.log(this.user);
   }
 
@@ -61,34 +60,49 @@ export class SettingsComponent implements OnInit {
 
 
   checkOldPassword(){
-    this.userService.checkPassword(new Code(this.checkPassword))
+    this.userService.checkPassword(new Code(this.oldDataCheck))
     .subscribe((respone) => {
       if(respone.ok){
         this.isErrorHidden = true;
-        this.passwordCheckBtnIsDisabled = true;
-        this.newPasswordCheckBtnIsDisabled = false;}
+        this.oldDataCheckBtnIsDisabled = true;
+        this.newDataCheckBtnIsDisabled = false;}
       }, 
       (error: HttpErrorResponse) => {
         console.log(error);
         this.isErrorHidden = false;
-        this.errorMessage="Password is incorrect!";
+        this.errorMessage="Input is incorrect";
+      });
+  }
+
+  checkOldEmail(){
+    this.userService.checkOldEmail(new Code(this.oldDataCheck))
+    .subscribe((respone) => {
+      if(respone.ok){
+        this.isErrorHidden = true;
+        this.oldDataCheckBtnIsDisabled = true;
+        this.newDataCheckBtnIsDisabled = false;}
+      }, 
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        this.isErrorHidden = false;
+        this.errorMessage="Input is incorrect";
       });
   }
 
   checkNewPasswordAndSendCode(){
-    if(this.newPassword.length <= 7){
+    if(this.newData.length <= 7){
       this.isErrorHidden = false;
       this.errorMessage= "Password must have at least 8 characters!";
       return;
     }
 
-    if(this.newPassword == this.newPasswordCheck){      
+    if(this.newData == this.newDataCheck){     
       this.feedbackService.sendCode(new Email(this.user.mail, "Your change password code", ""))
       .subscribe(() => {
         this.message = "The password change code was sent to your email!";
         this.isMessageHidden = false;
         this.isErrorHidden = true;
-        this.newPasswordCheckBtnIsDisabled = true;
+        this.newDataCheckBtnIsDisabled = true;
         this.codeCheckBtbIsDisabled = false;}
       );
     }
@@ -98,41 +112,108 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  checkCode(){
+  checkNewEmailAndSendCode(){
+    if(!this.feedbackService.isEmail(this.newData)){
+      this.isErrorHidden = false;
+      this.errorMessage= "Email was inputed incorrectly!";
+      return;
+    }
+
+    if(this.newData == this.newDataCheck){
+      this.userService.checkNewEmail(new Code(this.newData))
+      .subscribe((respone) => {
+        if(respone.ok){
+          this.feedbackService.sendCode(new Email(this.newData, "Your change email code", ""))
+          .subscribe(() => {
+            this.message = "The email change code was sent to your email!";
+            this.isMessageHidden = false;
+            this.isErrorHidden = true;
+            this.newDataCheckBtnIsDisabled = true;
+            this.codeCheckBtbIsDisabled = false;}
+          );}
+      }, (error: HttpErrorResponse) => {
+        console.log(error);
+        this.isErrorHidden = false;
+        this.errorMessage= "User with this email already exists!";
+      })      
+    }
+    else{
+      this.isErrorHidden = false;
+      this.errorMessage= "Emails are not the same!";
+    }
+  }
+
+  checkCodeAndUpdatePassword(){
     console.log(this.code);
     this.feedbackService.checkCode(new Code(this.code))
     .subscribe((respone) => {
       if(respone.ok){
-        this.isErrorHidden = true;
-        this.user.password = this.newPassword;
-        this.userService.updatePassword(new Code(this.newPassword))
-        .subscribe((respone) => {
-          if(respone.ok){
-            this.message = "Your password was successufully changed!";
-            this.isMessageHidden = false;
-            this.codeCheckBtbIsDisabled = true;
-          }
-        });
+        this.sendPasswordChangeRequest();
       }
     }, (error: HttpErrorResponse) =>{ 
       if (error.status == 400){
-        this.errorMessage= "Incorrect code!";
-        this.isMessageHidden = true;
-        this.isErrorHidden = false;
+        this.showCodeError();
+      }
+    });
+  }
+
+  checkCodeAndUpdateEmail(){
+    console.log(this.code);
+    this.feedbackService.checkCode(new Code(this.code))
+    .subscribe((respone) => {
+      if(respone.ok){
+        this.sendEmailChangeRequest();
+      }
+    }, (error: HttpErrorResponse) =>{ 
+      if (error.status == 400){
+        this.showCodeError();
       }
     });
   }
 
   resetChanges(){
-    this.checkPassword = "";
-    this.newPassword = "";
-    this.newPasswordCheck = "";
+    this.oldDataCheck = "";
+    this.newData = "";
+    this.newDataCheck = "";
     this.code = "";
     this.isErrorHidden = true;
     this.isMessageHidden = true;
-    this.passwordCheckBtnIsDisabled = false;
-    this.newPasswordCheckBtnIsDisabled = true;
+    this.oldDataCheckBtnIsDisabled = false;
+    this.newDataCheckBtnIsDisabled = true;
     this.codeCheckBtbIsDisabled = true;
+  }
+
+  sendPasswordChangeRequest(){
+    this.isErrorHidden = true;
+    this.user.password = this.newData;
+    this.userService.updatePassword(new Code(this.newData))
+      .subscribe((respone) => {
+        if(respone.ok){
+          this.message = "Your password was successufully changed!";
+          this.isMessageHidden = false;
+          this.codeCheckBtbIsDisabled = true;
+        }
+    });
+  }
+
+  sendEmailChangeRequest(){
+    this.isErrorHidden = true;
+    this.user.mail = this.newData;
+    console.log(this.newData);
+    this.userService.updateEmail(new Code(this.newData))
+      .subscribe((respone) => {
+        if(respone.ok){
+          this.message = "Your email was successufully changed!";
+          this.isMessageHidden = false;
+          this.codeCheckBtbIsDisabled = true;
+        }
+    });
+  }
+
+  showCodeError(){
+    this.errorMessage= "Incorrect code!";
+    this.isMessageHidden = true;
+    this.isErrorHidden = false;
   }
 
 }

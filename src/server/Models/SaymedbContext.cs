@@ -7,13 +7,17 @@ namespace server.Models
     {
         public DbSet<Post> Post { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<Following> Following{get;set;}
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.Entity<Following>().HasKey(k=>new {k.id_who,k.id_whom});
+        public DbSet<Following> Following { get; set; }
+        public DbSet<Blacklist> Blacklist { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Following>().HasKey(k => new { k.id_who, k.id_whom });
+            modelBuilder.Entity<Blacklist>().HasKey(k=>new {k.id_who,k.id_whom});
         }
+
+
         public SaymedbContext(DbContextOptions<SaymedbContext> options)
-            :base(options)
+            : base(options)
         { }
     }
 }

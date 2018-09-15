@@ -57,7 +57,6 @@ namespace server.Controllers
             return sBuilder.ToString();
         }
 
-        
         [AllowAnonymous]
         [HttpGet("generateToken")]
         public IActionResult GenerateToken()
@@ -66,16 +65,13 @@ namespace server.Controllers
             var key = Encoding.ASCII.GetBytes("authorization_saymetoken");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = System.DateTime.UtcNow.AddMinutes(1),
+                Expires = System.DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature),
 
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);Set("token", tokenString, 1);
-            return Ok(new
-            {
-                Token = tokenString
-            });
+            var tokenString = tokenHandler.WriteToken(token);
+            return Ok(value: new Token(tokenString));
         }
 
         private User GetCurrentUser()

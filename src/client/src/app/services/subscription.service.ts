@@ -7,16 +7,24 @@ import { NGXLogger } from 'ngx-logger';
 })
 export class SubscriptionService {
 
-  private urlFollowed='api/subscription/followed';
-  private urlFollowing='api/subscription/following';
+numOfSubscriptions:number=0;
+
+  private url='api/subscription';
 
   constructor(private http:HttpClient) {}
 
-  getFollowed(id:number){
-    return this.http.get(this.urlFollowed+'/'+id);
+  getFollowed(){
+    return this.http.get(this.url+'/followed');
   }
 
-  getFollowing(id:number){
-    return this.http.get(this.urlFollowing+'/'+id);
+  getFollowing(){
+    return this.http.get(this.url+'/following');
+  }
+  getBlackList(){
+    return this.http.get(this.url+'/blacklist')
+  }
+
+  addToBlackList(idWhom:number){
+    return this.http.post(this.url+'/blacklist',idWhom);
   }
 }

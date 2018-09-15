@@ -21,7 +21,7 @@ export class FollowingComponent implements OnInit {
 
 
   loadUserFollowing(){
-    this.subscriptionService.getFollowing(56)
+    this.subscriptionService.getFollowing()
     .subscribe((data:User[])=>
     {
       this.following=data;

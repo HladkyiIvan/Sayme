@@ -6,9 +6,9 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
 import { NGXLogger } from 'ngx-logger';
-import { forEach } from '../../../../node_modules/@angular/router/src/utils/collection';
+import { forEach } from '@angular/router/src/utils/collection';
 import { PostImage } from '../../Models/postImage';
-import { post } from '../../../../node_modules/@types/selenium-webdriver/http';
+import { post } from 'selenium-webdriver/http';
 
 
 @Component({

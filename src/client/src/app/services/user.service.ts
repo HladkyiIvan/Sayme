@@ -41,6 +41,10 @@ export class UserService {
     return this.http.put(this.url + '/password', password, {observe: "response"});
   }
 
+  updateEmail(email: Code){
+    return this.http.put(this.url + '/email', email, {observe: "response"});
+  }
+
   updateAvatar(id_user: number, file: File) {
 
     let formData = new FormData();
@@ -51,5 +55,13 @@ export class UserService {
 
   checkPassword(passwordCheck: Code){
     return this.http.post(this.url + '/checkpassword', passwordCheck, {observe: "response"});
+  }
+
+  checkOldEmail(emailCheck: Code){
+    return this.http.post(this.url + '/checkoldemail', emailCheck, {observe: "response"});
+  }
+
+  checkNewEmail(emailCheck: Code){
+    return this.http.post(this.url + '/checknewemail', emailCheck, {observe: "response"});
   }
 }

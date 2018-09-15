@@ -21,6 +21,6 @@ export class TokenService {
   }
 
   getToken() {
-    return this.http.get(this.url).subscribe((data:string)=>localStorage.setItem('token',data));
+    return this.http.get(this.url);
   }
 }

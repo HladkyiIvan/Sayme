@@ -98,6 +98,53 @@ namespace server.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("checkoldemail")]
+        public IActionResult CheckOldEmail([FromBody]Code email)
+        {
+            try
+            {
+                var user = context.User.Find(Convert.ToInt64(HttpContext.Session.GetString("ID")));
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                if (email.code != user.mail)
+                {
+                    return BadRequest();
+                }
+
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("checknewemail")]
+        public IActionResult CheckNewEmail([FromBody]Code email)
+        {
+            try
+            {
+                var checkEmail = context.User.FirstOrDefault(u=>u.mail == email.code);
+
+                if (checkEmail != null)
+                {
+                    return BadRequest("This email is already exists!");
+                }
+
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         
         [HttpPut("{id}")]
         public IActionResult UpdateImage(IFormFile image)
@@ -156,6 +203,7 @@ namespace server.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPut]
         [Route("password")]
         public IActionResult UpdatePassword(Code password)
@@ -169,7 +217,33 @@ namespace server.Controllers
                     return NotFound();
                 }
 
-                oldUser.password = password.code;
+                MD5 md5 = MD5.Create();
+                oldUser.password = GetMd5Hash(md5, password.code);
+
+                context.User.Update(oldUser);
+                context.SaveChanges();
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("email")]
+        public IActionResult UpdateEmail(Code email)
+        {
+            try
+            {
+                var oldUser = context.User.Find(Convert.ToInt64(HttpContext.Session.GetString("ID")));
+
+                if (oldUser == null)
+                {
+                    return BadRequest("There is no such user!");
+                }
+
+                oldUser.mail = email.code;
 
                 context.User.Update(oldUser);
                 context.SaveChanges();

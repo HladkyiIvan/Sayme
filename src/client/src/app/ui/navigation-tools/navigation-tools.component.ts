@@ -3,10 +3,8 @@ import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
-import { LoginService } from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '../../services/translate.service';
-import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { TranslatePipe } from '../../translate.pipe';
 import {TokenService} from '../../services/token.service';
@@ -35,8 +33,6 @@ export class NavigationToolsComponent implements OnInit {
     private translPipe: TranslatePipe,
     private router: Router,
     private logger: NGXLogger,
-    private userService: UserService,
-    private loginService:LoginService,
     private tokenService:TokenService,
   ) { }
 
@@ -50,20 +46,27 @@ export class NavigationToolsComponent implements OnInit {
     this.username=localStorage.getItem('curUser');
   }
 
-  // loadCurUser(){
-  //   this.userService.getCurrent()
-  //     .subscribe((data: User) => {
-  //       this.user = data;
-  //   })
-  // }
-
   signOut(){
     this.tokenService.token=''; 
     localStorage.removeItem('token');
     this.router.navigate(['']);
   }
 
-  setNavPanelLang(){
+  //!!!FEATURE!!!
+  //switching on navigationbar button`s text 
+  selectLanguage(){
+    var navigationItems = [];
+    switch (this.language) {
+      case 'ru':
+        navigationItems = ['Новости', 'Интересное', 'Сказать', 'Подписчики', 'Читаю'];
+        break;
+      case 'ua':
+        navigationItems = ['Новини', 'Цікаве', 'Сказати', 'Підписники', 'Читаю'];
+        break;
+      default:
+        navigationItems = ['News', 'Intresting', 'Say', 'Followed', 'Following'];
+        break;
+    }
     this.items = [
       {
         label: ' ',
@@ -71,24 +74,22 @@ export class NavigationToolsComponent implements OnInit {
         command: (onclick) => { this.open(); }
       },
       {
-        label: this.translPipe.transform('News'),
+        label: `${navigationItems[0]}`,
         command:(onclick)=>{this.router.navigate(['/post'])}
       },
       {
-        label: this.translPipe.transform('Interesting'),
+        label: `${navigationItems[1]}`,
         command:(onclick)=>{this.router.navigate(['/interesting'])}
       },
       {
-        label: this.translPipe.transform('Say'),
+        label: `${navigationItems[2]}`,
         command:(onclick)=>{this.router.navigate(['/**']);}
       },
       {
-        label: 'followed',
-        command:(onclick)=>{this.router.navigate(['/followed']);}
-      },
-      {
-        label: 'following',
-        command:(onclick)=>{this.router.navigate(['/following']);}
+        label:'blacklist',
+        command:(onclick)=>{this.router.navigate(['/blacklist']);}
+
+        
       }
     ]
   }
@@ -99,7 +100,7 @@ export class NavigationToolsComponent implements OnInit {
     this.language = lang;
     this.translate.use(lang);
     localStorage.setItem('language', lang);
-    this.setNavPanelLang();
+    this.selectLanguage();
   }
 
   ///opens sidebar with user info

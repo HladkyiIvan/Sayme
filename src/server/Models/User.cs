@@ -1,6 +1,5 @@
 namespace server.Models
 {
-    //user class
     public class User
     {
         public long id { get; set; }

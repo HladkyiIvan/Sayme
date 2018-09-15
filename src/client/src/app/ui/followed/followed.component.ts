@@ -21,7 +21,7 @@ export class FollowedComponent implements OnInit {
   }
 
   loadUserFollowed() {
-    this.subscriptionService.getFollowed(56)
+    this.subscriptionService.getFollowed()
       .subscribe((data: User[]) => { 
         this.followed = data;
         this.updateImages(this.followed);
