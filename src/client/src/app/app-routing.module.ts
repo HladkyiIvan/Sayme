@@ -5,8 +5,8 @@ import { PostComponent } from './ui/post/post.component';
 import { RegistrationComponent } from './ui/registration/registration.component';
 import { AuthorisationComponent } from './ui/authorization/authorization.component';
 import { UserpageComponent } from './ui/userpage/userpage.component';
-import { FollowedComponent } from './ui/followed/followed.component';
-import { FollowingComponent } from './ui/following/following.component';
+import { FollowingComponent } from './ui/following/following.component'
+import { FollowedComponent } from './ui/followed/followed.component'
 import {BlacklistComponent} from './ui/blacklist/blacklist.component';
 
 const routes: Routes = [

@@ -8,13 +8,6 @@ br{
     height: 5px;
 }
 
-hr{
-    color: #cccccc;
-    background: #cccccc;
-    height: 1px;
-    display: block;
-}
-
 
 .ui-button-text-icon-left .ui-button-text {
     padding: .25em 1em .25em 1em;
@@ -55,10 +48,6 @@ input{
     height: 220px;
 }
 
-.sub{
-    float: right
-}
-
 .post-username{
     outline: none; 
     border-radius: 40px; 
@@ -71,41 +60,4 @@ input{
     border-radius: 40px;
     margin-right: 20px;
     border: none;
-}
-
-.check-password{
-    outline: none;
-    border-radius: 40px;
-    margin-right: 20px;
-    border: none;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.p-password{
-    margin: 0;
-}
-
-.isa_error {
-    padding:10px;
-    color: rgb(255, 251, 252);
-    background-color: rgb(240, 0, 0);
-    border-radius: 20px;
-    margin:10px 22px;
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size:1em;
-    vertical-align:middle;
-    text-align: center;
-}
-
-.isa_message {
-    padding:10px;
-    color: rgb(255, 251, 252);
-    background-color: rgba(0, 96, 240, 0.856);
-    border-radius: 20px;
-    margin:10px 22px;
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size:1em;
-    vertical-align:middle;
-    text-align: center;
 }

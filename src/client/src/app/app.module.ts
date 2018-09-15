@@ -37,6 +37,7 @@ import { UserpageComponent } from './ui/userpage/userpage.component';
 import { FollowedComponent } from './ui/followed/followed.component';
 import {SubscriptionService} from './services/subscription.service';
 import { FollowingComponent } from './ui/following/following.component';
+import { SettingsComponent } from './ui/settings/settings.component';
 import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 
 
@@ -52,6 +53,7 @@ import { BlacklistComponent } from './ui/blacklist/blacklist.component';
     RegistrationComponent,
     FollowedComponent,
     FollowingComponent,
+    SettingsComponent,
     BlacklistComponent,
   ],
   imports: [LoggerModule.forRoot({

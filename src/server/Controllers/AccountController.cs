@@ -38,34 +38,13 @@ namespace server.Controllers
 
             if (authUser == null)
                 return BadRequest(new { message = "Username or password are incorrect!" });
-
-            //var tokenString=GenerateToken();
             
             HttpContext.Session.SetString("Username", authUser.login);
             HttpContext.Session.SetString("ID", Convert.ToString(authUser.id));
            
-            //Set("token", tokenString, 1);
             return Ok(user);
            
         }
-
-        //[AllowAnonymous]
-        // [HttpPost("registrate")]
-        // public IActionResult Registrate(User user)
-        // {
-        //     var repeatUser = context.User.FirstOrDefault(x => (x.mail == user.mail || x.login == user.login));
-        //     if (repeatUser != null)
-        //         return BadRequest("There is a user with the same email or login");
-        //     var emailValidator = new EmailAddressAttribute();
-        //     bool isEmailCorrect = emailValidator.IsValid(user.mail);
-        //     if (!isEmailCorrect)
-        //         return BadRequest("Email in wrong format");
-        //     var codeForRegistration=GetCode();
-        //     return Ok(codeForRegistration);
-
-        // }
-
-
 
         private string GetMd5Hash(MD5 md5Hash, string input)
         {

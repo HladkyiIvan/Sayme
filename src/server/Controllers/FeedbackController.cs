@@ -59,11 +59,8 @@ namespace server.Controllers
         [Route("sendcode")]
         public ActionResult<string> SendMail([FromBody]Email email)
         {
-                string hostEmail = "sayme.help@gmail.com";
+            string hostEmail = "sayme.help@gmail.com";
                 SmtpClient client = new SmtpClient();
-                Random rnd = new Random();
-                int code = rnd.Next(100000, 1000000);
-                HttpContext.Session.SetString("Code", Convert.ToString(code));
                 
                 client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
@@ -72,9 +69,11 @@ namespace server.Controllers
 
                 MailMessage mailtoClient = new MailMessage();
                 mailtoClient.From = new MailAddress(email.userEmail);
-                code = rnd.Next(100000, 1000000);
                 mailtoClient.To.Add(email.userEmail);
                 mailtoClient.Subject = email.subject;
+                Random rnd = new Random();
+                int code = rnd.Next(100000, 1000000);
+                HttpContext.Session.SetString("Code", Convert.ToString(code));
                 mailtoClient.Body = "Thank you for using Sayme! Here is your code: "+ Convert.ToString(code);
                 client.Send(mailtoClient);
 

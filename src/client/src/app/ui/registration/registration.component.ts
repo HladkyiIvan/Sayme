@@ -46,7 +46,7 @@ export class RegistrationComponent implements OnInit {
       });
 
       if (!this.newUser.id) {
-        if (this.isEmail(this.newUser.mail)) {
+        if (this.feedbackService.isEmail(this.newUser.mail)) {
           if ((this.password.length >= 7 && this.password.length <= 18) || (this.newUser.login.length >= 5 && this.newUser.login.length <= 20)) {
             if (this.password === this.repPassword) {
               this.isErrorHidden = true;
@@ -125,12 +125,7 @@ export class RegistrationComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  isEmail(search: string): boolean {
-    var serchfind: boolean;
-    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    serchfind = regexp.test(search);
-    return serchfind
-  }
+  
 
 
 }
