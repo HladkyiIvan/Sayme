@@ -1,0 +1,23 @@
+img{
+    width:25px;
+}
+
+.delete-from-blacklist-button{
+    border-radius: 5px;
+    background: gold;
+    margin-right: 10px; 
+    height: 30px;
+    border: 1px solid gold;
+    float:right;
+    margin-top: 10px;
+}
+
+.delete-from-blacklist-button:hover{
+    background: rgb(192, 164, 6);
+}
+
+.image-container{
+    float:left; 
+    padding-right: 1%;
+    padding-top: 10px
+}

@@ -26,4 +26,11 @@ export class FeedbackService {
   checkCode(code:Code){
     return this.http.post(this._url + "/checkcode", code, {observe: "response"});
   }
+
+  isEmail(search: string): boolean {
+    var serchfind: boolean;
+    var regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    serchfind = regexp.test(search);
+    return serchfind
+  }
 }
