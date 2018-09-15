@@ -4,6 +4,7 @@ using System.Linq;
 using server.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace server.Controllers
 {
@@ -20,6 +21,29 @@ namespace server.Controllers
             this.context = context;
         }
 
+        [HttpPost("subscribe")]
+        public IActionResult Subscribe([FromBody]Id userIdToSub)
+        {
+            if(ModelState.IsValid)
+            {
+                //this user wants to subscribe another user
+                User user = context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
+                long userId = user.id;
+                List<Following> followings = context.Following.ToList();
+                foreach (var sub in followings)
+                {
+                    if(sub.id_who == userId && sub.id_whom == userIdToSub.id)
+                    {
+                        return BadRequest();
+                    }
+                }
+                Following subscription = new Following(userId, userIdToSub.id);
+                context.Following.Add(subscription);
+                context.SaveChanges();
+                return Ok();
+            }
+            return BadRequest();
+        }
 
         [HttpGet("followed/{id}")]
         public IEnumerable<User> GetFollowed(long id)

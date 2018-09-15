@@ -1,19 +1,18 @@
 <app-navigation-tools></app-navigation-tools>
 <div class="outer">
-    <div class="inner" >
-        <div class="container">
-            <form #postForm="ngForm" (keydown.enter)="onSay()">
-                <div class="ui-g ui-fluid">
-                    <div style="padding: 10px;" class="ui-g-12">
-                        <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="{{ 'Say something...' | translate}}"
-                            autocomplete="off">
-                        <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
-                    </div>
+    <button (click)="loadNewPosts();">Load new posts!</button>
+    <div class="container">
+        <form #postForm="ngForm">
+            <div class="ui-g ui-fluid">
+                <div style="padding: 10px;" class="ui-g-12">
+                    <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="{{ 'Say something...' | translate}}"
+                        autocomplete="off">
+                    <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-     <p-dataView [value]="postAndImage.reverse()">
+     <p-dataView [value]="postAndImage">
         <ng-template let-post pTemplate="listItem">
             <div class="ui-g" >
                 <div class="ui-g-12 ui-md-12 post-container" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9">
@@ -27,16 +26,15 @@
                             </div>
                         </ng-template>
                         <div style="margin-top: 4px">
-                            <b>{{post.post.username}}</b>:
+                            <b>{{post.username}}</b>:
                         </div>
                         <p>
-                            <textarea class="post-text" readonly style="color: black">{{post.post.message}}</textarea>
+                            <textarea class="post-text" readonly style="color: black">{{post.message}}</textarea>
                         </p>
-                        <p>{{post.post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                        <p>{{post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
                     </div>
                 </div>
-                </div>
-            
+            </div> 
         </ng-template>
     </p-dataView> 
 </div>

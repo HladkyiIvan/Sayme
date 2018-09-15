@@ -7,6 +7,9 @@ import { Post } from '../Models/post';
 import { User } from '../Models/user';
 import { Email } from '../Models/email';
 import { Code } from '../Models/code';
+import { isNumber } from 'util';
+import { SubscriptionService } from '../services/subscription.service';
+import { Id } from '../Models/id';
 
 @Component({
   selector: 'app-userpage',
@@ -37,10 +40,17 @@ export class UserpageComponent implements OnInit {
   somePost: Post;
   editedPostMessage: string;
 
-  constructor(private postService: PostService, private userService: UserService, private feedbackService: FeedbackService) { }
+  constructor(private postService: PostService,
+              private userService: UserService,
+              private feedbackService: FeedbackService,
+              private subService: SubscriptionService) { }
 
   ngOnInit() {
     this.loadUserPosts();
+  }
+
+  subscribe(userID: number){
+    this.subService.userSubscribe(new Id(userID)).subscribe();
   }
 
   loadUserPosts(){
@@ -70,7 +80,7 @@ export class UserpageComponent implements OnInit {
   // добавляет новый пост в список постов
   onSay() {
     if (this.newPost.message.length <= 256 &&
-        this.newPost.message.length > 0 ) {
+        this.newPost.message.replace(/\s/g, '').length > 0){
       this.newPost.id_user = this.user.id;
       this.newPost.username = this.user.login;
       this.newPost.post_date = new Date();

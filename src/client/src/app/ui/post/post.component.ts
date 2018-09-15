@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
@@ -9,6 +9,7 @@ import { NGXLogger } from 'ngx-logger';
 import { forEach } from '../../../../node_modules/@angular/router/src/utils/collection';
 import { PostImage } from '../../Models/postImage';
 import { post } from '../../../../node_modules/@types/selenium-webdriver/http';
+import { Id } from '../../Models/Id';
 
 
 @Component({
@@ -19,13 +20,15 @@ import { post } from '../../../../node_modules/@types/selenium-webdriver/http';
 })
 export class PostComponent implements OnInit {
 
-  posts = [];
+  freevar: any;
   usersToSearch = [];
   currentUser: User;
   postAndImage = [];
   newPost = new Post();
   haveAvatar = true;
-  timeIt = timer(1, 10000);
+  lastPostID = 0;
+  mynewposts: Post;
+  timeIt = timer(10000, 10000);
 
   constructor(private postService: PostService, private userService: UserService, private logger: NGXLogger) { }
 
@@ -34,21 +37,24 @@ export class PostComponent implements OnInit {
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
-   this.loadCurrentUser()
-    this.timeIt.subscribe(x => this.loadPosts());
-    this.updateImages(this.posts);
+    this.loadPosts();
+    // this.timeIt.subscribe(x => this.loadNewPosts());
+    this.loadCurrentUser();
+    this.updateImages(this.postAndImage);
   }
 
   // добавляет новый пост в список постов залогиненого юзера
   onSay() {
-      if (this.newPost.message.length <= 256 &&
-        this.newPost.message.length > 0 ) {
+    if (this.newPost.message.length <= 256 &&
+      this.newPost.message.length > 0 ) {
       this.newPost.id_user = this.currentUser.id;
       this.newPost.username = this.currentUser.login;
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
-        .subscribe((data: Post) => {this.posts.push(data),this.loadPosts();});
-      this.newPost = new Post();
+        .subscribe(x => {
+          this.postAndImage.unshift(this.newPost);
+          this.newPost = new Post();
+        });
     }
   }
 
@@ -59,17 +65,33 @@ export class PostComponent implements OnInit {
 
   loadPosts() {
     this.userService.getUsers()
-      .subscribe((data: User[]) => this.usersToSearch = data);
-     
-      this.postService.getPosts()
-      .subscribe((data: Post[]) => {
-        this.posts = data;
-        this.updateImages(data);
+      .subscribe((data: User[]) => { 
+        this.usersToSearch = data;
       });
-      
-
+    this.postService.getPosts()
+      .subscribe((data: Post[]) => {
+        this.postAndImage = data;
+        // this.updateImages(data);
+    });
   }
 
+  loadNewPosts(){
+    let lastPost: Post = this.postAndImage[0];
+    let postID = lastPost.id;
+    this.postService.getNewPosts(new Id(postID))
+      .subscribe((data: Post[]) => {
+        try{
+          for(let post of data.reverse()){
+            this.mynewposts = post;
+            this.postAndImage.unshift(post);
+          }
+        }
+        catch
+        {
+          console.log("Failed to fetch new posts (maybe they disappeared...)");
+        }
+    });
+  }
 
   getPostDate(date: Date) {
     var yyyy = date.getFullYear().toString();
@@ -81,11 +103,12 @@ export class PostComponent implements OnInit {
   }
 
   updateImages(data) {
+    this.freevar = data;
     for (let post of data) {
       if (post.avatar == null)
-        this.postAndImage.push(new PostImage(post, null));
+        this.postAndImage.unshift(new PostImage(post, null));
       else
-        this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
+        this.postAndImage.unshift(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
     }
   }
 }
