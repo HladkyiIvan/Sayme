@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataViewModule } from 'primeng/dataview';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
 import { NGXLogger } from 'ngx-logger';
-import { forEach } from '@angular/router/src/utils/collection';
+import {SubscriptionService} from '../../services/subscription.service';
 import { PostImage } from '../../Models/postImage';
-import { post } from 'selenium-webdriver/http';
 
 
 @Component({
@@ -27,7 +25,11 @@ export class PostComponent implements OnInit {
   haveAvatar = true;
   timeIt = timer(1, 10000);
 
-  constructor(private postService: PostService, private userService: UserService, private logger: NGXLogger) { }
+  constructor(
+    private postService: PostService, 
+    private userService: UserService, 
+    private logger: NGXLogger,
+    private subscriptionService:SubscriptionService) { }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -52,6 +54,12 @@ export class PostComponent implements OnInit {
     }
   }
 
+  loadBlackList() {
+    this.subscriptionService.getBlackList()
+      .subscribe((data: User[]) => { 
+        this.subscriptionService.blacklist=data;
+       })
+  };
   loadCurrentUser() {
     this.userService.getCurrent()
       .subscribe((data: User) => this.currentUser = data);

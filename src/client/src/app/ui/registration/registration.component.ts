@@ -6,13 +6,12 @@ import { NGXLogger } from 'ngx-logger';
 import { User } from '../../Models/user';
 import { Email } from '../../Models/email';
 import { TooltipModule } from 'primeng/tooltip';
-import { RegistrationService } from '../../services/registration.service'
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
-  providers: [UserService, FeedbackService, NGXLogger, TooltipModule, RegistrationService]
+  providers: [UserService, FeedbackService, NGXLogger, TooltipModule]
 })
 export class RegistrationComponent implements OnInit {
 
