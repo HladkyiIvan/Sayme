@@ -20,7 +20,6 @@ export class FollowingComponent implements OnInit {
 
 
   loadUserFollowing() {
-    
     this.subscriptionService.getFollowing()
       .subscribe((data: User[]) => {
         this.usersAndImage = [];
