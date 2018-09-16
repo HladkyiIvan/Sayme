@@ -5,16 +5,16 @@ import { User } from '../../Models/user';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
-import { NGXLogger } from 'ngx-logger';
 import { PostImage } from '../../Models/postImage';
 import { HttpErrorResponse } from '@angular/common/http';
+import {SubscriptionService} from '../../services/subscription.service';
 
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  providers: [PostService, UserService, NGXLogger]
+  providers: [PostService, UserService]
 })
 export class PostComponent implements OnInit {
 
@@ -26,8 +26,11 @@ export class PostComponent implements OnInit {
   haveAvatar = true;
   timeIt = timer(1, 10000);
 
-  constructor(private postService: PostService, private userService: UserService, 
-    private logger: NGXLogger, private router: Router) { }
+  constructor(
+    private postService: PostService, 
+    private userService: UserService,
+    private subscriptionService:SubscriptionService,
+    private router: Router) { }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -52,6 +55,12 @@ export class PostComponent implements OnInit {
     }
   }
 
+  loadBlackList() {
+    this.subscriptionService.getBlackList()
+      .subscribe((data: User[]) => { 
+        this.subscriptionService.blacklist=data;
+       })
+  };
   loadCurrentUser() {
     this.userService.getCurrent()
       .subscribe((data: User) => this.currentUser = data);

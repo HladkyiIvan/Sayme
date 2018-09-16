@@ -10,7 +10,6 @@ import { UserImage } from '../../Models/userImage';
 })
 export class BlacklistComponent implements OnInit {
 
-  blacklist = [];
   usersAndImage = [];
   idWhom:number;
 
@@ -24,13 +23,14 @@ export class BlacklistComponent implements OnInit {
   loadBlackList() {
     this.subscriptionService.getBlackList()
       .subscribe((data: User[]) => { 
-        this.blacklist = data;
-        this.updateImages(this.blacklist);
-        console.log(data)
+        this.usersAndImage=[];
+        this.subscriptionService.blacklist=data;
+        this.addImages(data);
        })
   };
 
-  updateImages(data) {
+  addImages(data) {
+    
     for (let user of data) {
       if (user.avatar == null)
         this.usersAndImage.push(new UserImage(user, null));
@@ -39,8 +39,11 @@ export class BlacklistComponent implements OnInit {
     }
   }
 
-  onBlacklist(){
-    this.subscriptionService.addToBlackList(this.idWhom).subscribe();
+  onDeleteFromBlacklist(idWhom){
+    this.subscriptionService.deleteFromBlacklist(idWhom).subscribe(
+      ()=>{
+        this.loadBlackList()
+      });
   }
 
 }

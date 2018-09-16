@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 
 @Injectable({
@@ -7,24 +7,36 @@ import { NGXLogger } from 'ngx-logger';
 })
 export class SubscriptionService {
 
-numOfSubscriptions:number=0;
+  numOfSubscriptions: number = 0;
 
-  private url='api/subscription';
+  private url = 'api/subscription';
 
-  constructor(private http:HttpClient) {}
+  blacklist = [];
 
-  getFollowed(){
-    return this.http.get(this.url+'/followed');
+  constructor(private http: HttpClient) { }
+
+  getFollowed() {
+    return this.http.get(this.url + '/followed');
   }
 
-  getFollowing(){
-    return this.http.get(this.url+'/following');
-  }
-  getBlackList(){
-    return this.http.get(this.url+'/blacklist')
+  getFollowing() {
+    return this.http.get(this.url + '/following');
   }
 
-  addToBlackList(idWhom:number){
-    return this.http.post(this.url+'/blacklist',idWhom);
+  deleteFollowing(idWhom: number) {
+    return this.http.delete(this.url + '/followed/' + idWhom,{responseType:'text'});
+  }
+
+  deleteFromBlacklist(idWhom:number){
+    return this.http.delete(this.url+'/blacklist/'+idWhom, {responseType:'text'});
+  }
+
+  getBlackList() {
+    return this.http.get(this.url + '/blacklist');
+  }
+
+
+  addToBlackList(idWhom: number) {
+    return this.http.post(this.url + '/blacklist/' + idWhom, idWhom);
   }
 }

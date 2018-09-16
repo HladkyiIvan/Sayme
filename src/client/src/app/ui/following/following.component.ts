@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../Models/user';
-import {SubscriptionService} from '../../services/subscription.service';
+import { SubscriptionService } from '../../services/subscription.service';
 import { UserImage } from '../../Models/userImage';
 
 @Component({
@@ -10,9 +10,8 @@ import { UserImage } from '../../Models/userImage';
 })
 export class FollowingComponent implements OnInit {
 
-  constructor(private subscriptionService:SubscriptionService) { }
+  constructor(private subscriptionService: SubscriptionService) { }
 
-  following=[];
   usersAndImage = [];
 
   ngOnInit() {
@@ -20,20 +19,24 @@ export class FollowingComponent implements OnInit {
   }
 
 
-  loadUserFollowing(){
+  loadUserFollowing() {
     this.subscriptionService.getFollowing()
-    .subscribe((data:User[])=>
-    {
-      this.following=data;
-      this.updateImages(this.following);
-    })}
+      .subscribe((data: User[]) => {
+        this.usersAndImage = [];
+        this.addImages(data);
+      },)
+  }
 
-    updateImages(data) {
-      for (let user of data) {
-        if (user.avatar == null)
-          this.usersAndImage.push(new UserImage(user, null));
-        else
-          this.usersAndImage.push(new UserImage(user, 'data:image/jpg;base64,' + user.avatar));
-      }
-}
+  addImages(data) {
+    for (let user of data) {
+      if (user.avatar == null)
+        this.usersAndImage.push(new UserImage(user, null));
+      else
+        this.usersAndImage.push(new UserImage(user, 'data:image/jpg;base64,' + user.avatar));
+    }
+  }
+
+  onDeleteFollowing(idWhom) {
+    this.subscriptionService.deleteFollowing(idWhom).subscribe(()=>this.loadUserFollowing());
+  }
 }

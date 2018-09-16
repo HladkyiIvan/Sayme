@@ -11,7 +11,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
   private url = '/api/account';
-  // token: string;
 
   // TokenStringFromLocalstorage(){
   //   if(localStorage.getItem('token'))
