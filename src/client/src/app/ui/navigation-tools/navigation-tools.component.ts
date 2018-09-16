@@ -48,7 +48,7 @@ export class NavigationToolsComponent implements OnInit {
 
   signOut(){
     this.tokenService.token=''; 
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.router.navigate(['']);
   }
 

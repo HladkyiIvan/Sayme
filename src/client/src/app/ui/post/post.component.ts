@@ -5,7 +5,7 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
 import { NGXLogger } from 'ngx-logger';
-import {SubscriptionService} from '../../services/subscription.service';
+import { SubscriptionService } from '../../services/subscription.service';
 import { PostImage } from '../../Models/postImage';
 
 
@@ -23,43 +23,46 @@ export class PostComponent implements OnInit {
   postAndImage = [];
   newPost = new Post();
   haveAvatar = true;
-  timeIt = timer(1, 10000);
+ // timeIt = timer(1, 10000);
 
   constructor(
-    private postService: PostService, 
-    private userService: UserService, 
+    private postService: PostService,
+    private userService: UserService,
     private logger: NGXLogger,
-    private subscriptionService:SubscriptionService) { }
+    private subscriptionService: SubscriptionService) { }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
-   this.loadCurrentUser()
-    this.timeIt.subscribe(x => this.loadPosts());
-    this.updateImages(this.posts);
+    this.loadBlackList();
+    this.loadCurrentUser()
+    //this.timeIt.subscribe(x => this.loadPosts());
+    this.loadPosts();
+    this.addImages(this.posts);
   }
 
   // добавляет новый пост в список постов залогиненого юзера
   onSay() {
-      if (this.newPost.message.length <= 256 &&
-        this.newPost.message.length > 0 ) {
+    if (this.newPost.message.length <= 256 &&
+      this.newPost.message.length > 0) {
       this.newPost.id_user = this.currentUser.id;
       this.newPost.username = this.currentUser.login;
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
-        .subscribe((data: Post) => {this.posts.push(data),this.loadPosts();});
+        .subscribe((data: Post) => { this.posts.push(data), this.loadPosts(); });
       this.newPost = new Post();
     }
   }
 
   loadBlackList() {
     this.subscriptionService.getBlackList()
-      .subscribe((data: User[]) => { 
-        this.subscriptionService.blacklist=data;
-       })
-  };
+      .subscribe((data: User[]) => {
+        this.subscriptionService.blacklist = data;
+      })
+  }
+
   loadCurrentUser() {
     this.userService.getCurrent()
       .subscribe((data: User) => this.currentUser = data);
@@ -68,13 +71,14 @@ export class PostComponent implements OnInit {
   loadPosts() {
     this.userService.getUsers()
       .subscribe((data: User[]) => this.usersToSearch = data);
-     
-      this.postService.getPosts()
+
+    this.postService.getPosts()
       .subscribe((data: Post[]) => {
+        this.loadBlackList();
         this.posts = data;
-        this.updateImages(data);
+        this.addImages(data);
       });
-      
+
 
   }
 
@@ -88,12 +92,22 @@ export class PostComponent implements OnInit {
     return "".concat(yyyy).concat(mm).concat(dd).concat(hh).concat(min);
   }
 
-  updateImages(data) {
+  addImages(data) {
+    let isInBlacklist: boolean = false;
+    var usersInBlacklist = this.subscriptionService.blacklist;
+    console.log(usersInBlacklist);
     for (let post of data) {
+      isInBlacklist=false;
+      for(let blockedUser of usersInBlacklist)
+      {
+        if (post.id_user === blockedUser.id) isInBlacklist = true;
+      }
+      if (!isInBlacklist) {
       if (post.avatar == null)
         this.postAndImage.push(new PostImage(post, null));
       else
         this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
+      }
     }
   }
 }

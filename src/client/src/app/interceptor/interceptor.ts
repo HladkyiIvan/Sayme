@@ -3,15 +3,13 @@ import { Observable } from 'rxjs';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { TokenService } from '../services/token.service'
 
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
     constructor(
-        private router: Router,
-        private tokenService: TokenService
+        private router: Router
     ) { }
 
 
