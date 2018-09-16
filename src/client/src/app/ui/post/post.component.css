@@ -4,10 +4,6 @@ input{
     border: powderblue solid 1px;
 }
 
-.outer{
-    width: 900px;
-}
-
 .post-text{
     resize: none;
     padding: 0;

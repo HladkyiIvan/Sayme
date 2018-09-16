@@ -37,13 +37,13 @@ namespace server.Controllers
             AuthUser authUser = Authenticate(user.id, user.login, user.password);
 
             if (authUser == null)
+            {
                 return BadRequest(new { message = "Username or password are incorrect!" });
-            
+            }
             HttpContext.Session.SetString("Username", authUser.login);
             HttpContext.Session.SetString("ID", Convert.ToString(authUser.id));
-           
             return Ok(user);
-           
+
         }
 
         private string GetMd5Hash(MD5 md5Hash, string input)
@@ -87,8 +87,9 @@ namespace server.Controllers
             User user = context.User.FirstOrDefault(x => x.login == login && x.password == HashedPassword);
 
             if (user != null)
+            {
                 return new AuthUser(user.id, login, password);
-
+            }
             return null;
         }
 
@@ -104,12 +105,5 @@ namespace server.Controllers
 
             Response.Cookies.Append(key, value, option);
         }
-
-
-
-
     }
-
-
-
 }

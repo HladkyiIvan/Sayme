@@ -42,7 +42,9 @@ namespace server.Controllers
         {
             var user=context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
             if(user==null) 
+            {
             return NotFound();
+            }
             return user; 
         }
 

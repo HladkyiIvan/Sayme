@@ -1,30 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { User } from '../../Models/user';
+import { BaseUserpageComponent } from '../base-userpage/base-userpage.component';
 
 @Component({
   selector: 'app-userpage',
   templateUrl: './userpage.component.html',
   styleUrls: ['./userpage.component.css'],
-  providers: [PostService, UserService]
+  providers: []
 })
-export class UserpageComponent implements OnInit {
+export class UserpageComponent extends BaseUserpageComponent implements OnInit {
 
-  posts = [];
-  imageData;
-  user = new User();
   newPost = new Post();
-  haveAvatar = true;
   displayProfileSettings: boolean = false;
   somePost: Post;
   editedPostMessage: string;
 
-  constructor(private postService: PostService, private userService: UserService) { }
-
   ngOnInit() {
-    this.loadUserPosts();
+    this.loadCurrentUserPosts();
+    console.log(this.user);
   }
 
   updateAvatar(file:File){
@@ -34,7 +28,6 @@ export class UserpageComponent implements OnInit {
     reader.readAsDataURL(file); 
     reader.onloadend = function() {
       that.imageData = reader.result.toString();
-      console.log(that.imageData);
     }
   }
 

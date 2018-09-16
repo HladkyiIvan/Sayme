@@ -62,7 +62,9 @@ namespace server.Controllers
             var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
             var communication = context.Following.FirstOrDefault(c => (c.id_who == user.id && c.id_whom == idWhom));
             if (communication == null)
+            {
                 return NotFound("no communication");
+            }
             context.Following.Remove(communication);
             context.SaveChanges();
             return Ok("OKKKKK");
@@ -75,7 +77,9 @@ namespace server.Controllers
             var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
             var communication = context.Blacklist.FirstOrDefault(c => (c.id_who == user.id && c.id_whom == idWhom));
             if (communication == null)
+            {
                 return NotFound("no communication");
+            }
             context.Blacklist.Remove(communication);
             context.SaveChanges();
             return Ok("OKKKKK");

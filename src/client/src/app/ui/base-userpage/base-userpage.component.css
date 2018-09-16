@@ -1,0 +1,63 @@
+p{
+    color: #cccccc;
+    margin-top: 0;
+}
+
+br{
+    background: #cccccc;
+    height: 5px;
+}
+
+
+.ui-button-text-icon-left .ui-button-text {
+    padding: .25em 1em .25em 1em;
+}
+
+input{
+    padding: 5px;
+    border-radius: 5px; 
+    border: powderblue solid 1px;
+}
+
+.post-text{
+    resize: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border: none;
+    box-sizing:border-box;
+    outline: none; 
+}
+
+.post-text-change{
+    resize: none;
+    width: 100%;
+    border: 2px solid rgb(201, 201, 38);
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none; 
+}
+
+.bio{
+    word-wrap: break-word;
+    font-family: Roboto, sans-serif;
+}
+
+.userinfo{
+    display: block;
+    height: 220px;
+}
+
+.post-username{
+    outline: none; 
+    border-radius: 40px; 
+    margin: 0 20px; 
+    margin-left: -10px;
+}
+
+.post-message{
+    outline: none;
+    border-radius: 40px;
+    margin-right: 20px;
+    border: none;
+}

@@ -7,7 +7,8 @@ import { AuthorisationComponent } from './ui/authorization/authorization.compone
 import { UserpageComponent } from './ui/userpage/userpage.component';
 import { FollowingComponent } from './ui/following/following.component'
 import { FollowedComponent } from './ui/followed/followed.component'
-import {BlacklistComponent} from './ui/blacklist/blacklist.component';
+import { BlacklistComponent } from './ui/blacklist/blacklist.component';
+import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage.component';
 
 const routes: Routes = [
   {
@@ -44,10 +45,13 @@ const routes: Routes = [
     component: FollowingComponent,
   },
   {
+    path: 'user/:id', 
+    component: AnotherUserpageComponent,
+  },
+  {
     path: '**',
     component: UserpageComponent,
-  },
-  
+  }
 ];
 
 @NgModule({

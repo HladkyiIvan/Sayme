@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
-import { NGXLogger } from 'ngx-logger';
-import { SubscriptionService } from '../../services/subscription.service';
 import { PostImage } from '../../Models/postImage';
+import { HttpErrorResponse } from '@angular/common/http';
+import {SubscriptionService} from '../../services/subscription.service';
 
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  providers: [PostService, UserService, NGXLogger]
+  providers: [PostService, UserService]
 })
 export class PostComponent implements OnInit {
 
@@ -26,10 +27,10 @@ export class PostComponent implements OnInit {
  // timeIt = timer(1, 10000);
 
   constructor(
-    private postService: PostService,
+    private postService: PostService, 
     private userService: UserService,
-    private logger: NGXLogger,
-    private subscriptionService: SubscriptionService) { }
+    private subscriptionService:SubscriptionService,
+    private router: Router) { }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -109,6 +110,19 @@ export class PostComponent implements OnInit {
         this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
       }
     }
+  }
+
+  gotoUserpage(id:number){
+    let strId = id.toString();
+    this.userService.getCurrent()
+      .subscribe((data: User) => {
+        if (data.id == id){
+          this.router.navigate(['**']);
+        }
+        else{
+          this.router.navigate(['/user/' + strId]);
+        }
+      }, (error: HttpErrorResponse) => console.log(error));
   }
 }
 
