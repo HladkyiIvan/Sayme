@@ -6,7 +6,6 @@ import { NGXLogger } from 'ngx-logger';
 import { User } from '../../Models/user';
 import { Email } from '../../Models/email';
 import { TooltipModule } from 'primeng/tooltip';
-import { RegistrationService } from '../../services/registration.service'
 
 @Component({
   selector: 'app-registration',

@@ -39,6 +39,8 @@ import {SubscriptionService} from './services/subscription.service';
 import { FollowingComponent } from './ui/following/following.component';
 import { SettingsComponent } from './ui/settings/settings.component';
 import { BlacklistComponent } from './ui/blacklist/blacklist.component';
+import { BaseUserpageComponent } from './ui/base-userpage/base-userpage.component';
+import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage.component';
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import { BlacklistComponent } from './ui/blacklist/blacklist.component';
     FollowingComponent,
     SettingsComponent,
     BlacklistComponent,
+    BaseUserpageComponent,
+    AnotherUserpageComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),

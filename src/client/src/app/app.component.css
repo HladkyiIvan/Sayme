@@ -1,3 +1,6 @@
 .wrapper{
     display: flex; 
 }
+.outer{
+    width: 100%;
+}

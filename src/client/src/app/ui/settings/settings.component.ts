@@ -33,7 +33,6 @@ export class SettingsComponent implements OnInit {
   constructor(private feedbackService: FeedbackService, private userService: UserService) { }
 
   ngOnInit() {
-    console.log(this.user);
   }
 
   myUploader(event, form){

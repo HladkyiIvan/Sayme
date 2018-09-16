@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { DataViewModule } from 'primeng/dataview';
+import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
 import { NGXLogger } from 'ngx-logger';
-import { forEach } from '@angular/router/src/utils/collection';
 import { PostImage } from '../../Models/postImage';
-import { post } from 'selenium-webdriver/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -27,7 +26,8 @@ export class PostComponent implements OnInit {
   haveAvatar = true;
   timeIt = timer(1, 10000);
 
-  constructor(private postService: PostService, private userService: UserService, private logger: NGXLogger) { }
+  constructor(private postService: PostService, private userService: UserService, 
+    private logger: NGXLogger, private router: Router) { }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
@@ -87,6 +87,19 @@ export class PostComponent implements OnInit {
       else
         this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
     }
+  }
+
+  gotoUserpage(id:number){
+    let strId = id.toString();
+    this.userService.getCurrent()
+      .subscribe((data: User) => {
+        if (data.id == id){
+          this.router.navigate(['**']);
+        }
+        else{
+          this.router.navigate(['/user/' + strId]);
+        }
+      }, (error: HttpErrorResponse) => console.log(error));
   }
 }
 
