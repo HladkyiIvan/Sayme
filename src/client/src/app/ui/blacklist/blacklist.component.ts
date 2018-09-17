@@ -11,7 +11,7 @@ import { UserImage } from '../../Models/userImage';
 export class BlacklistComponent implements OnInit {
 
   usersAndImage = [];
-  idWhom:number;
+  idWhom: number;
 
 
   constructor(private subscriptionService: SubscriptionService) { }
@@ -22,15 +22,17 @@ export class BlacklistComponent implements OnInit {
 
   loadBlackList() {
     this.subscriptionService.getBlackList()
-      .subscribe((data: User[]) => { 
-        this.usersAndImage=[];
-        this.subscriptionService.blacklist=data;
+      .subscribe((data: User[]) => {
+        this.usersAndImage = [];
+        this.subscriptionService.blacklist = data;
         this.addImages(data);
-       })
+      })
   };
 
+
+  //Метод, который работает с тем, чтобы можно было выводить аватарки юзеров
   addImages(data) {
-    
+
     for (let user of data) {
       if (user.avatar == null)
         this.usersAndImage.push(new UserImage(user, null));
@@ -39,9 +41,9 @@ export class BlacklistComponent implements OnInit {
     }
   }
 
-  onDeleteFromBlacklist(idWhom){
+  onDeleteFromBlacklist(idWhom) {
     this.subscriptionService.deleteFromBlacklist(idWhom).subscribe(
-      ()=>{
+      () => {
         this.loadBlackList()
       });
   }

@@ -22,7 +22,6 @@ export class FollowedComponent implements OnInit {
   }
 
   loadUserFollowed() {
-    
     this.subscriptionService.getFollowed()
       .subscribe((data: User[]) => {
         this.usersAndImage = [];
@@ -39,7 +38,8 @@ export class FollowedComponent implements OnInit {
   };
 
 
-
+  //Метод, который работает с тем, чтобы можно было выводить аватарки юзеров,
+  //а также смотрит кто из подписчиков в черном списке и не выводит их
   addImages(data) {
     let isInBlacklist: boolean = false;
     var usersInBlacklist = this.subscriptionService.blacklist;

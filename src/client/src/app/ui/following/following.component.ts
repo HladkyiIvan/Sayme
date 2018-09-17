@@ -26,7 +26,7 @@ export class FollowingComponent implements OnInit {
         this.addImages(data);
       },)
   }
-
+  //Метод, который работает с тем, чтобы можно было выводить аватарки юзеров
   addImages(data) {
     for (let user of data) {
       if (user.avatar == null)

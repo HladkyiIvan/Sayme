@@ -39,9 +39,7 @@ export class AuthorisationComponent implements OnInit {
           this.tokenService.getToken()
           .subscribe(
             (data:Token)=>{
-              console.log(data.text);
-              this.tokenService.token=data.text;
-              sessionStorage.setItem('token',data.text);
+              localStorage.setItem('token',data.text)
               this.router.navigate(['/post']);
             }
           );

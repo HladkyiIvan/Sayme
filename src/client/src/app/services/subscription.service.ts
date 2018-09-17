@@ -35,6 +35,10 @@ export class SubscriptionService {
     return this.http.get(this.url + '/blacklist');
   }
 
+  getBlacklisted(){
+    return this.http.get(this.url+'/blacklisted');
+  }
+
 
   addToBlackList(idWhom: number) {
     return this.http.post(this.url + '/blacklist/' + idWhom, idWhom);
