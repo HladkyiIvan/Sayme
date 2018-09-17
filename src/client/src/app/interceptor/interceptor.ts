@@ -17,16 +17,15 @@ export class Interceptor implements HttpInterceptor {
     //авторизационный токен(если такой имеется). Если пользователь неавторизирован,
     //то редирект на логинпейдж
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
-            let authToken: string = sessionStorage.getItem('token');
-            if (authToken) {
-                req = req.clone({
-                    setHeaders: {
-                        Authorization: `Bearer ${authToken}`
-                    }
-                });
-            }
-        
+        let authToken: string = localStorage.getItem('token');
+        if (authToken) {
+            req = req.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${authToken}`
+                }
+            });
+        }
+
 
         return next.handle(req).pipe(tap(
             () => { },

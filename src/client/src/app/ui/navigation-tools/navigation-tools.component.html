@@ -38,7 +38,6 @@
         </div>
     </p-dialog>
 
-<<<<<<< HEAD
     <!-- Left slide sidebar -->
     <p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();">
         <h1><a routerLink="/**" style="color: #cccccc;">{{ username }}</a></h1>
@@ -57,23 +56,3 @@
             <option value="ru">русский</option>
         </select>
     </p-sidebar>
-=======
-<!-- Left slide sidebar -->
-<p-sidebar [(visible)]="opened" id="sidebar" [baseZIndex]="10000" (onHide)="open();" >
-    <h1><a routerLink="/**" style="color: #cccccc;">{{ username }}</a></h1>
-    <h5><a routerLink="/followed" style="color: #cccccc;">{{ 'Followers' | translate}}</a></h5>
-    <h5><a routerLink="/following" style="color: #cccccc;">{{ 'Following' | translate}}</a></h5>
-    <button pButton type="button" class="ui-button-warning" style="width: 200px; height: 30px; margin: 10px 0px;">{{ 'Settings' | translate }}</button>
-    <br>
-    <button pButton type="button" pButton (click)="signOut()" class="ui-button-danger" style="width: 200px; height: 30px;">{{ 'Log out' | translate }}</button>
-    <br>
-    <br>
-    <select name="language" [(ngModel)]="language" id="selectLanguage" (change)="setLang($event.target.value);">
-        <option value="en" selected>english</option>
-        <option value="ua">українська</option>
-        <option value="ru">русский</option>
-    </select>
-</p-sidebar>
-<router-outlet></router-outlet>
-</div>
->>>>>>> 1394d147cbd992f4dcbe7b4391857fb8d16c44d1

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from './services/translate.service';
 
 @Component({
@@ -7,8 +7,7 @@ import { TranslateService } from './services/translate.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{
-
+export class AppComponent {
 
   constructor(private translate: TranslateService) {
     translate.use('en');

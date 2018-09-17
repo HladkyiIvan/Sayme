@@ -62,9 +62,7 @@ namespace server.Controllers
             var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
             var communication = context.Following.FirstOrDefault(c => (c.id_who == user.id && c.id_whom == idWhom));
             if (communication == null)
-            {
                 return NotFound("no communication");
-            }
             context.Following.Remove(communication);
             context.SaveChanges();
             return Ok("OKKKKK");
@@ -77,9 +75,7 @@ namespace server.Controllers
             var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
             var communication = context.Blacklist.FirstOrDefault(c => (c.id_who == user.id && c.id_whom == idWhom));
             if (communication == null)
-            {
                 return NotFound("no communication");
-            }
             context.Blacklist.Remove(communication);
             context.SaveChanges();
             return Ok("OKKKKK");
@@ -100,6 +96,23 @@ namespace server.Controllers
                 }
             }
             return blacklistOfUser;
+        }
+
+        [HttpGet("blacklisted")]
+        public IEnumerable<User> GetUsersCurrentBlacklistedIn()
+        {
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+            var blacklist = context.Blacklist.ToList();
+            List<User> usersCurrentInBlacklist = new List<User> { };
+            foreach (var item in blacklist)
+            {
+                if (item.id_whom == user.id)
+                {
+                    var userInBlacklist = context.User.FirstOrDefault(x => x.id == item.id_who);
+                    usersCurrentInBlacklist.Add(userInBlacklist);
+                }
+            }
+            return usersCurrentInBlacklist;
         }
 
         [HttpPost("blacklist/{idWhom}")]
