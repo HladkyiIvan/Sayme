@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
@@ -11,14 +11,19 @@ import { User } from '../../Models/user';
   styleUrls: ['./base-userpage.component.css'],
   providers: [PostService, UserService]
 })
-export class BaseUserpageComponent {
+export class BaseUserpageComponent implements OnInit{
 
   posts = [];
   user = new User();
   imageData;
 
+  ngOnInit() {
+    console.log(this.user);
+  }
+
   constructor(protected route: ActivatedRoute, protected postService: PostService, 
-    protected userService: UserService) { }
+    protected userService: UserService) {
+    }
 
   loadCurrentUserPosts(){
     this.userService.getCurrent()

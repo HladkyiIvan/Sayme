@@ -1,7 +1,27 @@
 <app-base-userpage>
-  <div subscribe>
-      <p-button label="{{ 'Subscribe' | translate }}" class="sub" style="float:right;"></p-button>
-  </div>
+    <div userinfo>
+        <div class="userinfo">
+            <br>
+            <div style="float:left; padding-right:3%">
+                <div *ngIf="user.avatar!=null; else other_img">
+                    <img [src]="imageData" style=" width:240px;">
+                </div>
+                <ng-template #other_img>
+                    <img src="assets/images/default_avatar.svg" style="width:240px">
+                </ng-template>
+            </div>
+            <div>
+                <div style="padding: 15px;">
+                    <br>
+                    <h2 style="display: inline;">{{user.login}}</h2>
+                    <h4 class="bio">{{ 'About' | translate }}: {{user.bio}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div subscribe>
+        <p-button label="{{ 'Subscribe' | translate }}" class="sub" style="float:right;"></p-button>
+    </div>
     <div post>
         <p-dataView [value]="posts.reverse()">
             <ng-template let-post pTemplate="listItem">

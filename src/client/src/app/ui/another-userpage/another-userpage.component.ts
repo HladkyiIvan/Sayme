@@ -14,7 +14,6 @@ export class AnotherUserpageComponent extends BaseUserpageComponent implements O
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.loadAnotherUserPosts(id);
-    console.log(this.user);
   }
 
 }

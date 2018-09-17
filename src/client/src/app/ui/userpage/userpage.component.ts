@@ -18,7 +18,6 @@ export class UserpageComponent extends BaseUserpageComponent implements OnInit {
 
   ngOnInit() {
     this.loadCurrentUserPosts();
-    console.log(this.user);
   }
 
   updateAvatar(file:File){
@@ -33,29 +32,6 @@ export class UserpageComponent extends BaseUserpageComponent implements OnInit {
 
   updateBio(bio:string){
     this.user.bio = bio;
-  }
-
-  loadUserPosts(){
-    this.userService.getCurrent()
-      .subscribe((data: User) => {
-        this.user = data;
-        this.user = data;
-        this.getPostsFromService(data);
-        if(data.avatar == null){
-        }
-        else{
-          this.user.avatar = data.avatar;
-          this.imageData = 'data:image/jpg;base64,' + data.avatar;
-        }
-      }, err => console.error(err));
-  }
-
-  getPostsFromService(user: User){
-    this.postService.getUserPosts(user.id)
-      .subscribe((data: Post[]) => this.posts = data);
-    this.posts.forEach(post => {
-      post.is_changing = false;
-    });
   }
 
   // добавляет новый пост в список постов

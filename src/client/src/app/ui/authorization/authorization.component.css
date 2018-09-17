@@ -55,6 +55,8 @@ button{
       display: flex;
       justify-content: center;
       background-color: rgb(46, 45, 45);
+      margin-left: auto;
+      margin-right: auto;
       margin-bottom:10px; 
      box-shadow:  6px 3px 33px 0px rgba(0,0,0,0.31);
   }
