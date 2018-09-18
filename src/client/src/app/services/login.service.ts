@@ -13,22 +13,6 @@ export class LoginService {
   private url = '/api/account';
   // token: string;
 
-  // TokenStringFromLocalstorage(){
-  //   if(localStorage.getItem('token'))
-  //   {
-  //     this.token=localStorage.getItem('token');
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  // GET
-  // getResponce(): Observable<HttpResponse<AuthUser>> {
-  //   return this.http.get<AuthUser>(
-  //     this.url, { observe: 'response' });
-  // }
-
-  
 
   postLogin(login: AuthUser) {
     return this.http.post(this.url + "/authorizate", login);

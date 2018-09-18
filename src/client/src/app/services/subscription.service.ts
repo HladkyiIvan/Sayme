@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
 import { Id } from '../Models/id';
 
@@ -9,14 +9,36 @@ import { Id } from '../Models/id';
 export class SubscriptionService {
   private url='api/subscription'
 
-  constructor(private http:HttpClient) {}
+  blacklist = [];
 
-  getFollowed(id:number){
-    return this.http.get(this.url+'/followed/'+id);
+  constructor(private http: HttpClient) { }
+
+  getFollowed() {
+    return this.http.get(this.url + '/followed');
   }
 
-  getFollowing(id:number){
-    return this.http.get(this.url+'/followed/'+id);
+  getFollowing() {
+    return this.http.get(this.url + '/following');
+  }
+
+  deleteFollowing(idWhom: number) {
+    return this.http.delete(this.url + '/followed/' + idWhom,{responseType:'text'});
+  }
+
+  deleteFromBlacklist(idWhom:number){
+    return this.http.delete(this.url+'/blacklist/'+idWhom, {responseType:'text'});
+  }
+
+  getBlackList() {
+    return this.http.get(this.url + '/blacklist');
+  }
+
+  getBlacklisted(){
+    return this.http.get(this.url+'/blacklisted');
+  }
+
+  addToBlackList(idWhom: number) {
+    return this.http.post(this.url + '/blacklist/' + idWhom, idWhom);
   }
 
   userSubscribe(id:Id){

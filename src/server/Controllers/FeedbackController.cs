@@ -25,7 +25,7 @@ namespace server.Controllers
             {
                 string hostEmail = "sayme.help@gmail.com";
                 SmtpClient client = new SmtpClient();
-                
+
                 client = new SmtpClient("smtp.gmail.com", 587);
                 client.EnableSsl = true;
                 client.Credentials = new System.Net.NetworkCredential(hostEmail, "sayme12345");
@@ -39,7 +39,7 @@ namespace server.Controllers
                 mailMessage.Subject = email.userEmail;
                 client.Send(mailMessage);
                 log.LogDebug("Letter from user was sent");
-                
+
                 MailMessage mailtoClient = new MailMessage();
                 mailtoClient.From = new MailAddress(email.userEmail);
                 mailtoClient.To.Add(email.userEmail);
@@ -59,27 +59,25 @@ namespace server.Controllers
         [Route("sendcode")]
         public ActionResult<string> SendMail([FromBody]Email email)
         {
-                string hostEmail = "sayme.help@gmail.com";
-                SmtpClient client = new SmtpClient();
-                Random rnd = new Random();
-                int code = rnd.Next(100000, 1000000);
-                HttpContext.Session.SetString("Code", Convert.ToString(code));
-                
-                client = new SmtpClient("smtp.gmail.com", 587);
-                client.EnableSsl = true;
-                client.Credentials = new System.Net.NetworkCredential(hostEmail, "sayme12345");
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            string hostEmail = "sayme.help@gmail.com";
+            SmtpClient client = new SmtpClient();
 
-                MailMessage mailtoClient = new MailMessage();
-                mailtoClient.From = new MailAddress(email.userEmail);
-                code = rnd.Next(100000, 1000000);
-                mailtoClient.To.Add(email.userEmail);
-                mailtoClient.Subject = email.subject;
-                mailtoClient.Body = "Thank you for using Sayme! Here is your code: "+ Convert.ToString(code);
-                client.Send(mailtoClient);
+            client = new SmtpClient("smtp.gmail.com", 587);
+            client.EnableSsl = true;
+            client.Credentials = new System.Net.NetworkCredential(hostEmail, "sayme12345");
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                //log.LogDebug("Letter to user was sent");
-                return Convert.ToString(code);
+            MailMessage mailtoClient = new MailMessage();
+            mailtoClient.From = new MailAddress(email.userEmail);
+            mailtoClient.To.Add(email.userEmail);
+            mailtoClient.Subject = email.subject;
+            Random rnd = new Random();
+            int code = rnd.Next(100000, 1000000);
+            HttpContext.Session.SetString("Code", Convert.ToString(code));
+            mailtoClient.Body = "Thank you for using Sayme! Here is your code: " + Convert.ToString(code);
+            client.Send(mailtoClient);
+
+            return Convert.ToString(code);
         }
 
         [HttpPost]
@@ -88,11 +86,13 @@ namespace server.Controllers
         {
             try
             {
-                if (HttpContext.Session.GetString("Code") == null){
+                if (HttpContext.Session.GetString("Code") == null)
+                {
                     return BadRequest("There is no temp code");
                 }
 
-                if (HttpContext.Session.GetString("Code") != code.code){
+                if (HttpContext.Session.GetString("Code") != code.code)
+                {
                     return BadRequest("Codes are not the same");
                 }
 

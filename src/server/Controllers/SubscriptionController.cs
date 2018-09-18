@@ -45,38 +45,111 @@ namespace server.Controllers
             return BadRequest();
         }
 
-        [HttpGet("followed/{id}")]
-        public IEnumerable<User> GetFollowed(long id)
+        [HttpGet("following")]
+        public IEnumerable<User> GetFollowing()
         {
-            User user = context.User.FirstOrDefault(x => x.id == id);
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
             var allFollowed = context.Following.ToList();
             List<User> followed = new List<User> { };
             foreach (var follower in allFollowed)
             {
-                if (follower.id_who == id)
+                if (follower.id_who == user.id)
                 {
-                    var followedUser=context.User.FirstOrDefault(x=>x.id==follower.id_whom);
+                    var followedUser = context.User.FirstOrDefault(x => x.id == follower.id_whom);
                     followed.Add(followedUser);
                 }
             }
             return followed;
         }
 
-        [HttpGet("following/{id}")]
-        public IEnumerable<User> GetFollowing(long id)
+        [HttpGet("followed")]
+        public IEnumerable<User> GetFollowed()
         {
-            User user = context.User.FirstOrDefault(x => x.id == id);
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
             var allFollowing = context.Following.ToList();
             List<User> following = new List<User> { };
             foreach (var follower in allFollowing)
             {
-                if (follower.id_whom == id)
+                if (follower.id_whom == user.id)
                 {
-                    var followingUser=context.User.FirstOrDefault(x=>x.id==follower.id_who);
+                    var followingUser = context.User.FirstOrDefault(x => x.id == follower.id_who);
                     following.Add(followingUser);
                 }
             }
             return following;
+        }
+
+        [HttpDelete("followed/{idWhom}")]
+        public IActionResult DeleteFromFollowed(long idWhom)
+        {
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+            var communication = context.Following.FirstOrDefault(c => (c.id_who == user.id && c.id_whom == idWhom));
+            if (communication == null)
+                return NotFound("no communication");
+            context.Following.Remove(communication);
+            context.SaveChanges();
+            return Ok("OKKKKK");
+
+        }
+
+        [HttpDelete("blacklist/{idWhom}")]
+        public IActionResult DeleteFromBlacklist(long idWhom)
+        {
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+            var communication = context.Blacklist.FirstOrDefault(c => (c.id_who == user.id && c.id_whom == idWhom));
+            if (communication == null)
+                return NotFound("no communication");
+            context.Blacklist.Remove(communication);
+            context.SaveChanges();
+            return Ok("OKKKKK");
+        }
+
+        [HttpGet("blacklist")]
+        public IEnumerable<User> GetBlacklist()
+        {
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+            var blacklist = context.Blacklist.ToList();
+            List<User> blacklistOfUser = new List<User> { };
+            foreach (var item in blacklist)
+            {
+                if (item.id_who == user.id)
+                {
+                    var userInBlacklist = context.User.FirstOrDefault(x => x.id == item.id_whom);
+                    blacklistOfUser.Add(userInBlacklist);
+                }
+            }
+            return blacklistOfUser;
+        }
+
+        [HttpGet("blacklisted")]
+        public IEnumerable<User> GetUsersCurrentBlacklistedIn()
+        {
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+            var blacklist = context.Blacklist.ToList();
+            List<User> usersCurrentInBlacklist = new List<User> { };
+            foreach (var item in blacklist)
+            {
+                if (item.id_whom == user.id)
+                {
+                    var userInBlacklist = context.User.FirstOrDefault(x => x.id == item.id_who);
+                    usersCurrentInBlacklist.Add(userInBlacklist);
+                }
+            }
+            return usersCurrentInBlacklist;
+        }
+
+        [HttpPost("blacklist/{idWhom}")]
+        public IActionResult AddUserToBlacklist(long idWhom)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+                var blacklist = new Blacklist(user.id, idWhom);
+                context.Blacklist.Add(blacklist);
+                context.SaveChanges();
+                return Ok(blacklist);
+            }
+            return BadRequest(ModelState);
         }
     }
 }

@@ -139,7 +139,7 @@ namespace server.Controllers
                     .FirstOrDefault();
                 editedPost.message = postTransport.message;
                 context.SaveChanges();
-                return Ok(postTransport);
+                return Ok();
             }
             return BadRequest(ModelState);
         }

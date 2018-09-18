@@ -1,0 +1,26 @@
+<div class="logo">
+    <img src="assets/images/Logo-Sayme.svg" style="width:280px; display: block; margin-left: auto;margin-right: auto">
+</div>
+<div class="container_with_borders">
+    <form #postForm="ngForm" (keydown.enter)="onLogin()">
+        <div class="ui-g ui-fluid" style="justify-content: center">
+            <div style="padding: 0px;" class="ui-g-12">
+                <input [(ngModel)]="user.login" name="username" type="text" pInputText placeholder="{{ 'Username' | translate }}"
+                    autocomplete="on">
+                <br>
+                <input [(ngModel)]="user.password" name="password" type="password" pInputText placeholder="{{ 'Password' | translate }}"
+                    autocomplete="on">
+                <br>
+                <button class="regButton" style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
+                    pButton (click)="onLogin()">{{ 'Sign in' | translate }}</button>
+                <br>
+                <button class="regButton" style="padding:4%;vertical-align:middle; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
+                    pButton (click)="onPressRegistration()">{{ 'Sign up' | translate }}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="isa-error" [hidden]=isErrorHidden>
+    <i class="fa fa-times-circle"></i>
+    {{errorMessage}}
+</div>

@@ -1,0 +1,28 @@
+<app-navigation-tools></app-navigation-tools>
+<br>
+<p-dataView [value]="usersAndImage">
+    <ng-template let-user pTemplate="listItem">
+        <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9;margin-top: 15px">
+            <div class="ui-g-12 ui-md-12 post-container">
+                <div class="ui-g-12">
+                    <div *ngIf="user.avatar;else other_img" class="image-container">
+                        <img id="image" [src]="user.avatar">
+                    </div>
+                    <ng-template #other_img>
+                        <div class="image-container">
+                            <img src="assets/images/default_avatar.svg">
+                        </div>
+                    </ng-template>
+                    <button type="button" class="delete-followed-button" (click)="onDeleteFollowing(user.user.id)">Unsubscribe</button>
+                    <p><b>{{user.user.login}}</b></p>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+<ng-template #noposts>
+    <h1 style="text-align:center; ">There is nothing here now... stay tuned!</h1>
+    <div style="display: flex; justify-content: center;">
+        <img src="assets/images/jdun.svg" alt="Здесь правда ничего нет! :)" style="width: 300px; height: 300px;">
+    </div>
+</ng-template>

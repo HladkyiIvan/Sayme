@@ -3,10 +3,8 @@ import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { FeedbackService } from '../../services/feedback.service';
 import { Email } from '../../Models/email';
-import { LoginService } from'../../services/login.service';
 import { NGXLogger } from 'ngx-logger';
 import { TranslateService } from '../../services/translate.service';
-import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
 import { TranslatePipe } from '../../translate.pipe';
 import {TokenService} from '../../services/token.service';
@@ -35,8 +33,6 @@ export class NavigationToolsComponent implements OnInit {
     private translPipe: TranslatePipe,
     private router: Router,
     private logger: NGXLogger,
-    private userService: UserService,
-    private loginService:LoginService,
     private tokenService:TokenService,
   ) { }
 
@@ -50,16 +46,9 @@ export class NavigationToolsComponent implements OnInit {
     this.username=localStorage.getItem('curUser');
   }
 
-  // loadCurUser(){
-  //   this.userService.getCurrent()
-  //     .subscribe((data: User) => {
-  //       this.user = data;
-  //   })
-  // }
-
   signOut(){
     this.tokenService.token=''; 
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.router.navigate(['']);
   }
 
@@ -97,12 +86,10 @@ export class NavigationToolsComponent implements OnInit {
         command:(onclick)=>{this.router.navigate(['/**']);}
       },
       {
-        label: `${navigationItems[3]}`,
-        command:(onclick)=>{this.router.navigate(['/followed']);}
-      },
-      {
-        label: `${navigationItems[4]}`,
-        command:(onclick)=>{this.router.navigate(['/following']);}
+        label:'blacklist',
+        command:(onclick)=>{this.router.navigate(['/blacklist']);}
+
+        
       }
     ]
   }

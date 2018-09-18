@@ -1,0 +1,18 @@
+<app-navigation-tools></app-navigation-tools>
+<div class="outer">
+    <ng-content select="[userinfo]"></ng-content>
+
+    <form #postForm="ngForm">
+        <div class="ui-g ui-fluid">
+            <div style="padding: 10px;" class="ui-g-12">
+                <ng-content select="[sayAndSettingsButton]"></ng-content>
+                <ng-content select="[subscribe]"></ng-content>
+                <ng-content select="[settingsButton]"></ng-content>
+            </div>
+        </div>
+    </form>
+    <ng-content select="[editPost]"></ng-content>
+    <ng-content select="[post]"></ng-content>
+</div>
+
+<ng-content select="[settingsDialog]"></ng-content>
