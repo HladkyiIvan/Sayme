@@ -11,6 +11,7 @@ import { PostImage } from '../../Models/postImage';
 import { Id } from '../../Models/Id';
 import { HttpErrorResponse } from '@angular/common/http';
 import {SubscriptionService} from '../../services/subscription.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,15 +20,16 @@ import {SubscriptionService} from '../../services/subscription.service';
   styleUrls: ['./post.component.css'],
   providers: [PostService, UserService, NGXLogger]
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
+  subscriptions: Subscription[];
   posts: Post[] = [];
   usersToSearch = [];
   currentUser: User;
   postAndImage = [];
   newPost = new Post();
   haveAvatar = true;
-  lastPostID = 0;
+  lastPostID: number = 0;
   mynewposts: Post;
   timeIt = timer(10000, 10000);
   blacklisted=[];
@@ -37,17 +39,31 @@ export class PostComponent implements OnInit {
     private userService: UserService, 
     private logger: NGXLogger, 
     private router: Router,
-    private subscriptionService:SubscriptionService) { }
+    private subscriptionService:SubscriptionService) {
+      this.subscriptions = [];
+  }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
+    this.postService.getLastPost()
+      .subscribe(data => { 
+        console.log(data); 
+        this.lastPostID = data; 
+        this.loadPosts(this.lastPostID);
+    });
     this.loadBlackList();
     this.loadCurrentUser();
-    this.loadPosts();
+    // this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts()})); 
     this.addImages(this.posts);
+  }
+
+  ngOnDestroy(){
+    for(let subs of this.subscriptions) {
+      subs.unsubscribe();
+    }
   }
 
   // добавляет новый пост в список постов залогиненого юзера
@@ -77,15 +93,22 @@ export class PostComponent implements OnInit {
       .subscribe((data: User) => this.currentUser = data);
   }
 
-  loadPosts() {
+  loadPosts(lastPostId) {
     this.userService.getUsers()
       .subscribe((data: User[]) => this.usersToSearch = data);
 
-    this.postService.getPosts()
+    this.postService.getPosts(lastPostId)
       .subscribe((data: Post[]) => {
+        if(data === null || data.length == 0){
+          return;
+        }
         this.loadBlackList();
-        this.posts = data;
+        for (let post of data.reverse()) {
+          this.posts.push(post);
+        }
         this.addImages(data);
+        this.lastPostID = this.posts[this.posts.length-1].id;
+        console.log(this.lastPostID);
       });
 
 
@@ -96,15 +119,10 @@ export class PostComponent implements OnInit {
     let postID = lastPost.id;
     this.postService.getNewPosts(new Id(postID))
       .subscribe((data: Post[]) => {
-        try{
+        if(data != null){
           for(let post of data.reverse()){
-            this.mynewposts = post;
             this.postAndImage.unshift(post);
           }
-        }
-        catch
-        {
-          console.log("Failed to fetch new posts (maybe they disappeared...)");
         }
     });
   }
