@@ -11,11 +11,10 @@
                 <input [(ngModel)]="user.password" name="password" type="password" pInputText placeholder="{{ 'Password' | translate }}"
                     autocomplete="on">
                 <br>
-                <button class="regButton" style="padding:4%;vertical-align:middle; margin-top: 20px; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
-                    pButton (click)="onLogin()">{{ 'Sign in' | translate }}</button>
+                <button class="btn" pButton (click)="onLogin()">{{ 'Sign in' | translate }}</button>
                 <br>
-                <button class="regButton" style="padding:4%;vertical-align:middle; width: 120px;height: 40px; border-radius: 30px;margin-left: 45px;"
-                    pButton (click)="onPressRegistration()">{{ 'Sign up' | translate }}</button>
+                <button class="btn" style="margin-bottom: 5%;"
+                pButton (click)="onPressRegistration()">{{ 'Sign up' | translate }}</button>
             </div>
         </div>
     </form>

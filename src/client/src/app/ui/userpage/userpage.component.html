@@ -29,7 +29,7 @@
     <div sayAndSettingsButton>
         <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="Say something..."
             autocomplete="off" style="width: 35%;">
-        <p-button (click)="onSay()" icon="fa fa-comment" style="width:70px;"></p-button>
+        <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
         <p-button (click)="showProfileSettings()" icon="fas fa-cog" style="float:right"></p-button>
     </div>
     <div editPost>
