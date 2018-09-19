@@ -21,7 +21,10 @@ namespace server.Controllers
         }
 
         [HttpGet("lastpostid")]
-        public long GetLast() => context.Post.Last().id;
+        public long GetLast() 
+        {
+            return context.Post.Last().id;
+        } 
 
         [HttpGet("next/{id}")]
         public IEnumerable<PostTransport> Get(long id)

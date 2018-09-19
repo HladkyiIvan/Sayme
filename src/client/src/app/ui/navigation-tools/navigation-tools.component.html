@@ -11,19 +11,17 @@
 
 <!-- Feedback modal form -->
 <p-dialog header="{{ 'Feedback' | translate }}" [(visible)]="isFeedbackFormVisible" [resizable]='false' [closeOnEscape]='true'
-    [dismissableMask]='true' [draggable]='false' [modal]="true" [width]="350" [minWidth]="350" [maximizable]="true">
+    [dismissableMask]='true' [draggable]='false' [modal]="true" [width]="380" [minWidth]="350" [maximizable]="true">
     <p style="margin: 0 0 17px 0;">{{ 'Left your answer or comment here:' | translate }}</p>
     <form #postForm="ngForm" style="margin: 0;">
         <input pInputText required [(ngModel)]="useremail" name="useremail" type="email" class="feedback-email"
             placeholder="{{ 'your email'| translate }}" autocomplete="off">
         <textarea required [(ngModel)]="feedbackText" style="overflow:hidden;" class="feedback-text" name="feedbackText"
             placeholder="{{ 'your comment' | translate }}"></textarea>
-        <div style="float: right; margin-top: 5px;">
-            <button type="button" class="feedback-send-button" (click)="onSendFeedback()">{{ 'Send' | translate }}</button>
-            <button type="button" class="feedback-cancel-button" (click)="onCancelFeedBack()">{{ 'Cancel' |
-                translate }}</button>
-        </div>
+        <button pButton class="btn" (click)="onSendFeedback()">{{ 'Send' | translate }}</button>
+        <button pButton class="btn" style="float:right;" (click)="onCancelFeedBack()">{{ 'Cancel' | translate }}</button>
     </form>
+    <br>
 </p-dialog>
 
 <!-- Successfuly sent feedback modal form -->
