@@ -48,7 +48,7 @@ export class NavigationToolsComponent implements OnInit {
 
   signOut(){
     this.tokenService.token=''; 
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.router.navigate(['']);
   }
 
@@ -79,7 +79,7 @@ export class NavigationToolsComponent implements OnInit {
       },
       {
         label: `${navigationItems[1]}`,
-        command:(onclick)=>{this.router.navigate(['/interesting'])}
+        command:(onclick)=>{this.router.navigate(['/news'])}
       },
       {
         label: `${navigationItems[2]}`,

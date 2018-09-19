@@ -12,21 +12,19 @@ import { SubscriptionService } from '../../services/subscription.service';
 
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css'],
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.css'],
   providers: [PostService, UserService, NGXLogger]
 })
-export class PostComponent implements OnInit {
+export class NewsComponent implements OnInit {
 
-  following = [];
   usersToSearch = [];
   currentUser: User;
   postAndImage = [];
   newPost = new Post();
   haveAvatar = true;
-  blacklisted = [];
-  // timeIt = timer(1, 10000);
+  //timeIt = timer(1, 10000);
 
   constructor(
     private postService: PostService,
@@ -41,12 +39,8 @@ export class PostComponent implements OnInit {
   // хтмл файла. 
   ngOnInit() {
     this.loadCurrentUser()
-    
-    this.loadFollowing();
-    this.loadBlackList();
     //this.timeIt.subscribe(x => this.loadPosts());
     this.loadPosts();
-    //this.addImages(this.posts);
   }
 
   // добавляет новый пост в список постов залогиненого юзера
@@ -62,20 +56,7 @@ export class PostComponent implements OnInit {
     }
   }
 
-  loadBlackList() {
-    this.subscriptionService.getBlacklisted()
-      .subscribe((data: User[]) => {
-        this.blacklisted = data;
-      })
-  }
-
-  loadFollowing() {
-    this.subscriptionService.getFollowing()
-      .subscribe((data: User[]) => {
-        this.following = data;
-        console.log(this.following);
-      })
-  }
+  
 
   loadCurrentUser() {
     this.userService.getCurrent()
@@ -90,8 +71,6 @@ export class PostComponent implements OnInit {
       .subscribe((data: Post[]) => {
         this.addImages(data);
       });
-      
-      console.log(this.blacklisted)
 
 
   }
@@ -107,26 +86,14 @@ export class PostComponent implements OnInit {
   }
 
   addImages(data) {
-    let isInBlacklist: boolean = false;
-    
     for (let post of data) {
-      isInBlacklist = false;
-      for (let following of this.following) {
-        if (post.id_user === following.id) {
-          for (let blockUser of this.blacklisted) {
-            if (post.id_user === blockUser.id) isInBlacklist = true;
-          }
-          if (!isInBlacklist) {
-            if (post.avatar == null)
-              this.postAndImage.push(new PostImage(post, null));
-            else
-              this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
-          }
-        }
-      }
-
+      if (post.avatar == null)
+        this.postAndImage.push(new PostImage(post, null));
+      else
+        this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
     }
   }
+
 
   gotoUserpage(id: number) {
     let strId = id.toString();
@@ -141,4 +108,5 @@ export class PostComponent implements OnInit {
       }, (error: HttpErrorResponse) => console.log(error));
   }
 }
+
 
