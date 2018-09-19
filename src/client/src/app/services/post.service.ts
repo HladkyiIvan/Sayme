@@ -16,10 +16,13 @@ export class PostService {
 
   constructor( private http: HttpClient, private logger: NGXLogger) { }
 
+  getLastPost(){
+    return this.http.get<number>(this.url + '/lastpostid');
+  }
   // GET
-  getPosts(){
+  getPosts(currentLastPostId){
     this.logger.debug('getting posts from service');
-    return this.http.get(this.url);
+    return this.http.get(this.url + '/next/' + currentLastPostId.toString());
   }
 
   getNewPosts(lastPost: Id){

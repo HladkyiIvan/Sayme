@@ -18,13 +18,26 @@ namespace server.Controllers
         public PostController(SaymedbContext context)
         {
             this.context = context;
-        }  
-        
-        [HttpGet]
-        public IEnumerable<PostTransport> Get()
+        }
+
+        [HttpGet("lastpostid")]
+        public long GetLast() => context.Post.Last().id;
+
+        [HttpGet("next/{id}")]
+        public IEnumerable<PostTransport> Get(long id)
         {
-            var posts = context.Post.ToList();
-            var users = context.User.ToList();
+            var posts = context.Post.OrderByDescending(post => post.id)
+                                .Where(post => id > post.id)
+                                .Take(20).ToList();
+
+            if(posts.Count == 0)
+                return null;
+                
+            var users = (from u in context.User
+                        from p in posts
+                        where u.id == p.id_user
+                        select u).ToList();
+
             List<PostTransport> sendingPosts = new List<PostTransport>();
 
             foreach (Post post in posts)
