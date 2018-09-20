@@ -35,7 +35,7 @@ namespace server.Controllers
         [HttpPost("subscribe")]
         public IActionResult Subscribe([FromBody]Id userIdToSub)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //this user wants to subscribe another user
                 User user = context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
@@ -85,6 +85,23 @@ namespace server.Controllers
                 }
             }
             return followed;
+        }
+
+
+        [HttpGet("forPosts")]
+        public IEnumerable<User> GetUsersForPosts()
+        {
+            var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
+            var result= from f in context.Following
+            join b in context.Blacklist on f.id_who equals user.id 
+            where (b.id_whom != user.id) select new {UserId=f.id_whom};
+            List<User> following=new List<User>{};
+            foreach(var r in result)
+            {
+                following.Add(context.User.FirstOrDefault(x=>x.id==r.UserId));
+            }
+            return following;
+               
         }
 
         [HttpGet("followed")]

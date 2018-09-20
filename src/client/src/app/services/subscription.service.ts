@@ -41,6 +41,10 @@ export class SubscriptionService {
     return this.http.post(this.url + '/blacklist/' + idWhom, idWhom);
   }
 
+  getUsersForPosts(){
+    return this.http.get(this.url+'/forPosts');
+  }
+
   userSubscribe(id:Id){
     return this.http.post(this.url+'/subscribe', id);
   }

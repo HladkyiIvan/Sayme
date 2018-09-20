@@ -9,6 +9,7 @@ import { FollowingComponent } from './ui/following/following.component'
 import { FollowedComponent } from './ui/followed/followed.component'
 import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage.component';
+import {NewsComponent} from './ui/news/news.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'blacklist',
     component:BlacklistComponent
+  },
+  {
+    path:'news',
+    component:NewsComponent
   },
   {
     path: 'interesting',

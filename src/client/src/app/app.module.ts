@@ -41,6 +41,7 @@ import { SettingsComponent } from './ui/settings/settings.component';
 import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 import { BaseUserpageComponent } from './ui/base-userpage/base-userpage.component';
 import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage.component';
+import { NewsComponent } from './ui/news/news.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage
     BlacklistComponent,
     BaseUserpageComponent,
     AnotherUserpageComponent,
+    NewsComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),

@@ -12,5 +12,5 @@ export class AppComponent {
   constructor(private translate: TranslateService) {
     translate.use('en');
   }
-  title = 'ISD team! yep yep :)';
+  title = 'Sayme';
 }

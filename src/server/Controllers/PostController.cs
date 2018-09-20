@@ -43,6 +43,33 @@ namespace server.Controllers
         [HttpGet("lastpostid")]
         public long GetLastPostID() => context.Post.Last().id;
 
+        [HttpGet]
+        public IEnumerable<PostTransport> GetAll()
+        {
+            var posts = context.Post.ToList();
+            var users = context.User.ToList();
+            List<PostTransport> sendingPosts = new List<PostTransport>();
+
+            foreach (Post post in posts)
+            {
+                sendingPosts.Add(new PostTransport(post));
+            }
+            
+            foreach(PostTransport post in sendingPosts)
+            {
+                foreach (User user in users)
+                {
+                    if (post.id_user == user.id)
+                    {
+                        post.username = user.login;
+                        post.avatar=user.avatar;
+                    }
+                }
+            }
+
+            return sendingPosts;
+        }
+
         [HttpGet("next/{id}")]
         public IEnumerable<PostTransport> Get(long id)
         {

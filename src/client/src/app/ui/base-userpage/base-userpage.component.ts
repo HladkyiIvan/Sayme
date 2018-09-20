@@ -12,7 +12,7 @@ import { SubscriptionService } from '../../services/subscription.service';
   styleUrls: ['./base-userpage.component.css'],
   providers: [PostService, UserService]
 })
-export class BaseUserpageComponent implements OnInit{
+export class BaseUserpageComponent implements OnInit {
 
   posts = [];
   user = new User();
@@ -28,29 +28,39 @@ export class BaseUserpageComponent implements OnInit{
               protected subService: SubscriptionService) {
     }
 
-  loadCurrentUserPosts(){
+  loadCurrentUserPosts() {
     this.userService.getCurrent()
       .subscribe((data: User) => {
         this.user = data;
-        if(this.user.avatar != null){
+        if (this.user.avatar != null) {
           this.imageData = 'data:image/jpg;base64,' + data.avatar;
         }
         this.getPostsFromService(data);
       }, err => console.error(err));
   }
 
-  loadAnotherUserPosts(id: number){
+  loadAnotherUserPosts(id: number) {
     this.userService.getUser(id)
       .subscribe((data: User) => {
         this.user = data;
-        if(this.user.avatar != null){
+        if (this.user.avatar != null) {
           this.imageData = 'data:image/jpg;base64,' + data.avatar;
         }
-        this.getPostsFromService(data); 
+        this.getPostsFromService(data);
       }, err => console.error(err));
   }
 
-  getPostsFromService(user: User){
+  loadAnotherUserInfoWithoutPosts(id: number) {
+    this.userService.getUser(id)
+      .subscribe((data: User) => {
+        this.user = data;
+        if (this.user.avatar != null) {
+          this.imageData = 'data:image/jpg;base64,' + data.avatar;
+        }
+      }, err=>console.error(err));
+}
+
+  getPostsFromService(user: User) {
     this.postService.getUserPosts(user.id)
       .subscribe((data: Post[]) => this.posts = data);
     this.posts.forEach(post => {

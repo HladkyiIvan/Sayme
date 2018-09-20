@@ -10,7 +10,7 @@ import { NGXLogger } from 'ngx-logger';
 import { PostImage } from '../../Models/postImage';
 import { Id } from '../../Models/Id';
 import { HttpErrorResponse } from '@angular/common/http';
-import {SubscriptionService} from '../../services/subscription.service';
+import { SubscriptionService } from '../../services/subscription.service';
 import { Subscription } from 'rxjs';
 
 
@@ -24,6 +24,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   currentPageHeight: number;
   noMoreNewPosts: boolean = false;
+  following = [];
   subscriptions: Subscription[];
   posts: Post[] = [];
   usersToSearch = [];
@@ -31,19 +32,20 @@ export class PostComponent implements OnInit, OnDestroy {
   postAndImage = [];
   newPost = new Post();
   haveAvatar = true;
+  blacklisted = [];
+  // timeIt = timer(1, 10000);
   lastPostID: number = 0;
   newestPostID: number = 0;
   mynewposts: Post;
   timeIt = timer(10000, 5000);
-  blacklisted=[];
 
   constructor(
-    private postService: PostService, 
-    private userService: UserService, 
-    private logger: NGXLogger, 
+    private postService: PostService,
+    private userService: UserService,
+    private logger: NGXLogger,
     private router: Router,
-    private subscriptionService:SubscriptionService) {
-      this.subscriptions = [];
+    private subscriptionService: SubscriptionService) {
+    this.subscriptions = [];
   }
 
   // При первом вызове компонента вызывается метод сервиса, который
@@ -57,8 +59,7 @@ export class PostComponent implements OnInit, OnDestroy {
         this.lastPostID = data;
         this.newestPostID = data;
         this.loadPosts(this.lastPostID);
-    });
-    this.loadBlackList();
+      });
     this.loadCurrentUser();
     this.addImages(this.posts);
     this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts()})); 
@@ -70,8 +71,8 @@ export class PostComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
-    for(let subs of this.subscriptions) {
+  ngOnDestroy() {
+    for (let subs of this.subscriptions) {
       subs.unsubscribe();
     }
   }
@@ -92,10 +93,13 @@ export class PostComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadBlackList() {
-    this.subscriptionService.getBlacklisted()
+  
+
+  loadFollowing() {
+    this.subscriptionService.getFollowing()
       .subscribe((data: User[]) => {
-        this.blacklisted = data;
+        this.following = data;
+        console.log(this.following);
       })
   }
 
@@ -110,10 +114,9 @@ export class PostComponent implements OnInit, OnDestroy {
 
     this.postService.getPosts(lastPostId)
       .subscribe((data: Post[]) => {
-        if(data === null || data.length == 0){
+        if (data === null || data.length == 0) {
           return;
         }
-        this.loadBlackList();
         for (let post of data.reverse()) {
           this.posts.push(post);
         }
@@ -127,7 +130,7 @@ export class PostComponent implements OnInit, OnDestroy {
   onScroll(event: any){
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     let max = document.documentElement.scrollHeight;
-    if(Math.floor(pos) > max-10){
+    if(Math.floor(pos) == max || Math.floor(pos) == max-1){
       // console.log("End");
       this.loadPosts(this.lastPostID);
       this.postService.checkForLastPostInDB(this.lastPostID)
@@ -161,34 +164,24 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   addImages(data) {
-    let isInBlacklist: boolean = false;
-    //var usersInBlacklist = this.subscriptionService.blacklist;
     for (let post of data) {
-      isInBlacklist=false;
-      for(let blockUser of this.blacklisted){
-        if (post.id_user === blockUser.id){
-          isInBlacklist = true;
-        }
+      if (post.avatar == null) {
+        this.postAndImage.unshift(new PostImage(post, null));
       }
-      if (!isInBlacklist) {
-        if (post.avatar == null){
-          this.postAndImage.unshift(new PostImage(post, null));
-        }
-        else{
-          this.postAndImage.unshift(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
-        }
+      else {
+        this.postAndImage.unshift(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
       }
     }
   }
 
-  gotoUserpage(id:number){
+  gotoUserpage(id: number) {
     let strId = id.toString();
     this.userService.getCurrent()
       .subscribe((data: User) => {
-        if (data.id == id){
+        if (data.id == id) {
           this.router.navigate(['**']);
         }
-        else{
+        else {
           this.router.navigate(['/user/' + strId]);
         }
       }, (error: HttpErrorResponse) => console.log(error));

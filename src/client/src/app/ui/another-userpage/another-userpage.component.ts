@@ -14,13 +14,10 @@ export class AnotherUserpageComponent extends BaseUserpageComponent implements O
 
   isSubscribed: boolean;
   userId: number;
+  blacklisted: User[] = [];
+  id: number;
+  isNotInBlacklist:boolean=true;
 
-  ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.userId = id;
-    this.loadAnotherUserPosts(id);
-    this.checkSubscription();
-  }  
 
   checkSubscription(){
     this.subService.isSubscribed(this.userId)
@@ -36,5 +33,38 @@ export class AnotherUserpageComponent extends BaseUserpageComponent implements O
     this.subService.userUnsubscribe(new Id(userID)).subscribe();
     this.isSubscribed = false;
   }
+
+  ngOnInit() {
+    this.id = +this.route.snapshot.paramMap.get('id');
+    this.loadBlackList();
+    this.loadAnotherUserPosts(this.id);
+    this.checkSubscription();
+    
+  }
+
+
+  isNotInBlackList(id) {
+    for (let blacklisted of this.blacklisted) {
+      if (blacklisted.id == id)
+        return false;
+    }
+    return true;
+  }
+
+  loadBlackList() {
+    this.subService.getBlacklisted()
+      .subscribe((data: User[]) => {
+        this.blacklisted = data;
+        if (this.isNotInBlackList(this.id)) {
+          this.loadAnotherUserPosts(this.id);
+        }
+        else{
+          this.isNotInBlacklist=false;
+          this.loadAnotherUserInfoWithoutPosts(this.id);
+        }
+        console.log(this.blacklisted);
+      })
+  }
+
 
 }

@@ -32,6 +32,12 @@ export class PostService {
     this.logger.debug('getting posts from service');
     return this.http.get(this.url + '/next/' + currentLastPostId.toString());
   }
+  
+  getAllPosts()
+  {
+    return this.http.get(this.url);
+  }
+
 
   getNewPosts(lastPost: Id){
     return this.http.post(this.url + "/last", lastPost);

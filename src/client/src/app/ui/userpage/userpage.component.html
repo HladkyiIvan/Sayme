@@ -4,10 +4,10 @@
             <br>
             <div style="float:left; padding-right:3%">
                 <div *ngIf="user.avatar!=null; else other_img">
-                    <img [src]="imageData" style=" width:240px;">
+                    <img [src]="imageData" class="img">
                 </div>
                 <ng-template #other_img>
-                    <img src="assets/images/default_avatar.svg" style="width:240px">
+                    <img src="assets/images/default_avatar.svg" class="img">
                 </ng-template>
             </div>
             <div>
@@ -29,7 +29,7 @@
     <div sayAndSettingsButton>
         <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText placeholder="{{ 'Say something...' | translate }}"
             autocomplete="off" style="width: 35%;">
-        <p-button (click)="onSay()" icon="fa fa-comment" style="width:70px;"></p-button>
+        <button style=" width: 70px; border-radius: 50px;" pButton (click)="onSay()" icon="fa fa-comment"></button>
         <p-button (click)="showProfileSettings()" icon="fas fa-cog" style="float:right"></p-button>
     </div>
     <div editPost>
