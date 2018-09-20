@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXLogger } from 'ngx-logger';
-import {Id} from '../Models/id';
+import { Id } from '../Models/id';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionService {
-
-  numOfSubscriptions: number = 0;
-
-  private url = 'api/subscription';
+  private url='api/subscription'
 
   blacklist = [];
 
@@ -42,6 +39,10 @@ export class SubscriptionService {
 
   addToBlackList(idWhom: number) {
     return this.http.post(this.url + '/blacklist/' + idWhom, idWhom);
+  }
+
+  getUsersForPosts(){
+    return this.http.get(this.url+'/forPosts');
   }
 
   userSubscribe(id:Id){

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { User } from '../../Models/user';
+import { SubscriptionService } from '../../services/subscription.service'
 
 @Component({
   selector: 'app-base-userpage',
@@ -11,38 +12,54 @@ import { User } from '../../Models/user';
   styleUrls: ['./base-userpage.component.css'],
   providers: [PostService, UserService]
 })
-export class BaseUserpageComponent {
+export class BaseUserpageComponent implements OnInit {
 
   posts = [];
   user = new User();
   imageData;
 
-  constructor(protected route: ActivatedRoute, protected postService: PostService, 
-    protected userService: UserService) { }
+  ngOnInit() {
+    console.log(this.user);
+  }
 
-  loadCurrentUserPosts(){
+  constructor(protected route: ActivatedRoute, protected postService: PostService,
+    protected userService: UserService,
+    protected subscriptionService: SubscriptionService) {
+  }
+
+  loadCurrentUserPosts() {
     this.userService.getCurrent()
       .subscribe((data: User) => {
         this.user = data;
-        if(this.user.avatar != null){
+        if (this.user.avatar != null) {
           this.imageData = 'data:image/jpg;base64,' + data.avatar;
         }
         this.getPostsFromService(data);
       }, err => console.error(err));
   }
 
-  loadAnotherUserPosts(id: number){
+  loadAnotherUserPosts(id: number) {
     this.userService.getUser(id)
       .subscribe((data: User) => {
         this.user = data;
-        if(this.user.avatar != null){
+        if (this.user.avatar != null) {
           this.imageData = 'data:image/jpg;base64,' + data.avatar;
         }
-        this.getPostsFromService(data); 
+        this.getPostsFromService(data);
       }, err => console.error(err));
   }
 
-  getPostsFromService(user: User){
+  loadAnotherUserInfoWithoutPosts(id: number) {
+    this.userService.getUser(id)
+      .subscribe((data: User) => {
+        this.user = data;
+        if (this.user.avatar != null) {
+          this.imageData = 'data:image/jpg;base64,' + data.avatar;
+        }
+      }, err=>console.error(err));
+}
+
+  getPostsFromService(user: User) {
     this.postService.getUserPosts(user.id)
       .subscribe((data: Post[]) => this.posts = data);
     this.posts.forEach(post => {

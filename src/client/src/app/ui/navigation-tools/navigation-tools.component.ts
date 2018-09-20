@@ -75,21 +75,15 @@ export class NavigationToolsComponent implements OnInit {
       },
       {
         label: `${navigationItems[0]}`,
-        command:(onclick)=>{this.router.navigate(['/post'])}
+        command:(onclick)=>{this.router.navigate(['/news'])}
       },
       {
         label: `${navigationItems[1]}`,
-        command:(onclick)=>{this.router.navigate(['/news'])}
+        command:(onclick)=>{this.router.navigate(['/post'])}
       },
       {
         label: `${navigationItems[2]}`,
         command:(onclick)=>{this.router.navigate(['/**']);}
-      },
-      {
-        label:'blacklist',
-        command:(onclick)=>{this.router.navigate(['/blacklist']);}
-
-        
       }
     ]
   }

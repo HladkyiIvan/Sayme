@@ -29,7 +29,7 @@ a{
 
 .feedback-text{
     font-size: 16px;
-    width: 320px;
+    width: 100%;
     height: 150px;
     resize: none; 
     border: rgb(201, 201, 38) solid 1px;
@@ -45,35 +45,21 @@ a{
     border-radius: 10px;
     padding: 10px;
     outline: none;
-    width: 320px;
+    width: 100%;
 }
 
 .feedback-email:focus, .feedback-text:focus{
     box-shadow: inset 0 0 8px gold;
 }
 
-.feedback-send-button{
-    border-radius: 5px;
-    background: gold;
-    margin-right: 10px; 
-    height: 30px;
-    border: 1px solid gold;
+.btn{
+    padding:2%;
+    vertical-align:middle; 
+    width: 120px;height: 40px; 
+    border-radius: 30px;
+    margin-top: 5%;
 }
 
-.feedback-send-button:hover{
-    background: rgb(192, 164, 6);
-}
-
-.feedback-cancel-button{
-    border-radius: 5px;
-    background: #eeeeee;
-    height: 30px;
-    border: 1px solid #eeeeee;
-}
-
-.feedback-cancel-button:hover{
-    background: #555555;
-}
 div.sticky {
     position: sticky;
     top: 0;

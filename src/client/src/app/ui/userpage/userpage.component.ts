@@ -18,7 +18,6 @@ export class UserpageComponent extends BaseUserpageComponent implements OnInit {
 
   ngOnInit() {
     this.loadCurrentUserPosts();
-    console.log(this.user);
   }
 
   updateAvatar(file:File){
@@ -35,33 +34,10 @@ export class UserpageComponent extends BaseUserpageComponent implements OnInit {
     this.user.bio = bio;
   }
 
-  loadUserPosts(){
-    this.userService.getCurrent()
-      .subscribe((data: User) => {
-        this.user = data;
-        this.user = data;
-        this.getPostsFromService(data);
-        if(data.avatar == null){
-        }
-        else{
-          this.user.avatar = data.avatar;
-          this.imageData = 'data:image/jpg;base64,' + data.avatar;
-        }
-      }, err => console.error(err));
-  }
-
-  getPostsFromService(user: User){
-    this.postService.getUserPosts(user.id)
-      .subscribe((data: Post[]) => this.posts = data);
-    this.posts.forEach(post => {
-      post.is_changing = false;
-    });
-  }
-
   // добавляет новый пост в список постов
   onSay() {
     if (this.newPost.message.length <= 256 &&
-        this.newPost.message.length > 0 ) {
+        this.newPost.message.replace(/\s/g, '').length > 0) {
       this.newPost.id_user = this.user.id;
       this.newPost.username = this.user.login;
       this.newPost.post_date = new Date();
@@ -98,7 +74,9 @@ export class UserpageComponent extends BaseUserpageComponent implements OnInit {
 
   submitEditPost(){
     this.somePost.is_changing = false;
-    if(this.somePost.message !== this.editedPostMessage)
+    if(this.somePost.message !== this.editedPostMessage
+      && this.editedPostMessage.length < 256
+      && this.editedPostMessage.replace(/\s/g, '').length > 0)
     {
       this.somePost.message = this.editedPostMessage;
       this.postService.updatePost(this.somePost).subscribe();

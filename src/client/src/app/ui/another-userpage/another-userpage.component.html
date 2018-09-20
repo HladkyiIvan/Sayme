@@ -1,9 +1,30 @@
 <app-base-userpage>
-  <div subscribe>
-      <p-button label="{{ 'Subscribe' | translate }}" class="sub" style="float:right;"></p-button>
-  </div>
+    <div userinfo>
+        <div class="userinfo">
+           
+            <br>
+            <div style="float:left; padding-right:3%">
+                <div *ngIf="user.avatar!=null; else other_img">
+                    <img [src]="imageData" class="img">
+                </div>
+                <ng-template #other_img>
+                    <img src="assets/images/default_avatar.svg" class="img">
+                </ng-template>
+            </div>
+            <div style="padding: 15px;">
+                <br>
+                <h2 style="display: inline;">{{user.login}}</h2>
+                <h4 class="bio">{{ 'About' | translate }}: {{user.bio}}</h4>
+            </div>
+        </div>
+    </div>
+    
+    <div subscribe >
+        <p-button label="{{ 'Subscribe' | translate }}"  [disabled]="!isNotInBlacklist" class="sub" style="float:right;"></p-button>
+    </div>
     <div post>
-        <p-dataView [value]="posts.reverse()">
+            <div *ngIf="isNotInBlacklist;else inBlakList">
+        <p-dataView [value]="posts">
             <ng-template let-post pTemplate="listItem">
                 <div class="ui-g" style="padding: 0 10px; border-bottom: 1px solid #d9d9d9">
                     <div class="ui-g-12 ui-md-12 post-container">
@@ -15,5 +36,13 @@
                 </div>
             </ng-template>
         </p-dataView>
+
+        </div>
+        <ng-template #inBlakList>
+                <div class="isa-error">
+                        <i class="fa fa-times-circle"></i>
+                        Sorry, you are in blacklist
+                    </div>
+            </ng-template>
     </div>
 </app-base-userpage>

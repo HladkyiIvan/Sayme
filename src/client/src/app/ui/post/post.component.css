@@ -2,6 +2,7 @@ input{
     padding: 5px;
     border-radius: 5px; 
     border: powderblue solid 1px;
+    width: 35%;
 }
 
 .post-text{

@@ -1,30 +1,13 @@
 <app-navigation-tools></app-navigation-tools>
 <div class="outer">
-    <div class="userinfo">
-        <br>
-        <div style="float:left; padding-right:3%">
-            <div *ngIf="user.avatar!=null; else other_img">
-                <img [src]="imageData" style=" width:240px;">
-            </div>
-            <ng-template #other_img>
-                <img src="assets/images/default_avatar.svg" style="width:240px">
-            </ng-template>
-        </div>
-        <div>
-            <div style="padding: 10px;">
-                <h2 style="display: inline;">{{user.login}}</h2>
-                <ng-content select="[settingsButton]"></ng-content>
-            </div>
-            <br>
-            <h4 class="bio">{{ 'About' | translate }}: {{user.bio}}</h4>
-        </div>
-    </div>
+    <ng-content select="[userinfo]"></ng-content>
 
     <form #postForm="ngForm">
         <div class="ui-g ui-fluid">
             <div style="padding: 10px;" class="ui-g-12">
-                <ng-content select="[say]"></ng-content>
+                <ng-content select="[sayAndSettingsButton]"></ng-content>
                 <ng-content select="[subscribe]"></ng-content>
+                <ng-content select="[settingsButton]"></ng-content>
             </div>
         </div>
     </form>

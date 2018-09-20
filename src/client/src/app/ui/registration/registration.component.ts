@@ -34,6 +34,7 @@ export class RegistrationComponent implements OnInit {
     private logger: NGXLogger) { }
 
   ngOnInit() {
+    this.loadUsers();
   }
 
   onRegister() {

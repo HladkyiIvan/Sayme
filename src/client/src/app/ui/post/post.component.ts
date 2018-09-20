@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DataViewModule } from 'primeng/dataview';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
@@ -7,8 +8,10 @@ import { Post } from '../../Models/post';
 import { timer } from 'rxjs/internal/observable/timer';
 import { NGXLogger } from 'ngx-logger';
 import { PostImage } from '../../Models/postImage';
+import { Id } from '../../Models/Id';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SubscriptionService } from '../../services/subscription.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,9 +20,11 @@ import { SubscriptionService } from '../../services/subscription.service';
   styleUrls: ['./post.component.css'],
   providers: [PostService, UserService, NGXLogger]
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
   following = [];
+  subscriptions: Subscription[];
+  posts: Post[] = [];
   usersToSearch = [];
   currentUser: User;
   postAndImage = [];
@@ -27,26 +32,39 @@ export class PostComponent implements OnInit {
   haveAvatar = true;
   blacklisted = [];
   // timeIt = timer(1, 10000);
+  lastPostID: number = 0;
+  mynewposts: Post;
+  timeIt = timer(10000, 10000);
 
   constructor(
     private postService: PostService,
     private userService: UserService,
     private logger: NGXLogger,
     private router: Router,
-    private subscriptionService: SubscriptionService) { }
+    private subscriptionService: SubscriptionService) {
+    this.subscriptions = [];
+  }
 
   // При первом вызове компонента вызывается метод сервиса, который
   // возвращает все посты, которые он нашел по АПИшке, и добавляет их
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
-    this.loadCurrentUser()
-    
-    this.loadFollowing();
-    this.loadBlackList();
-    //this.timeIt.subscribe(x => this.loadPosts());
-    this.loadPosts();
-    //this.addImages(this.posts);
+    this.postService.getLastPost()
+      .subscribe(data => {
+        console.log(data);
+        this.lastPostID = data;
+        this.loadPosts(this.lastPostID);
+      });
+    this.loadCurrentUser();
+    // this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts()})); 
+    this.addImages(this.posts);
+  }
+
+  ngOnDestroy() {
+    for (let subs of this.subscriptions) {
+      subs.unsubscribe();
+    }
   }
 
   // добавляет новый пост в список постов залогиненого юзера
@@ -57,17 +75,14 @@ export class PostComponent implements OnInit {
       this.newPost.username = this.currentUser.login;
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
-        .subscribe((data: Post) => { this.addImages(data) });
-      this.newPost = new Post();
+        .subscribe(x => {
+          this.addImages(this.newPost);
+          this.newPost = new Post();
+        });
     }
   }
 
-  loadBlackList() {
-    this.subscriptionService.getBlacklisted()
-      .subscribe((data: User[]) => {
-        this.blacklisted = data;
-      })
-  }
+  
 
   loadFollowing() {
     this.subscriptionService.getFollowing()
@@ -82,20 +97,40 @@ export class PostComponent implements OnInit {
       .subscribe((data: User) => this.currentUser = data);
   }
 
-  loadPosts() {
+  loadPosts(lastPostId) {
     this.userService.getUsers()
       .subscribe((data: User[]) => this.usersToSearch = data);
 
-    this.postService.getPosts()
+    this.postService.getPosts(lastPostId)
       .subscribe((data: Post[]) => {
+        if (data === null || data.length == 0) {
+          return;
+        }
+        for (let post of data.reverse()) {
+          this.posts.push(post);
+        }
         this.addImages(data);
+        this.lastPostID = this.posts[this.posts.length - 1].id;
+        console.log(this.lastPostID);
       });
-      
-      console.log(this.blacklisted)
+
+    console.log(this.blacklisted)
 
 
   }
 
+  loadNewPosts() {
+    let lastPost: Post = this.postAndImage[0];
+    let postID = lastPost.id;
+    this.postService.getNewPosts(new Id(postID))
+      .subscribe((data: Post[]) => {
+        if (data != null) {
+          for (let post of data.reverse()) {
+            this.postAndImage.unshift(post);
+          }
+        }
+      });
+  }
 
   getPostDate(date: Date) {
     var yyyy = date.getFullYear().toString();
@@ -108,23 +143,14 @@ export class PostComponent implements OnInit {
 
   addImages(data) {
     let isInBlacklist: boolean = false;
-    
-    for (let post of data) {
-      isInBlacklist = false;
-      for (let following of this.following) {
-        if (post.id_user === following.id) {
-          for (let blockUser of this.blacklisted) {
-            if (post.id_user === blockUser.id) isInBlacklist = true;
-          }
-          if (!isInBlacklist) {
-            if (post.avatar == null)
-              this.postAndImage.push(new PostImage(post, null));
-            else
-              this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
-          }
-        }
-      }
 
+    for (let post of data) {
+      if (post.avatar == null) {
+        this.postAndImage.unshift(new PostImage(post, null));
+      }
+      else {
+        this.postAndImage.unshift(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
+      }
     }
   }
 

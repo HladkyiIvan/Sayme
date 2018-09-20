@@ -19,10 +19,13 @@ import { SubscriptionService } from '../../services/subscription.service';
 })
 export class NewsComponent implements OnInit {
 
-  usersToSearch = [];
   currentUser: User;
   postAndImage = [];
+  blacklisted = [];
+  posts=[];
   newPost = new Post();
+  following = [];
+  usersToSearch = [];
   haveAvatar = true;
   //timeIt = timer(1, 10000);
 
@@ -38,9 +41,10 @@ export class NewsComponent implements OnInit {
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
-    this.loadCurrentUser()
+    this.loadCurrentUser();
     //this.timeIt.subscribe(x => this.loadPosts());
     this.loadPosts();
+    
   }
 
   // добавляет новый пост в список постов залогиненого юзера
@@ -56,23 +60,35 @@ export class NewsComponent implements OnInit {
     }
   }
 
-  
+
 
   loadCurrentUser() {
     this.userService.getCurrent()
       .subscribe((data: User) => this.currentUser = data);
   }
 
+  loadBlackList() {
+    this.subscriptionService.getBlacklisted()
+      .subscribe((data: User[]) => {
+        this.blacklisted = data;
+        this.loadUserFollowing();
+      })
+  }
+
+  loadUserFollowing() {
+    this.subscriptionService.getFollowing()
+      .subscribe((data: User[]) => {
+        this.following = data;
+        this.addImages(this.posts)
+      })
+  }
+
   loadPosts() {
-    this.userService.getUsers()
-      .subscribe((data: User[]) => this.usersToSearch = data);
-
-    this.postService.getPosts()
+    this.postService.getAllPosts()
       .subscribe((data: Post[]) => {
-        this.addImages(data);
+        this.loadBlackList();
+    this.posts=data;
       });
-
-
   }
 
 
@@ -86,11 +102,28 @@ export class NewsComponent implements OnInit {
   }
 
   addImages(data) {
+    let isInBlacklist: boolean = false;
+    console.log(this.posts)
     for (let post of data) {
-      if (post.avatar == null)
-        this.postAndImage.push(new PostImage(post, null));
-      else
-        this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
+      isInBlacklist = false;
+      for (let following of this.following) {
+        if (post.id_user === following.id) {
+          for (let blockUser of this.blacklisted) {
+            if (following.id === blockUser.id) {
+              isInBlacklist = true;
+              break;
+            }
+          }
+          if (!isInBlacklist) {
+            if (post.avatar == null) {
+              this.postAndImage.push(new PostImage(post, null));
+            }
+            else {
+              this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
+            }
+          }
+        }
+      }
     }
   }
 
