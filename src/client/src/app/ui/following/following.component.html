@@ -13,7 +13,7 @@
                             <img src="assets/images/default_avatar.svg">
                         </div>
                     </ng-template>
-                    <button type="button" class="delete-followed-button" (click)="onDeleteFollowing(user.user.id)">Unsubscribe</button>
+                    <button type="button" class="delete-followed-button" (click)="onDeleteFollowing(user.user.id)">{{ 'Unsubscribe' | translate }}</button>
                     <p><b>{{user.user.login}}</b></p>
                 </div>
             </div>
@@ -21,8 +21,8 @@
     </ng-template>
 </p-dataView>
 <ng-template #noposts>
-    <h1 style="text-align:center; ">There is nothing here now... stay tuned!</h1>
+    <h1 style="text-align:center; ">{{ 'There is nothing here now... stay tuned!' | translate }}</h1>
     <div style="display: flex; justify-content: center;">
-        <img src="assets/images/jdun.svg" alt="Здесь правда ничего нет! :)" style="width: 300px; height: 300px;">
+        <img src="assets/images/jdun.svg" style="width: 300px; height: 300px;">
     </div>
 </ng-template>

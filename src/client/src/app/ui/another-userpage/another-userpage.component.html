@@ -20,7 +20,13 @@
         </div>
     </div>
     <div subscribe>
-        <p-button label="{{ 'Subscribe' | translate }}" class="sub" style="float:right;"></p-button>
+        <div *ngIf="isSubscribed;else noSub">
+            <p-button label="{{ 'Unsubscribe' | translate }}" class="sub" (click)="unsubscribeFromUser(user.id)" style="float:right;"></p-button>
+        </div>
+        <ng-template #noSub>
+            <p-button label="{{ 'Subscribe' | translate }}" class="sub" (click)="subscribeOnUser(user.id)" style="float:right;"></p-button>
+        </ng-template>
+
     </div>
     <div post>
         <p-dataView [value]="posts.reverse()">

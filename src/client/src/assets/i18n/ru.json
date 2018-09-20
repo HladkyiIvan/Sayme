@@ -36,5 +36,19 @@
     "Confirm new password": "Подтвердить новый пароль",
     "repeat new password":"повторите новый пароль",
     "Subscribe": "Подписаться",
-    "Common": "Основные"
+    "Common": "Основные",
+
+    "Delete from blacklist":"Удалить из черного списка",
+    "There is nothing here now... stay tuned!": "Сейчас здесь ничего нет ... не скучайте!)",
+    "Add to blacklist": "Добавить в черный список",
+    "Unsubscribe": "Отписаться",
+    "Enter current email":"Введите текущий email",
+    "New email":"Новый email",
+    "Confirm new email":"Подтвердите новый email",
+    "Check":"Проверить",
+    "Bio": "Био",
+    "old email": "текущий email",
+    "new email": "новый email",
+    "repeat new email":"повторите новый email"
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { DataViewModule } from 'primeng/dataview';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -22,6 +22,8 @@ import { Subscription } from 'rxjs';
 })
 export class PostComponent implements OnInit, OnDestroy {
 
+  currentPageHeight: number;
+  noMoreNewPosts: boolean = false;
   subscriptions: Subscription[];
   posts: Post[] = [];
   usersToSearch = [];
@@ -30,8 +32,9 @@ export class PostComponent implements OnInit, OnDestroy {
   newPost = new Post();
   haveAvatar = true;
   lastPostID: number = 0;
+  newestPostID: number = 0;
   mynewposts: Post;
-  timeIt = timer(10000, 10000);
+  timeIt = timer(10000, 5000);
   blacklisted=[];
 
   constructor(
@@ -48,16 +51,23 @@ export class PostComponent implements OnInit, OnDestroy {
   // в локальный массив, который в свою очередь общаеться с формой 
   // хтмл файла. 
   ngOnInit() {
-    this.postService.getLastPost()
+    this.postService.getLastPostId()
       .subscribe(data => { 
-        console.log(data); 
-        this.lastPostID = data; 
+        // console.log(data); 
+        this.lastPostID = data;
+        this.newestPostID = data;
         this.loadPosts(this.lastPostID);
     });
     this.loadBlackList();
     this.loadCurrentUser();
-    // this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts()})); 
     this.addImages(this.posts);
+    this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts()})); 
+    this.postService.getLastPost()
+    .subscribe(data => {
+      // console.log(data);
+      this.addImages(data);
+      this.postAndImage.push(new PostImage(data, 'data:image/jpg;base64,' + data.avatar));
+    });
   }
 
   ngOnDestroy(){
@@ -75,7 +85,8 @@ export class PostComponent implements OnInit, OnDestroy {
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
         .subscribe(x => {
-          this.addImages(this.newPost);
+          // this.addImages(this.newPost);
+          // this.postAndImage.push(new PostImage(this.newPost, 'data:image/jpg;base64,' + this.currentUser.avatar));
           this.newPost = new Post();
         });
     }
@@ -108,23 +119,36 @@ export class PostComponent implements OnInit, OnDestroy {
         }
         this.addImages(data);
         this.lastPostID = this.posts[this.posts.length-1].id;
-        console.log(this.lastPostID);
+        // console.log('lastPostId : ' + this.lastPostID);
       });
+  }
 
-
+  @HostListener('document:scroll', ['$event'])
+  onScroll(event: any){
+    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    let max = document.documentElement.scrollHeight;
+    if(Math.floor(pos) > max-10){
+      // console.log("End");
+      this.loadPosts(this.lastPostID);
+      this.postService.checkForLastPostInDB(this.lastPostID)
+          .subscribe(isItLast => this.noMoreNewPosts = isItLast);
+    }
   }
 
   loadNewPosts(){
-    let lastPost: Post = this.postAndImage[0];
-    let postID = lastPost.id;
-    this.postService.getNewPosts(new Id(postID))
-      .subscribe((data: Post[]) => {
-        if(data != null){
-          for(let post of data.reverse()){
-            this.postAndImage.unshift(post);
+    if(this.posts != null && this.posts.length != 0){
+      let postID = this.newestPostID;
+      this.postService.getNewPosts(new Id(postID))
+        .subscribe((data: Post[]) => {
+          if(data != null){
+            for(let post of data.reverse()){
+              // this.addImages(post);
+              this.newestPostID = post.id;
+              this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
+            }
           }
-        }
-    });
+      });
+    }
   }
 
   getPostDate(date: Date) {
@@ -139,7 +163,6 @@ export class PostComponent implements OnInit, OnDestroy {
   addImages(data) {
     let isInBlacklist: boolean = false;
     //var usersInBlacklist = this.subscriptionService.blacklist;
-    console.log(this.blacklisted);
     for (let post of data) {
       isInBlacklist=false;
       for(let blockUser of this.blacklisted){

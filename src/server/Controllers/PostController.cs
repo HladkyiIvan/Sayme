@@ -14,22 +14,48 @@ namespace server.Controllers
     {
         readonly ILogger<UserController> log;
         private readonly SaymedbContext context;
-
+        private static long lastPostId = 0;
         public PostController(SaymedbContext context)
         {
             this.context = context;
         }
 
+        [HttpGet("lastpost")]
+        public PostTransport GetLastPost()
+        {
+            var sendingPost = new PostTransport(context.Post.Last());
+            foreach (User user in context.User)
+            {
+                if (sendingPost.id_user == user.id)
+                {
+                    sendingPost.username = user.login;
+                    sendingPost.avatar = user.avatar;
+                }
+            }
+            return sendingPost;
+        } 
+        [HttpGet("nomoreposts/{id}")]
+        public bool CheckForTheLastPost(long id){
+            List<Post> posts = context.Post.Where(post => id >= post.id).ToList();
+            return posts.Count == 1 ? true: false;
+        }
+
         [HttpGet("lastpostid")]
-        public long GetLast() => context.Post.Last().id;
+        public long GetLastPostID() => context.Post.Last().id;
 
         [HttpGet("next/{id}")]
         public IEnumerable<PostTransport> Get(long id)
         {
-            var posts = context.Post.OrderByDescending(post => post.id)
+            if(lastPostId == id)
+            {
+                lastPostId = 0;
+                return null;
+            }
+            List<Post> posts = context.Post.OrderByDescending(post => post.id)
                                 .Where(post => id > post.id)
                                 .Take(20).ToList();
-
+            lastPostId = id;
+            
             if(posts.Count == 0)
                 return null;
                 
@@ -85,17 +111,18 @@ namespace server.Controllers
 
 
         [HttpPost("last")]
-        public IEnumerable<PostTransport> GetNewPosts(Id lastPostSiteId)
+        public IEnumerable<PostTransport> GetNewPosts([FromBody]Id lastPostSiteId)
         {
             var newPosts = context.Post.Where(lastPostDB => lastPostDB.id > lastPostSiteId.id)
                                        .OrderByDescending(p => p.id).ToList();
+            if(newPosts.Count == 0)
+                return null;
+                
             var users = (from p in newPosts
                         from u in context.User
                         where p.id_user == u.id
                         select u).ToList();
         
-            if(newPosts.Count == 0)
-                return null;
 
             List<PostTransport> sendingPosts = new List<PostTransport>();
             

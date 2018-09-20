@@ -1,7 +1,7 @@
 <app-navigation-tools></app-navigation-tools>
 <div class="inner">
     <div class="container">
-        <form #postForm="ngForm" (keydown.enter)="onSay()">
+        <form #postForm="ngForm">
             <div class="ui-g ui-fluid">
                 <div style="padding: 10px;" class="ui-g-12">
                     <input [(ngModel)]="newPost.message" class="post-message" name="text" type="text" pInputText
@@ -37,4 +37,10 @@
         </div>
     </ng-template>
 </p-dataView>
-<button (click)="loadPosts(lastPostID)">New posts!</button>
+<div *ngIf="!noMoreNewPosts;else allloaded">
+    <p style="display: flex; justify-content: center; font-size: 2em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Loading...</p>
+</div>
+<ng-template #allloaded>
+    <p style="display: flex; justify-content: center; font-size: 2em; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">No more posts left :(</p>
+</ng-template>
+<!-- <button (click)="loadPosts(lastPostID)">New posts!</button> -->

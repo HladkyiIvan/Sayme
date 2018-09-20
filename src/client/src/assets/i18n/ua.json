@@ -36,5 +36,19 @@
     "Confirm new password": "Підтвердити новий пароль",
     "repeat new password":"повторіть новий пароль",
     "Subscribe": "Підписатись",
-    "Common": "Основні"
+    "Common": "Основні",
+
+    "Delete from blacklist":"Видалити з чорного списку",
+    "There is nothing here now... stay tuned!": "Зараз тут нічого немає ... залишайтесь на зв'язку",
+    "Add to blacklist": "Додати до чорного списку",
+    "Unsubscribe": "Відписатися",
+    "Enter current email":"Введіть поточний email",
+    "Enter current password":"Введіть поточний пароль",
+    "New email":"Новий email",
+    "Confirm new email":"Підтвердіть новий email",
+    "Check":"Перевірити",
+    "Bio": "Біо",
+    "old email": "поточний email",
+    "new email": "новий email",
+    "repeat new email":"повторіть новий email"
 }

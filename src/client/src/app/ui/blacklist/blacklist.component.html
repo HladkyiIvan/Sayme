@@ -15,7 +15,7 @@
                             </div>
                         </ng-template>
                         <button type="button" class="delete-from-blacklist-button" (click)="onDeleteFromBlacklist(user.user.id)">
-                            Delete from blacklist</button>
+                            {{ 'Delete from blacklist' | translate}}</button>
                         <p><b>{{user.user.login}}</b></p>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
 </div>
 
 <ng-template #noposts>
-    <h1 style="text-align:center; ">There is nothing here now... stay tuned!</h1>
+    <h1 style="text-align:center; ">{{ 'There is nothing here now... stay tuned!' | translate}}</h1>
     <div style="display: flex; justify-content: center;">
         <img src="assets/images/jdun.svg" alt="Здесь правда ничего нет! :)" style="width: 300px; height: 300px;">
     </div>

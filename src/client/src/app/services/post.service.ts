@@ -16,7 +16,15 @@ export class PostService {
 
   constructor( private http: HttpClient, private logger: NGXLogger) { }
 
+  checkForLastPostInDB(lastPostId){
+    return this.http.get<boolean>(this.url + '/nomoreposts/' + lastPostId.toString());
+  }
+
   getLastPost(){
+    return this.http.get<Post>(this.url + '/lastpost');
+  }
+
+  getLastPostId(){
     return this.http.get<number>(this.url + '/lastpostid');
   }
   // GET

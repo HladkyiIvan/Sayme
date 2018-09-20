@@ -44,4 +44,13 @@ export class SubscriptionService {
   userSubscribe(id:Id){
     return this.http.post(this.url+'/subscribe', id);
   }
+
+  userUnsubscribe(id:Id){
+    return this.http.post(this.url+'/unsubscribe', id);
+  }
+
+  isSubscribed(userId: number){
+    return this.http.get<boolean>(this.url+'/checksub/'+ userId.toString());
+  }
+
 }

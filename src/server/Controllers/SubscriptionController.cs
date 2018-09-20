@@ -21,6 +21,17 @@ namespace server.Controllers
             this.context = context;
         }
 
+        [HttpGet("checksub/{userId}")]
+        public bool IsSubscribed(long userId)
+        {
+            User user = context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
+            var userHasSub = context.Following.Where(user2 => user2.id_whom == userId && user2.id_who == user.id).FirstOrDefault();
+            // from u in context.Following
+            //                  where u.id_who == user.id && u.id_whom == userId
+            //                  select u;
+            return userHasSub != null ? true: false;
+        }
+
         [HttpPost("subscribe")]
         public IActionResult Subscribe([FromBody]Id userIdToSub)
         {
@@ -28,17 +39,31 @@ namespace server.Controllers
             {
                 //this user wants to subscribe another user
                 User user = context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
+                List<Following> followings = context.Following.ToList();
+                var userToSubscribe = context.Following.FirstOrDefault(x=>x.id_who==user.id&&x.id_whom==user.id);
+                if(userToSubscribe != null)
+                {
+                    return BadRequest();
+                }
+                Following subscription = new Following(user.id, userIdToSub.id);
+                context.Following.Add(subscription);
+                context.SaveChanges();
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("unsubscribe")]
+        public IActionResult Unsubscribe([FromBody]Id userIdToUnsub)
+        {
+            if(ModelState.IsValid)
+            {   
+                //this user wants to subscribe another user
+                User user = context.User.FirstOrDefault(u=>u.login==HttpContext.Session.GetString("Username"));
                 long userId = user.id;
                 List<Following> followings = context.Following.ToList();
-                foreach (var sub in followings)
-                {
-                    if(sub.id_who == userId && sub.id_whom == userIdToSub.id)
-                    {
-                        return BadRequest();
-                    }
-                }
-                Following subscription = new Following(userId, userIdToSub.id);
-                context.Following.Add(subscription);
+                var userToDelete = context.Following.FirstOrDefault(x=> x.id_who==userId && x.id_whom==userIdToUnsub.id);
+                context.Following.Remove(userToDelete);
                 context.SaveChanges();
                 return Ok();
             }

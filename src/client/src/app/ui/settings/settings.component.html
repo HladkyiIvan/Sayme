@@ -1,45 +1,45 @@
 <p-tabView orientation="left" (onChange)="resetChanges()">
-    <p-tabPanel header="Avatar">
-        <p>Set new avatar:</p>
+    <p-tabPanel header="{{ 'Avatar' | translate }}">
+        <p>{{ 'Set new avatar' | translate }}:</p>
         <p-fileUpload #form name="myfile[]" customUpload="true" accept="image/*" maxFileSize="1000000"
-        (uploadHandler)="myUploader($event, form)" showUploadButton="false" mode="advanced" uploadLabel="Save"></p-fileUpload>
+        (uploadHandler)="myUploader($event, form)" showUploadButton="false" mode="advanced" cancelLabel="{{ 'Cancel' | translate}}" chooseLabel="{{ 'Choose' | translate }}" uploadLabel="{{ 'Save' | translate }}"></p-fileUpload>
     </p-tabPanel>
-    <p-tabPanel header="Bio">
-        <p>Change info about yourself:</p>
+    <p-tabPanel header="{{ 'Bio' | translate }}">
+        <p>{{ 'Change info about yourself' | translate }}:</p>
         <p><textarea pInputTextarea  [(ngModel)]="newBio" rows="4" maxlength="256" class="post-text" style="color: black; background: white; padding: 0.2em"></textarea></p>
-        <p-button label="Save" class="sub" (click)="saveNewBio()" style="display: block;"></p-button>
+        <p-button label="{{ 'Save' | translate }}" class="sub" (click)="saveNewBio()" style="display: block;"></p-button>
     </p-tabPanel>
-    <p-tabPanel header="Password">
-        <p class="p-password">Enter current password:</p>
-            <input [(ngModel)]="oldDataCheck" class="check" type="password" pInputText placeholder="old password" autocomplete="off" [disabled]="oldDataCheckBtnIsDisabled">
-            <p-button label="Check" class="sub" (click)="checkOldPassword();" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!oldDataCheckBtnIsDisabled;"></p-button>
-            <p class="p-password">New password:</p>
-            <input [(ngModel)]="newData" class="check" type="password" pInputText placeholder="new password" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
-            <p class="p-password">Confirm new password:</p>
-            <input [(ngModel)]="newDataCheck" class="check" type="password" pInputText placeholder="repeat new password" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
-            <p-button label="Submit" class="sub" (click)="checkNewPasswordAndSendCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newDataCheckBtnIsDisabled;"></p-button>
+    <p-tabPanel header="{{ 'Password' | translate }}">
+        <p class="p-password">{{ 'Enter current password' | translate }}:</p>
+            <input [(ngModel)]="oldDataCheck" class="check" type="password" pInputText placeholder="{{ 'old password' | translate }}" autocomplete="off" [disabled]="oldDataCheckBtnIsDisabled">
+            <p-button label="{{ 'Check' | translate }}" class="sub" (click)="checkOldPassword();" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!oldDataCheckBtnIsDisabled;"></p-button>
+            <p class="p-password">{{ 'New password' | translate }}:</p>
+            <input [(ngModel)]="newData" class="check" type="password" pInputText placeholder="{{ 'new password' | translate }}" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
+            <p class="p-password">{{ 'Confirm new password' | translate}}:</p>
+            <input [(ngModel)]="newDataCheck" class="check" type="password" pInputText placeholder="{{ 'repeat new password' | translate }}" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
+            <p-button label="{{ 'Submit' | translate }}" class="sub" (click)="checkNewPasswordAndSendCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newDataCheckBtnIsDisabled;"></p-button>
         <div *ngIf="!codeCheckBtbIsDisabled;">
-            <p class="p-password">Enter code:</p>
+            <p class="p-password">{{ 'Enter code' | translate }}:</p>
             <input [(ngModel)]="code" class="check" type="text" pInputText placeholder="code" autocomplete="off" [disabled]="codeCheckBtbIsDisabled">
-            <p-button label="Check code" class="sub" (click)="checkCodeAndUpdatePassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtbIsDisabled;"></p-button>
+            <p-button label="{{ 'Check code' | translate }}" class="sub" (click)="checkCodeAndUpdatePassword()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtbIsDisabled;"></p-button>
         </div>
     </p-tabPanel>
-    <p-tabPanel header="Email">
-        <p class="p-password">Enter current email:</p>
-            <input [(ngModel)]="oldDataCheck" #checkEmail="ngModel" class="check" type="email" pInputText placeholder="old email" autocomplete="off" [disabled]="oldDataCheckBtnIsDisabled">
-            <p-button label="Check" class="sub" (click)="checkOldEmail();" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!oldDataCheckBtnIsDisabled;"></p-button>
-            <p class="p-password">New email:</p>
-            <input [(ngModel)]="newData" #newEmail="ngModel" class="check" type="email" pInputText placeholder="new email" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
-            <p class="p-password">Confirm new email:</p>
-            <input [(ngModel)]="newDataCheck" #newEmailCheck="ngModel" name="newEmailCheck" class="check" type="email" pInputText placeholder="repeat new email" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
-            <p-button label="Submit" class="sub" (click)="checkNewEmailAndSendCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newDataCheckBtnIsDisabled;"></p-button>
+    <p-tabPanel header="{{ 'Email' | translate }}">
+        <p class="p-password">{{ 'Enter current email' | translate }}:</p>
+            <input [(ngModel)]="oldDataCheck" #checkEmail="ngModel" class="check" type="email" pInputText placeholder="{{ 'old email' | translate }}" autocomplete="off" [disabled]="oldDataCheckBtnIsDisabled">
+            <p-button label="{{ 'Check' | translate }}" class="sub" (click)="checkOldEmail();" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!oldDataCheckBtnIsDisabled;"></p-button>
+            <p class="p-password">{{ 'New email' | translate }}:</p>
+            <input [(ngModel)]="newData" #newEmail="ngModel" class="check" type="email" pInputText placeholder="{{ 'new email' | translate }}" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
+            <p class="p-password">{{ 'Confirm new email' | translate }}:</p>
+            <input [(ngModel)]="newDataCheck" #newEmailCheck="ngModel" name="newEmailCheck" class="check" type="email" pInputText placeholder="{{ 'repeat new email' | translate }}" autocomplete="off" [disabled]="newDataCheckBtnIsDisabled">
+            <p-button label="{{ 'Submit' | translate }}" class="sub" (click)="checkNewEmailAndSendCode()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!newDataCheckBtnIsDisabled;"></p-button>
         <div *ngIf="!codeCheckBtbIsDisabled;">
-            <p class="p-password">Enter code:</p>
+            <p class="p-password">{{ 'Enter code' | translate }}:</p>
             <input [(ngModel)]="code" class="check" type="text" pInputText placeholder="code" autocomplete="off" [disabled]="codeCheckBtbIsDisabled">
-            <p-button label="Check code" class="sub" (click)="checkCodeAndUpdateEmail()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtbIsDisabled;"></p-button>
+            <p-button label="{{ 'Check code' | translate }}" class="sub" (click)="checkCodeAndUpdateEmail()" style="display: block; margin-top: 1em; margin-bottom: 1em;" *ngIf="!codeCheckBtbIsDisabled;"></p-button>
         </div>
     </p-tabPanel> 
-    <p-tabPanel header="Common">
+    <p-tabPanel header="{{ 'Common' | translate }}">
         Content 3
     </p-tabPanel>
     <div class="isa_error" [hidden]=isErrorHidden>

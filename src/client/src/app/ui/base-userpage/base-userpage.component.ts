@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../Models/post';
 import { User } from '../../Models/user';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Component({
   selector: 'app-base-userpage',
@@ -21,8 +22,10 @@ export class BaseUserpageComponent implements OnInit{
     console.log(this.user);
   }
 
-  constructor(protected route: ActivatedRoute, protected postService: PostService, 
-    protected userService: UserService) {
+  constructor(protected route: ActivatedRoute, 
+              protected postService: PostService, 
+              protected userService: UserService,
+              protected subService: SubscriptionService) {
     }
 
   loadCurrentUserPosts(){
