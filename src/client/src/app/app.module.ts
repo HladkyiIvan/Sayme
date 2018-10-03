@@ -42,6 +42,7 @@ import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 import { BaseUserpageComponent } from './ui/base-userpage/base-userpage.component';
 import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage.component';
 import { NewsComponent } from './ui/news/news.component';
+import { CommentComponent } from './ui/comment/comment.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { NewsComponent } from './ui/news/news.component';
     BaseUserpageComponent,
     AnotherUserpageComponent,
     NewsComponent,
+    CommentComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
