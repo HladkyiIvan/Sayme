@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
 import { Post } from '../Models/post';
 import { NGXLogger } from 'ngx-logger';
-import { $ } from 'protractor';
-import { Observable } from 'rxjs';
 import { Id } from '../Models/Id';
-import { post } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'

@@ -32,7 +32,8 @@
                         {{post.post.message}}
                     </p>
                     <p>{{post.post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
-                </div>
+                    <span class="show-modal" (click)="openCommentsModal(post)">Show comments...</span>
+                </div>                
             </div>
         </div>
     </ng-template>

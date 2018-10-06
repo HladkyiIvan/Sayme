@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { DataViewModule } from 'primeng/dataview';
+import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../Models/user';
@@ -12,6 +11,9 @@ import { Id } from '../../Models/Id';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Subscription } from 'rxjs';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CommentComponent } from '../comment/comment.component';
 
 
 @Component({
@@ -38,11 +40,12 @@ export class PostComponent implements OnInit, OnDestroy {
   newestPostID: number = 0;
   mynewposts: Post;
   timeIt = timer(10000, 5000);
+  modalRef: BsModalRef;
 
   constructor(
     private postService: PostService,
     private userService: UserService,
-    private logger: NGXLogger,
+    private modalService: BsModalService,
     private router: Router,
     private subscriptionService: SubscriptionService) {
     this.subscriptions = [];
@@ -54,7 +57,7 @@ export class PostComponent implements OnInit, OnDestroy {
   // хтмл файла. 
   ngOnInit() {
     this.postService.getLastPostId()
-      .subscribe(data => { 
+      .subscribe(data => {
         // console.log(data); 
         this.lastPostID = data;
         this.newestPostID = data;
@@ -62,13 +65,13 @@ export class PostComponent implements OnInit, OnDestroy {
       });
     this.loadCurrentUser();
     this.addImages(this.posts);
-    this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts()})); 
+    this.subscriptions.push(this.timeIt.subscribe(() => { this.loadNewPosts() }));
     this.postService.getLastPost()
-    .subscribe(data => {
-      // console.log(data);
-      this.addImages(data);
-      this.postAndImage.push(new PostImage(data, 'data:image/jpg;base64,' + data.avatar));
-    });
+      .subscribe(data => {
+        // console.log(data);
+        this.addImages(data);
+        this.postAndImage.push(new PostImage(data, 'data:image/jpg;base64,' + data.avatar));
+      });
   }
 
   ngOnDestroy() {
@@ -85,15 +88,13 @@ export class PostComponent implements OnInit, OnDestroy {
       this.newPost.username = this.currentUser.login;
       this.newPost.post_date = new Date();
       this.postService.createPost(this.newPost)
-        .subscribe(x => {
+        .subscribe(() => {
           // this.addImages(this.newPost);
           // this.postAndImage.push(new PostImage(this.newPost, 'data:image/jpg;base64,' + this.currentUser.avatar));
           this.newPost = new Post();
         });
     }
   }
-
-  
 
   loadFollowing() {
     this.subscriptionService.getFollowing()
@@ -121,36 +122,36 @@ export class PostComponent implements OnInit, OnDestroy {
           this.posts.push(post);
         }
         this.addImages(data);
-        this.lastPostID = this.posts[this.posts.length-1].id;
+        this.lastPostID = this.posts[this.posts.length - 1].id;
         // console.log('lastPostId : ' + this.lastPostID);
       });
   }
 
   @HostListener('document:scroll', ['$event'])
-  onScroll(event: any){
+  onScroll(event: any) {
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     let max = document.documentElement.scrollHeight;
-    if(Math.floor(pos) == max || Math.floor(pos) == max-1){
+    if (Math.floor(pos) == max || Math.floor(pos) == max - 1) {
       // console.log("End");
       this.loadPosts(this.lastPostID);
       this.postService.checkForLastPostInDB(this.lastPostID)
-          .subscribe(isItLast => this.noMoreNewPosts = isItLast);
+        .subscribe(isItLast => this.noMoreNewPosts = isItLast);
     }
   }
 
-  loadNewPosts(){
-    if(this.posts != null && this.posts.length != 0){
+  loadNewPosts() {
+    if (this.posts != null && this.posts.length != 0) {
       let postID = this.newestPostID;
       this.postService.getNewPosts(new Id(postID))
         .subscribe((data: Post[]) => {
-          if(data != null){
-            for(let post of data.reverse()){
+          if (data != null) {
+            for (let post of data.reverse()) {
               // this.addImages(post);
               this.newestPostID = post.id;
               this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
             }
           }
-      });
+        });
     }
   }
 
@@ -185,6 +186,13 @@ export class PostComponent implements OnInit, OnDestroy {
           this.router.navigate(['/user/' + strId]);
         }
       }, (error: HttpErrorResponse) => console.log(error));
+  }
+
+  openCommentsModal(post: Post) {
+    const initialState = {
+      post: post
+    };
+    this.modalRef = this.modalService.show(CommentComponent, { class: 'modal-lg modal-dialog-centered ', initialState });
   }
 }
 

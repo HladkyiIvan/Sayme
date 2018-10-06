@@ -36,3 +36,8 @@ input{
     background:  rgb(255, 236, 153);
     border: none;
 }
+
+.post-container .show-modal{
+   cursor: pointer;
+   display: block;
+}

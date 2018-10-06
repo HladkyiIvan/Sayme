@@ -33,7 +33,7 @@ namespace server.Controllers
         public IEnumerable<CommentTransport> GetNextComments([FromBody]CommentState cs)
         {
             var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
-            List<Comment> comments = null;
+            List<Comment> comments = new List<Comment>();
 
             if (cs.lastCommentId == -1)
             {
@@ -46,10 +46,6 @@ namespace server.Controllers
                     .OrderByDescending(comment => comment.id)
                     .Where(comment => cs.lastCommentId > comment.id)
                     .Take(20).ToList();
-            }
-            if (comments.Count == 0)
-            {
-                return null;
             }
 
             var users = (from u in context.User

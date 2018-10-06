@@ -20,6 +20,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TooltipModule} from 'primeng/tooltip';
 import {TabViewModule} from 'primeng/tabview';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -82,7 +83,8 @@ import { CommentComponent } from './ui/comment/comment.component';
     DialogModule,
     InputTextareaModule,
     FileUploadModule,
-    TabViewModule    
+    TabViewModule,
+    ModalModule.forRoot()  
   ],
   exports: [
     AboutUserBodyComponent,
@@ -109,7 +111,10 @@ import { CommentComponent } from './ui/comment/comment.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [    
+    CommentComponent
+  ],
 })
 export class AppModule { }
 
