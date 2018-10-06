@@ -31,7 +31,25 @@
                     <p>
                         <textarea class="post-text" readonly style="color: black">{{post.post.message}}</textarea>
                     </p>
+
+                    <div class="bottom-post">
                     <p>{{post.post.post_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+
+                    <div class="action action-like">
+                        <button class="btn-action" (click)="likePost(post.post)">
+                          <div *ngIf="post.post.isLiked; else not_liked">
+                            <img src="/assets/images/like-red.png" class="icon icon-like img-responsive">
+                          </div>
+                          <ng-template #not_liked>
+                          <div>
+                            <img src="/assets/images/like.png" class="icon icon-like img-responsive">
+                          </div>
+                          </ng-template>
+                        </button>
+                        <span class="count">{{post.post.numOfLikes}}</span>
+                      </div>
+                    </div>
+
                 </div>
             </div>
         </div>
