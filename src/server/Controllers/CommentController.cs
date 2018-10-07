@@ -89,12 +89,13 @@ namespace server.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult DeleteComment([FromBody]Comment comment)
+       public IActionResult DeleteComment([FromBody]Comment comment)
         {
             var user = context.User.FirstOrDefault(u => u.login == HttpContext.Session.GetString("Username"));
-            if (ModelState.IsValid && comment.id_user == user.id)
+            Comment realComment = context.Comment.FirstOrDefault(c => c.id == comment.id);
+            if (ModelState.IsValid && realComment.id_user == user.id)
             {
-                context.Comment.Remove(context.Comment.FirstOrDefault(x => x.id == user.id));
+                context.Comment.Remove(realComment);
                 context.SaveChanges();
                 return Ok();
             }

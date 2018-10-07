@@ -21,7 +21,7 @@ export class CommentService {
         return this.http.post(this.url + '/delete', comment);
     }
 
-    getNextComments(newestCommentID: number, lastCommentID: number) {
-        return this.http.post(this.url + '/next',  {newestCommentID, lastCommentID});
+    getNextComments(postID: number, lastCommentID: number) {
+        return this.http.post(this.url + '/next',  {postID, lastCommentID});
     }
 }
