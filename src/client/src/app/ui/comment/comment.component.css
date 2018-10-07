@@ -1,0 +1,17 @@
+.add-msg-form .btn{
+    margin-top: 1rem;
+}
+.comment .delete{
+    cursor: pointer;
+}
+.username{
+    cursor: pointer;
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.comments-list{
+    margin: 0.5rem 0 1rem 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}

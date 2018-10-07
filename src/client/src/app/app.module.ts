@@ -20,6 +20,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TooltipModule} from 'primeng/tooltip';
 import {TabViewModule} from 'primeng/tabview';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 //project
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +43,7 @@ import { BlacklistComponent } from './ui/blacklist/blacklist.component';
 import { BaseUserpageComponent } from './ui/base-userpage/base-userpage.component';
 import { AnotherUserpageComponent } from './ui/another-userpage/another-userpage.component';
 import { NewsComponent } from './ui/news/news.component';
+import { CommentComponent } from './ui/comment/comment.component';
 
 
 @NgModule({
@@ -61,6 +63,7 @@ import { NewsComponent } from './ui/news/news.component';
     BaseUserpageComponent,
     AnotherUserpageComponent,
     NewsComponent,
+    CommentComponent,
   ],
   imports: [LoggerModule.forRoot({
     level: NgxLoggerLevel.DEBUG}),
@@ -80,7 +83,8 @@ import { NewsComponent } from './ui/news/news.component';
     DialogModule,
     InputTextareaModule,
     FileUploadModule,
-    TabViewModule    
+    TabViewModule,
+    ModalModule.forRoot()  
   ],
   exports: [
     AboutUserBodyComponent,
@@ -107,7 +111,10 @@ import { NewsComponent } from './ui/news/news.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [    
+    CommentComponent
+  ],
 })
 export class AppModule { }
 

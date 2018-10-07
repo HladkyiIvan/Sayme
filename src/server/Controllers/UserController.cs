@@ -29,7 +29,7 @@ namespace server.Controllers
             this.context = context;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<User> Get()
         {

@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Comments</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+
+<div class="modal-body modal-comments" id="modal-comments">
+  <div class="ui-g-12 ui-md-12">
+    <div class="ui-g-12">
+      <div *ngIf="post.avatar;else other_img" style="float:left; padding-right:1%; cursor:pointer;" (click)="gotoUserpage(post.post.id_user)">
+        <img id="image" [src]="post.avatar" style=" width:25px;">
+      </div>
+      <ng-template #other_img>
+        <div style="float:left; padding-right: 1%; cursor:pointer;" (click)="gotoUserpage(post.post.id_user)">
+          <img src="assets/images/default_avatar.svg" style="width:25px;">
+        </div>
+      </ng-template>
+      <div>
+        <span class="username" (click)="gotoUserpage(post.post.id_user)"><b>{{post.post.username}}</b></span>:
+      </div>
+      <p>
+        {{post.post.message}}
+      </p>
+      <p>
+        {{post.post.post_date | date: 'dd/MM/yyyy HH:mm'}}
+      </p>
+    </div>
+  </div>
+  <form class="add-msg-form">
+    <textarea class="form-control" [(ngModel)]="newComment.message" name="text" rows="2" maxlength="256" placeholder="Do you want leave your comment?"></textarea>
+    <button type="submit" class="btn btn-dark" (click)="addComment()">Comment</button>
+  </form>
+  <div class="comments-list" id="comments-list">
+    <div class="comment" *ngFor="let comment of comments">
+      <hr />
+      <i *ngIf="comment.isDeletable" class="far fa-trash-alt delete" (click)="deleteComment(comment)"></i>
+      <span class="username" (click)="gotoUserpage(post.post.id_user); modalRef.hide()">{{comment.username}}</span>
+      <p>{{comment.message}}</p>
+    </div>
+  </div>
+</div>

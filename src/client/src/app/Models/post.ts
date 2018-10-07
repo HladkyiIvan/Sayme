@@ -6,4 +6,7 @@ export class Post {
     public username: string;
     public avatar?: Blob;
     public is_changing: boolean;
+    
+    public numOfLikes: number;
+    public isLiked: boolean;
 }
