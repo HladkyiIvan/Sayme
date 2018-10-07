@@ -10,11 +10,10 @@ import { PostImage } from '../../Models/postImage';
 import { Id } from '../../Models/Id';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SubscriptionService } from '../../services/subscription.service';
-import { Subscription } from 'rxjs';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { CommentComponent } from '../comment/comment.component';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -41,6 +40,8 @@ export class PostComponent implements OnInit, OnDestroy {
   mynewposts: Post;
   timeIt = timer(10000, 5000);
   modalRef: BsModalRef;
+
+  like_timer = timer(2000);
 
   constructor(
     private postService: PostService,
@@ -69,6 +70,8 @@ export class PostComponent implements OnInit, OnDestroy {
     this.postService.getLastPost()
       .subscribe(data => {
         // console.log(data);
+        this.refreshLikes(data);
+        this.checkIfLiked(data);
         this.addImages(data);
         this.postAndImage.push(new PostImage(data, 'data:image/jpg;base64,' + data.avatar));
       });
@@ -119,6 +122,8 @@ export class PostComponent implements OnInit, OnDestroy {
           return;
         }
         for (let post of data.reverse()) {
+          this.refreshLikes(post);
+          this.checkIfLiked(post);
           this.posts.push(post);
         }
         this.addImages(data);
@@ -146,6 +151,8 @@ export class PostComponent implements OnInit, OnDestroy {
         .subscribe((data: Post[]) => {
           if (data != null) {
             for (let post of data.reverse()) {
+              this.refreshLikes(post);
+              this.checkIfLiked(post);
               // this.addImages(post);
               this.newestPostID = post.id;
               this.postAndImage.push(new PostImage(post, 'data:image/jpg;base64,' + post.avatar));
@@ -194,5 +201,35 @@ export class PostComponent implements OnInit, OnDestroy {
     };
     this.modalRef = this.modalService.show(CommentComponent, { class: 'modal-lg modal-dialog-centered ', initialState });
   }
+  likePost(post: Post) {
+    this.postService.likePost(post.id)
+      .subscribe(object => {
+        this.refreshLikes(post);
+        this.checkIfLiked(post);
+      }, error => console.log(error));
+  }
+
+  checkIfLiked(post: Post) {
+    this.postService.checkIfLiked(post.id)
+      .subscribe((res: boolean) => {
+        post.isLiked = res;
+        /*  if (res) {
+            this.likeImgUrl = '/assets/images/heart_red.png';
+          }
+          else {
+            this.likeImgUrl = '/assets/images/heart.png';
+          }*/
+      });
+  }
+
+  refreshLikes(post: Post) {
+    this.postService.countLikes(post.id)
+      .subscribe((numOfLikes: number) => {
+        post.numOfLikes = numOfLikes;
+      });
+    this.subscriptions.push(this.like_timer.subscribe(() => { this.refreshLikes(post) }));
+  }
+
+
 }
 
